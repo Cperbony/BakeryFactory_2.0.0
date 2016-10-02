@@ -24,8 +24,10 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,9 +37,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +46,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "receita")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "ReceitaVO.findAll", query = "SELECT r FROM ReceitaVO r")})
+public class ReceitaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +57,29 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @Column(name = "nome_prod")
+    private String nomeProd;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "porcentagem_receita")
+    private BigDecimal porcentagemReceita;
+    @Column(name = "tipo_receita")
+    private String tipoReceita;
+    @Column(name = "descricao")
+    private String descricao;
+    @Column(name = "ingrediente_massa")
+    private String ingredienteMassa;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaId")
+    private List<IngredientesReceitasVO> ingredientesReceitasVOList;
+    @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private ProdutoVO produtoId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaVO")
+    private List<ModoPreparoVO> modoPreparoVOList;
 
-    public PessoaJuridicaVO() {
+    public ReceitaVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public ReceitaVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +91,68 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getNomeProd() {
+        return nomeProd;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setNomeProd(String nomeProd) {
+        this.nomeProd = nomeProd;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public BigDecimal getPorcentagemReceita() {
+        return porcentagemReceita;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setPorcentagemReceita(BigDecimal porcentagemReceita) {
+        this.porcentagemReceita = porcentagemReceita;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public String getTipoReceita() {
+        return tipoReceita;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setTipoReceita(String tipoReceita) {
+        this.tipoReceita = tipoReceita;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Date getDataConstituicao() {
-        return dataConstituicao;
+    public String getIngredienteMassa() {
+        return ingredienteMassa;
     }
 
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
+    public void setIngredienteMassa(String ingredienteMassa) {
+        this.ingredienteMassa = ingredienteMassa;
     }
 
-    public Character getTipoRegime() {
-        return tipoRegime;
+    public List<IngredientesReceitasVO> getIngredientesReceitasVOList() {
+        return ingredientesReceitasVOList;
     }
 
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
+    public void setIngredientesReceitasVOList(List<IngredientesReceitasVO> ingredientesReceitasVOList) {
+        this.ingredientesReceitasVOList = ingredientesReceitasVOList;
     }
 
-    public Character getCrt() {
-        return crt;
+    public ProdutoVO getProdutoId() {
+        return produtoId;
     }
 
-    public void setCrt(Character crt) {
-        this.crt = crt;
+    public void setProdutoId(ProdutoVO produtoId) {
+        this.produtoId = produtoId;
     }
 
-    public String getSuframa() {
-        return suframa;
+    public List<ModoPreparoVO> getModoPreparoVOList() {
+        return modoPreparoVOList;
     }
 
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setModoPreparoVOList(List<ModoPreparoVO> modoPreparoVOList) {
+        this.modoPreparoVOList = modoPreparoVOList;
     }
 
     @Override
@@ -174,10 +165,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof ReceitaVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        ReceitaVO other = (ReceitaVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +177,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.ReceitaVO[ id=" + id + " ]";
     }
     
 }

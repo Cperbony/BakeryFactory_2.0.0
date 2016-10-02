@@ -24,7 +24,7 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +36,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +43,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "venda_condicoes_parcela")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "VendaCondicoesParcelaVO.findAll", query = "SELECT v FROM VendaCondicoesParcelaVO v")})
+public class VendaCondicoesParcelaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +54,21 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @Column(name = "parcela")
+    private Integer parcela;
+    @Column(name = "dias")
+    private Integer dias;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "taxa")
+    private BigDecimal taxa;
+    @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private VendaCondicoesPagamentoVO vendaCondicoesPagamentoId;
 
-    public PessoaJuridicaVO() {
+    public VendaCondicoesParcelaVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public VendaCondicoesParcelaVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +80,36 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Integer getParcela() {
+        return parcela;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setParcela(Integer parcela) {
+        this.parcela = parcela;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public Integer getDias() {
+        return dias;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setDias(Integer dias) {
+        this.dias = dias;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public BigDecimal getTaxa() {
+        return taxa;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setTaxa(BigDecimal taxa) {
+        this.taxa = taxa;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public VendaCondicoesPagamentoVO getVendaCondicoesPagamentoId() {
+        return vendaCondicoesPagamentoId;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public Date getDataConstituicao() {
-        return dataConstituicao;
-    }
-
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
-    }
-
-    public Character getTipoRegime() {
-        return tipoRegime;
-    }
-
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setVendaCondicoesPagamentoId(VendaCondicoesPagamentoVO vendaCondicoesPagamentoId) {
+        this.vendaCondicoesPagamentoId = vendaCondicoesPagamentoId;
     }
 
     @Override
@@ -174,10 +122,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof VendaCondicoesParcelaVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        VendaCondicoesParcelaVO other = (VendaCondicoesParcelaVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +134,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.VendaCondicoesParcelaVO[ id=" + id + " ]";
     }
     
 }

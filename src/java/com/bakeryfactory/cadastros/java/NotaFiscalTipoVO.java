@@ -24,8 +24,9 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,9 +36,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +45,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "nota_fiscal_tipo")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "NotaFiscalTipoVO.findAll", query = "SELECT n FROM NotaFiscalTipoVO n")})
+public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +56,29 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "descricao")
+    private String descricao;
+    @Column(name = "serie")
+    private String serie;
+    @Column(name = "serie_scan")
+    private String serieScan;
+    @Column(name = "ultimo_numero")
+    private Integer ultimoNumero;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipoId")
+    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private EmpresaVO empresaId;
+    @JoinColumn(name = "nota_fiscal_modelo_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private NotaFiscalModeloVO notaFiscalModeloId;
 
-    public PessoaJuridicaVO() {
+    public NotaFiscalTipoVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public NotaFiscalTipoVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +90,68 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public String getSerie() {
+        return serie;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setSerie(String serie) {
+        this.serie = serie;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getSerieScan() {
+        return serieScan;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setSerieScan(String serieScan) {
+        this.serieScan = serieScan;
     }
 
-    public Date getDataConstituicao() {
-        return dataConstituicao;
+    public Integer getUltimoNumero() {
+        return ultimoNumero;
     }
 
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
+    public void setUltimoNumero(Integer ultimoNumero) {
+        this.ultimoNumero = ultimoNumero;
     }
 
-    public Character getTipoRegime() {
-        return tipoRegime;
+    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
+        return vendaCabecalhoVOList;
     }
 
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
+    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
+        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
     }
 
-    public Character getCrt() {
-        return crt;
+    public EmpresaVO getEmpresaId() {
+        return empresaId;
     }
 
-    public void setCrt(Character crt) {
-        this.crt = crt;
+    public void setEmpresaId(EmpresaVO empresaId) {
+        this.empresaId = empresaId;
     }
 
-    public String getSuframa() {
-        return suframa;
+    public NotaFiscalModeloVO getNotaFiscalModeloId() {
+        return notaFiscalModeloId;
     }
 
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setNotaFiscalModeloId(NotaFiscalModeloVO notaFiscalModeloId) {
+        this.notaFiscalModeloId = notaFiscalModeloId;
     }
 
     @Override
@@ -174,10 +164,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof NotaFiscalTipoVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        NotaFiscalTipoVO other = (NotaFiscalTipoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +176,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.NotaFiscalTipoVO[ id=" + id + " ]";
     }
     
 }

@@ -42,10 +42,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_endereco")
+@Table(name = "empresa_endereco")
 @NamedQueries({
-    @NamedQuery(name = "PessoaEnderecoVO_1.findAll", query = "SELECT p FROM PessoaEnderecoVO_1 p")})
-public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "EmpresaEnderecoVO.findAll", query = "SELECT e FROM EmpresaEnderecoVO e")})
+public class EmpresaEnderecoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -77,14 +77,14 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
     private Character cobranca;
     @Column(name = "correspondencia")
     private Character correspondencia;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private EmpresaVO empresaId;
 
-    public PessoaEnderecoVO() {
+    public EmpresaEnderecoVO() {
     }
 
-    public PessoaEnderecoVO(Integer id) {
+    public EmpresaEnderecoVO(Integer id) {
         this.id = id;
     }
 
@@ -192,12 +192,12 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
         this.correspondencia = correspondencia;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public EmpresaVO getEmpresaId() {
+        return empresaId;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setEmpresaId(EmpresaVO empresaId) {
+        this.empresaId = empresaId;
     }
 
     @Override
@@ -210,10 +210,10 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaEnderecoVO)) {
+        if (!(object instanceof EmpresaEnderecoVO)) {
             return false;
         }
-        PessoaEnderecoVO other = (PessoaEnderecoVO) object;
+        EmpresaEnderecoVO other = (EmpresaEnderecoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -222,7 +222,7 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaEnderecoVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.EmpresaEnderecoVO[ id=" + id + " ]";
     }
     
 }

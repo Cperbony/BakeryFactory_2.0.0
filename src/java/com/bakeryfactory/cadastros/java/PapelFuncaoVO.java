@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +35,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +42,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "papel_funcao")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "PapelFuncaoVO.findAll", query = "SELECT p FROM PapelFuncaoVO p")})
+public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +53,27 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @Column(name = "pode_consultar")
+    private Character podeConsultar;
+    @Column(name = "pode_inserir")
+    private Character podeInserir;
+    @Column(name = "pode_alterar")
+    private Character podeAlterar;
+    @Column(name = "pode_excluir")
+    private Character podeExcluir;
+    @Column(name = "habilitado")
+    private Character habilitado;
+    @JoinColumn(name = "funcao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private FuncaoVO funcaoId;
+    @JoinColumn(name = "papel_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private PapelVO papelId;
 
-    public PessoaJuridicaVO() {
+    public PapelFuncaoVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public PapelFuncaoVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +85,60 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Character getPodeConsultar() {
+        return podeConsultar;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setPodeConsultar(Character podeConsultar) {
+        this.podeConsultar = podeConsultar;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public Character getPodeInserir() {
+        return podeInserir;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setPodeInserir(Character podeInserir) {
+        this.podeInserir = podeInserir;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public Character getPodeAlterar() {
+        return podeAlterar;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setPodeAlterar(Character podeAlterar) {
+        this.podeAlterar = podeAlterar;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public Character getPodeExcluir() {
+        return podeExcluir;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setPodeExcluir(Character podeExcluir) {
+        this.podeExcluir = podeExcluir;
     }
 
-    public Date getDataConstituicao() {
-        return dataConstituicao;
+    public Character getHabilitado() {
+        return habilitado;
     }
 
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
+    public void setHabilitado(Character habilitado) {
+        this.habilitado = habilitado;
     }
 
-    public Character getTipoRegime() {
-        return tipoRegime;
+    public FuncaoVO getFuncaoId() {
+        return funcaoId;
     }
 
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
+    public void setFuncaoId(FuncaoVO funcaoId) {
+        this.funcaoId = funcaoId;
     }
 
-    public Character getCrt() {
-        return crt;
+    public PapelVO getPapelId() {
+        return papelId;
     }
 
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPapelId(PapelVO papelId) {
+        this.papelId = papelId;
     }
 
     @Override
@@ -174,10 +151,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof PapelFuncaoVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        PapelFuncaoVO other = (PapelFuncaoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +163,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PapelFuncaoVO[ id=" + id + " ]";
     }
     
 }

@@ -24,7 +24,7 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,8 +39,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,10 +46,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "produto_calculo_preco_medidas")
 @NamedQueries({
-    @NamedQuery(name = "UsuarioVO_1.findAll", query = "SELECT u FROM UsuarioVO_1 u")})
-public class UsuarioVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "ProdutoCalculoPrecoMedidasVO.findAll", query = "SELECT p FROM ProdutoCalculoPrecoMedidasVO p")})
+public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,34 +57,29 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "login")
-    private String login;
-    @Column(name = "senha")
-    private String senha;
-    @Column(name = "data_cadastro")
-    @Temporal(TemporalType.DATE)
-    private Date dataCadastro;
-    @Column(name = "administrador")
-    private Character administrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<AuditoriaVO> auditoriaVOList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    @Column(name = "tipo_medida")
+    private String tipoMedida;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "mark_up_minimo")
+    private BigDecimal markUpMinimo;
+    @Column(name = "custo_produto")
+    private BigDecimal custoProduto;
+    @Column(name = "preco_sugestao")
+    private BigDecimal precoSugestao;
+    @Column(name = "preco_venda")
+    private BigDecimal precoVenda;
+    @Column(name = "mark_up_aplicado")
+    private BigDecimal markUpAplicado;
+    @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
-    @JoinColumn(name = "papel_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PapelVO papelId;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private ReceituarioControleCustoVO receituarioControleCustoId;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoCalculoPrecoMedidasId")
+    private List<PcpServicoVO> pcpServicoVOList;
 
-    public UsuarioVO() {
+    public ProdutoCalculoPrecoMedidasVO() {
     }
 
-    public UsuarioVO(Integer id) {
+    public ProdutoCalculoPrecoMedidasVO(Integer id) {
         this.id = id;
     }
 
@@ -98,76 +91,68 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getTipoMedida() {
+        return tipoMedida;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setTipoMedida(String tipoMedida) {
+        this.tipoMedida = tipoMedida;
     }
 
-    public String getSenha() {
-        return senha;
+    public BigDecimal getMarkUpMinimo() {
+        return markUpMinimo;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setMarkUpMinimo(BigDecimal markUpMinimo) {
+        this.markUpMinimo = markUpMinimo;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public BigDecimal getCustoProduto() {
+        return custoProduto;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setCustoProduto(BigDecimal custoProduto) {
+        this.custoProduto = custoProduto;
     }
 
-    public Character getAdministrador() {
-        return administrador;
+    public BigDecimal getPrecoSugestao() {
+        return precoSugestao;
     }
 
-    public void setAdministrador(Character administrador) {
-        this.administrador = administrador;
+    public void setPrecoSugestao(BigDecimal precoSugestao) {
+        this.precoSugestao = precoSugestao;
     }
 
-    public List<AuditoriaVO> getAuditoriaVOList() {
-        return auditoriaVOList;
+    public BigDecimal getPrecoVenda() {
+        return precoVenda;
     }
 
-    public void setAuditoriaVOList(List<AuditoriaVO> auditoriaVOList) {
-        this.auditoriaVOList = auditoriaVOList;
+    public void setPrecoVenda(BigDecimal precoVenda) {
+        this.precoVenda = precoVenda;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public BigDecimal getMarkUpAplicado() {
+        return markUpAplicado;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setMarkUpAplicado(BigDecimal markUpAplicado) {
+        this.markUpAplicado = markUpAplicado;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public ReceituarioControleCustoVO getReceituarioControleCustoId() {
+        return receituarioControleCustoId;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
+    public void setReceituarioControleCustoId(ReceituarioControleCustoVO receituarioControleCustoId) {
+        this.receituarioControleCustoId = receituarioControleCustoId;
     }
 
-    public PapelVO getPapelId() {
-        return papelId;
+    public List<PcpServicoVO> getPcpServicoVOList() {
+        return pcpServicoVOList;
     }
 
-    public void setPapelId(PapelVO papelId) {
-        this.papelId = papelId;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPcpServicoVOList(List<PcpServicoVO> pcpServicoVOList) {
+        this.pcpServicoVOList = pcpServicoVOList;
     }
 
     @Override
@@ -180,10 +165,10 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsuarioVO)) {
+        if (!(object instanceof ProdutoCalculoPrecoMedidasVO)) {
             return false;
         }
-        UsuarioVO other = (UsuarioVO) object;
+        ProdutoCalculoPrecoMedidasVO other = (ProdutoCalculoPrecoMedidasVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -192,7 +177,7 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.UsuarioVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.ProdutoCalculoPrecoMedidasVO[ id=" + id + " ]";
     }
     
 }

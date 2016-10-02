@@ -45,10 +45,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "pessoa_alteracao")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "PessoaAlteracaoVO.findAll", query = "SELECT p FROM PessoaAlteracaoVO p")})
+public class PessoaAlteracaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +56,21 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
+    @Column(name = "data_alteracao")
     @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
+    private Date dataAlteracao;
+    @Column(name = "objeto_antigo")
+    private String objetoAntigo;
+    @Column(name = "objeto_novo")
+    private String objetoNovo;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PessoaVO pessoaId;
 
-    public PessoaJuridicaVO() {
+    public PessoaAlteracaoVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public PessoaAlteracaoVO(Integer id) {
         this.id = id;
     }
 
@@ -92,68 +82,28 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Date getDataAlteracao() {
+        return dataAlteracao;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setDataAlteracao(Date dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public String getObjetoAntigo() {
+        return objetoAntigo;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setObjetoAntigo(String objetoAntigo) {
+        this.objetoAntigo = objetoAntigo;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public String getObjetoNovo() {
+        return objetoNovo;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public Date getDataConstituicao() {
-        return dataConstituicao;
-    }
-
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
-    }
-
-    public Character getTipoRegime() {
-        return tipoRegime;
-    }
-
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
+    public void setObjetoNovo(String objetoNovo) {
+        this.objetoNovo = objetoNovo;
     }
 
     public PessoaVO getPessoaId() {
@@ -174,10 +124,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof PessoaAlteracaoVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        PessoaAlteracaoVO other = (PessoaAlteracaoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +136,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PessoaAlteracaoVO[ id=" + id + " ]";
     }
     
 }

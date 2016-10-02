@@ -24,7 +24,7 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +36,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +43,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "compra_req_cotacao_detalhe")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "CompraReqCotacaoDetalheVO.findAll", query = "SELECT c FROM CompraReqCotacaoDetalheVO c")})
+public class CompraReqCotacaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +54,20 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "quantidade_cotada")
+    private BigDecimal quantidadeCotada;
+    @JoinColumn(name = "compra_cotacao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private CompraCotacaoVO compraCotacaoId;
+    @JoinColumn(name = "compra_requisicao_detalhe_id", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private CompraRequisicaoDetalheVO compraRequisicaoDetalheId;
 
-    public PessoaJuridicaVO() {
+    public CompraReqCotacaoDetalheVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public CompraReqCotacaoDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +79,28 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public BigDecimal getQuantidadeCotada() {
+        return quantidadeCotada;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setQuantidadeCotada(BigDecimal quantidadeCotada) {
+        this.quantidadeCotada = quantidadeCotada;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public CompraCotacaoVO getCompraCotacaoId() {
+        return compraCotacaoId;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setCompraCotacaoId(CompraCotacaoVO compraCotacaoId) {
+        this.compraCotacaoId = compraCotacaoId;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public CompraRequisicaoDetalheVO getCompraRequisicaoDetalheId() {
+        return compraRequisicaoDetalheId;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public Date getDataConstituicao() {
-        return dataConstituicao;
-    }
-
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
-    }
-
-    public Character getTipoRegime() {
-        return tipoRegime;
-    }
-
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setCompraRequisicaoDetalheId(CompraRequisicaoDetalheVO compraRequisicaoDetalheId) {
+        this.compraRequisicaoDetalheId = compraRequisicaoDetalheId;
     }
 
     @Override
@@ -174,10 +113,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof CompraReqCotacaoDetalheVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        CompraReqCotacaoDetalheVO other = (CompraReqCotacaoDetalheVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +125,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraReqCotacaoDetalheVO[ id=" + id + " ]";
     }
     
 }

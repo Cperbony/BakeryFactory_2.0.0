@@ -24,7 +24,7 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -39,8 +39,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,10 +46,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "vendedor")
 @NamedQueries({
-    @NamedQuery(name = "UsuarioVO_1.findAll", query = "SELECT u FROM UsuarioVO_1 u")})
-public class UsuarioVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "VendedorVO.findAll", query = "SELECT v FROM VendedorVO v")})
+public class VendedorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,34 +57,29 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "login")
-    private String login;
-    @Column(name = "senha")
-    private String senha;
-    @Column(name = "data_cadastro")
-    @Temporal(TemporalType.DATE)
-    private Date dataCadastro;
-    @Column(name = "administrador")
-    private Character administrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<AuditoriaVO> auditoriaVOList;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "comissao")
+    private BigDecimal comissao;
+    @Column(name = "meta_vendas")
+    private BigDecimal metaVendas;
+    @Column(name = "gerente")
+    private Character gerente;
+    @Column(name = "taxa_gerente")
+    private BigDecimal taxaGerente;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
+    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
+    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
+    private List<VendaComissaoVO> vendaComissaoVOList;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ColaboradorVO colaboradorId;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
-    @JoinColumn(name = "papel_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PapelVO papelId;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
 
-    public UsuarioVO() {
+    public VendedorVO() {
     }
 
-    public UsuarioVO(Integer id) {
+    public VendedorVO(Integer id) {
         this.id = id;
     }
 
@@ -98,44 +91,60 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public BigDecimal getComissao() {
+        return comissao;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setComissao(BigDecimal comissao) {
+        this.comissao = comissao;
     }
 
-    public String getSenha() {
-        return senha;
+    public BigDecimal getMetaVendas() {
+        return metaVendas;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setMetaVendas(BigDecimal metaVendas) {
+        this.metaVendas = metaVendas;
     }
 
-    public Date getDataCadastro() {
-        return dataCadastro;
+    public Character getGerente() {
+        return gerente;
     }
 
-    public void setDataCadastro(Date dataCadastro) {
-        this.dataCadastro = dataCadastro;
+    public void setGerente(Character gerente) {
+        this.gerente = gerente;
     }
 
-    public Character getAdministrador() {
-        return administrador;
+    public BigDecimal getTaxaGerente() {
+        return taxaGerente;
     }
 
-    public void setAdministrador(Character administrador) {
-        this.administrador = administrador;
+    public void setTaxaGerente(BigDecimal taxaGerente) {
+        this.taxaGerente = taxaGerente;
     }
 
-    public List<AuditoriaVO> getAuditoriaVOList() {
-        return auditoriaVOList;
+    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
+        return vendaCabecalhoVOList;
     }
 
-    public void setAuditoriaVOList(List<AuditoriaVO> auditoriaVOList) {
-        this.auditoriaVOList = auditoriaVOList;
+    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
+        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    }
+
+    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoVOList() {
+        return vendaOrcamentoCabecalhoVOList;
+    }
+
+    public void setVendaOrcamentoCabecalhoVOList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList) {
+        this.vendaOrcamentoCabecalhoVOList = vendaOrcamentoCabecalhoVOList;
+    }
+
+    public List<VendaComissaoVO> getVendaComissaoVOList() {
+        return vendaComissaoVOList;
+    }
+
+    public void setVendaComissaoVOList(List<VendaComissaoVO> vendaComissaoVOList) {
+        this.vendaComissaoVOList = vendaComissaoVOList;
     }
 
     public ColaboradorVO getColaboradorId() {
@@ -144,30 +153,6 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     public void setColaboradorId(ColaboradorVO colaboradorId) {
         this.colaboradorId = colaboradorId;
-    }
-
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
-    }
-
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
-    }
-
-    public PapelVO getPapelId() {
-        return papelId;
-    }
-
-    public void setPapelId(PapelVO papelId) {
-        this.papelId = papelId;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
     }
 
     @Override
@@ -180,10 +165,10 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsuarioVO)) {
+        if (!(object instanceof VendedorVO)) {
             return false;
         }
-        UsuarioVO other = (UsuarioVO) object;
+        VendedorVO other = (VendedorVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -192,7 +177,7 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.UsuarioVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.VendedorVO[ id=" + id + " ]";
     }
     
 }

@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,8 +35,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,10 +42,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "empresa_contato")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "EmpresaContatoVO.findAll", query = "SELECT e FROM EmpresaContatoVO e")})
+public class EmpresaContatoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +53,24 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
-    @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "email")
+    private String email;
+    @Column(name = "fone_comercial")
+    private String foneComercial;
+    @Column(name = "fone_residencial")
+    private String foneResidencial;
+    @Column(name = "fone_celular")
+    private String foneCelular;
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private EmpresaVO empresaId;
 
-    public PessoaJuridicaVO() {
+    public EmpresaContatoVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public EmpresaContatoVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +82,52 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public String getNome() {
+        return nome;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public String getEmail() {
+        return email;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public String getFoneComercial() {
+        return foneComercial;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setFoneComercial(String foneComercial) {
+        this.foneComercial = foneComercial;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getFoneResidencial() {
+        return foneResidencial;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setFoneResidencial(String foneResidencial) {
+        this.foneResidencial = foneResidencial;
     }
 
-    public Date getDataConstituicao() {
-        return dataConstituicao;
+    public String getFoneCelular() {
+        return foneCelular;
     }
 
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
+    public void setFoneCelular(String foneCelular) {
+        this.foneCelular = foneCelular;
     }
 
-    public Character getTipoRegime() {
-        return tipoRegime;
+    public EmpresaVO getEmpresaId() {
+        return empresaId;
     }
 
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setEmpresaId(EmpresaVO empresaId) {
+        this.empresaId = empresaId;
     }
 
     @Override
@@ -174,10 +140,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof EmpresaContatoVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        EmpresaContatoVO other = (EmpresaContatoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +152,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.EmpresaContatoVO[ id=" + id + " ]";
     }
     
 }

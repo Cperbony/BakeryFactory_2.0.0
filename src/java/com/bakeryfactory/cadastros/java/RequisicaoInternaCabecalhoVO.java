@@ -25,16 +25,17 @@ package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -45,10 +46,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "requisicao_interna_cabecalho")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "RequisicaoInternaCabecalhoVO.findAll", query = "SELECT r FROM RequisicaoInternaCabecalhoVO r")})
+public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +57,18 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
+    @Column(name = "data_requisicao")
     @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private Date dataRequisicao;
+    @Column(name = "situacao")
+    private Character situacao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoInternaCabecalhoId")
+    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList;
 
-    public PessoaJuridicaVO() {
+    public RequisicaoInternaCabecalhoVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public RequisicaoInternaCabecalhoVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +80,28 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Date getDataRequisicao() {
+        return dataRequisicao;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setDataRequisicao(Date dataRequisicao) {
+        this.dataRequisicao = dataRequisicao;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public Character getSituacao() {
+        return situacao;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setSituacao(Character situacao) {
+        this.situacao = situacao;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheVOList() {
+        return requisicaoInternaDetalheVOList;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
-    }
-
-    public String getNomeFantasia() {
-        return nomeFantasia;
-    }
-
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
-    }
-
-    public Date getDataConstituicao() {
-        return dataConstituicao;
-    }
-
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
-    }
-
-    public Character getTipoRegime() {
-        return tipoRegime;
-    }
-
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setRequisicaoInternaDetalheVOList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList) {
+        this.requisicaoInternaDetalheVOList = requisicaoInternaDetalheVOList;
     }
 
     @Override
@@ -174,10 +114,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof RequisicaoInternaCabecalhoVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        RequisicaoInternaCabecalhoVO other = (RequisicaoInternaCabecalhoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +126,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.RequisicaoInternaCabecalhoVO[ id=" + id + " ]";
     }
     
 }

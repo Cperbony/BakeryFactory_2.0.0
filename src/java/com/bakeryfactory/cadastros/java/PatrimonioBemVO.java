@@ -33,8 +33,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -48,10 +46,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "patrimonio_bem")
 @NamedQueries({
-    @NamedQuery(name = "UsuarioVO_1.findAll", query = "SELECT u FROM UsuarioVO_1 u")})
-public class UsuarioVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "PatrimonioBemVO.findAll", query = "SELECT p FROM PatrimonioBemVO p")})
+public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,34 +57,35 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "login")
-    private String login;
-    @Column(name = "senha")
-    private String senha;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "descricao")
+    private String descricao;
+    @Column(name = "numero_serie")
+    private String numeroSerie;
+    @Column(name = "data_aquisicao")
+    @Temporal(TemporalType.DATE)
+    private Date dataAquisicao;
+    @Column(name = "data_aceite")
+    @Temporal(TemporalType.DATE)
+    private Date dataAceite;
     @Column(name = "data_cadastro")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "administrador")
-    private Character administrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<AuditoriaVO> auditoriaVOList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
-    @JoinColumn(name = "papel_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PapelVO papelId;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    @Column(name = "vencimento_garantia")
+    @Temporal(TemporalType.DATE)
+    private Date vencimentoGarantia;
+    @Column(name = "numero_nota_fiscal")
+    private String numeroNotaFiscal;
+    @Column(name = "chave_nfe")
+    private String chaveNfe;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBemId")
+    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList;
 
-    public UsuarioVO() {
+    public PatrimonioBemVO() {
     }
 
-    public UsuarioVO(Integer id) {
+    public PatrimonioBemVO(Integer id) {
         this.id = id;
     }
 
@@ -98,20 +97,44 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getNome() {
+        return nome;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getSenha() {
-        return senha;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setSenha(String senha) {
-        this.senha = senha;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public String getNumeroSerie() {
+        return numeroSerie;
+    }
+
+    public void setNumeroSerie(String numeroSerie) {
+        this.numeroSerie = numeroSerie;
+    }
+
+    public Date getDataAquisicao() {
+        return dataAquisicao;
+    }
+
+    public void setDataAquisicao(Date dataAquisicao) {
+        this.dataAquisicao = dataAquisicao;
+    }
+
+    public Date getDataAceite() {
+        return dataAceite;
+    }
+
+    public void setDataAceite(Date dataAceite) {
+        this.dataAceite = dataAceite;
     }
 
     public Date getDataCadastro() {
@@ -122,52 +145,36 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-    public Character getAdministrador() {
-        return administrador;
+    public Date getVencimentoGarantia() {
+        return vencimentoGarantia;
     }
 
-    public void setAdministrador(Character administrador) {
-        this.administrador = administrador;
+    public void setVencimentoGarantia(Date vencimentoGarantia) {
+        this.vencimentoGarantia = vencimentoGarantia;
     }
 
-    public List<AuditoriaVO> getAuditoriaVOList() {
-        return auditoriaVOList;
+    public String getNumeroNotaFiscal() {
+        return numeroNotaFiscal;
     }
 
-    public void setAuditoriaVOList(List<AuditoriaVO> auditoriaVOList) {
-        this.auditoriaVOList = auditoriaVOList;
+    public void setNumeroNotaFiscal(String numeroNotaFiscal) {
+        this.numeroNotaFiscal = numeroNotaFiscal;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public String getChaveNfe() {
+        return chaveNfe;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setChaveNfe(String chaveNfe) {
+        this.chaveNfe = chaveNfe;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoVOList() {
+        return pcpServicoEquipamentoVOList;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
-    }
-
-    public PapelVO getPapelId() {
-        return papelId;
-    }
-
-    public void setPapelId(PapelVO papelId) {
-        this.papelId = papelId;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPcpServicoEquipamentoVOList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList) {
+        this.pcpServicoEquipamentoVOList = pcpServicoEquipamentoVOList;
     }
 
     @Override
@@ -180,10 +187,10 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsuarioVO)) {
+        if (!(object instanceof PatrimonioBemVO)) {
             return false;
         }
-        UsuarioVO other = (UsuarioVO) object;
+        PatrimonioBemVO other = (PatrimonioBemVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -192,7 +199,7 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.UsuarioVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PatrimonioBemVO[ id=" + id + " ]";
     }
     
 }

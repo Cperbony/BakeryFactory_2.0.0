@@ -45,10 +45,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "auditoria")
 @NamedQueries({
-    @NamedQuery(name = "PessoaJuridicaVO_1.findAll", query = "SELECT p FROM PessoaJuridicaVO_1 p")})
-public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "AuditoriaVO.findAll", query = "SELECT a FROM AuditoriaVO a")})
+public class AuditoriaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,31 +56,25 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "cnpj")
-    private String cnpj;
-    @Column(name = "inscricao_estadual")
-    private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
-    private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
-    private String nomeFantasia;
-    @Column(name = "data_constituicao")
+    @Column(name = "data_registro")
     @Temporal(TemporalType.DATE)
-    private Date dataConstituicao;
-    @Column(name = "tipo_regime")
-    private Character tipoRegime;
-    @Column(name = "crt")
-    private Character crt;
-    @Column(name = "suframa")
-    private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    private Date dataRegistro;
+    @Column(name = "hora_registro")
+    private String horaRegistro;
+    @Column(name = "janela_controller")
+    private String janelaController;
+    @Column(name = "acao")
+    private String acao;
+    @Column(name = "conteudo")
+    private String conteudo;
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private UsuarioVO usuarioId;
 
-    public PessoaJuridicaVO() {
+    public AuditoriaVO() {
     }
 
-    public PessoaJuridicaVO(Integer id) {
+    public AuditoriaVO(Integer id) {
         this.id = id;
     }
 
@@ -92,76 +86,52 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public String getCnpj() {
-        return cnpj;
+    public Date getDataRegistro() {
+        return dataRegistro;
     }
 
-    public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+    public void setDataRegistro(Date dataRegistro) {
+        this.dataRegistro = dataRegistro;
     }
 
-    public String getInscricaoEstadual() {
-        return inscricaoEstadual;
+    public String getHoraRegistro() {
+        return horaRegistro;
     }
 
-    public void setInscricaoEstadual(String inscricaoEstadual) {
-        this.inscricaoEstadual = inscricaoEstadual;
+    public void setHoraRegistro(String horaRegistro) {
+        this.horaRegistro = horaRegistro;
     }
 
-    public String getInscricaoMunicipal() {
-        return inscricaoMunicipal;
+    public String getJanelaController() {
+        return janelaController;
     }
 
-    public void setInscricaoMunicipal(String inscricaoMunicipal) {
-        this.inscricaoMunicipal = inscricaoMunicipal;
+    public void setJanelaController(String janelaController) {
+        this.janelaController = janelaController;
     }
 
-    public String getNomeFantasia() {
-        return nomeFantasia;
+    public String getAcao() {
+        return acao;
     }
 
-    public void setNomeFantasia(String nomeFantasia) {
-        this.nomeFantasia = nomeFantasia;
+    public void setAcao(String acao) {
+        this.acao = acao;
     }
 
-    public Date getDataConstituicao() {
-        return dataConstituicao;
+    public String getConteudo() {
+        return conteudo;
     }
 
-    public void setDataConstituicao(Date dataConstituicao) {
-        this.dataConstituicao = dataConstituicao;
+    public void setConteudo(String conteudo) {
+        this.conteudo = conteudo;
     }
 
-    public Character getTipoRegime() {
-        return tipoRegime;
+    public UsuarioVO getUsuarioId() {
+        return usuarioId;
     }
 
-    public void setTipoRegime(Character tipoRegime) {
-        this.tipoRegime = tipoRegime;
-    }
-
-    public Character getCrt() {
-        return crt;
-    }
-
-    public void setCrt(Character crt) {
-        this.crt = crt;
-    }
-
-    public String getSuframa() {
-        return suframa;
-    }
-
-    public void setSuframa(String suframa) {
-        this.suframa = suframa;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setUsuarioId(UsuarioVO usuarioId) {
+        this.usuarioId = usuarioId;
     }
 
     @Override
@@ -174,10 +144,10 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaJuridicaVO)) {
+        if (!(object instanceof AuditoriaVO)) {
             return false;
         }
-        PessoaJuridicaVO other = (PessoaJuridicaVO) object;
+        AuditoriaVO other = (AuditoriaVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -186,7 +156,7 @@ public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaJuridicaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.AuditoriaVO[ id=" + id + " ]";
     }
     
 }

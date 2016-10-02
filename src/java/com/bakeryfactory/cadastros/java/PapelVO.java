@@ -24,16 +24,17 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -42,10 +43,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_telefone")
+@Table(name = "papel")
 @NamedQueries({
-    @NamedQuery(name = "PessoaTelefoneVO_1.findAll", query = "SELECT p FROM PessoaTelefoneVO_1 p")})
-public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "PapelVO.findAll", query = "SELECT p FROM PapelVO p")})
+public class PapelVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,20 +54,21 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "tipo")
-    private Integer tipo;
-    @Column(name = "numero")
-    private String numero;
-    @Column(name = "observacao")
-    private String observacao;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "descricao")
+    private String descricao;
+    @Column(name = "acesso_completo")
+    private Character acessoCompleto;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
+    private List<UsuarioVO> usuarioVOList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
+    private List<PapelFuncaoVO> papelFuncaoVOList;
 
-    public PessoaTelefoneVO() {
+    public PapelVO() {
     }
 
-    public PessoaTelefoneVO(Integer id) {
+    public PapelVO(Integer id) {
         this.id = id;
     }
 
@@ -78,36 +80,44 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public Integer getTipo() {
-        return tipo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public Character getAcessoCompleto() {
+        return acessoCompleto;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setAcessoCompleto(Character acessoCompleto) {
+        this.acessoCompleto = acessoCompleto;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public List<UsuarioVO> getUsuarioVOList() {
+        return usuarioVOList;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setUsuarioVOList(List<UsuarioVO> usuarioVOList) {
+        this.usuarioVOList = usuarioVOList;
+    }
+
+    public List<PapelFuncaoVO> getPapelFuncaoVOList() {
+        return papelFuncaoVOList;
+    }
+
+    public void setPapelFuncaoVOList(List<PapelFuncaoVO> papelFuncaoVOList) {
+        this.papelFuncaoVOList = papelFuncaoVOList;
     }
 
     @Override
@@ -120,10 +130,10 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaTelefoneVO)) {
+        if (!(object instanceof PapelVO)) {
             return false;
         }
-        PessoaTelefoneVO other = (PessoaTelefoneVO) object;
+        PapelVO other = (PapelVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -132,7 +142,7 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaTelefoneVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PapelVO[ id=" + id + " ]";
     }
     
 }

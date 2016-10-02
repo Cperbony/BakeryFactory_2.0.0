@@ -24,16 +24,17 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -42,10 +43,10 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_telefone")
+@Table(name = "classe_produto_grupo")
 @NamedQueries({
-    @NamedQuery(name = "PessoaTelefoneVO_1.findAll", query = "SELECT p FROM PessoaTelefoneVO_1 p")})
-public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
+    @NamedQuery(name = "ClasseProdutoGrupoVO.findAll", query = "SELECT c FROM ClasseProdutoGrupoVO c")})
+public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,20 +54,17 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "tipo")
-    private Integer tipo;
-    @Column(name = "numero")
-    private String numero;
-    @Column(name = "observacao")
-    private String observacao;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    @Column(name = "nome")
+    private String nome;
+    @Column(name = "descricao")
+    private String descricao;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classeProdutoGrupoId")
+    private List<ProdutoSubgrupoVO> produtoSubgrupoVOList;
 
-    public PessoaTelefoneVO() {
+    public ClasseProdutoGrupoVO() {
     }
 
-    public PessoaTelefoneVO(Integer id) {
+    public ClasseProdutoGrupoVO(Integer id) {
         this.id = id;
     }
 
@@ -78,36 +76,28 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public Integer getTipo() {
-        return tipo;
+    public String getNome() {
+        return nome;
     }
 
-    public void setTipo(Integer tipo) {
-        this.tipo = tipo;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getNumero() {
-        return numero;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public List<ProdutoSubgrupoVO> getProdutoSubgrupoVOList() {
+        return produtoSubgrupoVOList;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
-    }
-
-    public PessoaVO getPessoaId() {
-        return pessoaId;
-    }
-
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setProdutoSubgrupoVOList(List<ProdutoSubgrupoVO> produtoSubgrupoVOList) {
+        this.produtoSubgrupoVOList = produtoSubgrupoVOList;
     }
 
     @Override
@@ -120,10 +110,10 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof PessoaTelefoneVO)) {
+        if (!(object instanceof ClasseProdutoGrupoVO)) {
             return false;
         }
-        PessoaTelefoneVO other = (PessoaTelefoneVO) object;
+        ClasseProdutoGrupoVO other = (ClasseProdutoGrupoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -132,7 +122,7 @@ public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaTelefoneVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.ClasseProdutoGrupoVO[ id=" + id + " ]";
     }
     
 }
