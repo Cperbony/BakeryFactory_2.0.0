@@ -44,7 +44,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 @Entity
 @Table(name = "pessoa_contato")
 @NamedQueries({
-    @NamedQuery(name = "PessoaContatoVO_1.findAll", query = "SELECT p FROM PessoaContatoVO_1 p")})
+    @NamedQuery(name = "PessoaContatoVO.findAll", query = "SELECT p FROM PessoaContatoVO p")})
 public class PessoaContatoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -152,7 +152,7 @@ public class PessoaContatoVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaContatoVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PessoaContatoVO[ id=" + id + " ]";
     }
     
 }

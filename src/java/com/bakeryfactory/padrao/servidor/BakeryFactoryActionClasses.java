@@ -24,6 +24,7 @@
 package com.bakeryfactory.padrao.servidor;
 
 import com.bakeryfactory.cadastros.cliente.PessoaDetalhe;
+import com.bakeryfactory.cadastros.java.EstadoCivilVO;
 import org.openswing.swing.server.Action;
 import org.openswing.swing.server.ActionsCollection;
 
@@ -37,11 +38,38 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
     Action a = null;
    
     
+      /*Actions do Módulo */
+    //INFRA
+    a = new 
+    
     /*Actions do Módulo */
     //PESSOA
+    a = new EstadoCivilGridAction(); put(a.getRequestName(), a);
     a = new PessoaDetalheAction(); put(a.getRequestName(), a);
+    
+      /*Actions do Módulo */
+    //DIVERSOS
+    
+    
+      /*Actions do Módulo */
+    //ENDEREÇO
+    
+      /*Actions do Módulo */
+    //COLABORADOR
+    
+      /*Actions do Módulo */
+    //CLIENTE - FORNECEDOR - TRANSPORTADORA
+    
+      /*Actions do Módulo */
+    //PRODUTO
+    
+    
+    
+      /*Actions do Módulo */
+    //VALIDAÇÕES E IMPORTAÇÕES
+    
+    
+    
+    
     }
-    
-    
-    
 }

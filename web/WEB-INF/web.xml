@@ -10,7 +10,7 @@
 		<servlet-class>org.openswing.swing.server.Controller</servlet-class>
 		<init-param>
 			<param-name>actionClasses</param-name>
-			<param-value>com.t2tierp.padrao.servidor.T2TiERPActionClasses</param-value>
+			<param-value>com.bakeryfactory.padrao.servidor.BakeryFactoryActionClasses</param-value>
 		</init-param>
 		<init-param>
 			<param-name>connectionSource</param-name>
@@ -18,7 +18,7 @@
 		</init-param>
 		<init-param>
 			<param-name>resourceFactory</param-name>
-			<param-value>com.t2tierp.padrao.servidor.XMLResources</param-value>
+			<param-value>com.bakeryfactory.padrao.servidor.XMLResources</param-value>
 		</init-param>
 		<init-param>
 			<param-name>loginAction</param-name>
@@ -34,7 +34,7 @@
 		</init-param>
 		<init-param>
 			<param-name>controllerCallbacks</param-name>
-			<param-value>com.t2tierp.padrao.servidor.T2TiERPControllerCallbacks</param-value>
+			<param-value>com.bakeryfactory.padrao.servidor.BakeryFactoryControllerCallbacks</param-value>
 		</init-param>
 		<init-param>
 			<param-name>objectsReceiver</param-name>

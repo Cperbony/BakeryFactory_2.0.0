@@ -33,6 +33,14 @@
     
     <!-- MAPEAR OS VOs-->
     <!-- classes mapeadas -->
+    
+    <mapping class="com.bakeryfactory.cadastros.java.AtividadeForCliVO"/>
+    <mapping class="com.bakeryfactory.cadastros.java.AuditoriaVO"/>
+    
+    
+    
+    
+    
     <mapping class="com.t2tierp.cadastros.java.AgenciaBancoVO"/>
     <mapping class="com.t2tierp.cadastros.java.AlmoxarifadoVO"/>
     <mapping class="com.t2tierp.cadastros.java.AtividadeForCliVO"/>
@@ -111,13 +119,7 @@
     <mapping class="com.t2tierp.cadastros.java.UsuarioVO"/>
     <mapping class="com.t2tierp.cadastros.java.VendedorVO"/>
   
-    <mapping class="com.t2tierp.contabilidade.java.ContabilContaVO"/>
-    <mapping class="com.t2tierp.contabilidade.java.PlanoContaRefSpedVO"/>
-    <mapping class="com.t2tierp.contabilidade.java.PlanoContaVO"/>
 
-    <mapping class="com.t2tierp.tributacao.java.TributGrupoTributarioVO"/>
-    <mapping class="com.t2tierp.tributacao.java.TributIcmsCustomCabVO"/>
-    <mapping class="com.t2tierp.tributacao.java.TributOperacaoFiscalVO"/>
     
   </session-factory>
 </hibernate-configuration>

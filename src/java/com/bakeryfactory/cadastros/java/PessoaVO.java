@@ -45,7 +45,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 @Entity
 @Table(name = "pessoa")
 @NamedQueries({
-    @NamedQuery(name = "PessoaVO_1.findAll", query = "SELECT p FROM PessoaVO_1 p")})
+    @NamedQuery(name = "PessoaVO.findAll", query = "SELECT p FROM PessoaVO p")})
 public class PessoaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,7 +77,7 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
     private List<PessoaFisicaVO> pessoaFisicaVOList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<EmpresaPessoaVO> empresaPessoaVOList;
+    private List<EmpresaPessoaVO> listaEmpresa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
     private List<TransportadoraVO> transportadoraVOList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
@@ -198,12 +198,12 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
         this.pessoaFisicaVOList = pessoaFisicaVOList;
     }
 
-    public List<EmpresaPessoaVO> getEmpresaPessoaVOList() {
-        return empresaPessoaVOList;
+    public List<EmpresaPessoaVO> getListaEmpresa() {
+        return listaEmpresa;
     }
 
-    public void setEmpresaPessoaVOList(List<EmpresaPessoaVO> empresaPessoaVOList) {
-        this.empresaPessoaVOList = empresaPessoaVOList;
+    public void setListaEmpresa(List<EmpresaPessoaVO> listaEmpresa) {
+        this.listaEmpresa = listaEmpresa;
     }
 
     public List<TransportadoraVO> getTransportadoraVOList() {
@@ -292,7 +292,7 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.PessoaVO_1[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.PessoaVO[ id=" + id + " ]";
     }
     
 }

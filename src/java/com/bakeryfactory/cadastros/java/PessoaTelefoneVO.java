@@ -44,7 +44,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 @Entity
 @Table(name = "pessoa_telefone")
 @NamedQueries({
-    @NamedQuery(name = "PessoaTelefoneVO_1.findAll", query = "SELECT p FROM PessoaTelefoneVO_1 p")})
+    @NamedQuery(name = "PessoaTelefoneVO.findAll", query = "SELECT p FROM PessoaTelefoneVO p")})
 public class PessoaTelefoneVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;

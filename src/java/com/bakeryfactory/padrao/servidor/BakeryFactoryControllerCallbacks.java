@@ -21,29 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+package com.bakeryfactory.padrao.servidor;
 
-package com.bakeryfactory.padrao.cliente;
-
-import com.bakeryfactory.cadastros.java.UsuarioVO;
-import java.util.Hashtable;
+import javax.servlet.ServletContext;
+import org.hibernate.Session;
+import org.openswing.swing.server.ControllerCallbacks;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/09/2016
+ * @date 03/10/2016
  */
-public class Container {
-    
-    //Objeto Utilizado para armazenar os dados da aplicação do lado Cliente
-    private static Hashtable container = new Hashtable();
+public class BakeryFactoryControllerCallbacks extends ControllerCallbacks {
 
-    public static Hashtable getContainer() {
-        return container;
+    public BakeryFactoryControllerCallbacks() {
     }
 
-    public static void setContainer(UsuarioVO usuarioVo) {
-        container.put("usuario", usuarioVo);
-        container.put("empresa", usuarioVo.getColaboradorId().getPessoaId().getListaE)
-       
+    /**
+     * Method called by the init method of Controller class, as last instruction.
+     */
+    @Override
+    public void afterInit(ServletContext context) {
+        createConnection(context);
+    }
+
+    /**
+     * Cria a conexão e executa alguma lógica no banco de dados
+     */
+    private void createConnection(ServletContext context) {
+        try {
+            Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+            session.beginTransaction();
+            try {
+                //insere os dados no banco
+                session.getTransaction().commit();
+            } catch (Exception ex1) {
+                ex1.printStackTrace();
+            } finally {
+                try {
+                    session.close();
+                } catch (Exception ex2) {
+                    ex2.printStackTrace();
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
     }
 
 }

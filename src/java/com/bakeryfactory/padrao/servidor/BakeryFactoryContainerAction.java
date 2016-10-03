@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Session;
+import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.server.Action;
@@ -38,33 +39,49 @@ import org.openswing.swing.server.UserSessionParameters;
  *
  * @author Claudinei Aparecido Perboni <cperbony@gmail.com>
  */
-public class BakeryFactoryContainerAction implements Action{
+public class BakeryFactoryContainerAction implements Action {
 
     public BakeryFactoryContainerAction() {
     }
-    
-   /*
+
+    /*
     Retorna um RequestName
-    */
+     */
     public String getRequestName() {
         return "containerAction";
     }
-    
-     public Response executeCommand(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-         Session session = null;
-         try {
-             String username = ((String[]) inputPar)[0];
-             String password = ((String[]) inputPar)[1];
-             session = HibernateUtil.getSessionFactory().openSession();
-             
-             String baseSQL = "from USUARIO in com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login'" + username + " ' and USUARIO.senha='" + password + "'";
-             UsuarioVO vo = (UsuarioVO) session.createQuery(baseSQL).uniqueResult();
-             
-             VOResponse voResponse = new VOResponse(vo);
-             return voResponse;
-         } catch (Exception e) {
-         }
+
+    /**
+     * 
+     * @param inputPar
+     * @param userSessionPars
+     * @param request
+     * @param response
+     * @param userSession
+     * @param context
+     * @return BUSCA AS INFORMAÇÕES
+     */
+    public Response executeCommand(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
+        Session session = null;
+        try {
+            String username = ((String[]) inputPar)[0];
+            String password = ((String[]) inputPar)[1];
+            session = HibernateUtil.getSessionFactory().openSession();
+
+            String baseSQL = "from USUARIO in class com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login'" + username + "' and USUARIO.senha='" + password + "'";
+            UsuarioVO vo = (UsuarioVO) session.createQuery(baseSQL).uniqueResult();
+
+            VOResponse voResponse = new VOResponse(vo);
+            return voResponse;
+        } catch (Exception ex1) {
+            ex1.printStackTrace();
+            return new ErrorResponse(ex1.getMessage());
+        } finally {
+            try {
+                session.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
-    
-    
 }
