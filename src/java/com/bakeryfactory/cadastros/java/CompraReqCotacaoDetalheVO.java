@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_req_cotacao_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "CompraReqCotacaoDetalheVO.findAll", query = "SELECT c FROM CompraReqCotacaoDetalheVO c")})
 public class CompraReqCotacaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,10 +57,10 @@ public class CompraReqCotacaoDetalheVO extends ValueObjectImpl implements Serial
     private BigDecimal quantidadeCotada;
     @JoinColumn(name = "compra_cotacao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraCotacaoVO compraCotacaoId;
+    private CompraCotacaoVO compraCotacao;
     @JoinColumn(name = "compra_requisicao_detalhe_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraRequisicaoDetalheVO compraRequisicaoDetalheId;
+    private CompraRequisicaoDetalheVO compraRequisicaoDetalhe;
 
     public CompraReqCotacaoDetalheVO() {
     }
@@ -87,20 +85,20 @@ public class CompraReqCotacaoDetalheVO extends ValueObjectImpl implements Serial
         this.quantidadeCotada = quantidadeCotada;
     }
 
-    public CompraCotacaoVO getCompraCotacaoId() {
-        return compraCotacaoId;
+    public CompraCotacaoVO getCompraCotacao() {
+        return compraCotacao;
     }
 
-    public void setCompraCotacaoId(CompraCotacaoVO compraCotacaoId) {
-        this.compraCotacaoId = compraCotacaoId;
+    public void setCompraCotacao(CompraCotacaoVO compraCotacao) {
+        this.compraCotacao = compraCotacao;
     }
 
-    public CompraRequisicaoDetalheVO getCompraRequisicaoDetalheId() {
-        return compraRequisicaoDetalheId;
+    public CompraRequisicaoDetalheVO getCompraRequisicaoDetalhe() {
+        return compraRequisicaoDetalhe;
     }
 
-    public void setCompraRequisicaoDetalheId(CompraRequisicaoDetalheVO compraRequisicaoDetalheId) {
-        this.compraRequisicaoDetalheId = compraRequisicaoDetalheId;
+    public void setCompraRequisicaoDetalhe(CompraRequisicaoDetalheVO compraRequisicaoDetalhe) {
+        this.compraRequisicaoDetalhe = compraRequisicaoDetalhe;
     }
 
     @Override

@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_orcamento_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "VendaOrcamentoDetalheVO.findAll", query = "SELECT v FROM VendaOrcamentoDetalheVO v")})
 public class VendaOrcamentoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,10 +68,10 @@ public class VendaOrcamentoDetalheVO extends ValueObjectImpl implements Serializ
     private BigDecimal valorTotal;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
     @JoinColumn(name = "venda_orcamento_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalhoId;
+    private VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho;
 
     public VendaOrcamentoDetalheVO() {
     }
@@ -143,40 +141,20 @@ public class VendaOrcamentoDetalheVO extends ValueObjectImpl implements Serializ
         this.valorTotal = valorTotal;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
-    public VendaOrcamentoCabecalhoVO getVendaOrcamentoCabecalhoId() {
-        return vendaOrcamentoCabecalhoId;
+    public VendaOrcamentoCabecalhoVO getVendaOrcamentoCabecalho() {
+        return vendaOrcamentoCabecalho;
     }
 
-    public void setVendaOrcamentoCabecalhoId(VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalhoId) {
-        this.vendaOrcamentoCabecalhoId = vendaOrcamentoCabecalhoId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaOrcamentoDetalheVO)) {
-            return false;
-        }
-        VendaOrcamentoDetalheVO other = (VendaOrcamentoDetalheVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setVendaOrcamentoCabecalho(VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho) {
+        this.vendaOrcamentoCabecalho = vendaOrcamentoCabecalho;
     }
 
     @Override

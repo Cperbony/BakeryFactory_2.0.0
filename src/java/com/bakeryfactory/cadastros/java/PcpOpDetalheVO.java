@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_op_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "PcpOpDetalheVO.findAll", query = "SELECT p FROM PcpOpDetalheVO p")})
 public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,12 +68,12 @@ public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
     private BigDecimal custoRealizado;
     @JoinColumn(name = "pcp_op_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpOpCabecalhoVO pcpOpCabecalhoId;
+    private PcpOpCabecalhoVO pcpOpCabecalho;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpDetalheId")
-    private List<PcpServicoVO> pcpServicoVOList;
+    private List<PcpServicoVO> pcpServicoList;
 
     public PcpOpDetalheVO() {
     }
@@ -132,28 +130,28 @@ public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
         this.custoRealizado = custoRealizado;
     }
 
-    public PcpOpCabecalhoVO getPcpOpCabecalhoId() {
-        return pcpOpCabecalhoId;
+    public PcpOpCabecalhoVO getPcpOpCabecalho() {
+        return pcpOpCabecalho;
     }
 
-    public void setPcpOpCabecalhoId(PcpOpCabecalhoVO pcpOpCabecalhoId) {
-        this.pcpOpCabecalhoId = pcpOpCabecalhoId;
+    public void setPcpOpCabecalho(PcpOpCabecalhoVO pcpOpCabecalho) {
+        this.pcpOpCabecalho = pcpOpCabecalho;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
-    public List<PcpServicoVO> getPcpServicoVOList() {
-        return pcpServicoVOList;
+    public List<PcpServicoVO> getPcpServicoList() {
+        return pcpServicoList;
     }
 
-    public void setPcpServicoVOList(List<PcpServicoVO> pcpServicoVOList) {
-        this.pcpServicoVOList = pcpServicoVOList;
+    public void setPcpServicoList(List<PcpServicoVO> pcpServicoList) {
+        this.pcpServicoList = pcpServicoList;
     }
 
     @Override

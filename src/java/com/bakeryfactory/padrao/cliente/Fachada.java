@@ -21,13 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.padrao.cliente;
+
+import com.bakeryfactory.cadastros.cliente.EstadoCivilGridController;
+import com.bakeryfactory.cadastros.java.EstadoCivilVO;
+import javax.swing.JOptionPane;
+import org.openswing.swing.mdi.client.ClientFacade;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/09/2016
+ * @date 11/09/2016
  */
-class Fachada {
+public class Fachada implements ClientFacade{
+
+    public Fachada() {
+    }
+    
+    //PESSOA
+    public void getEstadoCivil(){
+        new EstadoCivilGridController();
+    }
+    
+    public void getPessoa(){
+       // new PessoaGridController();
+    }
+
+    //CLIENTE • FORNECEDOR • TRANSPORTADORA
+    
+    //COLABORADORES
+    
+    //SETORES
+    
+    //ENDEREÇO
+    
+    
+    //PRODUTO
+    
+    
+    //FUNÇÕES E TABELAS
+    public void getFuncaoPadrao() {
+        JOptionPane.showMessageDialog(null, "Acesso não autorizado!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

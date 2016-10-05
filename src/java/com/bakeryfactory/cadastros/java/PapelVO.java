@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "papel")
-@NamedQueries({
-    @NamedQuery(name = "PapelVO.findAll", query = "SELECT p FROM PapelVO p")})
 public class PapelVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,9 +59,9 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
     @Column(name = "acesso_completo")
     private Character acessoCompleto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
-    private List<UsuarioVO> usuarioVOList;
+    private List<UsuarioVO> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
-    private List<PapelFuncaoVO> papelFuncaoVOList;
+    private List<PapelFuncaoVO> papelFuncaoList;
 
     public PapelVO() {
     }
@@ -104,20 +102,20 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
         this.acessoCompleto = acessoCompleto;
     }
 
-    public List<UsuarioVO> getUsuarioVOList() {
-        return usuarioVOList;
+    public List<UsuarioVO> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setUsuarioVOList(List<UsuarioVO> usuarioVOList) {
-        this.usuarioVOList = usuarioVOList;
+    public void setUsuarioList(List<UsuarioVO> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
-    public List<PapelFuncaoVO> getPapelFuncaoVOList() {
-        return papelFuncaoVOList;
+    public List<PapelFuncaoVO> getPapelFuncaoList() {
+        return papelFuncaoList;
     }
 
-    public void setPapelFuncaoVOList(List<PapelFuncaoVO> papelFuncaoVOList) {
-        this.papelFuncaoVOList = papelFuncaoVOList;
+    public void setPapelFuncaoList(List<PapelFuncaoVO> papelFuncaoList) {
+        this.papelFuncaoList = papelFuncaoList;
     }
 
     @Override

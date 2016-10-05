@@ -49,8 +49,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_romaneio_entrega")
-@NamedQueries({
-    @NamedQuery(name = "VendaRomaneioEntregaVO.findAll", query = "SELECT v FROM VendaRomaneioEntregaVO v")})
 public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -78,10 +76,10 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
     @Column(name = "observacao")
     private String observacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaRomaneioEntregaId")
-    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    private List<VendaCabecalhoVO> vendaCabecalhoList;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
 
     public VendaRomaneioEntregaVO() {
     }
@@ -154,40 +152,20 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
         this.observacao = observacao;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
-        return vendaCabecalhoVOList;
+    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
+        return vendaCabecalhoList;
     }
 
-    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
-        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
+        this.vendaCabecalhoList = vendaCabecalhoList;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaRomaneioEntregaVO)) {
-            return false;
-        }
-        VendaRomaneioEntregaVO other = (VendaRomaneioEntregaVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
     @Override

@@ -35,7 +35,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -47,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "receituario_controle_custo")
-@NamedQueries({
-    @NamedQuery(name = "ReceituarioControleCustoVO.findAll", query = "SELECT r FROM ReceituarioControleCustoVO r")})
 public class ReceituarioControleCustoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -91,14 +88,14 @@ public class ReceituarioControleCustoVO extends ValueObjectImpl implements Seria
     @Column(name = "mark_up_promocional")
     private Integer markUpPromocional;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoId")
-    private List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasVOList;
+    private List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoVO")
-    private List<ReceituarioPadraoVO> receituarioPadraoVOList;
+    private List<ReceituarioPadraoVO> receituarioPadraoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoId")
-    private List<IngredienteVO> ingredienteVOList;
+    private List<IngredienteVO> ingredienteList;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
 
     public ReceituarioControleCustoVO() {
     }
@@ -243,36 +240,36 @@ public class ReceituarioControleCustoVO extends ValueObjectImpl implements Seria
         this.markUpPromocional = markUpPromocional;
     }
 
-    public List<ProdutoCalculoPrecoMedidasVO> getProdutoCalculoPrecoMedidasVOList() {
-        return produtoCalculoPrecoMedidasVOList;
+    public List<ProdutoCalculoPrecoMedidasVO> getProdutoCalculoPrecoMedidasList() {
+        return produtoCalculoPrecoMedidasList;
     }
 
-    public void setProdutoCalculoPrecoMedidasVOList(List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasVOList) {
-        this.produtoCalculoPrecoMedidasVOList = produtoCalculoPrecoMedidasVOList;
+    public void setProdutoCalculoPrecoMedidasList(List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasList) {
+        this.produtoCalculoPrecoMedidasList = produtoCalculoPrecoMedidasList;
     }
 
-    public List<ReceituarioPadraoVO> getReceituarioPadraoVOList() {
-        return receituarioPadraoVOList;
+    public List<ReceituarioPadraoVO> getReceituarioPadraoList() {
+        return receituarioPadraoList;
     }
 
-    public void setReceituarioPadraoVOList(List<ReceituarioPadraoVO> receituarioPadraoVOList) {
-        this.receituarioPadraoVOList = receituarioPadraoVOList;
+    public void setReceituarioPadraoList(List<ReceituarioPadraoVO> receituarioPadraoList) {
+        this.receituarioPadraoList = receituarioPadraoList;
     }
 
-    public List<IngredienteVO> getIngredienteVOList() {
-        return ingredienteVOList;
+    public List<IngredienteVO> getIngredienteList() {
+        return ingredienteList;
     }
 
-    public void setIngredienteVOList(List<IngredienteVO> ingredienteVOList) {
-        this.ingredienteVOList = ingredienteVOList;
+    public void setIngredienteList(List<IngredienteVO> ingredienteList) {
+        this.ingredienteList = ingredienteList;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
     @Override

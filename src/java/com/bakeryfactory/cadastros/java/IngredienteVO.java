@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "ingrediente")
-@NamedQueries({
-    @NamedQuery(name = "IngredienteVO.findAll", query = "SELECT i FROM IngredienteVO i")})
 public class IngredienteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,16 +69,16 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<IngredientesReceitasVO> ingredientesReceitasVOList;
+    private List<IngredientesReceitasVO> ingredientesReceitasList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<MarcaVO> marcaVOList;
+    private List<MarcaVO> marcaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList;
+    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheList;
     @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ReceituarioControleCustoVO receituarioControleCustoId;
+    private ReceituarioControleCustoVO receituarioControleCusto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<CompraPedidoDetalheVO> compraPedidoDetalheVOList;
+    private List<CompraPedidoDetalheVO> compraPedidoDetalheList;
 
     public IngredienteVO() {
     }
@@ -145,44 +143,44 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public List<IngredientesReceitasVO> getIngredientesReceitasVOList() {
-        return ingredientesReceitasVOList;
+    public List<IngredientesReceitasVO> getIngredientesReceitasList() {
+        return ingredientesReceitasList;
     }
 
-    public void setIngredientesReceitasVOList(List<IngredientesReceitasVO> ingredientesReceitasVOList) {
-        this.ingredientesReceitasVOList = ingredientesReceitasVOList;
+    public void setIngredientesReceitasList(List<IngredientesReceitasVO> ingredientesReceitasList) {
+        this.ingredientesReceitasList = ingredientesReceitasList;
     }
 
-    public List<MarcaVO> getMarcaVOList() {
-        return marcaVOList;
+    public List<MarcaVO> getMarcaList() {
+        return marcaList;
     }
 
-    public void setMarcaVOList(List<MarcaVO> marcaVOList) {
-        this.marcaVOList = marcaVOList;
+    public void setMarcaList(List<MarcaVO> marcaList) {
+        this.marcaList = marcaList;
     }
 
-    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheVOList() {
-        return compraCotacaoDetalheVOList;
+    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheList() {
+        return compraCotacaoDetalheList;
     }
 
-    public void setCompraCotacaoDetalheVOList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList) {
-        this.compraCotacaoDetalheVOList = compraCotacaoDetalheVOList;
+    public void setCompraCotacaoDetalheList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheList) {
+        this.compraCotacaoDetalheList = compraCotacaoDetalheList;
     }
 
-    public ReceituarioControleCustoVO getReceituarioControleCustoId() {
-        return receituarioControleCustoId;
+    public ReceituarioControleCustoVO getReceituarioControleCusto() {
+        return receituarioControleCusto;
     }
 
-    public void setReceituarioControleCustoId(ReceituarioControleCustoVO receituarioControleCustoId) {
-        this.receituarioControleCustoId = receituarioControleCustoId;
+    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
+        this.receituarioControleCusto = receituarioControleCusto;
     }
 
-    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheVOList() {
-        return compraPedidoDetalheVOList;
+    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheList() {
+        return compraPedidoDetalheList;
     }
 
-    public void setCompraPedidoDetalheVOList(List<CompraPedidoDetalheVO> compraPedidoDetalheVOList) {
-        this.compraPedidoDetalheVOList = compraPedidoDetalheVOList;
+    public void setCompraPedidoDetalheList(List<CompraPedidoDetalheVO> compraPedidoDetalheList) {
+        this.compraPedidoDetalheList = compraPedidoDetalheList;
     }
 
     @Override

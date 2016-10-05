@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_servico_equipamento")
-@NamedQueries({
-    @NamedQuery(name = "PcpServicoEquipamentoVO.findAll", query = "SELECT p FROM PcpServicoEquipamentoVO p")})
 public class PcpServicoEquipamentoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +53,10 @@ public class PcpServicoEquipamentoVO extends ValueObjectImpl implements Serializ
     private Integer id;
     @JoinColumn(name = "patrimonio_bem_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PatrimonioBemVO patrimonioBemId;
+    private PatrimonioBemVO patrimonioBem;
     @JoinColumn(name = "pcp_servico_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpServicoVO pcpServicoId;
+    private PcpServicoVO pcpServico;
 
     public PcpServicoEquipamentoVO() {
     }
@@ -75,20 +73,20 @@ public class PcpServicoEquipamentoVO extends ValueObjectImpl implements Serializ
         this.id = id;
     }
 
-    public PatrimonioBemVO getPatrimonioBemId() {
-        return patrimonioBemId;
+    public PatrimonioBemVO getPatrimonioBem() {
+        return patrimonioBem;
     }
 
-    public void setPatrimonioBemId(PatrimonioBemVO patrimonioBemId) {
-        this.patrimonioBemId = patrimonioBemId;
+    public void setPatrimonioBem(PatrimonioBemVO patrimonioBem) {
+        this.patrimonioBem = patrimonioBem;
     }
 
-    public PcpServicoVO getPcpServicoId() {
-        return pcpServicoId;
+    public PcpServicoVO getPcpServico() {
+        return pcpServico;
     }
 
-    public void setPcpServicoId(PcpServicoVO pcpServicoId) {
-        this.pcpServicoId = pcpServicoId;
+    public void setPcpServico(PcpServicoVO pcpServico) {
+        this.pcpServico = pcpServico;
     }
 
     @Override

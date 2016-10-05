@@ -50,8 +50,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_servico")
-@NamedQueries({
-    @NamedQuery(name = "PcpServicoVO.findAll", query = "SELECT p FROM PcpServicoVO p")})
 public class PcpServicoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -90,15 +88,15 @@ public class PcpServicoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "custo_previsto")
     private BigDecimal custoPrevisto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpServicoId")
-    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList;
+    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList;
     @JoinColumn(name = "pcp_op_detalhe_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpOpDetalheVO pcpOpDetalheId;
+    private PcpOpDetalheVO pcpOpDetalhe;
     @JoinColumn(name = "produto_calculo_preco_medidas_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidasId;
+    private ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidas;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpServicoId")
-    private List<PcpServicoColaboradorVO> pcpServicoColaboradorVOList;
+    private List<PcpServicoColaboradorVO> pcpServicoColaboradorList;
 
     public PcpServicoVO() {
     }
@@ -211,36 +209,36 @@ public class PcpServicoVO extends ValueObjectImpl implements Serializable {
         this.custoPrevisto = custoPrevisto;
     }
 
-    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoVOList() {
-        return pcpServicoEquipamentoVOList;
+    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoList() {
+        return pcpServicoEquipamentoList;
     }
 
-    public void setPcpServicoEquipamentoVOList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList) {
-        this.pcpServicoEquipamentoVOList = pcpServicoEquipamentoVOList;
+    public void setPcpServicoEquipamentoList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList) {
+        this.pcpServicoEquipamentoList = pcpServicoEquipamentoList;
     }
 
-    public PcpOpDetalheVO getPcpOpDetalheId() {
-        return pcpOpDetalheId;
+    public PcpOpDetalheVO getPcpOpDetalhe() {
+        return pcpOpDetalhe;
     }
 
-    public void setPcpOpDetalheId(PcpOpDetalheVO pcpOpDetalheId) {
-        this.pcpOpDetalheId = pcpOpDetalheId;
+    public void setPcpOpDetalhe(PcpOpDetalheVO pcpOpDetalhe) {
+        this.pcpOpDetalhe = pcpOpDetalhe;
     }
 
-    public ProdutoCalculoPrecoMedidasVO getProdutoCalculoPrecoMedidasId() {
-        return produtoCalculoPrecoMedidasId;
+    public ProdutoCalculoPrecoMedidasVO getProdutoCalculoPrecoMedidas() {
+        return produtoCalculoPrecoMedidas;
     }
 
-    public void setProdutoCalculoPrecoMedidasId(ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidasId) {
-        this.produtoCalculoPrecoMedidasId = produtoCalculoPrecoMedidasId;
+    public void setProdutoCalculoPrecoMedidas(ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidas) {
+        this.produtoCalculoPrecoMedidas = produtoCalculoPrecoMedidas;
     }
 
-    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorVOList() {
-        return pcpServicoColaboradorVOList;
+    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorList() {
+        return pcpServicoColaboradorList;
     }
 
-    public void setPcpServicoColaboradorVOList(List<PcpServicoColaboradorVO> pcpServicoColaboradorVOList) {
-        this.pcpServicoColaboradorVOList = pcpServicoColaboradorVOList;
+    public void setPcpServicoColaboradorList(List<PcpServicoColaboradorVO> pcpServicoColaboradorList) {
+        this.pcpServicoColaboradorList = pcpServicoColaboradorList;
     }
 
     @Override

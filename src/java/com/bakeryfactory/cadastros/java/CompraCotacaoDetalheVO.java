@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_cotacao_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "CompraCotacaoDetalheVO.findAll", query = "SELECT c FROM CompraCotacaoDetalheVO c")})
 public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,16 +71,16 @@ public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializa
     @Column(name = "valor_total")
     private BigDecimal valorTotal;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoDetalheId")
-    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheVOList;
+    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList;
     @JoinColumn(name = "compra_fornecedor_cotacao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraFornecedorCotacaoVO compraFornecedorCotacaoId;
+    private CompraFornecedorCotacaoVO compraFornecedorCotacao;
     @JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private FornecedorVO fornecedorId;
+    private FornecedorVO fornecedor;
     @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private IngredienteVO ingredienteId;
+    private IngredienteVO ingrediente;
 
     public CompraCotacaoDetalheVO() {
     }
@@ -155,56 +153,36 @@ public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializa
         this.valorTotal = valorTotal;
     }
 
-    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheVOList() {
-        return compraCotacaoPedidoDetalheVOList;
+    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheList() {
+        return compraCotacaoPedidoDetalheList;
     }
 
-    public void setCompraCotacaoPedidoDetalheVOList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheVOList) {
-        this.compraCotacaoPedidoDetalheVOList = compraCotacaoPedidoDetalheVOList;
+    public void setCompraCotacaoPedidoDetalheList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList) {
+        this.compraCotacaoPedidoDetalheList = compraCotacaoPedidoDetalheList;
     }
 
-    public CompraFornecedorCotacaoVO getCompraFornecedorCotacaoId() {
-        return compraFornecedorCotacaoId;
+    public CompraFornecedorCotacaoVO getCompraFornecedorCotacao() {
+        return compraFornecedorCotacao;
     }
 
-    public void setCompraFornecedorCotacaoId(CompraFornecedorCotacaoVO compraFornecedorCotacaoId) {
-        this.compraFornecedorCotacaoId = compraFornecedorCotacaoId;
+    public void setCompraFornecedorCotacao(CompraFornecedorCotacaoVO compraFornecedorCotacao) {
+        this.compraFornecedorCotacao = compraFornecedorCotacao;
     }
 
-    public FornecedorVO getFornecedorId() {
-        return fornecedorId;
+    public FornecedorVO getFornecedor() {
+        return fornecedor;
     }
 
-    public void setFornecedorId(FornecedorVO fornecedorId) {
-        this.fornecedorId = fornecedorId;
+    public void setFornecedor(FornecedorVO fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
-    public IngredienteVO getIngredienteId() {
-        return ingredienteId;
+    public IngredienteVO getIngrediente() {
+        return ingrediente;
     }
 
-    public void setIngredienteId(IngredienteVO ingredienteId) {
-        this.ingredienteId = ingredienteId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraCotacaoDetalheVO)) {
-            return false;
-        }
-        CompraCotacaoDetalheVO other = (CompraCotacaoDetalheVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setIngrediente(IngredienteVO ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
     @Override

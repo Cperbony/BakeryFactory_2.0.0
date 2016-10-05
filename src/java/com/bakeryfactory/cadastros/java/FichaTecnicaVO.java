@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "ficha_tecnica")
-@NamedQueries({
-    @NamedQuery(name = "FichaTecnicaVO.findAll", query = "SELECT f FROM FichaTecnicaVO f")})
 public class FichaTecnicaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,7 +63,7 @@ public class FichaTecnicaVO extends ValueObjectImpl implements Serializable {
     private Integer sequenciaProducao;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
 
     public FichaTecnicaVO() {
     }
@@ -114,12 +112,12 @@ public class FichaTecnicaVO extends ValueObjectImpl implements Serializable {
         this.sequenciaProducao = sequenciaProducao;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
     @Override

@@ -26,9 +26,12 @@ package com.bakeryfactory.cadastros.cliente;
 import com.bakeryfactory.cadastros.java.PessoaVO;
 import java.util.ArrayList;
 import java.util.Map;
+import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
+import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
+import org.openswing.swing.util.java.Consts;
 
 /**
  *
@@ -46,7 +49,86 @@ class PessoaEnderecoGridController extends GridController implements GridDataLoc
     
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(pessoa != null && pessoa.getListaEndereco() != null) {
+            return new VOListResponse(pessoa.getListaEndereco(), false, pessoa.getListaEndereco().size());
+        } else {
+            return new VOListResponse();
+        }
     }
+    
+    
+    @Override
+    public boolean beforeInsertGrid(GridControl grid) {
+        if (pessoaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+    }
+
+    /**
+     * Method invoked when the user has clicked on save button and the grid is in INSERT mode.
+     *
+     * @param rowNumbers row indexes related to the new rows to save
+     * @param newValueObjects list of new value objects to save
+     * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
+     */
+    @Override
+    public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
+        return new VOListResponse(newValueObjects, false, newValueObjects.size());
+    }
+
+    /**
+     * Callback method invoked on pressing EDIT button.
+     *
+     * @return <code>true</code> allows to go to EDIT mode, <code>false</code> the mode change is interrupted
+     */
+    @Override
+    public boolean beforeEditGrid(GridControl grid) {
+        if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
+            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+    }
+
+    /**
+     * Method invoked when the user has clicked on save button and the grid is in EDIT mode.
+     *
+     * @param rowNumbers row indexes related to the changed/new rows
+     * @param oldPersistentObjects old value objects, previous the changes; it can contains null objects, in case of new inserted rows
+     * @param persistentObjects value objects related to the changed/new rows
+     * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
+     */
+    @Override
+    public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
+        return new VOListResponse(persistentObjects, false, persistentObjects.size());
+    }
+
+    /**
+     * Callback method invoked before deleting data when the grid was in READONLY mode (on pressing delete button).
+     *
+     * @return <code>true</code> allows the deleting to continue, <code>false</code> the deleting is interrupted
+     */
+    @Override
+    public boolean beforeDeleteGrid(GridControl grid) {
+         if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
+            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+    }
+
+    /**
+     * Method invoked when the user has clicked on delete button and the grid is in READONLY mode.
+     *
+     * @param persistentObjects value objects to delete (related to the currently selected rows)
+     * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     */
+    public Response deleteRecords(ArrayList persistentObjects) throws Exception {
+        return new VOListResponse(persistentObjects, false, persistentObjects.size());
+    }
+
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
+    }
+    
     
 }

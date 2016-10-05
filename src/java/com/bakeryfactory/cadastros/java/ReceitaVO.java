@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "receita")
-@NamedQueries({
-    @NamedQuery(name = "ReceitaVO.findAll", query = "SELECT r FROM ReceitaVO r")})
 public class ReceitaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,12 +67,12 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
     @Column(name = "ingrediente_massa")
     private String ingredienteMassa;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaId")
-    private List<IngredientesReceitasVO> ingredientesReceitasVOList;
+    private List<IngredientesReceitasVO> ingredientesReceitasList;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaVO")
-    private List<ModoPreparoVO> modoPreparoVOList;
+    private List<ModoPreparoVO> modoPreparoList;
 
     public ReceitaVO() {
     }
@@ -131,28 +129,28 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
         this.ingredienteMassa = ingredienteMassa;
     }
 
-    public List<IngredientesReceitasVO> getIngredientesReceitasVOList() {
-        return ingredientesReceitasVOList;
+    public List<IngredientesReceitasVO> getIngredientesReceitasList() {
+        return ingredientesReceitasList;
     }
 
-    public void setIngredientesReceitasVOList(List<IngredientesReceitasVO> ingredientesReceitasVOList) {
-        this.ingredientesReceitasVOList = ingredientesReceitasVOList;
+    public void setIngredientesReceitasList(List<IngredientesReceitasVO> ingredientesReceitasList) {
+        this.ingredientesReceitasList = ingredientesReceitasList;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
-    public List<ModoPreparoVO> getModoPreparoVOList() {
-        return modoPreparoVOList;
+    public List<ModoPreparoVO> getModoPreparoList() {
+        return modoPreparoList;
     }
 
-    public void setModoPreparoVOList(List<ModoPreparoVO> modoPreparoVOList) {
-        this.modoPreparoVOList = modoPreparoVOList;
+    public void setModoPreparoList(List<ModoPreparoVO> modoPreparoList) {
+        this.modoPreparoList = modoPreparoList;
     }
 
     @Override

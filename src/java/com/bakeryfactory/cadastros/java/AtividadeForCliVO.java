@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "atividade_for_cli")
-@NamedQueries({
-    @NamedQuery(name = "AtividadeForCliVO.findAll", query = "SELECT a FROM AtividadeForCliVO a")})
 public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,10 +56,11 @@ public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
     private String nome;
     @Column(name = "descricao")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "atividadeForCliId")
-    private List<ClienteVO> clienteVOList;
+    private List<ClienteVO> clienteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "atividadeForCliId")
-    private List<FornecedorVO> fornecedorVOList;
+    private List<FornecedorVO> fornecedorList;
 
     public AtividadeForCliVO() {
     }
@@ -94,40 +93,20 @@ public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<ClienteVO> getClienteVOList() {
-        return clienteVOList;
+    public List<ClienteVO> getClienteList() {
+        return clienteList;
     }
 
-    public void setClienteVOList(List<ClienteVO> clienteVOList) {
-        this.clienteVOList = clienteVOList;
+    public void setClienteList(List<ClienteVO> clienteList) {
+        this.clienteList = clienteList;
     }
 
-    public List<FornecedorVO> getFornecedorVOList() {
-        return fornecedorVOList;
+    public List<FornecedorVO> getFornecedorList() {
+        return fornecedorList;
     }
 
-    public void setFornecedorVOList(List<FornecedorVO> fornecedorVOList) {
-        this.fornecedorVOList = fornecedorVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof AtividadeForCliVO)) {
-            return false;
-        }
-        AtividadeForCliVO other = (AtividadeForCliVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setFornecedorList(List<FornecedorVO> fornecedorList) {
+        this.fornecedorList = fornecedorList;
     }
 
     @Override

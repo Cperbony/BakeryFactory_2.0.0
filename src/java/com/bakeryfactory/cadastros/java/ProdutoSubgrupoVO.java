@@ -46,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "produto_subgrupo")
-@NamedQueries({
-    @NamedQuery(name = "ProdutoSubgrupoVO.findAll", query = "SELECT p FROM ProdutoSubgrupoVO p")})
 public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -62,9 +60,9 @@ public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
     private String descricao;
     @JoinColumn(name = "classe_produto_grupo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClasseProdutoGrupoVO classeProdutoGrupoId;
+    private ClasseProdutoGrupoVO classeProdutoGrupo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoSubgrupoId")
-    private List<ProdutoVO> produtoVOList;
+    private List<ProdutoVO> produtoList;
 
     public ProdutoSubgrupoVO() {
     }
@@ -97,20 +95,20 @@ public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public ClasseProdutoGrupoVO getClasseProdutoGrupoId() {
-        return classeProdutoGrupoId;
+    public ClasseProdutoGrupoVO getClasseProdutoGrupo() {
+        return classeProdutoGrupo;
     }
 
-    public void setClasseProdutoGrupoId(ClasseProdutoGrupoVO classeProdutoGrupoId) {
-        this.classeProdutoGrupoId = classeProdutoGrupoId;
+    public void setClasseProdutoGrupo(ClasseProdutoGrupoVO classeProdutoGrupo) {
+        this.classeProdutoGrupo = classeProdutoGrupo;
     }
 
-    public List<ProdutoVO> getProdutoVOList() {
-        return produtoVOList;
+    public List<ProdutoVO> getProdutoList() {
+        return produtoList;
     }
 
-    public void setProdutoVOList(List<ProdutoVO> produtoVOList) {
-        this.produtoVOList = produtoVOList;
+    public void setProdutoList(List<ProdutoVO> produtoList) {
+        this.produtoList = produtoList;
     }
 
     @Override

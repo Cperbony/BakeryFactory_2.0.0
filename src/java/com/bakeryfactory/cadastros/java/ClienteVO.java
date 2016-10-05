@@ -50,8 +50,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "cliente")
-@NamedQueries({
-    @NamedQuery(name = "ClienteVO.findAll", query = "SELECT c FROM ClienteVO c")})
 public class ClienteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,21 +81,22 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     private BigDecimal limiteCredito;
     @Column(name = "tipo_frete")
     private Character tipoFrete;
+    @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
     @Column(name = "classificacao_contabil_conta")
     private String classificacaoContabilConta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
-    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    private List<VendaCabecalhoVO> vendaCabecalhoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList;
+    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
     @JoinColumn(name = "atividade_for_cli_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private AtividadeForCliVO atividadeForCliId;
+    private AtividadeForCliVO atividadeForCli;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
     @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private SituacaoForCliVO situacaoForCliId;
+    private SituacaoForCliVO situacaoForCli;
 
     public ClienteVO() {
     }
@@ -202,64 +201,44 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
-        return vendaCabecalhoVOList;
+    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
+        return vendaCabecalhoList;
     }
 
-    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
-        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
+        this.vendaCabecalhoList = vendaCabecalhoList;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoVOList() {
-        return vendaOrcamentoCabecalhoVOList;
+    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
+        return vendaOrcamentoCabecalhoList;
     }
 
-    public void setVendaOrcamentoCabecalhoVOList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList) {
-        this.vendaOrcamentoCabecalhoVOList = vendaOrcamentoCabecalhoVOList;
+    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
+        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
     }
 
-    public AtividadeForCliVO getAtividadeForCliId() {
-        return atividadeForCliId;
+    public AtividadeForCliVO getAtividadeForCli() {
+        return atividadeForCli;
     }
 
-    public void setAtividadeForCliId(AtividadeForCliVO atividadeForCliId) {
-        this.atividadeForCliId = atividadeForCliId;
+    public void setAtividadeForCli(AtividadeForCliVO atividadeForCli) {
+        this.atividadeForCli = atividadeForCli;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public SituacaoForCliVO getSituacaoForCliId() {
-        return situacaoForCliId;
+    public SituacaoForCliVO getSituacaoForCli() {
+        return situacaoForCli;
     }
 
-    public void setSituacaoForCliId(SituacaoForCliVO situacaoForCliId) {
-        this.situacaoForCliId = situacaoForCliId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClienteVO)) {
-            return false;
-        }
-        ClienteVO other = (ClienteVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setSituacaoForCli(SituacaoForCliVO situacaoForCli) {
+        this.situacaoForCli = situacaoForCli;
     }
 
     @Override

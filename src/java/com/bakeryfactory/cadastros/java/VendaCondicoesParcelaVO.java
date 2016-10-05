@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_condicoes_parcela")
-@NamedQueries({
-    @NamedQuery(name = "VendaCondicoesParcelaVO.findAll", query = "SELECT v FROM VendaCondicoesParcelaVO v")})
 public class VendaCondicoesParcelaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +61,7 @@ public class VendaCondicoesParcelaVO extends ValueObjectImpl implements Serializ
     private BigDecimal taxa;
     @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaCondicoesPagamentoVO vendaCondicoesPagamentoId;
+    private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
 
     public VendaCondicoesParcelaVO() {
     }
@@ -104,32 +102,12 @@ public class VendaCondicoesParcelaVO extends ValueObjectImpl implements Serializ
         this.taxa = taxa;
     }
 
-    public VendaCondicoesPagamentoVO getVendaCondicoesPagamentoId() {
-        return vendaCondicoesPagamentoId;
+    public VendaCondicoesPagamentoVO getVendaCondicoesPagamento() {
+        return vendaCondicoesPagamento;
     }
 
-    public void setVendaCondicoesPagamentoId(VendaCondicoesPagamentoVO vendaCondicoesPagamentoId) {
-        this.vendaCondicoesPagamentoId = vendaCondicoesPagamentoId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaCondicoesParcelaVO)) {
-            return false;
-        }
-        VendaCondicoesParcelaVO other = (VendaCondicoesParcelaVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setVendaCondicoesPagamento(VendaCondicoesPagamentoVO vendaCondicoesPagamento) {
+        this.vendaCondicoesPagamento = vendaCondicoesPagamento;
     }
 
     @Override

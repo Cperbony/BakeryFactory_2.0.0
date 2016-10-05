@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "nota_fiscal_modelo")
-@NamedQueries({
-    @NamedQuery(name = "NotaFiscalModeloVO.findAll", query = "SELECT n FROM NotaFiscalModeloVO n")})
 public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,7 +59,7 @@ public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable 
     @Column(name = "modelo")
     private String modelo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalModeloId")
-    private List<NotaFiscalTipoVO> notaFiscalTipoVOList;
+    private List<NotaFiscalTipoVO> notaFiscalTipoList;
 
     public NotaFiscalModeloVO() {
     }
@@ -102,12 +100,12 @@ public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable 
         this.modelo = modelo;
     }
 
-    public List<NotaFiscalTipoVO> getNotaFiscalTipoVOList() {
-        return notaFiscalTipoVOList;
+    public List<NotaFiscalTipoVO> getNotaFiscalTipoList() {
+        return notaFiscalTipoList;
     }
 
-    public void setNotaFiscalTipoVOList(List<NotaFiscalTipoVO> notaFiscalTipoVOList) {
-        this.notaFiscalTipoVOList = notaFiscalTipoVOList;
+    public void setNotaFiscalTipoList(List<NotaFiscalTipoVO> notaFiscalTipoList) {
+        this.notaFiscalTipoList = notaFiscalTipoList;
     }
 
     @Override

@@ -33,6 +33,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -45,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "cargo")
-@NamedQueries({
-    @NamedQuery(name = "CargoVO.findAll", query = "SELECT c FROM CargoVO c")})
 public class CargoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +63,10 @@ public class CargoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "salario")
     private BigDecimal salario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoId")
-    private List<ColaboradorVO> colaboradorVOList;
+    private List<ColaboradorVO> colaboradorList;
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private EmpresaVO empresa;
 
     public CargoVO() {
     }
@@ -104,37 +107,26 @@ public class CargoVO extends ValueObjectImpl implements Serializable {
         this.salario = salario;
     }
 
-    public List<ColaboradorVO> getColaboradorVOList() {
-        return colaboradorVOList;
+    public List<ColaboradorVO> getColaboradorList() {
+        return colaboradorList;
     }
 
-    public void setColaboradorVOList(List<ColaboradorVO> colaboradorVOList) {
-        this.colaboradorVOList = colaboradorVOList;
+    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
+        this.colaboradorList = colaboradorList;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CargoVO)) {
-            return false;
-        }
-        CargoVO other = (CargoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
+    
 
     @Override
     public String toString() {
         return "com.bakeryfactory.cadastros.java.CargoVO[ id=" + id + " ]";
     }
-    
+
 }

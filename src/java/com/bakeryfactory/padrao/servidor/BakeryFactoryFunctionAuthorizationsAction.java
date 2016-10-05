@@ -97,7 +97,7 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
 
         UsuarioVO usuario = (UsuarioVO) inputPar;
 
-        if (!usuario.getPapelId().getAcessoCompleto().equals("S")) {
+        if (!usuario.getPapel().getAcessoCompleto().equals("S")) {
             for (int i = 0; i < root.getChildCount(); i++) {
                 autorizaFuncoes((DefaultMutableTreeNode) root.getChildAt(i), buscaPapelFuncao(usuario));
             }
@@ -110,7 +110,7 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(PapelFuncaoVO.class);
-            criteria.add(Restrictions.eq("papel", usuario.getPapelId()));
+            criteria.add(Restrictions.eq("papel", usuario.getPapel()));
 
             List<PapelFuncaoVO> listaPapelFuncao = criteria.list();
             List<String> funcoes = new ArrayList<>();
@@ -118,9 +118,9 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
                 if (listaPapelFuncao.get(i).getPodeAlterar().equals("S")
                         || listaPapelFuncao.get(i).getPodeInserir().equals("S")
                         || listaPapelFuncao.get(i).getPodeExcluir().equals("S")) {
-                    funcoes.add(listaPapelFuncao.get(i).getFuncaoId().getNome());
+                    funcoes.add(listaPapelFuncao.get(i).getFuncao().getNome());
                 } else if (listaPapelFuncao.get(i).getPodeConsultar().equals("S")) {
-                    funcoes.add(listaPapelFuncao.get(i).getFuncaoId().getNome());
+                    funcoes.add(listaPapelFuncao.get(i).getFuncao().getNome());
                 }
             }
             return funcoes;

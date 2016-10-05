@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "patrimonio_bem")
-@NamedQueries({
-    @NamedQuery(name = "PatrimonioBemVO.findAll", query = "SELECT p FROM PatrimonioBemVO p")})
 public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -80,7 +78,7 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
     @Column(name = "chave_nfe")
     private String chaveNfe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBemId")
-    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList;
+    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList;
 
     public PatrimonioBemVO() {
     }
@@ -169,12 +167,12 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
         this.chaveNfe = chaveNfe;
     }
 
-    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoVOList() {
-        return pcpServicoEquipamentoVOList;
+    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoList() {
+        return pcpServicoEquipamentoList;
     }
 
-    public void setPcpServicoEquipamentoVOList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoVOList) {
-        this.pcpServicoEquipamentoVOList = pcpServicoEquipamentoVOList;
+    public void setPcpServicoEquipamentoList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList) {
+        this.pcpServicoEquipamentoList = pcpServicoEquipamentoList;
     }
 
     @Override

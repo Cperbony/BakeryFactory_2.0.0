@@ -27,25 +27,35 @@ import com.bakeryfactory.cadastros.java.PessoaVO;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOResponse;
+import org.openswing.swing.message.receive.java.ValueObject;
 
 /**
  *
  * @author Claudinei Aparecido Perboni <cperbony@gmail.com>
  */
-public class PessoaFisicaDetalheController extends FormController{
+public class PessoaFisicaDetalheController extends FormController {
 
     private PessoaVO pessoa;
 
     public PessoaFisicaDetalheController() {
     }
-    
+
     @Override
     public Response loadData(Class valueObjectClass) {
-        return new VOResponse(pessoa.getP)
+        return new VOResponse(pessoa.getPessoaFisica());
     }
-    
+
+    @Override
+    public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        return new VOResponse(newPersistentObject);
+    }
+
+    @Override
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+        return new VOResponse(persistentObject);
+    }
+
     void setPessoa(PessoaVO pessoa) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.pessoa = pessoa;
     }
-    
 }

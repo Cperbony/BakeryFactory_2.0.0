@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_frete")
-@NamedQueries({
-    @NamedQuery(name = "VendaFreteVO.findAll", query = "SELECT v FROM VendaFreteVO v")})
 public class VendaFreteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,10 +75,10 @@ public class VendaFreteVO extends ValueObjectImpl implements Serializable {
     private BigDecimal pesoLiquido;
     @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TransportadoraVO transportadoraId;
+    private TransportadoraVO transportadora;
     @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaCabecalhoVO vendaCabecalhoId;
+    private VendaCabecalhoVO vendaCabecalho;
 
     public VendaFreteVO() {
     }
@@ -177,40 +175,20 @@ public class VendaFreteVO extends ValueObjectImpl implements Serializable {
         this.pesoLiquido = pesoLiquido;
     }
 
-    public TransportadoraVO getTransportadoraId() {
-        return transportadoraId;
+    public TransportadoraVO getTransportadora() {
+        return transportadora;
     }
 
-    public void setTransportadoraId(TransportadoraVO transportadoraId) {
-        this.transportadoraId = transportadoraId;
+    public void setTransportadora(TransportadoraVO transportadora) {
+        this.transportadora = transportadora;
     }
 
-    public VendaCabecalhoVO getVendaCabecalhoId() {
-        return vendaCabecalhoId;
+    public VendaCabecalhoVO getVendaCabecalho() {
+        return vendaCabecalho;
     }
 
-    public void setVendaCabecalhoId(VendaCabecalhoVO vendaCabecalhoId) {
-        this.vendaCabecalhoId = vendaCabecalhoId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaFreteVO)) {
-            return false;
-        }
-        VendaFreteVO other = (VendaFreteVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setVendaCabecalho(VendaCabecalhoVO vendaCabecalho) {
+        this.vendaCabecalho = vendaCabecalho;
     }
 
     @Override

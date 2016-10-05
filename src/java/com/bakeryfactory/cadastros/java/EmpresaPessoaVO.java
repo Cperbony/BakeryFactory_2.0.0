@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "empresa_pessoa")
-@NamedQueries({
-    @NamedQuery(name = "EmpresaPessoaVO.findAll", query = "SELECT e FROM EmpresaPessoaVO e")})
 public class EmpresaPessoaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,10 +55,10 @@ public class EmpresaPessoaVO extends ValueObjectImpl implements Serializable {
     private Character responsavelLegal;
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
+    private EmpresaVO empresa;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
 
     public EmpresaPessoaVO() {
     }
@@ -85,20 +83,20 @@ public class EmpresaPessoaVO extends ValueObjectImpl implements Serializable {
         this.responsavelLegal = responsavelLegal;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

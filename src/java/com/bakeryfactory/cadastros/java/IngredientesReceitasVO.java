@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "ingredientes_receitas")
-@NamedQueries({
-    @NamedQuery(name = "IngredientesReceitasVO.findAll", query = "SELECT i FROM IngredientesReceitasVO i")})
 public class IngredientesReceitasVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +53,10 @@ public class IngredientesReceitasVO extends ValueObjectImpl implements Serializa
     private Integer id;
     @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private IngredienteVO ingredienteId;
+    private IngredienteVO ingrediente;
     @JoinColumn(name = "receita_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ReceitaVO receitaId;
+    private ReceitaVO receita;
 
     public IngredientesReceitasVO() {
     }
@@ -75,20 +73,20 @@ public class IngredientesReceitasVO extends ValueObjectImpl implements Serializa
         this.id = id;
     }
 
-    public IngredienteVO getIngredienteId() {
-        return ingredienteId;
+    public IngredienteVO getIngrediente() {
+        return ingrediente;
     }
 
-    public void setIngredienteId(IngredienteVO ingredienteId) {
-        this.ingredienteId = ingredienteId;
+    public void setIngrediente(IngredienteVO ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
-    public ReceitaVO getReceitaId() {
-        return receitaId;
+    public ReceitaVO getReceita() {
+        return receita;
     }
 
-    public void setReceitaId(ReceitaVO receitaId) {
-        this.receitaId = receitaId;
+    public void setReceita(ReceitaVO receita) {
+        this.receita = receita;
     }
 
     @Override

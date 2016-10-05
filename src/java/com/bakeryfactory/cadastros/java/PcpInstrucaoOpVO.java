@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_instrucao_op")
-@NamedQueries({
-    @NamedQuery(name = "PcpInstrucaoOpVO.findAll", query = "SELECT p FROM PcpInstrucaoOpVO p")})
 public class PcpInstrucaoOpVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +53,10 @@ public class PcpInstrucaoOpVO extends ValueObjectImpl implements Serializable {
     private Integer id;
     @JoinColumn(name = "pcp_instrucao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpInstrucaoVO pcpInstrucaoId;
+    private PcpInstrucaoVO pcpInstrucao;
     @JoinColumn(name = "pcp_op_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpOpCabecalhoVO pcpOpCabecalhoId;
+    private PcpOpCabecalhoVO pcpOpCabecalho;
 
     public PcpInstrucaoOpVO() {
     }
@@ -75,20 +73,20 @@ public class PcpInstrucaoOpVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public PcpInstrucaoVO getPcpInstrucaoId() {
-        return pcpInstrucaoId;
+    public PcpInstrucaoVO getPcpInstrucao() {
+        return pcpInstrucao;
     }
 
-    public void setPcpInstrucaoId(PcpInstrucaoVO pcpInstrucaoId) {
-        this.pcpInstrucaoId = pcpInstrucaoId;
+    public void setPcpInstrucao(PcpInstrucaoVO pcpInstrucao) {
+        this.pcpInstrucao = pcpInstrucao;
     }
 
-    public PcpOpCabecalhoVO getPcpOpCabecalhoId() {
-        return pcpOpCabecalhoId;
+    public PcpOpCabecalhoVO getPcpOpCabecalho() {
+        return pcpOpCabecalho;
     }
 
-    public void setPcpOpCabecalhoId(PcpOpCabecalhoVO pcpOpCabecalhoId) {
-        this.pcpOpCabecalhoId = pcpOpCabecalhoId;
+    public void setPcpOpCabecalho(PcpOpCabecalhoVO pcpOpCabecalho) {
+        this.pcpOpCabecalho = pcpOpCabecalho;
     }
 
     @Override

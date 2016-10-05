@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_cotacao_pedido_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "CompraCotacaoPedidoDetalheVO.findAll", query = "SELECT c FROM CompraCotacaoPedidoDetalheVO c")})
 public class CompraCotacaoPedidoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,10 +57,10 @@ public class CompraCotacaoPedidoDetalheVO extends ValueObjectImpl implements Ser
     private BigDecimal quantidadePedida;
     @JoinColumn(name = "compra_cotacao_detalhe_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraCotacaoDetalheVO compraCotacaoDetalheId;
+    private CompraCotacaoDetalheVO compraCotacaoDetalhe;
     @JoinColumn(name = "compra_pedido_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraPedidoVO compraPedidoId;
+    private CompraPedidoVO compraPedido;
 
     public CompraCotacaoPedidoDetalheVO() {
     }
@@ -87,20 +85,20 @@ public class CompraCotacaoPedidoDetalheVO extends ValueObjectImpl implements Ser
         this.quantidadePedida = quantidadePedida;
     }
 
-    public CompraCotacaoDetalheVO getCompraCotacaoDetalheId() {
-        return compraCotacaoDetalheId;
+    public CompraCotacaoDetalheVO getCompraCotacaoDetalhe() {
+        return compraCotacaoDetalhe;
     }
 
-    public void setCompraCotacaoDetalheId(CompraCotacaoDetalheVO compraCotacaoDetalheId) {
-        this.compraCotacaoDetalheId = compraCotacaoDetalheId;
+    public void setCompraCotacaoDetalhe(CompraCotacaoDetalheVO compraCotacaoDetalhe) {
+        this.compraCotacaoDetalhe = compraCotacaoDetalhe;
     }
 
-    public CompraPedidoVO getCompraPedidoId() {
-        return compraPedidoId;
+    public CompraPedidoVO getCompraPedido() {
+        return compraPedido;
     }
 
-    public void setCompraPedidoId(CompraPedidoVO compraPedidoId) {
-        this.compraPedidoId = compraPedidoId;
+    public void setCompraPedido(CompraPedidoVO compraPedido) {
+        this.compraPedido = compraPedido;
     }
 
     @Override

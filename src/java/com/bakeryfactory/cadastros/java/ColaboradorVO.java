@@ -49,8 +49,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "colaborador")
-@NamedQueries({
-    @NamedQuery(name = "ColaboradorVO.findAll", query = "SELECT c FROM ColaboradorVO c")})
 public class ColaboradorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -148,29 +146,29 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date ataDemissao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<VendaRomaneioEntregaVO> vendaRomaneioEntregaVOList;
+    private List<VendaRomaneioEntregaVO> vendaRomaneioEntregaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<UsuarioVO> usuarioVOList;
+    private List<UsuarioVO> usuarioList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList;
+    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<CompraRequisicaoVO> compraRequisicaoVOList;
+    private List<CompraRequisicaoVO> compraRequisicaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<VendedorVO> vendedorVOList;
+    private List<VendedorVO> vendedorList;
     @JoinColumn(name = "cargo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CargoVO cargoId;
+    private CargoVO cargo;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
     @JoinColumn(name = "setor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private SetorVO setorId;
+    private SetorVO setor;
     @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TipoColaboradorVO tipoColaboradorId;
+    private TipoColaboradorVO tipoColaborador;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<PcpServicoColaboradorVO> pcpServicoColaboradorVOList;
+    private List<PcpServicoColaboradorVO> pcpServicoColaboradorList;
 
     public ColaboradorVO() {
     }
@@ -499,104 +497,84 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.ataDemissao = ataDemissao;
     }
 
-    public List<VendaRomaneioEntregaVO> getVendaRomaneioEntregaVOList() {
-        return vendaRomaneioEntregaVOList;
+    public List<VendaRomaneioEntregaVO> getVendaRomaneioEntregaList() {
+        return vendaRomaneioEntregaList;
     }
 
-    public void setVendaRomaneioEntregaVOList(List<VendaRomaneioEntregaVO> vendaRomaneioEntregaVOList) {
-        this.vendaRomaneioEntregaVOList = vendaRomaneioEntregaVOList;
+    public void setVendaRomaneioEntregaList(List<VendaRomaneioEntregaVO> vendaRomaneioEntregaList) {
+        this.vendaRomaneioEntregaList = vendaRomaneioEntregaList;
     }
 
-    public List<UsuarioVO> getUsuarioVOList() {
-        return usuarioVOList;
+    public List<UsuarioVO> getUsuarioList() {
+        return usuarioList;
     }
 
-    public void setUsuarioVOList(List<UsuarioVO> usuarioVOList) {
-        this.usuarioVOList = usuarioVOList;
+    public void setUsuarioList(List<UsuarioVO> usuarioList) {
+        this.usuarioList = usuarioList;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheVOList() {
-        return requisicaoInternaDetalheVOList;
+    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
+        return requisicaoInternaDetalheList;
     }
 
-    public void setRequisicaoInternaDetalheVOList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList) {
-        this.requisicaoInternaDetalheVOList = requisicaoInternaDetalheVOList;
+    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
+        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
     }
 
-    public List<CompraRequisicaoVO> getCompraRequisicaoVOList() {
-        return compraRequisicaoVOList;
+    public List<CompraRequisicaoVO> getCompraRequisicaoList() {
+        return compraRequisicaoList;
     }
 
-    public void setCompraRequisicaoVOList(List<CompraRequisicaoVO> compraRequisicaoVOList) {
-        this.compraRequisicaoVOList = compraRequisicaoVOList;
+    public void setCompraRequisicaoList(List<CompraRequisicaoVO> compraRequisicaoList) {
+        this.compraRequisicaoList = compraRequisicaoList;
     }
 
-    public List<VendedorVO> getVendedorVOList() {
-        return vendedorVOList;
+    public List<VendedorVO> getVendedorList() {
+        return vendedorList;
     }
 
-    public void setVendedorVOList(List<VendedorVO> vendedorVOList) {
-        this.vendedorVOList = vendedorVOList;
+    public void setVendedorList(List<VendedorVO> vendedorList) {
+        this.vendedorList = vendedorList;
     }
 
-    public CargoVO getCargoId() {
-        return cargoId;
+    public CargoVO getCargo() {
+        return cargo;
     }
 
-    public void setCargoId(CargoVO cargoId) {
-        this.cargoId = cargoId;
+    public void setCargo(CargoVO cargo) {
+        this.cargo = cargo;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public SetorVO getSetorId() {
-        return setorId;
+    public SetorVO getSetor() {
+        return setor;
     }
 
-    public void setSetorId(SetorVO setorId) {
-        this.setorId = setorId;
+    public void setSetor(SetorVO setor) {
+        this.setor = setor;
     }
 
-    public TipoColaboradorVO getTipoColaboradorId() {
-        return tipoColaboradorId;
+    public TipoColaboradorVO getTipoColaborador() {
+        return tipoColaborador;
     }
 
-    public void setTipoColaboradorId(TipoColaboradorVO tipoColaboradorId) {
-        this.tipoColaboradorId = tipoColaboradorId;
+    public void setTipoColaborador(TipoColaboradorVO tipoColaborador) {
+        this.tipoColaborador = tipoColaborador;
     }
 
-    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorVOList() {
-        return pcpServicoColaboradorVOList;
+    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorList() {
+        return pcpServicoColaboradorList;
     }
 
-    public void setPcpServicoColaboradorVOList(List<PcpServicoColaboradorVO> pcpServicoColaboradorVOList) {
-        this.pcpServicoColaboradorVOList = pcpServicoColaboradorVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ColaboradorVO)) {
-            return false;
-        }
-        ColaboradorVO other = (ColaboradorVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setPcpServicoColaboradorList(List<PcpServicoColaboradorVO> pcpServicoColaboradorList) {
+        this.pcpServicoColaboradorList = pcpServicoColaboradorList;
     }
 
     @Override

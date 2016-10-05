@@ -49,8 +49,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "fornecedor")
-@NamedQueries({
-    @NamedQuery(name = "FornecedorVO.findAll", query = "SELECT f FROM FornecedorVO f")})
 public class FornecedorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -90,18 +88,18 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "classificacao_contabil_conta")
     private String classificacaoContabilConta;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId")
-    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList;
+    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId")
-    private List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoVOList;
+    private List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList;
     @JoinColumn(name = "atividade_for_cli_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private AtividadeForCliVO atividadeForCliId;
+    private AtividadeForCliVO atividadeForCli;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
     @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private SituacaoForCliVO situacaoForCliId;
+    private SituacaoForCliVO situacaoForCli;
 
     public FornecedorVO() {
     }
@@ -230,44 +228,44 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheVOList() {
-        return compraCotacaoDetalheVOList;
+    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheList() {
+        return compraCotacaoDetalheList;
     }
 
-    public void setCompraCotacaoDetalheVOList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList) {
-        this.compraCotacaoDetalheVOList = compraCotacaoDetalheVOList;
+    public void setCompraCotacaoDetalheList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheList) {
+        this.compraCotacaoDetalheList = compraCotacaoDetalheList;
     }
 
-    public List<CompraFornecedorCotacaoVO> getCompraFornecedorCotacaoVOList() {
-        return compraFornecedorCotacaoVOList;
+    public List<CompraFornecedorCotacaoVO> getCompraFornecedorCotacaoList() {
+        return compraFornecedorCotacaoList;
     }
 
-    public void setCompraFornecedorCotacaoVOList(List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoVOList) {
-        this.compraFornecedorCotacaoVOList = compraFornecedorCotacaoVOList;
+    public void setCompraFornecedorCotacaoList(List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList) {
+        this.compraFornecedorCotacaoList = compraFornecedorCotacaoList;
     }
 
-    public AtividadeForCliVO getAtividadeForCliId() {
-        return atividadeForCliId;
+    public AtividadeForCliVO getAtividadeForCli() {
+        return atividadeForCli;
     }
 
-    public void setAtividadeForCliId(AtividadeForCliVO atividadeForCliId) {
-        this.atividadeForCliId = atividadeForCliId;
+    public void setAtividadeForCli(AtividadeForCliVO atividadeForCli) {
+        this.atividadeForCli = atividadeForCli;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
-    public SituacaoForCliVO getSituacaoForCliId() {
-        return situacaoForCliId;
+    public SituacaoForCliVO getSituacaoForCli() {
+        return situacaoForCli;
     }
 
-    public void setSituacaoForCliId(SituacaoForCliVO situacaoForCliId) {
-        this.situacaoForCliId = situacaoForCliId;
+    public void setSituacaoForCli(SituacaoForCliVO situacaoForCli) {
+        this.situacaoForCli = situacaoForCli;
     }
 
     @Override

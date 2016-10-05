@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_instrucao")
-@NamedQueries({
-    @NamedQuery(name = "PcpInstrucaoVO.findAll", query = "SELECT p FROM PcpInstrucaoVO p")})
 public class PcpInstrucaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +57,7 @@ public class PcpInstrucaoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpInstrucaoId")
-    private List<PcpInstrucaoOpVO> pcpInstrucaoOpVOList;
+    private List<PcpInstrucaoOpVO> pcpInstrucaoOpList;
 
     public PcpInstrucaoVO() {
     }
@@ -92,12 +90,12 @@ public class PcpInstrucaoVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpVOList() {
-        return pcpInstrucaoOpVOList;
+    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpList() {
+        return pcpInstrucaoOpList;
     }
 
-    public void setPcpInstrucaoOpVOList(List<PcpInstrucaoOpVO> pcpInstrucaoOpVOList) {
-        this.pcpInstrucaoOpVOList = pcpInstrucaoOpVOList;
+    public void setPcpInstrucaoOpList(List<PcpInstrucaoOpVO> pcpInstrucaoOpList) {
+        this.pcpInstrucaoOpList = pcpInstrucaoOpList;
     }
 
     @Override

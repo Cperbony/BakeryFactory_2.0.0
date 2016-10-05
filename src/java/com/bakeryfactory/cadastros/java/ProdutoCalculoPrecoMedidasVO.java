@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "produto_calculo_preco_medidas")
-@NamedQueries({
-    @NamedQuery(name = "ProdutoCalculoPrecoMedidasVO.findAll", query = "SELECT p FROM ProdutoCalculoPrecoMedidasVO p")})
 public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,9 +70,9 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
     private BigDecimal markUpAplicado;
     @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ReceituarioControleCustoVO receituarioControleCustoId;
+    private ReceituarioControleCustoVO receituarioControleCusto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoCalculoPrecoMedidasId")
-    private List<PcpServicoVO> pcpServicoVOList;
+    private List<PcpServicoVO> pcpServicoList;
 
     public ProdutoCalculoPrecoMedidasVO() {
     }
@@ -139,20 +137,20 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
         this.markUpAplicado = markUpAplicado;
     }
 
-    public ReceituarioControleCustoVO getReceituarioControleCustoId() {
-        return receituarioControleCustoId;
+    public ReceituarioControleCustoVO getReceituarioControleCusto() {
+        return receituarioControleCusto;
     }
 
-    public void setReceituarioControleCustoId(ReceituarioControleCustoVO receituarioControleCustoId) {
-        this.receituarioControleCustoId = receituarioControleCustoId;
+    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
+        this.receituarioControleCusto = receituarioControleCusto;
     }
 
-    public List<PcpServicoVO> getPcpServicoVOList() {
-        return pcpServicoVOList;
+    public List<PcpServicoVO> getPcpServicoList() {
+        return pcpServicoList;
     }
 
-    public void setPcpServicoVOList(List<PcpServicoVO> pcpServicoVOList) {
-        this.pcpServicoVOList = pcpServicoVOList;
+    public void setPcpServicoList(List<PcpServicoVO> pcpServicoList) {
+        this.pcpServicoList = pcpServicoList;
     }
 
     @Override

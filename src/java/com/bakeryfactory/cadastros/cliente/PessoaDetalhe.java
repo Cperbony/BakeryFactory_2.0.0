@@ -23,6 +23,8 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
 import javax.swing.text.MaskFormatter;
 import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
@@ -73,6 +75,30 @@ public class PessoaDetalhe extends InternalFrame {
         enderecoController = new PessoaEnderecoGridController(this);
         gridControlEndereco.setController(enderecoController);
         gridControlEndereco.setGridDataLocator(enderecoController);
+        
+        telefoneController = new PessoaTelefoneGridController(this);
+        gridControlTelefone.setController(telefoneController);
+        gridControlTelefone.setGridDataLocator(telefoneController);
+        
+        
+        /*
+        * Configurações do lookup do estado civil
+        */
+        
+        estadoCivilController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.EstadoCivilVO");
+        estadoCivilController.addLookup2ParentLink("id", "estadoCivil.id");
+        estadoCivilController.addLookup2ParentLink("nome", "estadoCivil.nome");
+        estadoCivilController.setHeaderColumnName("id", "ID");
+        estadoCivilController.setHeaderColumnName("nome", "Nome");
+        estadoCivilController.setFrameTitle("Importa Estado Civil");
+        
+        estadoCivilController.setVisibleStatusPanel(true);
+        estadoCivilController.setVisibleColumn("id", true);
+        estadoCivilController.setVisibleColumn("nome", true);
+        estadoCivilController.setFramePreferedSize(new Dimension(600, 500));
+        
+        estadoCivilController.setLookupDataLocator(new LookupDataLocatorGenerico(estadoCivilController.getLookupValueObjectClassName()));
+        codLookupEstadoCivil.setLookupController(estadoCivilController);
 
     }
 
@@ -105,7 +131,7 @@ public class PessoaDetalhe extends InternalFrame {
 
     //retorna a GRID Vinculada à Pessoa Endereco
     public org.openswing.swing.client.GridControl getGridControlEndereco() {
-        return gridControlContatos;
+        return gridControlEndereco;
     }
     
          //retorna a GRID Vinculada à Pessoa Telefone
@@ -113,7 +139,10 @@ public class PessoaDetalhe extends InternalFrame {
       return gridControlTelefone;
   }
    
-   
+   /**
+    * 
+    * @return DetalheController
+    */
 
     public PessoaFisicaDetalheController getPessoaFisicaController() {
         return pessoaFisicaController;
@@ -171,7 +200,7 @@ public class PessoaDetalhe extends InternalFrame {
         jPanel3 = new javax.swing.JPanel();
         formPessoaFisica = new org.openswing.swing.form.client.Form();
         lblEstadoCivil = new org.openswing.swing.client.LabelControl();
-        codLookupControl3 = new org.openswing.swing.client.CodLookupControl();
+        codLookupEstadoCivil = new org.openswing.swing.client.CodLookupControl();
         lblCpf = new org.openswing.swing.client.LabelControl();
         lblDtaNascimento = new org.openswing.swing.client.LabelControl();
         dateControl8 = new org.openswing.swing.client.DateControl();
@@ -509,16 +538,16 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         formPessoaFisica.add(lblEstadoCivil, gridBagConstraints);
 
-        codLookupControl3.setAttributeName("estadoCivil.nome");
-        codLookupControl3.setEnabled(false);
-        codLookupControl3.setRequired(true);
+        codLookupEstadoCivil.setAttributeName("estadoCivil.nome");
+        codLookupEstadoCivil.setEnabled(false);
+        codLookupEstadoCivil.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = -70;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        formPessoaFisica.add(codLookupControl3, gridBagConstraints);
+        formPessoaFisica.add(codLookupEstadoCivil, gridBagConstraints);
 
         lblCpf.setLabel("CPF:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1423,7 +1452,7 @@ public class PessoaDetalhe extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.client.CodLookupControl codLookupControl3;
+    private org.openswing.swing.client.CodLookupControl codLookupEstadoCivil;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl12;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl13;

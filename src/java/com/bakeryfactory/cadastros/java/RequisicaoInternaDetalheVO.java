@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "requisicao_interna_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "RequisicaoInternaDetalheVO.findAll", query = "SELECT r FROM RequisicaoInternaDetalheVO r")})
 public class RequisicaoInternaDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,13 +57,13 @@ public class RequisicaoInternaDetalheVO extends ValueObjectImpl implements Seria
     private BigDecimal quantidade;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
     @JoinColumn(name = "compra_requisicao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraRequisicaoVO compraRequisicaoId;
+    private CompraRequisicaoVO compraRequisicao;
     @JoinColumn(name = "compra_requisicao_interna_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalhoId;
+    private RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho;
 
     public RequisicaoInternaDetalheVO() {
     }
@@ -90,48 +88,28 @@ public class RequisicaoInternaDetalheVO extends ValueObjectImpl implements Seria
         this.quantidade = quantidade;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
-    public CompraRequisicaoVO getCompraRequisicaoId() {
-        return compraRequisicaoId;
+    public CompraRequisicaoVO getCompraRequisicao() {
+        return compraRequisicao;
     }
 
-    public void setCompraRequisicaoId(CompraRequisicaoVO compraRequisicaoId) {
-        this.compraRequisicaoId = compraRequisicaoId;
+    public void setCompraRequisicao(CompraRequisicaoVO compraRequisicao) {
+        this.compraRequisicao = compraRequisicao;
     }
 
-    public RequisicaoInternaCabecalhoVO getCompraRequisicaoInternaCabecalhoId() {
-        return compraRequisicaoInternaCabecalhoId;
+    public RequisicaoInternaCabecalhoVO getCompraRequisicaoInternaCabecalho() {
+        return compraRequisicaoInternaCabecalho;
     }
 
-    public void setCompraRequisicaoInternaCabecalhoId(RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalhoId) {
-        this.compraRequisicaoInternaCabecalhoId = compraRequisicaoInternaCabecalhoId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RequisicaoInternaDetalheVO)) {
-            return false;
-        }
-        RequisicaoInternaDetalheVO other = (RequisicaoInternaDetalheVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setCompraRequisicaoInternaCabecalho(RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho) {
+        this.compraRequisicaoInternaCabecalho = compraRequisicaoInternaCabecalho;
     }
 
     @Override

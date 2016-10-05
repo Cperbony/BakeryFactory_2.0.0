@@ -46,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "municipio")
-@NamedQueries({
-    @NamedQuery(name = "MunicipioVO.findAll", query = "SELECT m FROM MunicipioVO m")})
 public class MunicipioVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,10 +65,10 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
     @Column(name = "uf_sigla")
     private String ufSigla;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "municipioId")
-    private List<TransportadoraMunicipioVO> transportadoraMunicipioVOList;
+    private List<TransportadoraMunicipioVO> transportadoraMunicipioList;
     @JoinColumn(name = "uf_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private UfVO ufId;
+    private UfVO uf;
 
     public MunicipioVO() {
     }
@@ -127,20 +125,20 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
         this.ufSigla = ufSigla;
     }
 
-    public List<TransportadoraMunicipioVO> getTransportadoraMunicipioVOList() {
-        return transportadoraMunicipioVOList;
+    public List<TransportadoraMunicipioVO> getTransportadoraMunicipioList() {
+        return transportadoraMunicipioList;
     }
 
-    public void setTransportadoraMunicipioVOList(List<TransportadoraMunicipioVO> transportadoraMunicipioVOList) {
-        this.transportadoraMunicipioVOList = transportadoraMunicipioVOList;
+    public void setTransportadoraMunicipioList(List<TransportadoraMunicipioVO> transportadoraMunicipioList) {
+        this.transportadoraMunicipioList = transportadoraMunicipioList;
     }
 
-    public UfVO getUfId() {
-        return ufId;
+    public UfVO getUf() {
+        return uf;
     }
 
-    public void setUfId(UfVO ufId) {
-        this.ufId = ufId;
+    public void setUf(UfVO uf) {
+        this.uf = uf;
     }
 
     @Override

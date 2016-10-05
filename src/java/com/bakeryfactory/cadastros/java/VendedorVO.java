@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "vendedor")
-@NamedQueries({
-    @NamedQuery(name = "VendedorVO.findAll", query = "SELECT v FROM VendedorVO v")})
 public class VendedorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -67,14 +65,14 @@ public class VendedorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "taxa_gerente")
     private BigDecimal taxaGerente;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    private List<VendaCabecalhoVO> vendaCabecalhoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList;
+    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaComissaoVO> vendaComissaoVOList;
+    private List<VendaComissaoVO> vendaComissaoList;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
 
     public VendedorVO() {
     }
@@ -123,56 +121,36 @@ public class VendedorVO extends ValueObjectImpl implements Serializable {
         this.taxaGerente = taxaGerente;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
-        return vendaCabecalhoVOList;
+    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
+        return vendaCabecalhoList;
     }
 
-    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
-        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
+        this.vendaCabecalhoList = vendaCabecalhoList;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoVOList() {
-        return vendaOrcamentoCabecalhoVOList;
+    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
+        return vendaOrcamentoCabecalhoList;
     }
 
-    public void setVendaOrcamentoCabecalhoVOList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList) {
-        this.vendaOrcamentoCabecalhoVOList = vendaOrcamentoCabecalhoVOList;
+    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
+        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
     }
 
-    public List<VendaComissaoVO> getVendaComissaoVOList() {
-        return vendaComissaoVOList;
+    public List<VendaComissaoVO> getVendaComissaoList() {
+        return vendaComissaoList;
     }
 
-    public void setVendaComissaoVOList(List<VendaComissaoVO> vendaComissaoVOList) {
-        this.vendaComissaoVOList = vendaComissaoVOList;
+    public void setVendaComissaoList(List<VendaComissaoVO> vendaComissaoList) {
+        this.vendaComissaoList = vendaComissaoList;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendedorVO)) {
-            return false;
-        }
-        VendedorVO other = (VendedorVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
     @Override

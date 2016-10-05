@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "papel_funcao")
-@NamedQueries({
-    @NamedQuery(name = "PapelFuncaoVO.findAll", query = "SELECT p FROM PapelFuncaoVO p")})
 public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,10 +63,10 @@ public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
     private Character habilitado;
     @JoinColumn(name = "funcao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private FuncaoVO funcaoId;
+    private FuncaoVO funcao;
     @JoinColumn(name = "papel_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PapelVO papelId;
+    private PapelVO papel;
 
     public PapelFuncaoVO() {
     }
@@ -125,20 +123,20 @@ public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
         this.habilitado = habilitado;
     }
 
-    public FuncaoVO getFuncaoId() {
-        return funcaoId;
+    public FuncaoVO getFuncao() {
+        return funcao;
     }
 
-    public void setFuncaoId(FuncaoVO funcaoId) {
-        this.funcaoId = funcaoId;
+    public void setFuncao(FuncaoVO funcao) {
+        this.funcao = funcao;
     }
 
-    public PapelVO getPapelId() {
-        return papelId;
+    public PapelVO getPapel() {
+        return papel;
     }
 
-    public void setPapelId(PapelVO papelId) {
-        this.papelId = papelId;
+    public void setPapel(PapelVO papel) {
+        this.papel = papel;
     }
 
     @Override

@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "tipo_colaborador")
-@NamedQueries({
-    @NamedQuery(name = "TipoColaboradorVO.findAll", query = "SELECT t FROM TipoColaboradorVO t")})
 public class TipoColaboradorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +57,7 @@ public class TipoColaboradorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoColaboradorId")
-    private List<ColaboradorVO> colaboradorVOList;
+    private List<ColaboradorVO> colaboradorList;
 
     public TipoColaboradorVO() {
     }
@@ -92,32 +90,12 @@ public class TipoColaboradorVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<ColaboradorVO> getColaboradorVOList() {
-        return colaboradorVOList;
+    public List<ColaboradorVO> getColaboradorList() {
+        return colaboradorList;
     }
 
-    public void setColaboradorVOList(List<ColaboradorVO> colaboradorVOList) {
-        this.colaboradorVOList = colaboradorVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TipoColaboradorVO)) {
-            return false;
-        }
-        TipoColaboradorVO other = (TipoColaboradorVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
+        this.colaboradorList = colaboradorList;
     }
 
     @Override

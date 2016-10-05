@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "transportadora_municipio")
-@NamedQueries({
-    @NamedQuery(name = "TransportadoraMunicipioVO.findAll", query = "SELECT t FROM TransportadoraMunicipioVO t")})
 public class TransportadoraMunicipioVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +53,10 @@ public class TransportadoraMunicipioVO extends ValueObjectImpl implements Serial
     private Integer id;
     @JoinColumn(name = "municipio_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private MunicipioVO municipioId;
+    private MunicipioVO municipio;
     @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TransportadoraVO transportadoraId;
+    private TransportadoraVO transportadora;
 
     public TransportadoraMunicipioVO() {
     }
@@ -75,40 +73,20 @@ public class TransportadoraMunicipioVO extends ValueObjectImpl implements Serial
         this.id = id;
     }
 
-    public MunicipioVO getMunicipioId() {
-        return municipioId;
+    public MunicipioVO getMunicipio() {
+        return municipio;
     }
 
-    public void setMunicipioId(MunicipioVO municipioId) {
-        this.municipioId = municipioId;
+    public void setMunicipio(MunicipioVO municipio) {
+        this.municipio = municipio;
     }
 
-    public TransportadoraVO getTransportadoraId() {
-        return transportadoraId;
+    public TransportadoraVO getTransportadora() {
+        return transportadora;
     }
 
-    public void setTransportadoraId(TransportadoraVO transportadoraId) {
-        this.transportadoraId = transportadoraId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TransportadoraMunicipioVO)) {
-            return false;
-        }
-        TransportadoraMunicipioVO other = (TransportadoraMunicipioVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setTransportadora(TransportadoraVO transportadora) {
+        this.transportadora = transportadora;
     }
 
     @Override

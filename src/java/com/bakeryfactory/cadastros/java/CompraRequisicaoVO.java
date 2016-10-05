@@ -49,8 +49,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_requisicao")
-@NamedQueries({
-    @NamedQuery(name = "CompraRequisicaoVO.findAll", query = "SELECT c FROM CompraRequisicaoVO c")})
 public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,15 +63,15 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
     @Column(name = "observacao")
     private String observacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
-    private List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheVOList;
+    private List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList;
+    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
     @JoinColumn(name = "compra_tipo_requisicao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraTipoRequisicaoVO compraTipoRequisicaoId;
+    private CompraTipoRequisicaoVO compraTipoRequisicao;
 
     public CompraRequisicaoVO() {
     }
@@ -106,36 +104,36 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
         this.observacao = observacao;
     }
 
-    public List<CompraRequisicaoDetalheVO> getCompraRequisicaoDetalheVOList() {
-        return compraRequisicaoDetalheVOList;
+    public List<CompraRequisicaoDetalheVO> getCompraRequisicaoDetalheList() {
+        return compraRequisicaoDetalheList;
     }
 
-    public void setCompraRequisicaoDetalheVOList(List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheVOList) {
-        this.compraRequisicaoDetalheVOList = compraRequisicaoDetalheVOList;
+    public void setCompraRequisicaoDetalheList(List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheList) {
+        this.compraRequisicaoDetalheList = compraRequisicaoDetalheList;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheVOList() {
-        return requisicaoInternaDetalheVOList;
+    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
+        return requisicaoInternaDetalheList;
     }
 
-    public void setRequisicaoInternaDetalheVOList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList) {
-        this.requisicaoInternaDetalheVOList = requisicaoInternaDetalheVOList;
+    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
+        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
-    public CompraTipoRequisicaoVO getCompraTipoRequisicaoId() {
-        return compraTipoRequisicaoId;
+    public CompraTipoRequisicaoVO getCompraTipoRequisicao() {
+        return compraTipoRequisicao;
     }
 
-    public void setCompraTipoRequisicaoId(CompraTipoRequisicaoVO compraTipoRequisicaoId) {
-        this.compraTipoRequisicaoId = compraTipoRequisicaoId;
+    public void setCompraTipoRequisicao(CompraTipoRequisicaoVO compraTipoRequisicao) {
+        this.compraTipoRequisicao = compraTipoRequisicao;
     }
 
     @Override

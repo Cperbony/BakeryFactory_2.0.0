@@ -50,8 +50,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_pedido")
-@NamedQueries({
-    @NamedQuery(name = "CompraPedidoVO.findAll", query = "SELECT c FROM CompraPedidoVO c")})
 public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -115,12 +113,12 @@ public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "dias_intervalo")
     private Integer diasIntervalo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
-    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheVOList;
+    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
-    private List<CompraPedidoDetalheVO> compraPedidoDetalheVOList;
+    private List<CompraPedidoDetalheVO> compraPedidoDetalheList;
     @JoinColumn(name = "compra_tipo_pedido_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraTipoPedidoVO compraTipoPedidoId;
+    private CompraTipoPedidoVO compraTipoPedido;
 
     public CompraPedidoVO() {
     }
@@ -337,28 +335,28 @@ public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
         this.diasIntervalo = diasIntervalo;
     }
 
-    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheVOList() {
-        return compraCotacaoPedidoDetalheVOList;
+    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheList() {
+        return compraCotacaoPedidoDetalheList;
     }
 
-    public void setCompraCotacaoPedidoDetalheVOList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheVOList) {
-        this.compraCotacaoPedidoDetalheVOList = compraCotacaoPedidoDetalheVOList;
+    public void setCompraCotacaoPedidoDetalheList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList) {
+        this.compraCotacaoPedidoDetalheList = compraCotacaoPedidoDetalheList;
     }
 
-    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheVOList() {
-        return compraPedidoDetalheVOList;
+    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheList() {
+        return compraPedidoDetalheList;
     }
 
-    public void setCompraPedidoDetalheVOList(List<CompraPedidoDetalheVO> compraPedidoDetalheVOList) {
-        this.compraPedidoDetalheVOList = compraPedidoDetalheVOList;
+    public void setCompraPedidoDetalheList(List<CompraPedidoDetalheVO> compraPedidoDetalheList) {
+        this.compraPedidoDetalheList = compraPedidoDetalheList;
     }
 
-    public CompraTipoPedidoVO getCompraTipoPedidoId() {
-        return compraTipoPedidoId;
+    public CompraTipoPedidoVO getCompraTipoPedido() {
+        return compraTipoPedido;
     }
 
-    public void setCompraTipoPedidoId(CompraTipoPedidoVO compraTipoPedidoId) {
-        this.compraTipoPedidoId = compraTipoPedidoId;
+    public void setCompraTipoPedido(CompraTipoPedidoVO compraTipoPedido) {
+        this.compraTipoPedido = compraTipoPedido;
     }
 
     @Override

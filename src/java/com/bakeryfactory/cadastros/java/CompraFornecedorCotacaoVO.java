@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_fornecedor_cotacao")
-@NamedQueries({
-    @NamedQuery(name = "CompraFornecedorCotacaoVO.findAll", query = "SELECT c FROM CompraFornecedorCotacaoVO c")})
 public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,13 +69,13 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
     @Column(name = "total")
     private BigDecimal total;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraFornecedorCotacaoId")
-    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList;
+    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheList;
     @JoinColumn(name = "compra_cotacao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraCotacaoVO compraCotacaoId;
+    private CompraCotacaoVO compraCotacao;
     @JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private FornecedorVO fornecedorId;
+    private FornecedorVO fornecedor;
 
     public CompraFornecedorCotacaoVO() {
     }
@@ -142,28 +140,28 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
         this.total = total;
     }
 
-    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheVOList() {
-        return compraCotacaoDetalheVOList;
+    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheList() {
+        return compraCotacaoDetalheList;
     }
 
-    public void setCompraCotacaoDetalheVOList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheVOList) {
-        this.compraCotacaoDetalheVOList = compraCotacaoDetalheVOList;
+    public void setCompraCotacaoDetalheList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheList) {
+        this.compraCotacaoDetalheList = compraCotacaoDetalheList;
     }
 
-    public CompraCotacaoVO getCompraCotacaoId() {
-        return compraCotacaoId;
+    public CompraCotacaoVO getCompraCotacao() {
+        return compraCotacao;
     }
 
-    public void setCompraCotacaoId(CompraCotacaoVO compraCotacaoId) {
-        this.compraCotacaoId = compraCotacaoId;
+    public void setCompraCotacao(CompraCotacaoVO compraCotacao) {
+        this.compraCotacao = compraCotacao;
     }
 
-    public FornecedorVO getFornecedorId() {
-        return fornecedorId;
+    public FornecedorVO getFornecedor() {
+        return fornecedor;
     }
 
-    public void setFornecedorId(FornecedorVO fornecedorId) {
-        this.fornecedorId = fornecedorId;
+    public void setFornecedor(FornecedorVO fornecedor) {
+        this.fornecedor = fornecedor;
     }
 
     @Override

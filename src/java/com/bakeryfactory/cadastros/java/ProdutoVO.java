@@ -50,8 +50,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "produto")
-@NamedQueries({
-    @NamedQuery(name = "ProdutoVO.findAll", query = "SELECT p FROM ProdutoVO p")})
 public class ProdutoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -96,22 +94,22 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "imagem")
     private String imagem;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<FichaTecnicaVO> fichaTecnicaVOList;
+    private List<FichaTecnicaVO> fichaTecnicaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ReceitaVO> receitaVOList;
+    private List<ReceitaVO> receitaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<PcpOpDetalheVO> pcpOpDetalheVOList;
+    private List<PcpOpDetalheVO> pcpOpDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheVOList;
+    private List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<VendaDetalheVO> vendaDetalheVOList;
+    private List<VendaDetalheVO> vendaDetalheList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoVOList;
+    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList;
     @JoinColumn(name = "produto_subgrupo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoSubgrupoVO produtoSubgrupoId;
+    private ProdutoSubgrupoVO produtoSubgrupo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ReceituarioControleCustoVO> receituarioControleCustoVOList;
+    private List<ReceituarioControleCustoVO> receituarioControleCustoList;
 
     public ProdutoVO() {
     }
@@ -256,68 +254,68 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.imagem = imagem;
     }
 
-    public List<FichaTecnicaVO> getFichaTecnicaVOList() {
-        return fichaTecnicaVOList;
+    public List<FichaTecnicaVO> getFichaTecnicaList() {
+        return fichaTecnicaList;
     }
 
-    public void setFichaTecnicaVOList(List<FichaTecnicaVO> fichaTecnicaVOList) {
-        this.fichaTecnicaVOList = fichaTecnicaVOList;
+    public void setFichaTecnicaList(List<FichaTecnicaVO> fichaTecnicaList) {
+        this.fichaTecnicaList = fichaTecnicaList;
     }
 
-    public List<ReceitaVO> getReceitaVOList() {
-        return receitaVOList;
+    public List<ReceitaVO> getReceitaList() {
+        return receitaList;
     }
 
-    public void setReceitaVOList(List<ReceitaVO> receitaVOList) {
-        this.receitaVOList = receitaVOList;
+    public void setReceitaList(List<ReceitaVO> receitaList) {
+        this.receitaList = receitaList;
     }
 
-    public List<PcpOpDetalheVO> getPcpOpDetalheVOList() {
-        return pcpOpDetalheVOList;
+    public List<PcpOpDetalheVO> getPcpOpDetalheList() {
+        return pcpOpDetalheList;
     }
 
-    public void setPcpOpDetalheVOList(List<PcpOpDetalheVO> pcpOpDetalheVOList) {
-        this.pcpOpDetalheVOList = pcpOpDetalheVOList;
+    public void setPcpOpDetalheList(List<PcpOpDetalheVO> pcpOpDetalheList) {
+        this.pcpOpDetalheList = pcpOpDetalheList;
     }
 
-    public List<VendaOrcamentoDetalheVO> getVendaOrcamentoDetalheVOList() {
-        return vendaOrcamentoDetalheVOList;
+    public List<VendaOrcamentoDetalheVO> getVendaOrcamentoDetalheList() {
+        return vendaOrcamentoDetalheList;
     }
 
-    public void setVendaOrcamentoDetalheVOList(List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheVOList) {
-        this.vendaOrcamentoDetalheVOList = vendaOrcamentoDetalheVOList;
+    public void setVendaOrcamentoDetalheList(List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheList) {
+        this.vendaOrcamentoDetalheList = vendaOrcamentoDetalheList;
     }
 
-    public List<VendaDetalheVO> getVendaDetalheVOList() {
-        return vendaDetalheVOList;
+    public List<VendaDetalheVO> getVendaDetalheList() {
+        return vendaDetalheList;
     }
 
-    public void setVendaDetalheVOList(List<VendaDetalheVO> vendaDetalheVOList) {
-        this.vendaDetalheVOList = vendaDetalheVOList;
+    public void setVendaDetalheList(List<VendaDetalheVO> vendaDetalheList) {
+        this.vendaDetalheList = vendaDetalheList;
     }
 
-    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoVOList() {
-        return produtoTabelaPrecoVOList;
+    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoList() {
+        return produtoTabelaPrecoList;
     }
 
-    public void setProdutoTabelaPrecoVOList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoVOList) {
-        this.produtoTabelaPrecoVOList = produtoTabelaPrecoVOList;
+    public void setProdutoTabelaPrecoList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList) {
+        this.produtoTabelaPrecoList = produtoTabelaPrecoList;
     }
 
-    public ProdutoSubgrupoVO getProdutoSubgrupoId() {
-        return produtoSubgrupoId;
+    public ProdutoSubgrupoVO getProdutoSubgrupo() {
+        return produtoSubgrupo;
     }
 
-    public void setProdutoSubgrupoId(ProdutoSubgrupoVO produtoSubgrupoId) {
-        this.produtoSubgrupoId = produtoSubgrupoId;
+    public void setProdutoSubgrupo(ProdutoSubgrupoVO produtoSubgrupo) {
+        this.produtoSubgrupo = produtoSubgrupo;
     }
 
-    public List<ReceituarioControleCustoVO> getReceituarioControleCustoVOList() {
-        return receituarioControleCustoVOList;
+    public List<ReceituarioControleCustoVO> getReceituarioControleCustoList() {
+        return receituarioControleCustoList;
     }
 
-    public void setReceituarioControleCustoVOList(List<ReceituarioControleCustoVO> receituarioControleCustoVOList) {
-        this.receituarioControleCustoVOList = receituarioControleCustoVOList;
+    public void setReceituarioControleCustoList(List<ReceituarioControleCustoVO> receituarioControleCustoList) {
+        this.receituarioControleCustoList = receituarioControleCustoList;
     }
 
     @Override

@@ -46,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "uf")
-@NamedQueries({
-    @NamedQuery(name = "UfVO.findAll", query = "SELECT u FROM UfVO u")})
 public class UfVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -64,9 +62,9 @@ public class UfVO extends ValueObjectImpl implements Serializable {
     private Integer codigoIbge;
     @JoinColumn(name = "pais_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PaisVO paisId;
+    private PaisVO pais;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ufId")
-    private List<MunicipioVO> municipioVOList;
+    private List<MunicipioVO> municipioList;
 
     public UfVO() {
     }
@@ -107,40 +105,20 @@ public class UfVO extends ValueObjectImpl implements Serializable {
         this.codigoIbge = codigoIbge;
     }
 
-    public PaisVO getPaisId() {
-        return paisId;
+    public PaisVO getPais() {
+        return pais;
     }
 
-    public void setPaisId(PaisVO paisId) {
-        this.paisId = paisId;
+    public void setPais(PaisVO pais) {
+        this.pais = pais;
     }
 
-    public List<MunicipioVO> getMunicipioVOList() {
-        return municipioVOList;
+    public List<MunicipioVO> getMunicipioList() {
+        return municipioList;
     }
 
-    public void setMunicipioVOList(List<MunicipioVO> municipioVOList) {
-        this.municipioVOList = municipioVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UfVO)) {
-            return false;
-        }
-        UfVO other = (UfVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setMunicipioList(List<MunicipioVO> municipioList) {
+        this.municipioList = municipioList;
     }
 
     @Override

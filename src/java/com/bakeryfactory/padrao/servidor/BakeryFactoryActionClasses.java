@@ -40,12 +40,15 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
     
       /*Actions do Módulo */
     //INFRA
-    a = new 
+    a = new BakeryFactoryButtonAuthorizationsAction(); put(a.getRequestName(), a);
+    a = new BakeryFactoryFunctionAuthorizationsAction(); put(a.getRequestName(), a);
+    a = new BakeryFactoryContainerAction(); put(a.getRequestName(), a);
+    a = new UserLoginAction(); put(a.getRequestName(), a);
     
     /*Actions do Módulo */
     //PESSOA
-    a = new EstadoCivilGridAction(); put(a.getRequestName(), a);
-    a = new PessoaDetalheAction(); put(a.getRequestName(), a);
+    //a = new EstadoCivilGridAction(); put(a.getRequestName(), a);
+   // a = new PessoaDetalheAction(); put(a.getRequestName(), a);
     
       /*Actions do Módulo */
     //DIVERSOS

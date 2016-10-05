@@ -41,14 +41,14 @@ public class ModoPreparoVOPK extends ValueObjectImpl implements Serializable {
     private int id;
     @Basic(optional = false)
     @Column(name = "receita_id")
-    private int receitaId;
+    private int receitas;
 
     public ModoPreparoVOPK() {
     }
 
     public ModoPreparoVOPK(int id, int receitaId) {
         this.id = id;
-        this.receitaId = receitaId;
+        this.receitas = receitaId;
     }
 
     public int getId() {
@@ -59,19 +59,19 @@ public class ModoPreparoVOPK extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public int getReceitaId() {
-        return receitaId;
+    public int getReceitas() {
+        return receitas;
     }
 
-    public void setReceitaId(int receitaId) {
-        this.receitaId = receitaId;
+    public void setReceitas(int receitas) {
+        this.receitas = receitas;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) id;
-        hash += (int) receitaId;
+        hash += (int) receitas;
         return hash;
     }
 
@@ -85,7 +85,7 @@ public class ModoPreparoVOPK extends ValueObjectImpl implements Serializable {
         if (this.id != other.id) {
             return false;
         }
-        if (this.receitaId != other.receitaId) {
+        if (this.receitas != other.receitas) {
             return false;
         }
         return true;
@@ -93,7 +93,7 @@ public class ModoPreparoVOPK extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.ModoPreparoVOPK[ id=" + id + ", receitaId=" + receitaId + " ]";
+        return "com.bakeryfactory.cadastros.java.ModoPreparoVOPK[ id=" + id + ", receitaId=" + receitas + " ]";
     }
     
 }

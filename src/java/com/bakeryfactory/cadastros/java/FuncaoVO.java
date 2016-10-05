@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "funcao")
-@NamedQueries({
-    @NamedQuery(name = "FuncaoVO.findAll", query = "SELECT f FROM FuncaoVO f")})
 public class FuncaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,7 +63,7 @@ public class FuncaoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "formulario")
     private String formulario;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcaoId")
-    private List<PapelFuncaoVO> papelFuncaoVOList;
+    private List<PapelFuncaoVO> papelFuncaoList;
 
     public FuncaoVO() {
     }
@@ -122,12 +120,12 @@ public class FuncaoVO extends ValueObjectImpl implements Serializable {
         this.formulario = formulario;
     }
 
-    public List<PapelFuncaoVO> getPapelFuncaoVOList() {
-        return papelFuncaoVOList;
+    public List<PapelFuncaoVO> getPapelFuncaoList() {
+        return papelFuncaoList;
     }
 
-    public void setPapelFuncaoVOList(List<PapelFuncaoVO> papelFuncaoVOList) {
-        this.papelFuncaoVOList = papelFuncaoVOList;
+    public void setPapelFuncaoList(List<PapelFuncaoVO> papelFuncaoList) {
+        this.papelFuncaoList = papelFuncaoList;
     }
 
     @Override

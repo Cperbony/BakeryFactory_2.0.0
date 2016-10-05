@@ -70,14 +70,14 @@ public class BakeryFactoryButtonAuthorizationsAction implements Action {
             UsuarioVO usuario = (UsuarioVO) inputPar;
             session = HibernateUtil.getSessionFactory().openSession();
             Criteria criteria = session.createCriteria(PapelFuncaoVO.class);
-            criteria.add(Restrictions.eq("papel", usuario.getPapelId()));
+            criteria.add(Restrictions.eq("papel", usuario.getPapel()));
 
             List<PapelFuncaoVO> listaPapelFuncao = criteria.list();
             ButtonsAuthorizations buttonsAuthorization = new ButtonsAuthorizations();
 
-            if (!usuario.getPapelId().getAcessoCompleto().equals("S")) {
+            if (!usuario.getPapel().getAcessoCompleto().equals("S")) {
                 for (int i = 0; i < listaPapelFuncao.size(); i++) {
-                    buttonsAuthorization.addButtonAuthorization(listaPapelFuncao.get(i).getFuncaoId().getNome(),
+                    buttonsAuthorization.addButtonAuthorization(listaPapelFuncao.get(i).getFuncao().getNome(),
                             listaPapelFuncao.get(i).getPodeInserir().equals("S"),
                             listaPapelFuncao.get(i).getPodeAlterar().equals("S"),
                             listaPapelFuncao.get(i).getPodeExcluir().equals("S")

@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_requisicao_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "CompraRequisicaoDetalheVO.findAll", query = "SELECT c FROM CompraRequisicaoDetalheVO c")})
 public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,9 +64,9 @@ public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serial
     private Character itemCotado;
     @JoinColumn(name = "compra_requisicao_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraRequisicaoVO compraRequisicaoId;
+    private CompraRequisicaoVO compraRequisicao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoDetalheId")
-    private List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheVOList;
+    private List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList;
 
     public CompraRequisicaoDetalheVO() {
     }
@@ -109,20 +107,20 @@ public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serial
         this.itemCotado = itemCotado;
     }
 
-    public CompraRequisicaoVO getCompraRequisicaoId() {
-        return compraRequisicaoId;
+    public CompraRequisicaoVO getCompraRequisicao() {
+        return compraRequisicao;
     }
 
-    public void setCompraRequisicaoId(CompraRequisicaoVO compraRequisicaoId) {
-        this.compraRequisicaoId = compraRequisicaoId;
+    public void setCompraRequisicao(CompraRequisicaoVO compraRequisicao) {
+        this.compraRequisicao = compraRequisicao;
     }
 
-    public List<CompraReqCotacaoDetalheVO> getCompraReqCotacaoDetalheVOList() {
-        return compraReqCotacaoDetalheVOList;
+    public List<CompraReqCotacaoDetalheVO> getCompraReqCotacaoDetalheList() {
+        return compraReqCotacaoDetalheList;
     }
 
-    public void setCompraReqCotacaoDetalheVOList(List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheVOList) {
-        this.compraReqCotacaoDetalheVOList = compraReqCotacaoDetalheVOList;
+    public void setCompraReqCotacaoDetalheList(List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList) {
+        this.compraReqCotacaoDetalheList = compraReqCotacaoDetalheList;
     }
 
     @Override

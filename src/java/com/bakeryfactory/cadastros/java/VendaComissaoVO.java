@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_comissao")
-@NamedQueries({
-    @NamedQuery(name = "VendaComissaoVO.findAll", query = "SELECT v FROM VendaComissaoVO v")})
 public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,10 +69,10 @@ public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
     private Date dataLancamento;
     @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaCabecalhoVO vendaCabecalhoId;
+    private VendaCabecalhoVO vendaCabecalho;
     @JoinColumn(name = "vendedor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendedorVO vendedorId;
+    private VendedorVO vendedor;
 
     public VendaComissaoVO() {
     }
@@ -131,40 +129,20 @@ public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
         this.dataLancamento = dataLancamento;
     }
 
-    public VendaCabecalhoVO getVendaCabecalhoId() {
-        return vendaCabecalhoId;
+    public VendaCabecalhoVO getVendaCabecalho() {
+        return vendaCabecalho;
     }
 
-    public void setVendaCabecalhoId(VendaCabecalhoVO vendaCabecalhoId) {
-        this.vendaCabecalhoId = vendaCabecalhoId;
+    public void setVendaCabecalho(VendaCabecalhoVO vendaCabecalho) {
+        this.vendaCabecalho = vendaCabecalho;
     }
 
-    public VendedorVO getVendedorId() {
-        return vendedorId;
+    public VendedorVO getVendedor() {
+        return vendedor;
     }
 
-    public void setVendedorId(VendedorVO vendedorId) {
-        this.vendedorId = vendedorId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaComissaoVO)) {
-            return false;
-        }
-        VendaComissaoVO other = (VendaComissaoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setVendedor(VendedorVO vendedor) {
+        this.vendedor = vendedor;
     }
 
     @Override

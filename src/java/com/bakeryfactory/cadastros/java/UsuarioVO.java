@@ -49,8 +49,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "usuario")
-@NamedQueries({
-    @NamedQuery(name = "UsuarioVO.findAll", query = "SELECT u FROM UsuarioVO u")})
 public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -69,19 +67,19 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @Column(name = "administrador")
     private Character administrador;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<AuditoriaVO> auditoriaVOList;
+    private List<AuditoriaVO> auditoriaList;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
+    private EmpresaVO empresa;
     @JoinColumn(name = "papel_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PapelVO papelId;
+    private PapelVO papel;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
 
     public UsuarioVO() {
     }
@@ -130,64 +128,44 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.administrador = administrador;
     }
 
-    public List<AuditoriaVO> getAuditoriaVOList() {
-        return auditoriaVOList;
+    public List<AuditoriaVO> getAuditoriaList() {
+        return auditoriaList;
     }
 
-    public void setAuditoriaVOList(List<AuditoriaVO> auditoriaVOList) {
-        this.auditoriaVOList = auditoriaVOList;
+    public void setAuditoriaList(List<AuditoriaVO> auditoriaList) {
+        this.auditoriaList = auditoriaList;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
-    public PapelVO getPapelId() {
-        return papelId;
+    public PapelVO getPapel() {
+        return papel;
     }
 
-    public void setPapelId(PapelVO papelId) {
-        this.papelId = papelId;
+    public void setPapel(PapelVO papel) {
+        this.papel = papel;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof UsuarioVO)) {
-            return false;
-        }
-        UsuarioVO other = (UsuarioVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_servico_colaborador")
-@NamedQueries({
-    @NamedQuery(name = "PcpServicoColaboradorVO.findAll", query = "SELECT p FROM PcpServicoColaboradorVO p")})
 public class PcpServicoColaboradorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -55,10 +53,10 @@ public class PcpServicoColaboradorVO extends ValueObjectImpl implements Serializ
     private Integer id;
     @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaboradorId;
+    private ColaboradorVO colaborador;
     @JoinColumn(name = "pcp_servico_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PcpServicoVO pcpServicoId;
+    private PcpServicoVO pcpServico;
 
     public PcpServicoColaboradorVO() {
     }
@@ -75,20 +73,20 @@ public class PcpServicoColaboradorVO extends ValueObjectImpl implements Serializ
         this.id = id;
     }
 
-    public ColaboradorVO getColaboradorId() {
-        return colaboradorId;
+    public ColaboradorVO getColaborador() {
+        return colaborador;
     }
 
-    public void setColaboradorId(ColaboradorVO colaboradorId) {
-        this.colaboradorId = colaboradorId;
+    public void setColaborador(ColaboradorVO colaborador) {
+        this.colaborador = colaborador;
     }
 
-    public PcpServicoVO getPcpServicoId() {
-        return pcpServicoId;
+    public PcpServicoVO getPcpServico() {
+        return pcpServico;
     }
 
-    public void setPcpServicoId(PcpServicoVO pcpServicoId) {
-        this.pcpServicoId = pcpServicoId;
+    public void setPcpServico(PcpServicoVO pcpServico) {
+        this.pcpServico = pcpServico;
     }
 
     @Override

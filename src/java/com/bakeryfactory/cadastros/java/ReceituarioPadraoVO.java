@@ -41,8 +41,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "receituario_padrao")
-@NamedQueries({
-    @NamedQuery(name = "ReceituarioPadraoVO.findAll", query = "SELECT r FROM ReceituarioPadraoVO r")})
 public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -75,7 +73,7 @@ public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable
     private Integer perdaComum;
     @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private ReceituarioControleCustoVO receituarioControleCustoVO;
+    private ReceituarioControleCustoVO receituarioControleCusto;
 
     public ReceituarioPadraoVO() {
     }
@@ -192,12 +190,12 @@ public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable
         this.perdaComum = perdaComum;
     }
 
-    public ReceituarioControleCustoVO getReceituarioControleCustoVO() {
-        return receituarioControleCustoVO;
+    public ReceituarioControleCustoVO getReceituarioControleCusto() {
+        return receituarioControleCusto;
     }
 
-    public void setReceituarioControleCustoVO(ReceituarioControleCustoVO receituarioControleCustoVO) {
-        this.receituarioControleCustoVO = receituarioControleCustoVO;
+    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
+        this.receituarioControleCusto = receituarioControleCusto;
     }
 
     @Override

@@ -67,12 +67,12 @@ public class TabelaPrecoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "base_custo")
     private Character baseCusto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tabelaPrecoId")
-    private List<TabelaPrecoVO> tabelaPrecoVOList;
+    private List<TabelaPrecoVO> tabelaPrecoList;
     @JoinColumn(name = "tabela_preco_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TabelaPrecoVO tabelaPrecoId;
+    private TabelaPrecoVO tabelaPreco;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "tabelaPrecoId")
-    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoVOList;
+    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList;
 
     public TabelaPrecoVO() {
     }
@@ -121,48 +121,28 @@ public class TabelaPrecoVO extends ValueObjectImpl implements Serializable {
         this.baseCusto = baseCusto;
     }
 
-    public List<TabelaPrecoVO> getTabelaPrecoVOList() {
-        return tabelaPrecoVOList;
+    public List<TabelaPrecoVO> getTabelaPrecoList() {
+        return tabelaPrecoList;
     }
 
-    public void setTabelaPrecoVOList(List<TabelaPrecoVO> tabelaPrecoVOList) {
-        this.tabelaPrecoVOList = tabelaPrecoVOList;
+    public void setTabelaPrecoList(List<TabelaPrecoVO> tabelaPrecoList) {
+        this.tabelaPrecoList = tabelaPrecoList;
     }
 
-    public TabelaPrecoVO getTabelaPrecoId() {
-        return tabelaPrecoId;
+    public TabelaPrecoVO getTabelaPreco() {
+        return tabelaPreco;
     }
 
-    public void setTabelaPrecoId(TabelaPrecoVO tabelaPrecoId) {
-        this.tabelaPrecoId = tabelaPrecoId;
+    public void setTabelaPreco(TabelaPrecoVO tabelaPreco) {
+        this.tabelaPreco = tabelaPreco;
     }
 
-    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoVOList() {
-        return produtoTabelaPrecoVOList;
+    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoList() {
+        return produtoTabelaPrecoList;
     }
 
-    public void setProdutoTabelaPrecoVOList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoVOList) {
-        this.produtoTabelaPrecoVOList = produtoTabelaPrecoVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TabelaPrecoVO)) {
-            return false;
-        }
-        TabelaPrecoVO other = (TabelaPrecoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setProdutoTabelaPrecoList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList) {
+        this.produtoTabelaPrecoList = produtoTabelaPrecoList;
     }
 
     @Override

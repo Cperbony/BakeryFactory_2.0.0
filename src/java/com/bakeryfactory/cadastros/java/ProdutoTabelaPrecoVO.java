@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "produto_tabela_preco")
-@NamedQueries({
-    @NamedQuery(name = "ProdutoTabelaPrecoVO.findAll", query = "SELECT p FROM ProdutoTabelaPrecoVO p")})
 public class ProdutoTabelaPrecoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,10 +57,10 @@ public class ProdutoTabelaPrecoVO extends ValueObjectImpl implements Serializabl
     private BigDecimal precoDecimal;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
     @JoinColumn(name = "tabela_preco_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TabelaPrecoVO tabelaPrecoId;
+    private TabelaPrecoVO tabelaPreco;
 
     public ProdutoTabelaPrecoVO() {
     }
@@ -87,20 +85,20 @@ public class ProdutoTabelaPrecoVO extends ValueObjectImpl implements Serializabl
         this.precoDecimal = precoDecimal;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
-    public TabelaPrecoVO getTabelaPrecoId() {
-        return tabelaPrecoId;
+    public TabelaPrecoVO getTabelaPreco() {
+        return tabelaPreco;
     }
 
-    public void setTabelaPrecoId(TabelaPrecoVO tabelaPrecoId) {
-        this.tabelaPrecoId = tabelaPrecoId;
+    public void setTabelaPreco(TabelaPrecoVO tabelaPreco) {
+        this.tabelaPreco = tabelaPreco;
     }
 
     @Override

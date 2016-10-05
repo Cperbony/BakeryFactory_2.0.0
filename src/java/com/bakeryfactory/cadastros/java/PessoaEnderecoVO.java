@@ -43,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pessoa_endereco")
-@NamedQueries({
-    @NamedQuery(name = "PessoaEnderecoVO.findAll", query = "SELECT p FROM PessoaEnderecoVO p")})
 public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -79,7 +77,7 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
     private Character correspondencia;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
 
     public PessoaEnderecoVO() {
     }
@@ -192,12 +190,12 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
         this.correspondencia = correspondencia;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "requisicao_interna_cabecalho")
-@NamedQueries({
-    @NamedQuery(name = "RequisicaoInternaCabecalhoVO.findAll", query = "SELECT r FROM RequisicaoInternaCabecalhoVO r")})
 public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +61,7 @@ public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Ser
     @Column(name = "situacao")
     private Character situacao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoInternaCabecalhoId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList;
+    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
 
     public RequisicaoInternaCabecalhoVO() {
     }
@@ -96,32 +94,12 @@ public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Ser
         this.situacao = situacao;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheVOList() {
-        return requisicaoInternaDetalheVOList;
+    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
+        return requisicaoInternaDetalheList;
     }
 
-    public void setRequisicaoInternaDetalheVOList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheVOList) {
-        this.requisicaoInternaDetalheVOList = requisicaoInternaDetalheVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof RequisicaoInternaCabecalhoVO)) {
-            return false;
-        }
-        RequisicaoInternaCabecalhoVO other = (RequisicaoInternaCabecalhoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
+        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
     }
 
     @Override

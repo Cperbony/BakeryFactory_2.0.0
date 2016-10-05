@@ -47,8 +47,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_condicoes_pagamento")
-@NamedQueries({
-    @NamedQuery(name = "VendaCondicoesPagamentoVO.findAll", query = "SELECT v FROM VendaCondicoesPagamentoVO v")})
 public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,14 +75,14 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
     @Column(name = "vista_prazo")
     private Character vistaPrazo;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaCondicoesParcelaVO> vendaCondicoesParcelaVOList;
+    private List<VendaCondicoesParcelaVO> vendaCondicoesParcelaList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
+    private List<VendaCabecalhoVO> vendaCabecalhoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList;
+    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
+    private EmpresaVO empresa;
 
     public VendaCondicoesPagamentoVO() {
     }
@@ -173,56 +171,36 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
         this.vistaPrazo = vistaPrazo;
     }
 
-    public List<VendaCondicoesParcelaVO> getVendaCondicoesParcelaVOList() {
-        return vendaCondicoesParcelaVOList;
+    public List<VendaCondicoesParcelaVO> getVendaCondicoesParcelaList() {
+        return vendaCondicoesParcelaList;
     }
 
-    public void setVendaCondicoesParcelaVOList(List<VendaCondicoesParcelaVO> vendaCondicoesParcelaVOList) {
-        this.vendaCondicoesParcelaVOList = vendaCondicoesParcelaVOList;
+    public void setVendaCondicoesParcelaList(List<VendaCondicoesParcelaVO> vendaCondicoesParcelaList) {
+        this.vendaCondicoesParcelaList = vendaCondicoesParcelaList;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
-        return vendaCabecalhoVOList;
+    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
+        return vendaCabecalhoList;
     }
 
-    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
-        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
+        this.vendaCabecalhoList = vendaCabecalhoList;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoVOList() {
-        return vendaOrcamentoCabecalhoVOList;
+    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
+        return vendaOrcamentoCabecalhoList;
     }
 
-    public void setVendaOrcamentoCabecalhoVOList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoVOList) {
-        this.vendaOrcamentoCabecalhoVOList = vendaOrcamentoCabecalhoVOList;
+    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
+        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaCondicoesPagamentoVO)) {
-            return false;
-        }
-        VendaCondicoesPagamentoVO other = (VendaCondicoesPagamentoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
     @Override

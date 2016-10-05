@@ -46,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pessoa_fisica")
-@NamedQueries({
-    @NamedQuery(name = "PessoaFisicaVO.findAll", query = "SELECT p FROM PessoaFisicaVO p")})
 public class PessoaFisicaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -101,10 +99,10 @@ public class PessoaFisicaVO extends ValueObjectImpl implements Serializable {
     private String nomePai;
     @JoinColumn(name = "estado_civil_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EstadoCivilVO estadoCivilId;
+    private EstadoCivilVO estadoCivil;
     @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private PessoaVO pessoaId;
+    private PessoaVO pessoa;
 
     public PessoaFisicaVO() {
     }
@@ -281,20 +279,20 @@ public class PessoaFisicaVO extends ValueObjectImpl implements Serializable {
         this.nomePai = nomePai;
     }
 
-    public EstadoCivilVO getEstadoCivilId() {
-        return estadoCivilId;
+    public EstadoCivilVO getEstadoCivil() {
+        return estadoCivil;
     }
 
-    public void setEstadoCivilId(EstadoCivilVO estadoCivilId) {
-        this.estadoCivilId = estadoCivilId;
+    public void setEstadoCivil(EstadoCivilVO estadoCivil) {
+        this.estadoCivil = estadoCivil;
     }
 
-    public PessoaVO getPessoaId() {
-        return pessoaId;
+    public PessoaVO getPessoa() {
+        return pessoa;
     }
 
-    public void setPessoaId(PessoaVO pessoaId) {
-        this.pessoaId = pessoaId;
+    public void setPessoa(PessoaVO pessoa) {
+        this.pessoa = pessoa;
     }
 
     @Override

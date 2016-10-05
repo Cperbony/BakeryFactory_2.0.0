@@ -91,8 +91,11 @@ public class PessoaGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
+        gridControl1.setDeleteButton(deleteButton1);
         gridControl1.setFunctionId("pessoa");
+        gridControl1.setInsertButton(insertButton1);
         gridControl1.setReloadButton(reloadButton1);
+        gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn1.setColumnName("nome");

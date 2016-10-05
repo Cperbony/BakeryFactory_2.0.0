@@ -32,7 +32,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -44,8 +43,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "setor")
-@NamedQueries({
-    @NamedQuery(name = "SetorVO.findAll", query = "SELECT s FROM SetorVO s")})
 public class SetorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +56,7 @@ public class SetorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "setor_descricao")
     private String setorDescricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "setorId")
-    private List<ColaboradorVO> colaboradorVOList;
+    private List<ColaboradorVO> colaboradorList;
 
     public SetorVO() {
     }
@@ -92,32 +89,12 @@ public class SetorVO extends ValueObjectImpl implements Serializable {
         this.setorDescricao = setorDescricao;
     }
 
-    public List<ColaboradorVO> getColaboradorVOList() {
-        return colaboradorVOList;
+    public List<ColaboradorVO> getColaboradorList() {
+        return colaboradorList;
     }
 
-    public void setColaboradorVOList(List<ColaboradorVO> colaboradorVOList) {
-        this.colaboradorVOList = colaboradorVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof SetorVO)) {
-            return false;
-        }
-        SetorVO other = (SetorVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
+        this.colaboradorList = colaboradorList;
     }
 
     @Override

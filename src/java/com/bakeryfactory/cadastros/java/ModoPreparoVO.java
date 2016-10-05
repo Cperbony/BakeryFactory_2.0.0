@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "modo_preparo")
-@NamedQueries({
-    @NamedQuery(name = "ModoPreparoVO.findAll", query = "SELECT m FROM ModoPreparoVO m")})
 public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -63,7 +61,7 @@ public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
     private Date dataRevisao;
     @JoinColumn(name = "receita_id", referencedColumnName = "id", insertable = false, updatable = false)
     @ManyToOne(optional = false)
-    private ReceitaVO receitaVO;
+    private ReceitaVO receita;
 
     public ModoPreparoVO() {
     }
@@ -116,12 +114,12 @@ public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
         this.dataRevisao = dataRevisao;
     }
 
-    public ReceitaVO getReceitaVO() {
-        return receitaVO;
+    public ReceitaVO getReceita() {
+        return receita;
     }
 
-    public void setReceitaVO(ReceitaVO receitaVO) {
-        this.receitaVO = receitaVO;
+    public void setReceita(ReceitaVO receita) {
+        this.receita = receita;
     }
 
     @Override

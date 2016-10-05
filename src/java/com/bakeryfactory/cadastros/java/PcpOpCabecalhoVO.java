@@ -48,8 +48,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pcp_op_cabecalho")
-@NamedQueries({
-    @NamedQuery(name = "PcpOpCabecalhoVO.findAll", query = "SELECT p FROM PcpOpCabecalhoVO p")})
 public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,9 +75,9 @@ public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "porcento_estoque")
     private BigDecimal porcentoEstoque;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalhoId")
-    private List<PcpInstrucaoOpVO> pcpInstrucaoOpVOList;
+    private List<PcpInstrucaoOpVO> pcpInstrucaoOpList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalhoId")
-    private List<PcpOpDetalheVO> pcpOpDetalheVOList;
+    private List<PcpOpDetalheVO> pcpOpDetalheList;
 
     public PcpOpCabecalhoVO() {
     }
@@ -152,20 +150,20 @@ public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
         this.porcentoEstoque = porcentoEstoque;
     }
 
-    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpVOList() {
-        return pcpInstrucaoOpVOList;
+    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpList() {
+        return pcpInstrucaoOpList;
     }
 
-    public void setPcpInstrucaoOpVOList(List<PcpInstrucaoOpVO> pcpInstrucaoOpVOList) {
-        this.pcpInstrucaoOpVOList = pcpInstrucaoOpVOList;
+    public void setPcpInstrucaoOpList(List<PcpInstrucaoOpVO> pcpInstrucaoOpList) {
+        this.pcpInstrucaoOpList = pcpInstrucaoOpList;
     }
 
-    public List<PcpOpDetalheVO> getPcpOpDetalheVOList() {
-        return pcpOpDetalheVOList;
+    public List<PcpOpDetalheVO> getPcpOpDetalheList() {
+        return pcpOpDetalheList;
     }
 
-    public void setPcpOpDetalheVOList(List<PcpOpDetalheVO> pcpOpDetalheVOList) {
-        this.pcpOpDetalheVOList = pcpOpDetalheVOList;
+    public void setPcpOpDetalheList(List<PcpOpDetalheVO> pcpOpDetalheList) {
+        this.pcpOpDetalheList = pcpOpDetalheList;
     }
 
     @Override

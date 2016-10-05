@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "VendaDetalheVO.findAll", query = "SELECT v FROM VendaDetalheVO v")})
 public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -73,13 +71,13 @@ public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
     private BigDecimal valorComissao;
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
+    private EmpresaVO empresa;
     @JoinColumn(name = "produto_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ProdutoVO produtoId;
+    private ProdutoVO produto;
     @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaCabecalhoVO vendaCabecalhoId;
+    private VendaCabecalhoVO vendaCabecalho;
 
     public VendaDetalheVO() {
     }
@@ -160,28 +158,28 @@ public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
         this.valorComissao = valorComissao;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
-    public ProdutoVO getProdutoId() {
-        return produtoId;
+    public ProdutoVO getProduto() {
+        return produto;
     }
 
-    public void setProdutoId(ProdutoVO produtoId) {
-        this.produtoId = produtoId;
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
     }
 
-    public VendaCabecalhoVO getVendaCabecalhoId() {
-        return vendaCabecalhoId;
+    public VendaCabecalhoVO getVendaCabecalho() {
+        return vendaCabecalho;
     }
 
-    public void setVendaCabecalhoId(VendaCabecalhoVO vendaCabecalhoId) {
-        this.vendaCabecalhoId = vendaCabecalhoId;
+    public void setVendaCabecalho(VendaCabecalhoVO vendaCabecalho) {
+        this.vendaCabecalho = vendaCabecalho;
     }
 
     @Override
@@ -189,19 +187,6 @@ public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
         return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaDetalheVO)) {
-            return false;
-        }
-        VendaDetalheVO other = (VendaDetalheVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
     }
 
     @Override

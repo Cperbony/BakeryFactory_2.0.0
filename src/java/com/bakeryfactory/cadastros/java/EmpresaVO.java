@@ -34,12 +34,18 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,8 +54,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "empresa")
-@NamedQueries({
-    @NamedQuery(name = "EmpresaVO_1.findAll", query = "SELECT e FROM EmpresaVO_1 e")})
 public class EmpresaVO  extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -116,24 +120,21 @@ public class EmpresaVO  extends ValueObjectImpl implements Serializable {
     private String codigoCnaePrincipal;
     @Column(name = "tipo_controle_estoque")
     private Character tipoControleEstoque;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<EmpresaPessoaVO> empresaPessoaVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<EmpresaEnderecoVO> empresaEnderecoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<EmpresaTelefoneVO> empresaTelefoneVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<EmpresaContatoVO> empresaContatoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<NotaFiscalTipoVO> notaFiscalTipoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<UsuarioVO> usuarioVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<VendaDetalheVO> vendaDetalheVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<CompraTipoRequisicaoVO> compraTipoRequisicaoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "empresaId")
-    private List<VendaCondicoesPagamentoVO> vendaCondicoesPagamentoVOList;
+    
+    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    @ManyToOne
+    private EmpresaVO empresa;
+    @ManyToMany(mappedBy = "listaEmpresa")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PessoaVO> listaPessoa;
+    @OneToMany(mappedBy="empresa")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<EmpresaEnderecoVO> listaEndereco;
+    @Transient
+    private byte[] imagem;
+    
+    
+    
 
     public EmpresaVO() {
     }
@@ -366,96 +367,36 @@ public class EmpresaVO  extends ValueObjectImpl implements Serializable {
         this.tipoControleEstoque = tipoControleEstoque;
     }
 
-    public List<EmpresaPessoaVO> getEmpresaPessoaVOList() {
-        return empresaPessoaVOList;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaPessoaVOList(List<EmpresaPessoaVO> empresaPessoaVOList) {
-        this.empresaPessoaVOList = empresaPessoaVOList;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
-    public List<EmpresaEnderecoVO> getEmpresaEnderecoVOList() {
-        return empresaEnderecoVOList;
+    public List<PessoaVO> getListaPessoa() {
+        return listaPessoa;
     }
 
-    public void setEmpresaEnderecoVOList(List<EmpresaEnderecoVO> empresaEnderecoVOList) {
-        this.empresaEnderecoVOList = empresaEnderecoVOList;
+    public void setListaPessoa(List<PessoaVO> listaPessoa) {
+        this.listaPessoa = listaPessoa;
     }
 
-    public List<EmpresaTelefoneVO> getEmpresaTelefoneVOList() {
-        return empresaTelefoneVOList;
+    public List<EmpresaEnderecoVO> getListaEndereco() {
+        return listaEndereco;
     }
 
-    public void setEmpresaTelefoneVOList(List<EmpresaTelefoneVO> empresaTelefoneVOList) {
-        this.empresaTelefoneVOList = empresaTelefoneVOList;
+    public void setListaEndereco(List<EmpresaEnderecoVO> listaEndereco) {
+        this.listaEndereco = listaEndereco;
     }
 
-    public List<EmpresaContatoVO> getEmpresaContatoVOList() {
-        return empresaContatoVOList;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setEmpresaContatoVOList(List<EmpresaContatoVO> empresaContatoVOList) {
-        this.empresaContatoVOList = empresaContatoVOList;
-    }
-
-    public List<NotaFiscalTipoVO> getNotaFiscalTipoVOList() {
-        return notaFiscalTipoVOList;
-    }
-
-    public void setNotaFiscalTipoVOList(List<NotaFiscalTipoVO> notaFiscalTipoVOList) {
-        this.notaFiscalTipoVOList = notaFiscalTipoVOList;
-    }
-
-    public List<UsuarioVO> getUsuarioVOList() {
-        return usuarioVOList;
-    }
-
-    public void setUsuarioVOList(List<UsuarioVO> usuarioVOList) {
-        this.usuarioVOList = usuarioVOList;
-    }
-
-    public List<VendaDetalheVO> getVendaDetalheVOList() {
-        return vendaDetalheVOList;
-    }
-
-    public void setVendaDetalheVOList(List<VendaDetalheVO> vendaDetalheVOList) {
-        this.vendaDetalheVOList = vendaDetalheVOList;
-    }
-
-    public List<CompraTipoRequisicaoVO> getCompraTipoRequisicaoVOList() {
-        return compraTipoRequisicaoVOList;
-    }
-
-    public void setCompraTipoRequisicaoVOList(List<CompraTipoRequisicaoVO> compraTipoRequisicaoVOList) {
-        this.compraTipoRequisicaoVOList = compraTipoRequisicaoVOList;
-    }
-
-    public List<VendaCondicoesPagamentoVO> getVendaCondicoesPagamentoVOList() {
-        return vendaCondicoesPagamentoVOList;
-    }
-
-    public void setVendaCondicoesPagamentoVOList(List<VendaCondicoesPagamentoVO> vendaCondicoesPagamentoVOList) {
-        this.vendaCondicoesPagamentoVOList = vendaCondicoesPagamentoVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof EmpresaVO)) {
-            return false;
-        }
-        EmpresaVO other = (EmpresaVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
     @Override

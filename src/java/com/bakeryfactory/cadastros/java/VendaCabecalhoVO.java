@@ -50,8 +50,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "venda_cabecalho")
-@NamedQueries({
-    @NamedQuery(name = "VendaCabecalhoVO.findAll", query = "SELECT v FROM VendaCabecalhoVO v")})
 public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -99,28 +97,28 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
     private Character situacao;
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private ClienteVO clienteId;
+    private ClienteVO cliente;
     @JoinColumn(name = "nota_fiscal_tipo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private NotaFiscalTipoVO notaFiscalTipoId;
+    private NotaFiscalTipoVO notaFiscalTipo;
     @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private TransportadoraVO transportadoraId;
+    private TransportadoraVO transportadora;
     @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaCondicoesPagamentoVO vendaCondicoesPagamentoId;
+    private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
     @JoinColumn(name = "venda_romaneio_entrega_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendaRomaneioEntregaVO vendaRomaneioEntregaId;
+    private VendaRomaneioEntregaVO vendaRomaneioEntrega;
     @JoinColumn(name = "vendedor_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private VendedorVO vendedorId;
+    private VendedorVO vendedor;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaComissaoVO> vendaComissaoVOList;
+    private List<VendaComissaoVO> vendaComissaoList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaFreteVO> vendaFreteVOList;
+    private List<VendaFreteVO> vendaFreteList;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaDetalheVO> vendaDetalheVOList;
+    private List<VendaDetalheVO> vendaDetalheList;
 
     public VendaCabecalhoVO() {
     }
@@ -273,96 +271,76 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
         this.situacao = situacao;
     }
 
-    public ClienteVO getClienteId() {
-        return clienteId;
+    public ClienteVO getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(ClienteVO clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(ClienteVO cliente) {
+        this.cliente = cliente;
     }
 
-    public NotaFiscalTipoVO getNotaFiscalTipoId() {
-        return notaFiscalTipoId;
+    public NotaFiscalTipoVO getNotaFiscalTipo() {
+        return notaFiscalTipo;
     }
 
-    public void setNotaFiscalTipoId(NotaFiscalTipoVO notaFiscalTipoId) {
-        this.notaFiscalTipoId = notaFiscalTipoId;
+    public void setNotaFiscalTipo(NotaFiscalTipoVO notaFiscalTipo) {
+        this.notaFiscalTipo = notaFiscalTipo;
     }
 
-    public TransportadoraVO getTransportadoraId() {
-        return transportadoraId;
+    public TransportadoraVO getTransportadora() {
+        return transportadora;
     }
 
-    public void setTransportadoraId(TransportadoraVO transportadoraId) {
-        this.transportadoraId = transportadoraId;
+    public void setTransportadora(TransportadoraVO transportadora) {
+        this.transportadora = transportadora;
     }
 
-    public VendaCondicoesPagamentoVO getVendaCondicoesPagamentoId() {
-        return vendaCondicoesPagamentoId;
+    public VendaCondicoesPagamentoVO getVendaCondicoesPagamento() {
+        return vendaCondicoesPagamento;
     }
 
-    public void setVendaCondicoesPagamentoId(VendaCondicoesPagamentoVO vendaCondicoesPagamentoId) {
-        this.vendaCondicoesPagamentoId = vendaCondicoesPagamentoId;
+    public void setVendaCondicoesPagamento(VendaCondicoesPagamentoVO vendaCondicoesPagamento) {
+        this.vendaCondicoesPagamento = vendaCondicoesPagamento;
     }
 
-    public VendaRomaneioEntregaVO getVendaRomaneioEntregaId() {
-        return vendaRomaneioEntregaId;
+    public VendaRomaneioEntregaVO getVendaRomaneioEntrega() {
+        return vendaRomaneioEntrega;
     }
 
-    public void setVendaRomaneioEntregaId(VendaRomaneioEntregaVO vendaRomaneioEntregaId) {
-        this.vendaRomaneioEntregaId = vendaRomaneioEntregaId;
+    public void setVendaRomaneioEntrega(VendaRomaneioEntregaVO vendaRomaneioEntrega) {
+        this.vendaRomaneioEntrega = vendaRomaneioEntrega;
     }
 
-    public VendedorVO getVendedorId() {
-        return vendedorId;
+    public VendedorVO getVendedor() {
+        return vendedor;
     }
 
-    public void setVendedorId(VendedorVO vendedorId) {
-        this.vendedorId = vendedorId;
+    public void setVendedor(VendedorVO vendedor) {
+        this.vendedor = vendedor;
     }
 
-    public List<VendaComissaoVO> getVendaComissaoVOList() {
-        return vendaComissaoVOList;
+    public List<VendaComissaoVO> getVendaComissaoList() {
+        return vendaComissaoList;
     }
 
-    public void setVendaComissaoVOList(List<VendaComissaoVO> vendaComissaoVOList) {
-        this.vendaComissaoVOList = vendaComissaoVOList;
+    public void setVendaComissaoList(List<VendaComissaoVO> vendaComissaoList) {
+        this.vendaComissaoList = vendaComissaoList;
     }
 
-    public List<VendaFreteVO> getVendaFreteVOList() {
-        return vendaFreteVOList;
+    public List<VendaFreteVO> getVendaFreteList() {
+        return vendaFreteList;
     }
 
-    public void setVendaFreteVOList(List<VendaFreteVO> vendaFreteVOList) {
-        this.vendaFreteVOList = vendaFreteVOList;
+    public void setVendaFreteList(List<VendaFreteVO> vendaFreteList) {
+        this.vendaFreteList = vendaFreteList;
     }
 
-    public List<VendaDetalheVO> getVendaDetalheVOList() {
-        return vendaDetalheVOList;
+    public List<VendaDetalheVO> getVendaDetalheList() {
+        return vendaDetalheList;
     }
 
-    public void setVendaDetalheVOList(List<VendaDetalheVO> vendaDetalheVOList) {
-        this.vendaDetalheVOList = vendaDetalheVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof VendaCabecalhoVO)) {
-            return false;
-        }
-        VendaCabecalhoVO other = (VendaCabecalhoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setVendaDetalheList(List<VendaDetalheVO> vendaDetalheList) {
+        this.vendaDetalheList = vendaDetalheList;
     }
 
     @Override

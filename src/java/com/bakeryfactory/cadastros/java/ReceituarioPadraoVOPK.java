@@ -41,14 +41,14 @@ public class ReceituarioPadraoVOPK extends ValueObjectImpl implements Serializab
     private int id;
     @Basic(optional = false)
     @Column(name = "receituario_controle_custo_id")
-    private int receituarioControleCustoId;
+    private int receituarioControleCusto;
 
     public ReceituarioPadraoVOPK() {
     }
 
     public ReceituarioPadraoVOPK(int id, int receituarioControleCustoId) {
         this.id = id;
-        this.receituarioControleCustoId = receituarioControleCustoId;
+        this.receituarioControleCusto = receituarioControleCustoId;
     }
 
     public int getId() {
@@ -59,19 +59,19 @@ public class ReceituarioPadraoVOPK extends ValueObjectImpl implements Serializab
         this.id = id;
     }
 
-    public int getReceituarioControleCustoId() {
-        return receituarioControleCustoId;
+    public int getReceituarioControleCusto() {
+        return receituarioControleCusto;
     }
 
-    public void setReceituarioControleCustoId(int receituarioControleCustoId) {
-        this.receituarioControleCustoId = receituarioControleCustoId;
+    public void setReceituarioControleCusto(int receituarioControleCusto) {
+        this.receituarioControleCusto = receituarioControleCusto;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
         hash += (int) id;
-        hash += (int) receituarioControleCustoId;
+        hash += (int) receituarioControleCusto;
         return hash;
     }
 
@@ -85,7 +85,7 @@ public class ReceituarioPadraoVOPK extends ValueObjectImpl implements Serializab
         if (this.id != other.id) {
             return false;
         }
-        if (this.receituarioControleCustoId != other.receituarioControleCustoId) {
+        if (this.receituarioControleCusto != other.receituarioControleCusto) {
             return false;
         }
         return true;
@@ -93,7 +93,7 @@ public class ReceituarioPadraoVOPK extends ValueObjectImpl implements Serializab
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.ReceituarioPadraoVOPK[ id=" + id + ", receituarioControleCustoId=" + receituarioControleCustoId + " ]";
+        return "com.bakeryfactory.cadastros.java.ReceituarioPadraoVOPK[ id=" + id + ", receituarioControleCustoId=" + receituarioControleCusto + " ]";
     }
     
 }

@@ -29,13 +29,20 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -44,8 +51,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "pessoa")
-@NamedQueries({
-    @NamedQuery(name = "PessoaVO.findAll", query = "SELECT p FROM PessoaVO p")})
 public class PessoaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,30 +75,24 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
     private Character colaborador;
     @Column(name = "transportadora")
     private Character transportadora;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaJuridicaVO> pessoaJuridicaVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaAlteracaoVO> pessoaAlteracaoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaFisicaVO> pessoaFisicaVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<EmpresaPessoaVO> listaEmpresa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<TransportadoraVO> transportadoraVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<ClienteVO> clienteVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<UsuarioVO> usuarioVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaContatoVO> pessoaContatoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaEnderecoVO> pessoaEnderecoVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<ColaboradorVO> colaboradorVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<PessoaTelefoneVO> pessoaTelefoneVOList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pessoaId")
-    private List<FornecedorVO> fornecedorVOList;
+    
+    @ManyToMany(fetch=FetchType.EAGER)
+    @JoinTable(name="empresa_pessoa", joinColumns={@JoinColumn(name="pessoa_id")}, inverseJoinColumns={@JoinColumn(name="empresa_id")})
+    private List<EmpresaVO> listaEmpresa;
+    @OneToOne(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL)
+    private PessoaFisicaVO pessoaFisica;
+    @OneToOne(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL)
+    private PessoaJuridicaVO pessoaJuridica;
+    @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PessoaEnderecoVO> listaEndereco;
+    @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PessoaContatoVO> listaContato;
+    @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PessoaTelefoneVO> listaTelefone;
+    
 
     public PessoaVO() {
     }
@@ -174,101 +173,55 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
         this.transportadora = transportadora;
     }
 
-    public List<PessoaJuridicaVO> getPessoaJuridicaVOList() {
-        return pessoaJuridicaVOList;
-    }
-
-    public void setPessoaJuridicaVOList(List<PessoaJuridicaVO> pessoaJuridicaVOList) {
-        this.pessoaJuridicaVOList = pessoaJuridicaVOList;
-    }
-
-    public List<PessoaAlteracaoVO> getPessoaAlteracaoVOList() {
-        return pessoaAlteracaoVOList;
-    }
-
-    public void setPessoaAlteracaoVOList(List<PessoaAlteracaoVO> pessoaAlteracaoVOList) {
-        this.pessoaAlteracaoVOList = pessoaAlteracaoVOList;
-    }
-
-    public List<PessoaFisicaVO> getPessoaFisicaVOList() {
-        return pessoaFisicaVOList;
-    }
-
-    public void setPessoaFisicaVOList(List<PessoaFisicaVO> pessoaFisicaVOList) {
-        this.pessoaFisicaVOList = pessoaFisicaVOList;
-    }
-
-    public List<EmpresaPessoaVO> getListaEmpresa() {
+    public List<EmpresaVO> getListaEmpresa() {
         return listaEmpresa;
     }
 
-    public void setListaEmpresa(List<EmpresaPessoaVO> listaEmpresa) {
+    public void setListaEmpresa(List<EmpresaVO> listaEmpresa) {
         this.listaEmpresa = listaEmpresa;
     }
 
-    public List<TransportadoraVO> getTransportadoraVOList() {
-        return transportadoraVOList;
+    public PessoaFisicaVO getPessoaFisica() {
+        return pessoaFisica;
     }
 
-    public void setTransportadoraVOList(List<TransportadoraVO> transportadoraVOList) {
-        this.transportadoraVOList = transportadoraVOList;
+    public void setPessoaFisica(PessoaFisicaVO pessoaFisica) {
+        this.pessoaFisica = pessoaFisica;
     }
 
-    public List<ClienteVO> getClienteVOList() {
-        return clienteVOList;
+    public PessoaJuridicaVO getPessoaJuridica() {
+        return pessoaJuridica;
     }
 
-    public void setClienteVOList(List<ClienteVO> clienteVOList) {
-        this.clienteVOList = clienteVOList;
+    public void setPessoaJuridica(PessoaJuridicaVO pessoaJuridica) {
+        this.pessoaJuridica = pessoaJuridica;
     }
 
-    public List<UsuarioVO> getUsuarioVOList() {
-        return usuarioVOList;
+    public List<PessoaEnderecoVO> getListaEndereco() {
+        return listaEndereco;
     }
 
-    public void setUsuarioVOList(List<UsuarioVO> usuarioVOList) {
-        this.usuarioVOList = usuarioVOList;
+    public void setListaEndereco(List<PessoaEnderecoVO> listaEndereco) {
+        this.listaEndereco = listaEndereco;
     }
 
-    public List<PessoaContatoVO> getPessoaContatoVOList() {
-        return pessoaContatoVOList;
+    public List<PessoaContatoVO> getListaContato() {
+        return listaContato;
     }
 
-    public void setPessoaContatoVOList(List<PessoaContatoVO> pessoaContatoVOList) {
-        this.pessoaContatoVOList = pessoaContatoVOList;
+    public void setListaContato(List<PessoaContatoVO> listaContato) {
+        this.listaContato = listaContato;
     }
 
-    public List<PessoaEnderecoVO> getPessoaEnderecoVOList() {
-        return pessoaEnderecoVOList;
+    public List<PessoaTelefoneVO> getListaTelefone() {
+        return listaTelefone;
     }
 
-    public void setPessoaEnderecoVOList(List<PessoaEnderecoVO> pessoaEnderecoVOList) {
-        this.pessoaEnderecoVOList = pessoaEnderecoVOList;
+    public void setListaTelefone(List<PessoaTelefoneVO> listaTelefone) {
+        this.listaTelefone = listaTelefone;
     }
 
-    public List<ColaboradorVO> getColaboradorVOList() {
-        return colaboradorVOList;
-    }
-
-    public void setColaboradorVOList(List<ColaboradorVO> colaboradorVOList) {
-        this.colaboradorVOList = colaboradorVOList;
-    }
-
-    public List<PessoaTelefoneVO> getPessoaTelefoneVOList() {
-        return pessoaTelefoneVOList;
-    }
-
-    public void setPessoaTelefoneVOList(List<PessoaTelefoneVO> pessoaTelefoneVOList) {
-        this.pessoaTelefoneVOList = pessoaTelefoneVOList;
-    }
-
-    public List<FornecedorVO> getFornecedorVOList() {
-        return fornecedorVOList;
-    }
-
-    public void setFornecedorVOList(List<FornecedorVO> fornecedorVOList) {
-        this.fornecedorVOList = fornecedorVOList;
-    }
+    
 
     @Override
     public int hashCode() {

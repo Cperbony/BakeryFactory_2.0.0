@@ -46,8 +46,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "nota_fiscal_tipo")
-@NamedQueries({
-    @NamedQuery(name = "NotaFiscalTipoVO.findAll", query = "SELECT n FROM NotaFiscalTipoVO n")})
 public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,10 +68,10 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
     private List<VendaCabecalhoVO> vendaCabecalhoVOList;
     @JoinColumn(name = "empresa_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private EmpresaVO empresaId;
+    private EmpresaVO empresa;
     @JoinColumn(name = "nota_fiscal_modelo_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private NotaFiscalModeloVO notaFiscalModeloId;
+    private NotaFiscalModeloVO notaFiscalModelo;
 
     public NotaFiscalTipoVO() {
     }
@@ -138,20 +136,20 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
         this.vendaCabecalhoVOList = vendaCabecalhoVOList;
     }
 
-    public EmpresaVO getEmpresaId() {
-        return empresaId;
+    public EmpresaVO getEmpresa() {
+        return empresa;
     }
 
-    public void setEmpresaId(EmpresaVO empresaId) {
-        this.empresaId = empresaId;
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
     }
 
-    public NotaFiscalModeloVO getNotaFiscalModeloId() {
-        return notaFiscalModeloId;
+    public NotaFiscalModeloVO getNotaFiscalModelo() {
+        return notaFiscalModelo;
     }
 
-    public void setNotaFiscalModeloId(NotaFiscalModeloVO notaFiscalModeloId) {
-        this.notaFiscalModeloId = notaFiscalModeloId;
+    public void setNotaFiscalModelo(NotaFiscalModeloVO notaFiscalModelo) {
+        this.notaFiscalModelo = notaFiscalModelo;
     }
 
     @Override

@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "classe_produto_grupo")
-@NamedQueries({
-    @NamedQuery(name = "ClasseProdutoGrupoVO.findAll", query = "SELECT c FROM ClasseProdutoGrupoVO c")})
 public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -59,7 +57,7 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
     @Column(name = "descricao")
     private String descricao;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classeProdutoGrupoId")
-    private List<ProdutoSubgrupoVO> produtoSubgrupoVOList;
+    private List<ProdutoSubgrupoVO> produtoSubgrupoList;
 
     public ClasseProdutoGrupoVO() {
     }
@@ -92,32 +90,12 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
         this.descricao = descricao;
     }
 
-    public List<ProdutoSubgrupoVO> getProdutoSubgrupoVOList() {
-        return produtoSubgrupoVOList;
+    public List<ProdutoSubgrupoVO> getProdutoSubgrupoList() {
+        return produtoSubgrupoList;
     }
 
-    public void setProdutoSubgrupoVOList(List<ProdutoSubgrupoVO> produtoSubgrupoVOList) {
-        this.produtoSubgrupoVOList = produtoSubgrupoVOList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClasseProdutoGrupoVO)) {
-            return false;
-        }
-        ClasseProdutoGrupoVO other = (ClasseProdutoGrupoVO) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public void setProdutoSubgrupoList(List<ProdutoSubgrupoVO> produtoSubgrupoList) {
+        this.produtoSubgrupoList = produtoSubgrupoList;
     }
 
     @Override

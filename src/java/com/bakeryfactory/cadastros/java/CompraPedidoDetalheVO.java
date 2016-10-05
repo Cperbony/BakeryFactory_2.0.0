@@ -44,8 +44,6 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "compra_pedido_detalhe")
-@NamedQueries({
-    @NamedQuery(name = "CompraPedidoDetalheVO.findAll", query = "SELECT c FROM CompraPedidoDetalheVO c")})
 public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -83,10 +81,10 @@ public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializab
     private BigDecimal aliquotaIpi;
     @JoinColumn(name = "compra_pedido_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private CompraPedidoVO compraPedidoId;
+    private CompraPedidoVO compraPedido;
     @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
     @ManyToOne(optional = false)
-    private IngredienteVO ingredienteId;
+    private IngredienteVO ingrediente;
 
     public CompraPedidoDetalheVO() {
     }
@@ -207,20 +205,20 @@ public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializab
         this.aliquotaIpi = aliquotaIpi;
     }
 
-    public CompraPedidoVO getCompraPedidoId() {
-        return compraPedidoId;
+    public CompraPedidoVO getCompraPedido() {
+        return compraPedido;
     }
 
-    public void setCompraPedidoId(CompraPedidoVO compraPedidoId) {
-        this.compraPedidoId = compraPedidoId;
+    public void setCompraPedido(CompraPedidoVO compraPedido) {
+        this.compraPedido = compraPedido;
     }
 
-    public IngredienteVO getIngredienteId() {
-        return ingredienteId;
+    public IngredienteVO getIngrediente() {
+        return ingrediente;
     }
 
-    public void setIngredienteId(IngredienteVO ingredienteId) {
-        this.ingredienteId = ingredienteId;
+    public void setIngrediente(IngredienteVO ingrediente) {
+        this.ingrediente = ingrediente;
     }
 
     @Override

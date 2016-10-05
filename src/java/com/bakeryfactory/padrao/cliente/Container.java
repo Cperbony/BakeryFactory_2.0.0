@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.padrao.cliente;
 
+import com.bakeryfactory.cadastros.java.EmpresaEnderecoVO;
 import com.bakeryfactory.cadastros.java.UsuarioVO;
 import java.util.Hashtable;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/09/2016
+ * @date 11/09/2016
  */
 public class Container {
-    
+
     //Objeto Utilizado para armazenar os dados da aplicação do lado Cliente
     private static Hashtable container = new Hashtable();
 
@@ -42,8 +42,13 @@ public class Container {
 
     public static void setContainer(UsuarioVO usuarioVo) {
         container.put("usuario", usuarioVo);
-        container.put("empresa", usuarioVo.getColaboradorId().getPessoaId().getListaE)
-       
+        container.put("empresa", usuarioVo.getColaborador().getPessoa().getListaEmpresa().get(0));
+        EmpresaEnderecoVO enderecoPrincipalEmpresa = new EmpresaEnderecoVO();
+        for (EmpresaEnderecoVO endereco : usuarioVo.getColaborador().getPessoa().getListaEmpresa().get(0).getListaEndereco()) {
+            if (endereco.getPrincipal().equals("S")) {
+                enderecoPrincipalEmpresa = endereco;
+            }
+        }
+        container.put("enderecoPrincipalEmpresa", enderecoPrincipalEmpresa);
     }
-
 }
