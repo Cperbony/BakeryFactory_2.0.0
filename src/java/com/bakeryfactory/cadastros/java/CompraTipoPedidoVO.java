@@ -43,23 +43,24 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_tipo_pedido")
+@Table(name = "COMPRA_TIPO_PEDIDO")
 public class CompraTipoPedidoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private String codigo;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraTipoPedidoId")
-    private List<CompraPedidoVO> compraPedidoList;
+    private List<CompraPedidoVO> listaCompraPedido;
 
     public CompraTipoPedidoVO() {
     }
@@ -100,12 +101,12 @@ public class CompraTipoPedidoVO extends ValueObjectImpl implements Serializable 
         this.descricao = descricao;
     }
 
-    public List<CompraPedidoVO> getCompraPedidoList() {
-        return compraPedidoList;
+    public List<CompraPedidoVO> getListaCompraPedido() {
+        return listaCompraPedido;
     }
 
-    public void setCompraPedidoList(List<CompraPedidoVO> compraPedidoList) {
-        this.compraPedidoList = compraPedidoList;
+    public void setListaCompraPedido(List<CompraPedidoVO> listaCompraPedido) {
+        this.listaCompraPedido = listaCompraPedido;
     }
 
     @Override

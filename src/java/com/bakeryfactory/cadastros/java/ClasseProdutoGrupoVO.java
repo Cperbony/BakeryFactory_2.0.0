@@ -43,21 +43,22 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "classe_produto_grupo")
+@Table(name = "CLASSE_PRODUTO_GRUPO")
 public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "classeProdutoGrupoId")
-    private List<ProdutoSubgrupoVO> produtoSubgrupoList;
+    private List<ProdutoSubgrupoVO> listaProdutoSubgrupo;
 
     public ClasseProdutoGrupoVO() {
     }
@@ -90,12 +91,12 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
         this.descricao = descricao;
     }
 
-    public List<ProdutoSubgrupoVO> getProdutoSubgrupoList() {
-        return produtoSubgrupoList;
+    public List<ProdutoSubgrupoVO> getListaProdutoSubgrupo() {
+        return listaProdutoSubgrupo;
     }
 
-    public void setProdutoSubgrupoList(List<ProdutoSubgrupoVO> produtoSubgrupoList) {
-        this.produtoSubgrupoList = produtoSubgrupoList;
+    public void setListaProdutoSubgrupo(List<ProdutoSubgrupoVO> listaProdutoSubgrupo) {
+        this.listaProdutoSubgrupo = listaProdutoSubgrupo;
     }
 
     @Override

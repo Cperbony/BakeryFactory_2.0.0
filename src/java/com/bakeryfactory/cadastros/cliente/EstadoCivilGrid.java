@@ -51,6 +51,7 @@ public class EstadoCivilGrid extends InternalFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         insertButton1 = new org.openswing.swing.client.InsertButton();
@@ -61,6 +62,10 @@ public class EstadoCivilGrid extends InternalFrame {
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
 
+        setTitle("Bakery Factory - Cadastros Estado Civil");
+        setPreferredSize(new java.awt.Dimension(700, 400));
+        getContentPane().setLayout(new java.awt.GridBagLayout());
+
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado Civil"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(insertButton1);
@@ -68,8 +73,21 @@ public class EstadoCivilGrid extends InternalFrame {
         jPanel1.add(reloadButton1);
         jPanel1.add(navigatorBar1);
 
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        getContentPane().add(jPanel1, gridBagConstraints);
+
+        gridControl1.setDeleteButton(deleteButton1);
         gridControl1.setFunctionId("estadoCivil");
+        gridControl1.setInsertButton(insertButton1);
+        gridControl1.setNavBar(navigatorBar1);
+        gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.EstadoCivilVO");
+        gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn2.setColumnName("nome");
         textColumn2.setHeaderColumnName("Nome");
@@ -83,30 +101,13 @@ public class EstadoCivilGrid extends InternalFrame {
         textColumn3.setPreferredWidth(300);
         gridControl1.getColumnContainer().add(textColumn3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 562, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gridControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 562, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 303, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(gridControl1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(gridControl1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

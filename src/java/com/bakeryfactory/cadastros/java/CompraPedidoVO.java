@@ -49,74 +49,77 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_pedido")
+@Table(name = "COMPRA_PEDIDO")
 public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_pedido")
+    @Column(name = "DATA_PEDIDO")
     @Temporal(TemporalType.DATE)
     private Date dataPedido;
-    @Column(name = "data_prevista_entrega")
+    @Column(name = "DATA_PREVISTA_ENTREGA")
     @Temporal(TemporalType.DATE)
     private Date dataPrevistaEntrega;
-    @Column(name = "data_previsao_pagamento")
+    @Column(name = "DATA_PREVISAO_PAGAMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataPrevisaoPagamento;
-    @Column(name = "local_entrega")
+    @Column(name = "LOCAL_ENTREGA")
     private String localEntrega;
-    @Column(name = "local_cobranca")
+    @Column(name = "LOCAL_COBRANCA")
     private String localCobranca;
-    @Column(name = "contato")
+    @Column(name = "CONTATO")
     private String contato;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "taxa_desconto")
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total_pedido")
+    @Column(name = "VALOR_TOTAL_PEDIDO")
     private BigDecimal valorTotalPedido;
-    @Column(name = "tipo_frete")
+    @Column(name = "TIPO_FRETE")
     private Character tipoFrete;
-    @Column(name = "forma_pagamento")
+    @Column(name = "FORMA_PAGAMENTO")
     private Character formaPagamento;
-    @Column(name = "base_calculo_icms")
+    @Column(name = "BASE_CALCULO_ICMS")
     private BigDecimal baseCalculoIcms;
-    @Column(name = "valor_icms")
+    @Column(name = "VALOR_ICMS")
     private BigDecimal valorIcms;
-    @Column(name = "base_calculo_icms_st")
+    @Column(name = "BASE_CALCULO_ICMS_ST")
     private BigDecimal baseCalculoIcmsSt;
-    @Column(name = "valor_icms_st")
+    @Column(name = "VALOR_ICMS_ST")
     private BigDecimal valorIcmsSt;
-    @Column(name = "valor_total_produtos")
+    @Column(name = "VALOR_TOTAL_PRODUTOS")
     private BigDecimal valorTotalProdutos;
-    @Column(name = "valor_frete")
+    @Column(name = "VALOR_FRETE")
     private BigDecimal valorFrete;
-    @Column(name = "valor_seguro")
+    @Column(name = "VALOR_SEGURO")
     private BigDecimal valorSeguro;
-    @Column(name = "valor_outras_despesas")
+    @Column(name = "VALOR_OUTRAS_DESPESAS")
     private BigDecimal valorOutrasDespesas;
-    @Column(name = "valor_ipi")
+    @Column(name = "VALOR_IPI")
     private BigDecimal valorIpi;
-    @Column(name = "valor_total_nf")
+    @Column(name = "VALOR_TOTAL_NF")
     private BigDecimal valorTotalNf;
-    @Column(name = "quantidade_parcelas")
+    @Column(name = "QUANTIDADE_PARCELAS")
     private Integer quantidadeParcelas;
-    @Column(name = "dias_primeiro_vencimento")
+    @Column(name = "DIAS_PRIMEIRO_VENCIMENTO")
     private Integer diasPrimeiroVencimento;
-    @Column(name = "dias_intervalo")
+    @Column(name = "DIAS_INTERVALO")
     private Integer diasIntervalo;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
-    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList;
+    private List<CompraCotacaoPedidoDetalheVO> listaCompraCotacaoPedidoDetalhe;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
-    private List<CompraPedidoDetalheVO> compraPedidoDetalheList;
-    @JoinColumn(name = "compra_tipo_pedido_id", referencedColumnName = "id")
+    private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
+    
+    @JoinColumn(name = "ID_COMPRA_TIPO_PEDIDO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraTipoPedidoVO compraTipoPedido;
 
@@ -335,20 +338,20 @@ public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
         this.diasIntervalo = diasIntervalo;
     }
 
-    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheList() {
-        return compraCotacaoPedidoDetalheList;
+    public List<CompraCotacaoPedidoDetalheVO> getListaCompraCotacaoPedidoDetalhe() {
+        return listaCompraCotacaoPedidoDetalhe;
     }
 
-    public void setCompraCotacaoPedidoDetalheList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList) {
-        this.compraCotacaoPedidoDetalheList = compraCotacaoPedidoDetalheList;
+    public void setListaCompraCotacaoPedidoDetalhe(List<CompraCotacaoPedidoDetalheVO> listaCompraCotacaoPedidoDetalhe) {
+        this.listaCompraCotacaoPedidoDetalhe = listaCompraCotacaoPedidoDetalhe;
     }
 
-    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheList() {
-        return compraPedidoDetalheList;
+    public List<CompraPedidoDetalheVO> getListaCompraPedidoDetalhe() {
+        return listaCompraPedidoDetalhe;
     }
 
-    public void setCompraPedidoDetalheList(List<CompraPedidoDetalheVO> compraPedidoDetalheList) {
-        this.compraPedidoDetalheList = compraPedidoDetalheList;
+    public void setListaCompraPedidoDetalhe(List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe) {
+        this.listaCompraPedidoDetalhe = listaCompraPedidoDetalhe;
     }
 
     public CompraTipoPedidoVO getCompraTipoPedido() {

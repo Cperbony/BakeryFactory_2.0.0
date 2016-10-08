@@ -43,48 +43,56 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_pedido_detalhe")
+@Table(name = "COMPRA_PEDIDO_DETALHE")
 public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @Column(name = "valor_unitario")
+    @Column(name = "VALOR_UNITARIO")
     private BigDecimal valorUnitario;
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "taxa_desconto")
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @Column(name = "cst_csosn")
+    @Column(name = "CST_CSOSN")
     private String cstCsosn;
-    @Column(name = "cfop")
+    @Column(name = "CFOP")
     private Integer cfop;
-    @Column(name = "base_calculo_icms")
+    @Column(name = "BASE_CALCULO_ICMS")
     private BigDecimal baseCalculoIcms;
-    @Column(name = "valor_icms")
+    @Column(name = "VALOR_ICMS")
     private BigDecimal valorIcms;
-    @Column(name = "valor_ipi")
+    @Column(name = "VALOR_IPI")
     private BigDecimal valorIpi;
-    @Column(name = "aliquota_icms")
+    @Column(name = "ALIQUOTA_ICMS")
     private BigDecimal aliquotaIcms;
-    @Column(name = "aliquota_ipi")
+    @Column(name = "ALIQUOTA_IPI")
     private BigDecimal aliquotaIpi;
-    @JoinColumn(name = "compra_pedido_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_COMPRA_PEDIDO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraPedidoVO compraPedido;
-    @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private IngredienteVO ingrediente;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoVO produto;
+    
+    
 
     public CompraPedidoDetalheVO() {
     }
@@ -220,6 +228,16 @@ public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializab
     public void setIngrediente(IngredienteVO ingrediente) {
         this.ingrediente = ingrediente;
     }
+
+    public ProdutoVO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
+    }
+    
+    
 
     @Override
     public int hashCode() {

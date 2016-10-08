@@ -48,128 +48,138 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "colaborador")
+@Table(name = "COLABORADOR")
 public class ColaboradorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "matricula")
+    @Column(name = "MATRICULA")
     private String matricula;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "data_admissao")
+    @Column(name = "DATA_ADMISSAO")
     @Temporal(TemporalType.DATE)
     private Date dataAdmissao;
-    @Column(name = "vencimento_ferias")
+    @Column(name = "VENCIMENTO_FERIAS")
     @Temporal(TemporalType.DATE)
     private Date vencimentoFerias;
-    @Column(name = "foto_3x4")
+    @Column(name = "FOTO_3X4")
     private String foto3x4;
-    @Column(name = "data_transferencia")
+    @Column(name = "DATA_TRANSFERENCIA")
     @Temporal(TemporalType.DATE)
     private Date dataTransferencia;
-    @Column(name = "fgts_optante")
+    @Column(name = "FGTS_OPTANTE")
     private Character fgtsOptante;
-    @Column(name = "fgts_data_opcao")
+    @Column(name = "FGTS_DATA_OPCAO")
     @Temporal(TemporalType.DATE)
     private Date fgtsDataOpcao;
-    @Column(name = "fgts_conta")
+    @Column(name = "FGTS_CONTA")
     private Integer fgtsConta;
-    @Column(name = "pagamento_forma")
+    @Column(name = "PAGAMENTO_FORMA")
     private Character pagamentoForma;
-    @Column(name = "pagamento_banco")
+    @Column(name = "PAGAMENTO_BANCO")
     private String pagamentoBanco;
-    @Column(name = "pagamento_agencia")
+    @Column(name = "PAGAMENTO_AGENCIA")
     private String pagamentoAgencia;
-    @Column(name = "pagamento_agencia_digito")
+    @Column(name = "PAGAMENTO_AGENCIA_DIGITO")
     private Character pagamentoAgenciaDigito;
-    @Column(name = "pagamento_conta")
+    @Column(name = "PAGAMENTO_CONTA")
     private String pagamentoConta;
-    @Column(name = "pagamento_conta_digito")
+    @Column(name = "PAGAMENTO_CONTA_DIGITO")
     private Character pagamentoContaDigito;
-    @Column(name = "exame_medico_ultimo")
+    @Column(name = "EXAME_MEDICO_ULTIMO")
     @Temporal(TemporalType.DATE)
     private Date exameMedicoUltimo;
-    @Column(name = "exame_medico_vencimento")
+    @Column(name = "EXAME_MEDICO_VENCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date exameMedicoVencimento;
-    @Column(name = "pis_data_cadastro")
+    @Column(name = "PIS_DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date pisDataCadastro;
-    @Column(name = "pis_numero")
+    @Column(name = "PIS_NUMERO")
     private String pisNumero;
-    @Column(name = "pis_banco")
+    @Column(name = "PIS_BANCO")
     private String pisBanco;
-    @Column(name = "pis_agencia")
+    @Column(name = "PIS_AGENCIA")
     private String pisAgencia;
-    @Column(name = "pis_agencia_digito")
+    @Column(name = "PIS_AGENCIA_DIGITO")
     private Character pisAgenciaDigito;
-    @Column(name = "ctps_numero")
+    @Column(name = "CTPS_NUMERO")
     private String ctpsNumero;
-    @Column(name = "ctps_serie")
+    @Column(name = "CTPS_SERIE")
     private String ctpsSerie;
-    @Column(name = "ctps_data_expedicao")
+    @Column(name = "CTPS_DATA_EXPEDICAO")
     @Temporal(TemporalType.DATE)
     private Date ctpsDataExpedicao;
-    @Column(name = "ctps_uf")
+    @Column(name = "CTPS_UF")
     private String ctpsUf;
-    @Column(name = "desconto_plano_saude")
+    @Column(name = "DESCONTO_PLANO_SAUDE")
     private Character descontoPlanoSaude;
-    @Column(name = "sai_na_rais")
+    @Column(name = "SAI_NA_RAIS")
     private Character saiNaRais;
-    @Column(name = "categoria_sefip")
+    @Column(name = "CATEGORIA_SEFIP")
     private String categoriaSefip;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "ocorrencia_sefip")
+    @Column(name = "OCORRENCIA_SEFIP")
     private Integer ocorrenciaSefip;
-    @Column(name = "codigo_admissao_caged")
+    @Column(name = "CODIGO_ADMISSAO_CAGED")
     private Integer codigoAdmissaoCaged;
-    @Column(name = "codigo_demissao_caged")
+    @Column(name = "CODIGO_DEMISSAO_CAGED")
     private Integer codigoDemissaoCaged;
-    @Column(name = "codigo_demissao_sefip")
+    @Column(name = "CODIGO_DEMISSAO_SEFIP")
     private Integer codigoDemissaoSefip;
-    @Column(name = "caged_aprendiz")
+    @Column(name = "CAGED_APRENDIZ")
     private Character cagedAprendiz;
-    @Column(name = "caged_deficiencia")
+    @Column(name = "CAGED_DEFICIENCIA")
     private Character cagedDeficiencia;
-    @Column(name = "classificacao_contabil_conta")
+    @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
-    @Column(name = "codigo_turma_ponto")
+    @Column(name = "CODIGO_TURMA_PONTO")
     private String codigoTurmaPonto;
-    @Column(name = "ata_demissao")
+    @Column(name = "ATA_DEMISSAO")
     @Temporal(TemporalType.DATE)
     private Date ataDemissao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<VendaRomaneioEntregaVO> vendaRomaneioEntregaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<UsuarioVO> usuarioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<CompraRequisicaoVO> compraRequisicaoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<VendedorVO> vendedorList;
-    @JoinColumn(name = "cargo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_CARGO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CargoVO cargo;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    @JoinColumn(name = "setor_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_SETOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SetorVO setor;
-    @JoinColumn(name = "tipo_colaborador_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_TIPO_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TipoColaboradorVO tipoColaborador;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<PcpServicoColaboradorVO> pcpServicoColaboradorList;
-
+    private List<VendaRomaneioEntregaVO> listaVendaRomaneioEntrega;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<UsuarioVO> ListaUsuario;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<CompraRequisicaoVO> listaCompraRequisicao;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<VendedorVO> listaVendedor;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+    private List<PcpServicoColaboradorVO> ListaPcpServicoColaborador;
+    
     public ColaboradorVO() {
     }
 
@@ -497,44 +507,44 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.ataDemissao = ataDemissao;
     }
 
-    public List<VendaRomaneioEntregaVO> getVendaRomaneioEntregaList() {
-        return vendaRomaneioEntregaList;
+    public List<VendaRomaneioEntregaVO> getListaVendaRomaneioEntrega() {
+        return listaVendaRomaneioEntrega;
     }
 
-    public void setVendaRomaneioEntregaList(List<VendaRomaneioEntregaVO> vendaRomaneioEntregaList) {
-        this.vendaRomaneioEntregaList = vendaRomaneioEntregaList;
+    public void setListaVendaRomaneioEntrega(List<VendaRomaneioEntregaVO> listaVendaRomaneioEntrega) {
+        this.listaVendaRomaneioEntrega = listaVendaRomaneioEntrega;
     }
 
-    public List<UsuarioVO> getUsuarioList() {
-        return usuarioList;
+    public List<UsuarioVO> getListaUsuario() {
+        return ListaUsuario;
     }
 
-    public void setUsuarioList(List<UsuarioVO> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setListaUsuario(List<UsuarioVO> ListaUsuario) {
+        this.ListaUsuario = ListaUsuario;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
-        return requisicaoInternaDetalheList;
+    public List<RequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
+        return listaRequisicaoInternaDetalhe;
     }
 
-    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
-        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
+    public void setListaRequisicaoInternaDetalhe(List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
+        this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
     }
 
-    public List<CompraRequisicaoVO> getCompraRequisicaoList() {
-        return compraRequisicaoList;
+    public List<CompraRequisicaoVO> getListaCompraRequisicao() {
+        return listaCompraRequisicao;
     }
 
-    public void setCompraRequisicaoList(List<CompraRequisicaoVO> compraRequisicaoList) {
-        this.compraRequisicaoList = compraRequisicaoList;
+    public void setListaCompraRequisicao(List<CompraRequisicaoVO> listaCompraRequisicao) {
+        this.listaCompraRequisicao = listaCompraRequisicao;
     }
 
-    public List<VendedorVO> getVendedorList() {
-        return vendedorList;
+    public List<VendedorVO> getListaVendedor() {
+        return listaVendedor;
     }
 
-    public void setVendedorList(List<VendedorVO> vendedorList) {
-        this.vendedorList = vendedorList;
+    public void setListaVendedor(List<VendedorVO> listaVendedor) {
+        this.listaVendedor = listaVendedor;
     }
 
     public CargoVO getCargo() {
@@ -569,12 +579,12 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.tipoColaborador = tipoColaborador;
     }
 
-    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorList() {
-        return pcpServicoColaboradorList;
+    public List<PcpServicoColaboradorVO> getListaPcpServicoColaborador() {
+        return ListaPcpServicoColaborador;
     }
 
-    public void setPcpServicoColaboradorList(List<PcpServicoColaboradorVO> pcpServicoColaboradorList) {
-        this.pcpServicoColaboradorList = pcpServicoColaboradorList;
+    public void setListaPcpServicoColaborador(List<PcpServicoColaboradorVO> ListaPcpServicoColaborador) {
+        this.ListaPcpServicoColaborador = ListaPcpServicoColaborador;
     }
 
     @Override

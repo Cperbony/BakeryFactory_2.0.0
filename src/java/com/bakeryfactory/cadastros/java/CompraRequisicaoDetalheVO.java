@@ -46,27 +46,33 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_requisicao_detalhe")
+@Table(name = "COMPRA_REQUISICAO_DETALHE")
 public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @Column(name = "quantidade_cotada")
+    @Column(name = "QUANTIDADE_COTADA")
     private BigDecimal quantidadeCotada;
-    @Column(name = "item_cotado")
+    @Column(name = "ITEM_COTADO")
     private Character itemCotado;
-    @JoinColumn(name = "compra_requisicao_id", referencedColumnName = "id")
+    @JoinColumn(name = "ID_COMPRA_REQUISICAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraRequisicaoVO compraRequisicao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoDetalheId")
-    private List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList;
+    private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoVO produto;
+    
 
     public CompraRequisicaoDetalheVO() {
     }
@@ -115,13 +121,23 @@ public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serial
         this.compraRequisicao = compraRequisicao;
     }
 
-    public List<CompraReqCotacaoDetalheVO> getCompraReqCotacaoDetalheList() {
-        return compraReqCotacaoDetalheList;
+    public List<CompraReqCotacaoDetalheVO> getListaCompraReqCotacaoDetalhe() {
+        return listaCompraReqCotacaoDetalhe;
     }
 
-    public void setCompraReqCotacaoDetalheList(List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList) {
-        this.compraReqCotacaoDetalheList = compraReqCotacaoDetalheList;
+    public void setListaCompraReqCotacaoDetalhe(List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe) {
+        this.listaCompraReqCotacaoDetalhe = listaCompraReqCotacaoDetalhe;
     }
+
+    public ProdutoVO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
+    }
+    
+    
 
     @Override
     public int hashCode() {

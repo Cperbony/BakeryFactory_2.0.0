@@ -39,6 +39,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,41 +47,53 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_cotacao_detalhe")
+@Table(name = "COMPRA_COTACAO_DETALHE")
 public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @Column(name = "quantidade_pedida")
+    @Column(name = "QUANTIDADE_PEDIDA")
     private BigDecimal quantidadePedida;
-    @Column(name = "valor_unitario")
+    @Column(name = "VALOR_UNITARIO")
     private BigDecimal valorUnitario;
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "taxa_desconto")
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoDetalheId")
-    private List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList;
-    @JoinColumn(name = "compra_fornecedor_cotacao_id", referencedColumnName = "id")
+    private List<CompraCotacaoPedidoDetalheVO> listaCompraCotacaoPedidoDetalhe;
+    
+    @JoinColumn(name = "ID_COMPRA_FORNECEDOR_COTACAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraFornecedorCotacaoVO compraFornecedorCotacao;
-    @JoinColumn(name = "fornecedor_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_FORNECEDOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private FornecedorVO fornecedor;
-    @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private IngredienteVO ingrediente;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoVO produto;
+    
+    @Transient
+    private CompraRequisicaoDetalheVO compraRequisicaoDetalhe;
+    
 
     public CompraCotacaoDetalheVO() {
     }
@@ -153,12 +166,12 @@ public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializa
         this.valorTotal = valorTotal;
     }
 
-    public List<CompraCotacaoPedidoDetalheVO> getCompraCotacaoPedidoDetalheList() {
-        return compraCotacaoPedidoDetalheList;
+    public List<CompraCotacaoPedidoDetalheVO> getListaCompraCotacaoPedidoDetalhe() {
+        return listaCompraCotacaoPedidoDetalhe;
     }
 
-    public void setCompraCotacaoPedidoDetalheList(List<CompraCotacaoPedidoDetalheVO> compraCotacaoPedidoDetalheList) {
-        this.compraCotacaoPedidoDetalheList = compraCotacaoPedidoDetalheList;
+    public void setListaCompraCotacaoPedidoDetalhe(List<CompraCotacaoPedidoDetalheVO> listaCompraCotacaoPedidoDetalhe) {
+        this.listaCompraCotacaoPedidoDetalhe = listaCompraCotacaoPedidoDetalhe;
     }
 
     public CompraFornecedorCotacaoVO getCompraFornecedorCotacao() {
@@ -184,6 +197,24 @@ public class CompraCotacaoDetalheVO extends ValueObjectImpl implements Serializa
     public void setIngrediente(IngredienteVO ingrediente) {
         this.ingrediente = ingrediente;
     }
+
+    public ProdutoVO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
+    }
+
+    public CompraRequisicaoDetalheVO getCompraRequisicaoDetalhe() {
+        return compraRequisicaoDetalhe;
+    }
+
+    public void setCompraRequisicaoDetalhe(CompraRequisicaoDetalheVO compraRequisicaoDetalhe) {
+        this.compraRequisicaoDetalhe = compraRequisicaoDetalhe;
+    }
+    
+
 
     @Override
     public String toString() {

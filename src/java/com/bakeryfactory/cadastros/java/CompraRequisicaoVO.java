@@ -48,28 +48,32 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_requisicao")
+@Table(name = "COMPRA_REQUISICAO")
 public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_requisicao")
+    @Column(name = "DATA_REQUISICAO")
     @Temporal(TemporalType.DATE)
     private Date dataRequisicao;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
-    private List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheList;
+    private List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    private List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
+    
+    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
-    @JoinColumn(name = "compra_tipo_requisicao_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_COMPRA_TIPO_REQUISICAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraTipoRequisicaoVO compraTipoRequisicao;
 
@@ -104,20 +108,20 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
         this.observacao = observacao;
     }
 
-    public List<CompraRequisicaoDetalheVO> getCompraRequisicaoDetalheList() {
-        return compraRequisicaoDetalheList;
+    public List<CompraRequisicaoDetalheVO> getListaCompraRequisicaoDetalhe() {
+        return listaCompraRequisicaoDetalhe;
     }
 
-    public void setCompraRequisicaoDetalheList(List<CompraRequisicaoDetalheVO> compraRequisicaoDetalheList) {
-        this.compraRequisicaoDetalheList = compraRequisicaoDetalheList;
+    public void setListaCompraRequisicaoDetalhe(List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe) {
+        this.listaCompraRequisicaoDetalhe = listaCompraRequisicaoDetalhe;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
-        return requisicaoInternaDetalheList;
+    public List<RequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
+        return listaRequisicaoInternaDetalhe;
     }
 
-    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
-        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
+    public void setListaRequisicaoInternaDetalhe(List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
+        this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
     }
 
     public ColaboradorVO getColaborador() {

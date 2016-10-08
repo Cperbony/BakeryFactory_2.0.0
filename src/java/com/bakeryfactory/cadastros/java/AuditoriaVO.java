@@ -45,27 +45,28 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "auditoria")
+@Table(name = "AUDITORIA")
 public class AuditoriaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_registro")
+    @Column(name = "DATA_REGISTRO")
     @Temporal(TemporalType.DATE)
     private Date dataRegistro;
-    @Column(name = "hora_registro")
+    @Column(name = "HORA_REGISTRO")
     private String horaRegistro;
-    @Column(name = "janela_controller")
+    @Column(name = "JANELA_CONTROLLER")
     private String janelaController;
-    @Column(name = "acao")
+    @Column(name = "ACAO")
     private String acao;
-    @Column(name = "conteudo")
+    @Column(name = "CONTEUDO")
     private String conteudo;
-    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_USUARIO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private UsuarioVO usuario;
 

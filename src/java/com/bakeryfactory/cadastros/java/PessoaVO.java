@@ -50,34 +50,34 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa")
+@Table(name = "PESSOA")
 public class PessoaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "tipo")
+    @Column(name = "TIPO")
     private Character tipo;
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "site")
+    @Column(name = "SITE")
     private String site;
-    @Column(name = "cliente")
+    @Column(name = "CLIENTE")
     private Character cliente;
-    @Column(name = "fornecedor")
+    @Column(name = "FORNECEDOR")
     private Character fornecedor;
-    @Column(name = "colaborador")
+    @Column(name = "COLABORADOR")
     private Character colaborador;
-    @Column(name = "transportadora")
+    @Column(name = "TRANSPORTADORA")
     private Character transportadora;
     
     @ManyToMany(fetch=FetchType.EAGER)
-    @JoinTable(name="empresa_pessoa", joinColumns={@JoinColumn(name="pessoa_id")}, inverseJoinColumns={@JoinColumn(name="empresa_id")})
+    @JoinTable(name="EMPRESA_PESSOA", joinColumns={@JoinColumn(name="ID_PESSOA")}, inverseJoinColumns={@JoinColumn(name="ID_EMPRESA")})
     private List<EmpresaVO> listaEmpresa;
     @OneToOne(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL)
     private PessoaFisicaVO pessoaFisica;

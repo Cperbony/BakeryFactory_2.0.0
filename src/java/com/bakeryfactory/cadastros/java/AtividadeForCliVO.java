@@ -43,24 +43,25 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "atividade_for_cli")
+@Table(name = "ATIVIDADE_FOR_CLI")
 public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "atividadeForCliId")
-    private List<ClienteVO> clienteList;
+    private List<ClienteVO> listaCliente;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "atividadeForCliId")
-    private List<FornecedorVO> fornecedorList;
+    private List<FornecedorVO> listaFornecedor;
 
     public AtividadeForCliVO() {
     }
@@ -93,20 +94,20 @@ public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<ClienteVO> getClienteList() {
-        return clienteList;
+    public List<ClienteVO> getListaCliente() {
+        return listaCliente;
     }
 
-    public void setClienteList(List<ClienteVO> clienteList) {
-        this.clienteList = clienteList;
+    public void setListaCliente(List<ClienteVO> listaCliente) {
+        this.listaCliente = listaCliente;
     }
 
-    public List<FornecedorVO> getFornecedorList() {
-        return fornecedorList;
+    public List<FornecedorVO> getListaFornecedor() {
+        return listaFornecedor;
     }
 
-    public void setFornecedorList(List<FornecedorVO> fornecedorList) {
-        this.fornecedorList = fornecedorList;
+    public void setListaFornecedor(List<FornecedorVO> listaFornecedor) {
+        this.listaFornecedor = listaFornecedor;
     }
 
     @Override

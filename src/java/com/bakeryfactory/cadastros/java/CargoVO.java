@@ -46,24 +46,26 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "cargo")
+@Table(name = "CARGO")
 public class CargoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "salario")
+    @Column(name = "SALARIO")
     private BigDecimal salario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cargoId")
-    private List<ColaboradorVO> colaboradorList;
+    private List<ColaboradorVO> listaColaborador;
+    
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
@@ -107,12 +109,12 @@ public class CargoVO extends ValueObjectImpl implements Serializable {
         this.salario = salario;
     }
 
-    public List<ColaboradorVO> getColaboradorList() {
-        return colaboradorList;
+    public List<ColaboradorVO> getListaColaborador() {
+        return listaColaborador;
     }
 
-    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
-        this.colaboradorList = colaboradorList;
+    public void setListaColaborador(List<ColaboradorVO> listaColaborador) {
+        this.listaColaborador = listaColaborador;
     }
 
     public EmpresaVO getEmpresa() {

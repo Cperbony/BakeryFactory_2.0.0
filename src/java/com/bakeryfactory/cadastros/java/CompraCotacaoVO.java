@@ -46,26 +46,28 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_cotacao")
+@Table(name = "COMPRA_COTACAO")
 public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_cotacao")
+    @Column(name = "DATA_COTACAO")
     @Temporal(TemporalType.DATE)
     private Date dataCotacao;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoId")
-    private List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList;
+    private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoId")
-    private List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList;
+    private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
 
     public CompraCotacaoVO() {
     }
@@ -106,20 +108,20 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
         this.situacao = situacao;
     }
 
-    public List<CompraReqCotacaoDetalheVO> getCompraReqCotacaoDetalheList() {
-        return compraReqCotacaoDetalheList;
+    public List<CompraReqCotacaoDetalheVO> getListaCompraReqCotacaoDetalhe() {
+        return listaCompraReqCotacaoDetalhe;
     }
 
-    public void setCompraReqCotacaoDetalheList(List<CompraReqCotacaoDetalheVO> compraReqCotacaoDetalheList) {
-        this.compraReqCotacaoDetalheList = compraReqCotacaoDetalheList;
+    public void setListaCompraReqCotacaoDetalhe(List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe) {
+        this.listaCompraReqCotacaoDetalhe = listaCompraReqCotacaoDetalhe;
     }
 
-    public List<CompraFornecedorCotacaoVO> getCompraFornecedorCotacaoList() {
-        return compraFornecedorCotacaoList;
+    public List<CompraFornecedorCotacaoVO> getListaCompraFornecedorCotacao() {
+        return listaCompraFornecedorCotacao;
     }
 
-    public void setCompraFornecedorCotacaoList(List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList) {
-        this.compraFornecedorCotacaoList = compraFornecedorCotacaoList;
+    public void setListaCompraFornecedorCotacao(List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao) {
+        this.listaCompraFornecedorCotacao = listaCompraFornecedorCotacao;
     }
 
     @Override

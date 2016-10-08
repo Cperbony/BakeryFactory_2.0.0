@@ -49,52 +49,58 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "cliente")
+@Table(name = "CLIENTE")
 public class ClienteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "desde")
+    @Column(name = "DESDE")
     @Temporal(TemporalType.DATE)
     private Date desde;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "gera_financeiro")
+    @Column(name = "GERA_FINANCEIRO")
     private Character geraFinanceiro;
-    @Column(name = "conta_tomador")
+    @Column(name = "CONTA_TOMADOR")
     private String contaTomador;
-    @Column(name = "indicador_preco")
+    @Column(name = "INDICADOR_PRECO")
     private Character indicadorPreco;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "porcento_desconto")
+    @Column(name = "PORCENTO_DESCONTO")
     private BigDecimal porcentoDesconto;
-    @Column(name = "forma_desconto")
+    @Column(name = "FORMA_DESCONTO")
     private Character formaDesconto;
-    @Column(name = "limite_credito")
+    @Column(name = "LIMITE_CREDITO")
     private BigDecimal limiteCredito;
-    @Column(name = "tipo_frete")
+    @Column(name = "TIPO_FRETE")
     private Character tipoFrete;
-    @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
-    @Column(name = "classificacao_contabil_conta")
+    
+    @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
+    @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
-    private List<VendaCabecalhoVO> vendaCabecalhoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clienteId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
-    @JoinColumn(name = "atividade_for_cli_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+    private List<VendaCabecalhoVO> ListaVendaCabecalho;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+    private List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho;
+    
+    @JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private AtividadeForCliVO atividadeForCli;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SituacaoForCliVO situacaoForCli;
 
@@ -201,20 +207,20 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
-        return vendaCabecalhoList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
+        return ListaVendaCabecalho;
     }
 
-    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
-        this.vendaCabecalhoList = vendaCabecalhoList;
+    public void setListaVendaCabecalho(List<VendaCabecalhoVO> ListaVendaCabecalho) {
+        this.ListaVendaCabecalho = ListaVendaCabecalho;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
-        return vendaOrcamentoCabecalhoList;
+    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
+        return ListaVendaOrcamentoCabecalho;
     }
 
-    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
-        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
+    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho) {
+        this.ListaVendaOrcamentoCabecalho = ListaVendaOrcamentoCabecalho;
     }
 
     public AtividadeForCliVO getAtividadeForCli() {

@@ -45,24 +45,26 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "compra_tipo_requisicao")
+@Table(name = "COMPRA_TIPO_REQUISICAO")
 public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private String codigo;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraTipoRequisicaoId")
-    private List<CompraRequisicaoVO> compraRequisicaoList;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    private List<CompraRequisicaoVO> listaCompraRequisicao;
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
 
@@ -105,12 +107,12 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
         this.descricao = descricao;
     }
 
-    public List<CompraRequisicaoVO> getCompraRequisicaoList() {
-        return compraRequisicaoList;
+    public List<CompraRequisicaoVO> getListaCompraRequisicao() {
+        return listaCompraRequisicao;
     }
 
-    public void setCompraRequisicaoList(List<CompraRequisicaoVO> compraRequisicaoList) {
-        this.compraRequisicaoList = compraRequisicaoList;
+    public void setListaCompraRequisicao(List<CompraRequisicaoVO> listaCompraRequisicao) {
+        this.listaCompraRequisicao = listaCompraRequisicao;
     }
 
     public EmpresaVO getEmpresa() {
