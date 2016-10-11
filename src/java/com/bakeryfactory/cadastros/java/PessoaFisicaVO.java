@@ -45,62 +45,64 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_fisica")
+@Table(name = "PESSOA_FISICA")
 public class PessoaFisicaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "cpf")
+    @Column(name = "CPF")
     private String cpf;
-    @Column(name = "rg")
+    @Column(name = "RG")
     private String rg;
-    @Column(name = "orgao_rg")
+    @Column(name = "ORGAO_RG")
     private String orgaoRg;
-    @Column(name = "data_emissao")
+    @Column(name = "DATA_EMISSAO_RG")
     @Temporal(TemporalType.DATE)
-    private Date dataEmissao;
-    @Column(name = "data_nascimento")
+    private Date dataEmissaoRg;
+    @Column(name = "DATA_NASCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataNascimento;
-    @Column(name = "sexo")
+    @Column(name = "SEXO")
     private Character sexo;
-    @Column(name = "naturalidade")
+    @Column(name = "NATURALIDADE")
     private String naturalidade;
-    @Column(name = "nacionalidade")
+    @Column(name = "NACIONALIDADE")
     private String nacionalidade;
-    @Column(name = "raca")
+    @Column(name = "RACA")
     private Character raca;
-    @Column(name = "tipo_sangue")
+    @Column(name = "TIPO_SANGUE")
     private String tipoSangue;
-    @Column(name = "cnh_numero")
+    @Column(name = "CNH_NUMERO")
     private String cnhNumero;
-    @Column(name = "cnh_categoria")
+    @Column(name = "CNH_CATEGORIA")
     private String cnhCategoria;
-    @Column(name = "cnh_vencimento")
+    @Column(name = "CNH_VENCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date cnhVencimento;
-    @Column(name = "titulo_eleitoral_numero")
+    @Column(name = "TITULO_ELEITORAL_NUMERO")
     private String tituloEleitoralNumero;
-    @Column(name = "titulo_eleitoral_zona")
+    @Column(name = "TITULO_ELEITORAL_ZONA")
     private Integer tituloEleitoralZona;
-    @Column(name = "titulo_eleitoral_secao")
+    @Column(name = "TITULO_ELEITORAL_SECAO")
     private Integer tituloEleitoralSecao;
-    @Column(name = "reservista_numero")
+    @Column(name = "RESERVISTA_NUMERO")
     private String reservistaNumero;
-    @Column(name = "reservista_categoria")
+    @Column(name = "RESERVISTA_CATEGORIA")
     private Integer reservistaCategoria;
-    @Column(name = "nome_mae")
+    @Column(name = "NOME_MAE")
     private String nomeMae;
-    @Column(name = "nome_pai")
+    @Column(name = "NOME_PAI")
     private String nomePai;
-    @JoinColumn(name = "estado_civil_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_ESTADO_CIVIL", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EstadoCivilVO estadoCivil;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 
@@ -143,12 +145,12 @@ public class PessoaFisicaVO extends ValueObjectImpl implements Serializable {
         this.orgaoRg = orgaoRg;
     }
 
-    public Date getDataEmissao() {
-        return dataEmissao;
+    public Date getDataEmissaoRg() {
+        return dataEmissaoRg;
     }
 
-    public void setDataEmissao(Date dataEmissao) {
-        this.dataEmissao = dataEmissao;
+    public void setDataEmissaoRg(Date dataEmissaoRg) {
+        this.dataEmissaoRg = dataEmissaoRg;
     }
 
     public Date getDataNascimento() {

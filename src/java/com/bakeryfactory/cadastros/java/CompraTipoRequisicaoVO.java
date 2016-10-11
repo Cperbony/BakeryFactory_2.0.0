@@ -38,6 +38,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -61,7 +63,8 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraTipoRequisicaoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraTipoRequisicao")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraRequisicaoVO> listaCompraRequisicao;
     
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")

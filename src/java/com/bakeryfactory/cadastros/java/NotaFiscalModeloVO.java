@@ -43,23 +43,24 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "nota_fiscal_modelo")
+@Table(name = "NOTA_FISCAL_MODELO")
 public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private String codigo;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "modelo")
+    @Column(name = "MODELO")
     private String modelo;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalModeloId")
-    private List<NotaFiscalTipoVO> notaFiscalTipoList;
+    private List<NotaFiscalTipoVO> listaNotaFiscalTipo;
 
     public NotaFiscalModeloVO() {
     }
@@ -100,12 +101,12 @@ public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable 
         this.modelo = modelo;
     }
 
-    public List<NotaFiscalTipoVO> getNotaFiscalTipoList() {
-        return notaFiscalTipoList;
+    public List<NotaFiscalTipoVO> getListaNotaFiscalTipo() {
+        return listaNotaFiscalTipo;
     }
 
-    public void setNotaFiscalTipoList(List<NotaFiscalTipoVO> notaFiscalTipoList) {
-        this.notaFiscalTipoList = notaFiscalTipoList;
+    public void setListaNotaFiscalTipo(List<NotaFiscalTipoVO> listaNotaFiscalTipo) {
+        this.listaNotaFiscalTipo = listaNotaFiscalTipo;
     }
 
     @Override

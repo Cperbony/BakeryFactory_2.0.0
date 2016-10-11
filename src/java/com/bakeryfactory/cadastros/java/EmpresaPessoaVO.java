@@ -42,21 +42,23 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "empresa_pessoa")
+@Table(name = "EMPRESA_PESSOA")
 public class EmpresaPessoaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "responsavel_legal")
+    @Column(name = "RESPONSAVEL_LEGAL")
     private Character responsavelLegal;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 

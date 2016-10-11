@@ -40,38 +40,39 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "receituario_padrao")
+@Table(name = "RECEITUARIO_PADRAO")
 public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ReceituarioPadraoVOPK receituarioPadraoVOPK;
-    @Column(name = "nome_produto")
+    @Column(name = "NOME_PRODUTO")
     private String nomeProduto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "porcentagem_ingredientes")
+    @Column(name = "PORCENTAGEM_INGREDIENTE")
     private BigDecimal porcentagemIngredientes;
-    @Column(name = "ingrediente_massa")
+    @Column(name = "INGREDIENTE_MASSA")
     private String ingredienteMassa;
-    @Column(name = "padrao_composicao")
+    @Column(name = "PADRAO_COMPOSICAO")
     private BigDecimal padraoComposicao;
-    @Column(name = "total_grama")
+    @Column(name = "TOTAL_GRAMA")
     private BigDecimal totalGrama;
-    @Column(name = "total_unidades")
+    @Column(name = "TOTAL_UNIDADES")
     private BigDecimal totalUnidades;
-    @Column(name = "rendimento")
+    @Column(name = "RENDIMENTO")
     private BigDecimal rendimento;
-    @Column(name = "perda")
+    @Column(name = "PERDA")
     private BigDecimal perda;
-    @Column(name = "peso_bola")
+    @Column(name = "PESO_BOLA")
     private BigDecimal pesoBola;
-    @Column(name = "numero_divisao")
+    @Column(name = "NUMERO_DIVISAO")
     private Integer numeroDivisao;
-    @Column(name = "base_calc_perdas")
+    @Column(name = "BASE_CALC_PERDAS")
     private Integer baseCalcPerdas;
-    @Column(name = "perda_comum")
+    @Column(name = "PERDA_COMUM")
     private Integer perdaComum;
-    @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id", insertable = false, updatable = false)
+    
+    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
 

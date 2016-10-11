@@ -53,83 +53,86 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "empresa")
+@Table(name = "EMPRESA")
 public class EmpresaVO  extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "razao_social")
+    @Column(name = "RAZAO_SOCIAL")
     private String razaoSocial;
-    @Column(name = "nome_fantasia")
+    @Column(name = "NOME_FANTASIA")
     private String nomeFantasia;
-    @Column(name = "cnpj")
+    @Column(name = "CNPJ")
     private String cnpj;
-    @Column(name = "inscricao_estadual")
+    @Column(name = "INSCRICAO_ESTADUAL")
     private String inscricaoEstadual;
-    @Column(name = "inscricao_estadual_st")
+    @Column(name = "INSCRICAO_ESTADUAL_ST")
     private String inscricaoEstadualSt;
-    @Column(name = "inscricao_municipal")
+    @Column(name = "INSCRICAO_MUNICIPAL")
     private String inscricaoMunicipal;
-    @Column(name = "inscricao_junta_comercial")
+    @Column(name = "INSCRICAO_JUNTA_COMERCIAL")
     private String inscricaoJuntaComercial;
-    @Column(name = "data_insc_junta_comercial")
+    @Column(name = "DATA_INSC_JUNTA_COMERCIAL")
     @Temporal(TemporalType.DATE)
     private Date dataInscJuntaComercial;
-    @Column(name = "tipo")
+    @Column(name = "TIPO")
     private Character tipo;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "data_inicio_atividades")
+    @Column(name = "DATA_INICIO_ATIVIDADES")
     @Temporal(TemporalType.DATE)
     private Date dataInicioAtividades;
-    @Column(name = "suframa")
+    @Column(name = "SUFRAMA")
     private String suframa;
-    @Column(name = "email")
+    @Column(name = "EMAIL")
     private String email;
-    @Column(name = "imagem_logotipo")
+    @Column(name = "IMAGEM_LOGOTIPO")
     private String imagemLogotipo;
-    @Column(name = "crt")
+    @Column(name = "CRT")
     private Character crt;
-    @Column(name = "tipo_regime")
+    @Column(name = "TIPO_REGIME")
     private Character tipoRegime;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "aliquota_pis")
+    @Column(name = "ALIQUOTA_PIS")
     private BigDecimal aliquotaPis;
-    @Column(name = "contato")
-    private String contato;
-    @Column(name = "aliquota_cofins")
+    @Column(name = "EMPRESA_CONTATO")
+    private String empresaContato;
+    @Column(name = "ALIQUOTA_COFINS")
     private BigDecimal aliquotaCofins;
-    @Column(name = "codigo_ibge_cidade")
+    @Column(name = "CODIGO_IBGE_CIDADE")
     private Integer codigoIbgeCidade;
-    @Column(name = "codigo_ibge_uf")
+    @Column(name = "CODIGO_IBGE_UF")
     private Integer codigoIbgeUf;
-    @Column(name = "codigo_terceiros")
+    @Column(name = "CODIGO_TERCEIROS")
     private Integer codigoTerceiros;
-    @Column(name = "codigo_gps")
+    @Column(name = "CODIGO_GPS")
     private Integer codigoGps;
-    @Column(name = "aliquota_sat")
+    @Column(name = "ALIQUOTA_SAT")
     private BigDecimal aliquotaSat;
-    @Column(name = "cei")
+    @Column(name = "CEI")
     private String cei;
-    @Column(name = "codigo_cnae_principal")
+    @Column(name = "CODIGO_CNAE_PRINCIPAL")
     private String codigoCnaePrincipal;
-    @Column(name = "tipo_controle_estoque")
+    @Column(name = "TIPO_CONTROLE_ESTOQUE")
     private Character tipoControleEstoque;
     
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne
     private EmpresaVO empresa;
+    
     @ManyToMany(mappedBy = "listaEmpresa")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PessoaVO> listaPessoa;
+    
     @OneToMany(mappedBy="empresa")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<EmpresaEnderecoVO> listaEndereco;
+    
     @Transient
     private byte[] imagem;
     
@@ -287,12 +290,12 @@ public class EmpresaVO  extends ValueObjectImpl implements Serializable {
         this.aliquotaPis = aliquotaPis;
     }
 
-    public String getContato() {
-        return contato;
+    public String getEmpresaContato() {
+        return empresaContato;
     }
 
-    public void setContato(String contato) {
-        this.contato = contato;
+    public void setEmpresaContato(String empresaContato) {
+        this.empresaContato = empresaContato;
     }
 
     public BigDecimal getAliquotaCofins() {

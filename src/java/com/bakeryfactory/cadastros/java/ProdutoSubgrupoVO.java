@@ -38,6 +38,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,24 +47,27 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "produto_subgrupo")
+@Table(name = "PRODUTO_SUB_GRUPO")
 public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @JoinColumn(name = "classe_produto_grupo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_CLASSE_PRODUTO_GRUPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ClasseProdutoGrupoVO classeProdutoGrupo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoSubgrupoId")
-    private List<ProdutoVO> produtoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produtoSubgrupo")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProdutoVO> listaProduto;
 
     public ProdutoSubgrupoVO() {
     }
@@ -103,12 +108,12 @@ public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
         this.classeProdutoGrupo = classeProdutoGrupo;
     }
 
-    public List<ProdutoVO> getProdutoList() {
-        return produtoList;
+    public List<ProdutoVO> getListaProduto() {
+        return listaProduto;
     }
 
-    public void setProdutoList(List<ProdutoVO> produtoList) {
-        this.produtoList = produtoList;
+    public void setListaProduto(List<ProdutoVO> listaProduto) {
+        this.listaProduto = listaProduto;
     }
 
     @Override

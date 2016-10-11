@@ -43,27 +43,28 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pais")
+@Table(name = "PAIS")
 public class PaisVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private Integer codigo;
-    @Column(name = "nome_en")
+    @Column(name = "NOME_EN")
     private String nomeEn;
-    @Column(name = "nome_ptbr")
+    @Column(name = "NOME_PTBR")
     private String nomePtbr;
-    @Column(name = "sigla2")
+    @Column(name = "SIGLA2")
     private String sigla2;
-    @Column(name = "sigla3")
+    @Column(name = "SIGLA3")
     private String sigla3;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "paisId")
-    private List<UfVO> ufList;
+    private List<UfVO> listaUf;
 
     public PaisVO() {
     }
@@ -120,12 +121,12 @@ public class PaisVO extends ValueObjectImpl implements Serializable {
         this.sigla3 = sigla3;
     }
 
-    public List<UfVO> getUfList() {
-        return ufList;
+    public List<UfVO> getListaUf() {
+        return listaUf;
     }
 
-    public void setUfList(List<UfVO> ufList) {
-        this.ufList = ufList;
+    public void setListaUf(List<UfVO> listaUf) {
+        this.listaUf = listaUf;
     }
 
     @Override

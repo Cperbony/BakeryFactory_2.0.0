@@ -42,6 +42,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -49,54 +51,60 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pcp_servico")
+@Table(name = "PCP_SERVICO")
 public class PcpServicoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "inicio_realizado")
+    @Column(name = "INICIO_REALIZADO")
     @Temporal(TemporalType.DATE)
     private Date inicioRealizado;
-    @Column(name = "termino_realizado")
+    @Column(name = "TERMINO_REALIZADO")
     @Temporal(TemporalType.DATE)
     private Date terminoRealizado;
-    @Column(name = "horas_realizado")
+    @Column(name = "HORAS_REALIZADO")
     private Integer horasRealizado;
-    @Column(name = "minutos_realizado")
+    @Column(name = "MINUTOS_REALIZADO")
     private Integer minutosRealizado;
-    @Column(name = "segundos_realizado")
+    @Column(name = "SEGUNDOS_REALIZADO")
     private Integer segundosRealizado;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "custo_realizado")
+    @Column(name = "CUSTO_REALIZADO")
     private BigDecimal custoRealizado;
-    @Column(name = "inicio_previsto")
+    @Column(name = "INICIO_PREVISTO")
     @Temporal(TemporalType.DATE)
     private Date inicioPrevisto;
-    @Column(name = "termino_previsto")
+    @Column(name = "TERMINO_PREVISTO")
     @Temporal(TemporalType.DATE)
     private Date terminoPrevisto;
-    @Column(name = "horas_previsto")
+    @Column(name = "HORAS_PREVISTO")
     private Integer horasPrevisto;
-    @Column(name = "minutos_previsto")
+    @Column(name = "MINUTOS_PREVISTO")
     private Integer minutosPrevisto;
-    @Column(name = "segundos_previsto")
+    @Column(name = "SEGUNDOS_PREVISTO")
     private Integer segundosPrevisto;
-    @Column(name = "custo_previsto")
+    @Column(name = "CUSTO_PREVISTO")
     private BigDecimal custoPrevisto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpServicoId")
-    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList;
-    @JoinColumn(name = "pcp_op_detalhe_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PCP_OP_DETALHE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PcpOpDetalheVO pcpOpDetalhe;
-    @JoinColumn(name = "produto_calculo_preco_medidas_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PRODUTO_CALCULO_PRECO_MEDIDAS", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidas;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpServicoId")
-    private List<PcpServicoColaboradorVO> pcpServicoColaboradorList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServicoId")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpServicoColaboradorVO> listaPcpServicoColaborador;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServicoId")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento;
 
     public PcpServicoVO() {
     }
@@ -209,12 +217,12 @@ public class PcpServicoVO extends ValueObjectImpl implements Serializable {
         this.custoPrevisto = custoPrevisto;
     }
 
-    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoList() {
-        return pcpServicoEquipamentoList;
+    public List<PcpServicoEquipamentoVO> getListaPcpServicoEquipamento() {
+        return listaPcpServicoEquipamento;
     }
 
-    public void setPcpServicoEquipamentoList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList) {
-        this.pcpServicoEquipamentoList = pcpServicoEquipamentoList;
+    public void setListaPcpServicoEquipamento(List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento) {
+        this.listaPcpServicoEquipamento = listaPcpServicoEquipamento;
     }
 
     public PcpOpDetalheVO getPcpOpDetalhe() {
@@ -233,12 +241,12 @@ public class PcpServicoVO extends ValueObjectImpl implements Serializable {
         this.produtoCalculoPrecoMedidas = produtoCalculoPrecoMedidas;
     }
 
-    public List<PcpServicoColaboradorVO> getPcpServicoColaboradorList() {
-        return pcpServicoColaboradorList;
+    public List<PcpServicoColaboradorVO> getListaPcpServicoColaborador() {
+        return listaPcpServicoColaborador;
     }
 
-    public void setPcpServicoColaboradorList(List<PcpServicoColaboradorVO> pcpServicoColaboradorList) {
-        this.pcpServicoColaboradorList = pcpServicoColaboradorList;
+    public void setListaPcpServicoColaborador(List<PcpServicoColaboradorVO> listaPcpServicoColaborador) {
+        this.listaPcpServicoColaborador = listaPcpServicoColaborador;
     }
 
     @Override

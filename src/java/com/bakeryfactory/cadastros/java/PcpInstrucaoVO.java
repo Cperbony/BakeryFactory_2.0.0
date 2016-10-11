@@ -36,6 +36,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -43,21 +45,23 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pcp_instrucao")
+@Table(name = "PCP_INSTRUCAO")
 public class PcpInstrucaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private String codigo;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpInstrucaoId")
-    private List<PcpInstrucaoOpVO> pcpInstrucaoOpList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpInstrucao")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpInstrucaoOpVO> listaPcpInstrucaoOp;
 
     public PcpInstrucaoVO() {
     }
@@ -90,12 +94,12 @@ public class PcpInstrucaoVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpList() {
-        return pcpInstrucaoOpList;
+    public List<PcpInstrucaoOpVO> getListaPcpInstrucaoOp() {
+        return listaPcpInstrucaoOp;
     }
 
-    public void setPcpInstrucaoOpList(List<PcpInstrucaoOpVO> pcpInstrucaoOpList) {
-        this.pcpInstrucaoOpList = pcpInstrucaoOpList;
+    public void setListaPcpInstrucaoOp(List<PcpInstrucaoOpVO> listaPcpInstrucaoOp) {
+        this.listaPcpInstrucaoOp = listaPcpInstrucaoOp;
     }
 
     @Override

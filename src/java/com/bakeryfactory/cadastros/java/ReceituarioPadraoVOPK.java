@@ -37,10 +37,11 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 public class ReceituarioPadraoVOPK extends ValueObjectImpl implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private int id;
+    
     @Basic(optional = false)
-    @Column(name = "receituario_controle_custo_id")
+    @Column(name = "ID_RECEITUARIO_CONTROLE_CUSTO")
     private int receituarioControleCusto;
 
     public ReceituarioPadraoVOPK() {

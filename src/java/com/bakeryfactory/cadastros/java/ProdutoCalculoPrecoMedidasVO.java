@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,33 +48,36 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "produto_calculo_preco_medidas")
+@Table(name = "PRODUTO_CALCULO_PRECO_MEDIDAS")
 public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "tipo_medida")
+    @Column(name = "TIPO_MEDIDA")
     private String tipoMedida;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "mark_up_minimo")
+    @Column(name = "MARK_UP_MINIMO")
     private BigDecimal markUpMinimo;
-    @Column(name = "custo_produto")
+    @Column(name = "CUSTO_PRODUTO")
     private BigDecimal custoProduto;
-    @Column(name = "preco_sugestao")
+    @Column(name = "PRECO_SUGESTAO")
     private BigDecimal precoSugestao;
-    @Column(name = "preco_venda")
+    @Column(name = "PRECO_VENDA")
     private BigDecimal precoVenda;
-    @Column(name = "mark_up_aplicado")
+    @Column(name = "MARK_UP_APLICADO")
     private BigDecimal markUpAplicado;
-    @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoCalculoPrecoMedidasId")
-    private List<PcpServicoVO> pcpServicoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produtoCalculoPrecoMedidas")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpServicoVO> listPcpServico;
 
     public ProdutoCalculoPrecoMedidasVO() {
     }
@@ -145,12 +150,12 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
         this.receituarioControleCusto = receituarioControleCusto;
     }
 
-    public List<PcpServicoVO> getPcpServicoList() {
-        return pcpServicoList;
+    public List<PcpServicoVO> getListPcpServico() {
+        return listPcpServico;
     }
 
-    public void setPcpServicoList(List<PcpServicoVO> pcpServicoList) {
-        this.pcpServicoList = pcpServicoList;
+    public void setListPcpServico(List<PcpServicoVO> listPcpServico) {
+        this.listPcpServico = listPcpServico;
     }
 
     @Override

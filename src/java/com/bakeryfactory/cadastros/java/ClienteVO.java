@@ -42,6 +42,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -81,28 +83,30 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     private BigDecimal limiteCredito;
     @Column(name = "TIPO_FRETE")
     private Character tipoFrete;
-    
+
     @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
-    private List<VendaCabecalhoVO> ListaVendaCabecalho;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
-    private List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho;
-    
+
     @JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private AtividadeForCliVO atividadeForCli;
-    
+
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    
+
     @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SituacaoForCliVO situacaoForCli;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCabecalhoVO> ListaVendaCabecalho;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho;
 
     public ClienteVO() {
     }
@@ -251,5 +255,5 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.ClienteVO[ id=" + id + " ]";
     }
-    
+
 }

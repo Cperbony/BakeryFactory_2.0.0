@@ -43,23 +43,24 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_condicoes_parcela")
+@Table(name = "VENDA_CONDICOES_PARCELAS")
 public class VendaCondicoesParcelaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "parcela")
+    @Column(name = "PARCELA")
     private Integer parcela;
-    @Column(name = "dias")
+    @Column(name = "DIAS")
     private Integer dias;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "taxa")
+    @Column(name = "TAXA")
     private BigDecimal taxa;
-    @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CONDICOES_PAGAMENTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
 

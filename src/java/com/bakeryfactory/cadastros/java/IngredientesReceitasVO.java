@@ -42,19 +42,21 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "ingredientes_receitas")
+@Table(name = "INGREDIENTES_RECEITAS")
 public class IngredientesReceitasVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private IngredienteVO ingrediente;
-    @JoinColumn(name = "receita_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_RECEITA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceitaVO receita;
 

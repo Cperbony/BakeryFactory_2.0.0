@@ -41,6 +41,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -145,41 +147,47 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "ATA_DEMISSAO")
     @Temporal(TemporalType.DATE)
     private Date ataDemissao;
-    
+
     @JoinColumn(name = "ID_CARGO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CargoVO cargo;
-    
+
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    
+
     @JoinColumn(name = "ID_SETOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SetorVO setor;
-    
+
     @JoinColumn(name = "ID_TIPO_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TipoColaboradorVO tipoColaborador;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaRomaneioEntregaVO> listaVendaRomaneioEntrega;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UsuarioVO> ListaUsuario;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
-    private List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraRequisicaoVO> listaCompraRequisicao;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendedorVO> listaVendedor;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "colaboradorId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpServicoColaboradorVO> ListaPcpServicoColaborador;
-    
+
     public ColaboradorVO() {
     }
 
@@ -523,11 +531,11 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.ListaUsuario = ListaUsuario;
     }
 
-    public List<RequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
+    public List<CompraRequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
         return listaRequisicaoInternaDetalhe;
     }
 
-    public void setListaRequisicaoInternaDetalhe(List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
+    public void setListaRequisicaoInternaDetalhe(List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
         this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
     }
 
@@ -591,5 +599,5 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.ColaboradorVO[ id=" + id + " ]";
     }
-    
+
 }

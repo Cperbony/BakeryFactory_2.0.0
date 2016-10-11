@@ -42,40 +42,43 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_endereco")
+@Table(name = "PESSOA_ENDERECO")
 public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "logradouro")
+    @Column(name = "LOGRADOURO")
     private String logradouro;
-    @Column(name = "numero")
+    @Column(name = "NUMERO")
     private String numero;
-    @Column(name = "complemento")
+    @Column(name = "COMPLEMENTO")
     private String complemento;
-    @Column(name = "bairro")
+    @Column(name = "BAIRRO")
     private String bairro;
-    @Column(name = "cidade")
+    @Column(name = "CIDADE")
     private String cidade;
-    @Column(name = "cep")
+    @Column(name = "CEP")
     private String cep;
-    @Column(name = "fone")
+    @Column(name = "FONE")
     private String fone;
-    @Column(name = "municicio_ibge")
+    @Column(name = "MUNICIPIO_IBGE")
     private Integer municicioIbge;
-    @Column(name = "uf")
+    @Column(name = "UF")
     private String uf;
-    @Column(name = "principal")
+    @Column(name = "PRINCIPAL")
     private Character principal;
-    @Column(name = "cobranca")
+    @Column(name = "ENTREGA")
+    private String entrega;
+    @Column(name = "COBRANCA")
     private Character cobranca;
-    @Column(name = "correspondencia")
+    @Column(name = "CORRESPONDENCIA")
     private Character correspondencia;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 
@@ -172,6 +175,14 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
 
     public void setPrincipal(Character principal) {
         this.principal = principal;
+    }
+
+    public String getEntrega() {
+        return entrega;
+    }
+
+    public void setEntrega(String entrega) {
+        this.entrega = entrega;
     }
 
     public Character getCobranca() {

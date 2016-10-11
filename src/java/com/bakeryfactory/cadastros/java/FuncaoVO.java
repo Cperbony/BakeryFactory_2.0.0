@@ -43,27 +43,28 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "funcao")
+@Table(name = "FUNCAO")
 public class FuncaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "descricao_menu")
+    @Column(name = "DESCRICAO_MENU")
     private String descricaoMenu;
-    @Column(name = "imagem_menu")
+    @Column(name = "IMAGEM_MENU")
     private String imagemMenu;
-    @Column(name = "metodo")
+    @Column(name = "METODO")
     private String metodo;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "formulario")
+    @Column(name = "FORMULARIO")
     private String formulario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "funcaoId")
-    private List<PapelFuncaoVO> papelFuncaoList;
+    private List<PapelFuncaoVO> listaPapelFuncao;
 
     public FuncaoVO() {
     }
@@ -120,12 +121,12 @@ public class FuncaoVO extends ValueObjectImpl implements Serializable {
         this.formulario = formulario;
     }
 
-    public List<PapelFuncaoVO> getPapelFuncaoList() {
-        return papelFuncaoList;
+    public List<PapelFuncaoVO> getListaPapelFuncao() {
+        return listaPapelFuncao;
     }
 
-    public void setPapelFuncaoList(List<PapelFuncaoVO> papelFuncaoList) {
-        this.papelFuncaoList = papelFuncaoList;
+    public void setListaPapelFuncao(List<PapelFuncaoVO> listaPapelFuncao) {
+        this.listaPapelFuncao = listaPapelFuncao;
     }
 
     @Override

@@ -37,7 +37,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 public class ModoPreparoVOPK extends ValueObjectImpl implements Serializable {
 
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private int id;
     @Basic(optional = false)
     @Column(name = "receita_id")

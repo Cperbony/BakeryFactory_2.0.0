@@ -45,33 +45,36 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "nota_fiscal_tipo")
+@Table(name = "NOTA_FISCAL_TIPO")
 public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "serie")
+    @Column(name = "SERIE")
     private String serie;
-    @Column(name = "serie_scan")
+    @Column(name = "SERIE_SCAN")
     private String serieScan;
-    @Column(name = "ultimo_numero")
+    @Column(name = "ULTIMO_NUMERO")
     private Integer ultimoNumero;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipoId")
-    private List<VendaCabecalhoVO> vendaCabecalhoVOList;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
-    @JoinColumn(name = "nota_fiscal_modelo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_NOTA_FISCAL_MODELO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private NotaFiscalModeloVO notaFiscalModelo;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipoId")
+    private List<VendaCabecalhoVO> listaVendaCabecalhoVO;
 
     public NotaFiscalTipoVO() {
     }
@@ -128,12 +131,12 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
         this.ultimoNumero = ultimoNumero;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoVOList() {
-        return vendaCabecalhoVOList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalhoVO() {
+        return listaVendaCabecalhoVO;
     }
 
-    public void setVendaCabecalhoVOList(List<VendaCabecalhoVO> vendaCabecalhoVOList) {
-        this.vendaCabecalhoVOList = vendaCabecalhoVOList;
+    public void setListaVendaCabecalhoVO(List<VendaCabecalhoVO> listaVendaCabecalhoVO) {
+        this.listaVendaCabecalhoVO = listaVendaCabecalhoVO;
     }
 
     public EmpresaVO getEmpresa() {

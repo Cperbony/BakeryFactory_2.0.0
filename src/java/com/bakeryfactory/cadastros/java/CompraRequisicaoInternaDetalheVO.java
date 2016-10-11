@@ -43,32 +43,35 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "requisicao_interna_detalhe")
-public class RequisicaoInternaDetalheVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_REQUISICAO_INTERNA_DETALHE")
+public class CompraRequisicaoInternaDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
-    @JoinColumn(name = "compra_requisicao_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_COMPRA_REQUISICAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraRequisicaoVO compraRequisicao;
-    @JoinColumn(name = "compra_requisicao_interna_cabecalho_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_COMPRA_REQUISICAO_INTERNA_CABECALHO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho;
+    private CompraRequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho;
 
-    public RequisicaoInternaDetalheVO() {
+    public CompraRequisicaoInternaDetalheVO() {
     }
 
-    public RequisicaoInternaDetalheVO(Integer id) {
+    public CompraRequisicaoInternaDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -104,11 +107,11 @@ public class RequisicaoInternaDetalheVO extends ValueObjectImpl implements Seria
         this.compraRequisicao = compraRequisicao;
     }
 
-    public RequisicaoInternaCabecalhoVO getCompraRequisicaoInternaCabecalho() {
+    public CompraRequisicaoInternaCabecalhoVO getCompraRequisicaoInternaCabecalho() {
         return compraRequisicaoInternaCabecalho;
     }
 
-    public void setCompraRequisicaoInternaCabecalho(RequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho) {
+    public void setCompraRequisicaoInternaCabecalho(CompraRequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho) {
         this.compraRequisicaoInternaCabecalho = compraRequisicaoInternaCabecalho;
     }
 

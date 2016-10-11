@@ -41,6 +41,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -63,11 +65,13 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
     @Column(name = "OBSERVACAO")
     private String observacao;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicaoId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoId")
-    private List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicao")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
     
     @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -116,11 +120,11 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
         this.listaCompraRequisicaoDetalhe = listaCompraRequisicaoDetalhe;
     }
 
-    public List<RequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
+    public List<CompraRequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
         return listaRequisicaoInternaDetalhe;
     }
 
-    public void setListaRequisicaoInternaDetalhe(List<RequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
+    public void setListaRequisicaoInternaDetalhe(List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
         this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
     }
 

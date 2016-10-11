@@ -46,39 +46,39 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "patrimonio_bem")
+@Table(name = "PATRIMONIO_BEM")
 public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "numero_serie")
+    @Column(name = "NUMERO_SERIE")
     private String numeroSerie;
-    @Column(name = "data_aquisicao")
+    @Column(name = "DATA_AQUISICAO")
     @Temporal(TemporalType.DATE)
     private Date dataAquisicao;
-    @Column(name = "data_aceite")
+    @Column(name = "DATA_ACEITE")
     @Temporal(TemporalType.DATE)
     private Date dataAceite;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "vencimento_garantia")
+    @Column(name = "VENCIMENTO_GARANTIA")
     @Temporal(TemporalType.DATE)
     private Date vencimentoGarantia;
-    @Column(name = "numero_nota_fiscal")
+    @Column(name = "NUMERO_NOTA_FISCAL")
     private String numeroNotaFiscal;
-    @Column(name = "chave_nfe")
+    @Column(name = "CHAVE_NFE")
     private String chaveNfe;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBemId")
-    private List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList;
+    private List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento;
 
     public PatrimonioBemVO() {
     }
@@ -167,12 +167,12 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
         this.chaveNfe = chaveNfe;
     }
 
-    public List<PcpServicoEquipamentoVO> getPcpServicoEquipamentoList() {
-        return pcpServicoEquipamentoList;
+    public List<PcpServicoEquipamentoVO> getListaPcpServicoEquipamento() {
+        return listaPcpServicoEquipamento;
     }
 
-    public void setPcpServicoEquipamentoList(List<PcpServicoEquipamentoVO> pcpServicoEquipamentoList) {
-        this.pcpServicoEquipamentoList = pcpServicoEquipamentoList;
+    public void setListaPcpServicoEquipamento(List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento) {
+        this.listaPcpServicoEquipamento = listaPcpServicoEquipamento;
     }
 
     @Override

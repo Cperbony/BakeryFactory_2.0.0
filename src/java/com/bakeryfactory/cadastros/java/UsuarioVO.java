@@ -41,6 +41,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,36 +50,42 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "usuario")
+@Table(name = "USUARIO")
 public class UsuarioVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "login")
+    @Column(name = "LOGIN")
     private String login;
-    @Column(name = "senha")
+    @Column(name = "SENHA")
     private String senha;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "administrador")
+    @Column(name = "ADMINISTRADOR")
     private Character administrador;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "usuarioId")
-    private List<AuditoriaVO> auditoriaList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<AuditoriaVO> listaAuditoria;
+    
+    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
-    @JoinColumn(name = "papel_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PAPEL", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PapelVO papel;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 
@@ -128,12 +136,12 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
         this.administrador = administrador;
     }
 
-    public List<AuditoriaVO> getAuditoriaList() {
-        return auditoriaList;
+    public List<AuditoriaVO> getListaAuditoria() {
+        return listaAuditoria;
     }
 
-    public void setAuditoriaList(List<AuditoriaVO> auditoriaList) {
-        this.auditoriaList = auditoriaList;
+    public void setListaAuditoria(List<AuditoriaVO> listaAuditoria) {
+        this.listaAuditoria = listaAuditoria;
     }
 
     public ColaboradorVO getColaborador() {

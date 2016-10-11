@@ -49,61 +49,66 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_orcamento_cabecalho")
+@Table(name = "VENDA_ORCAMENTO_CABECALHO")
 public class VendaOrcamentoCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "tipo")
+    @Column(name = "TIPO")
     private Character tipo;
-    @Column(name = "codigo")
+    @Column(name = "CODIGO")
     private String codigo;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "data_entrega")
+    @Column(name = "DATA_ENTREGA")
     @Temporal(TemporalType.DATE)
     private Date dataEntrega;
-    @Column(name = "validade")
+    @Column(name = "VALIDADE")
     @Temporal(TemporalType.DATE)
     private Date validade;
-    @Column(name = "tipo_frete")
+    @Column(name = "TIPO_FRETE")
     private Character tipoFrete;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "valor_frete")
+    @Column(name = "VALOR_FRETE")
     private BigDecimal valorFrete;
-    @Column(name = "taxa_comissao")
+    @Column(name = "TAXA_COMISSAO")
     private BigDecimal taxaComissao;
-    @Column(name = "valor_comissao")
+    @Column(name = "VALOR_COMISSAO")
     private BigDecimal valorComissao;
-    @Column(name = "taxa_desconto")
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ClienteVO cliente;
-    @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_TRANSPORTADORA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TransportadoraVO transportadora;
-    @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CONDICOES_PAGAMENTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
-    @JoinColumn(name = "vendedor_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDEDOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaOrcamentoCabecalhoId")
     private List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheList;
 

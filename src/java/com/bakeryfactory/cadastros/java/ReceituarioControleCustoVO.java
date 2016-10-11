@@ -38,6 +38,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -45,55 +47,62 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "receituario_controle_custo")
+@Table(name = "RECEITUARIO_CONTROLE_CUSTO")
 public class ReceituarioControleCustoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome_produto")
+    @Column(name = "NOME_PRODUTO")
     private String nomeProduto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "porcentagem_ingrediente")
+    @Column(name = "PORCENTAGEM_INGREDIENTE")
     private BigDecimal porcentagemIngrediente;
-    @Column(name = "ingrediente_massa")
+    @Column(name = "INGREDIENTE_MASSA")
     private String ingredienteMassa;
-    @Column(name = "padrao_grama")
+    @Column(name = "PADRAO_GRAMA")
     private Integer padraoGrama;
-    @Column(name = "peso_massa")
+    @Column(name = "PESO_MASSA")
     private BigDecimal pesoMassa;
-    @Column(name = "rendimento_unidade")
+    @Column(name = "RENDIMENTO_UNIDADE")
     private Integer rendimentoUnidade;
-    @Column(name = "rendimento_kg")
+    @Column(name = "RENDIMENTO_KG")
     private BigDecimal rendimentoKg;
-    @Column(name = "custo_unidade")
+    @Column(name = "CUSTO_UNIDADE")
     private BigDecimal custoUnidade;
-    @Column(name = "custo_kg")
+    @Column(name = "CUSTO_KG")
     private BigDecimal custoKg;
-    @Column(name = "valor_unidade")
+    @Column(name = "VALOR_UNIDADE")
     private BigDecimal valorUnidade;
-    @Column(name = "valor_kg")
+    @Column(name = "VALOR_KG")
     private BigDecimal valorKg;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @Column(name = "valor_de_venda")
+    @Column(name = "VALOR_DE_VENDA")
     private BigDecimal valorDeVenda;
-    @Column(name = "total_soma_custo")
+    @Column(name = "TOTAL_SOMA_CUSTO")
     private BigDecimal totalSomaCusto;
-    @Column(name = "mark_up_minimo")
+    @Column(name = "MARK_UP_MINIMO")
     private Integer markUpMinimo;
-    @Column(name = "mark_up_promocional")
+    @Column(name = "MARK_UP_PROMOCIONAL")
     private Integer markUpPromocional;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoId")
-    private List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoVO")
-    private List<ReceituarioPadraoVO> receituarioPadraoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receituarioControleCustoId")
-    private List<IngredienteVO> ingredienteList;
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL,  orphanRemoval = true, mappedBy = "receituarioControleCusto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProdutoCalculoPrecoMedidasVO> listaProdutoCalculoPrecoMedidas;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receituarioControleCusto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ReceituarioPadraoVO> listaReceituarioPadrao;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receituarioControleCusto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<IngredienteVO> listaIngrediente;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
 
@@ -240,28 +249,28 @@ public class ReceituarioControleCustoVO extends ValueObjectImpl implements Seria
         this.markUpPromocional = markUpPromocional;
     }
 
-    public List<ProdutoCalculoPrecoMedidasVO> getProdutoCalculoPrecoMedidasList() {
-        return produtoCalculoPrecoMedidasList;
+    public List<ProdutoCalculoPrecoMedidasVO> getListaProdutoCalculoPrecoMedidas() {
+        return listaProdutoCalculoPrecoMedidas;
     }
 
-    public void setProdutoCalculoPrecoMedidasList(List<ProdutoCalculoPrecoMedidasVO> produtoCalculoPrecoMedidasList) {
-        this.produtoCalculoPrecoMedidasList = produtoCalculoPrecoMedidasList;
+    public void setListaProdutoCalculoPrecoMedidas(List<ProdutoCalculoPrecoMedidasVO> listaProdutoCalculoPrecoMedidas) {
+        this.listaProdutoCalculoPrecoMedidas = listaProdutoCalculoPrecoMedidas;
     }
 
-    public List<ReceituarioPadraoVO> getReceituarioPadraoList() {
-        return receituarioPadraoList;
+    public List<ReceituarioPadraoVO> getListaReceituarioPadrao() {
+        return listaReceituarioPadrao;
     }
 
-    public void setReceituarioPadraoList(List<ReceituarioPadraoVO> receituarioPadraoList) {
-        this.receituarioPadraoList = receituarioPadraoList;
+    public void setListaReceituarioPadrao(List<ReceituarioPadraoVO> listaReceituarioPadrao) {
+        this.listaReceituarioPadrao = listaReceituarioPadrao;
     }
 
-    public List<IngredienteVO> getIngredienteList() {
-        return ingredienteList;
+    public List<IngredienteVO> getListaIngrediente() {
+        return listaIngrediente;
     }
 
-    public void setIngredienteList(List<IngredienteVO> ingredienteList) {
-        this.ingredienteList = ingredienteList;
+    public void setListaIngrediente(List<IngredienteVO> listaIngrediente) {
+        this.listaIngrediente = listaIngrediente;
     }
 
     public ProdutoVO getProduto() {

@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,33 +48,36 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "tabela_preco")
-@NamedQueries({
-    @NamedQuery(name = "TabelaPrecoVO.findAll", query = "SELECT t FROM TabelaPrecoVO t")})
+@Table(name = "TABELA_PRECO")
 public class TabelaPrecoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "coeficiente")
+    @Column(name = "COEFICIENTE")
     private BigDecimal coeficiente;
-    @Column(name = "principal")
+    @Column(name = "PRINCIPAL")
     private Character principal;
-    @Column(name = "base_custo")
+    @Column(name = "BASE_CUSTO")
     private Character baseCusto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tabelaPrecoId")
-    private List<TabelaPrecoVO> tabelaPrecoList;
-    @JoinColumn(name = "tabela_preco_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_TABELA_PRECO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TabelaPrecoVO tabelaPreco;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tabelaPrecoId")
-    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "tabelaPreco")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<TabelaPrecoVO> listaTabelaPreco;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "tabelaPreco")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco;
 
     public TabelaPrecoVO() {
     }
@@ -121,12 +126,12 @@ public class TabelaPrecoVO extends ValueObjectImpl implements Serializable {
         this.baseCusto = baseCusto;
     }
 
-    public List<TabelaPrecoVO> getTabelaPrecoList() {
-        return tabelaPrecoList;
+    public List<TabelaPrecoVO> getListaTabelaPreco() {
+        return listaTabelaPreco;
     }
 
-    public void setTabelaPrecoList(List<TabelaPrecoVO> tabelaPrecoList) {
-        this.tabelaPrecoList = tabelaPrecoList;
+    public void setListaTabelaPreco(List<TabelaPrecoVO> listaTabelaPreco) {
+        this.listaTabelaPreco = listaTabelaPreco;
     }
 
     public TabelaPrecoVO getTabelaPreco() {
@@ -137,12 +142,12 @@ public class TabelaPrecoVO extends ValueObjectImpl implements Serializable {
         this.tabelaPreco = tabelaPreco;
     }
 
-    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoList() {
-        return produtoTabelaPrecoList;
+    public List<ProdutoTabelaPrecoVO> getListaProdutoTabelaPreco() {
+        return listaProdutoTabelaPreco;
     }
 
-    public void setProdutoTabelaPrecoList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList) {
-        this.produtoTabelaPrecoList = produtoTabelaPrecoList;
+    public void setListaProdutoTabelaPreco(List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco) {
+        this.listaProdutoTabelaPreco = listaProdutoTabelaPreco;
     }
 
     @Override

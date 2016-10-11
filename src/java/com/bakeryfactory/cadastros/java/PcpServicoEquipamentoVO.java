@@ -42,19 +42,21 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pcp_servico_equipamento")
+@Table(name = "PCP_SERVICO_EQUIPAMENTO")
 public class PcpServicoEquipamentoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @JoinColumn(name = "patrimonio_bem_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PATRIM_BEM", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PatrimonioBemVO patrimonioBem;
-    @JoinColumn(name = "pcp_servico_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PCP_SERVICO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PcpServicoVO pcpServico;
 

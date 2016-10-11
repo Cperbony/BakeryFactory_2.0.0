@@ -42,29 +42,31 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "papel_funcao")
+@Table(name = "PAPEL_FUNCAO")
 public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "pode_consultar")
+    @Column(name = "PODE_CONSULTAR")
     private Character podeConsultar;
-    @Column(name = "pode_inserir")
+    @Column(name = "PODE_INSERIR")
     private Character podeInserir;
-    @Column(name = "pode_alterar")
+    @Column(name = "PODE_ALTERAR")
     private Character podeAlterar;
-    @Column(name = "pode_excluir")
+    @Column(name = "PODE_EXCLUIR")
     private Character podeExcluir;
-    @Column(name = "habilitado")
+    @Column(name = "HABILITADO")
     private Character habilitado;
-    @JoinColumn(name = "funcao_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_FUNCAO", referencedColumnName = "IS")
     @ManyToOne(optional = false)
     private FuncaoVO funcao;
-    @JoinColumn(name = "papel_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PAPEL", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PapelVO papel;
 

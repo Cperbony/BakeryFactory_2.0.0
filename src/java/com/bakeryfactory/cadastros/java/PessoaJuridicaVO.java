@@ -45,33 +45,34 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_juridica")
+@Table(name = "PESSOA_JURIDICA")
 public class PessoaJuridicaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "cnpj")
+    @Column(name = "CNPJ")
     private String cnpj;
-    @Column(name = "inscricao_estadual")
+    @Column(name = "INSCRICAO_ESTADUAL")
     private String inscricaoEstadual;
-    @Column(name = "inscricao_municipal")
+    @Column(name = "INSCRICAO_MUNICIPAL")
     private String inscricaoMunicipal;
-    @Column(name = "nome_fantasia")
+    @Column(name = "NOME_FANTASIA")
     private String nomeFantasia;
-    @Column(name = "data_constituicao")
+    @Column(name = "DATA_CONSTITUICAO")
     @Temporal(TemporalType.DATE)
     private Date dataConstituicao;
-    @Column(name = "tipo_regime")
+    @Column(name = "TIPO_REGIME")
     private Character tipoRegime;
-    @Column(name = "crt")
+    @Column(name = "CRT")
     private Character crt;
-    @Column(name = "suframa")
+    @Column(name = "SUFRAMA")
     private String suframa;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 

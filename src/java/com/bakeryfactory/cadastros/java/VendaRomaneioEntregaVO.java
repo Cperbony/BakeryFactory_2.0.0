@@ -41,6 +41,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,7 +50,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_romaneio_entrega")
+@Table(name = "VENDA_ROMANEIO_ENTREGA")
 public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -57,27 +59,30 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "data_emissao")
+    @Column(name = "DATA_EMISSAO")
     @Temporal(TemporalType.DATE)
     private Date dataEmissao;
-    @Column(name = "data_prevista")
+    @Column(name = "DATA_PREVISTA")
     @Temporal(TemporalType.DATE)
     private Date dataPrevista;
-    @Column(name = "data_saida")
+    @Column(name = "DATA_SAIDA")
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
-    @Column(name = "data_encerramento")
+    @Column(name = "DATA_ENCERRAMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataEncerramento;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaRomaneioEntregaId")
-    private List<VendaCabecalhoVO> vendaCabecalhoList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaRomaneioEntrega")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCabecalhoVO> listaVendaCabecalho;
+    
+    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
 
@@ -152,12 +157,12 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
         this.observacao = observacao;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
-        return vendaCabecalhoList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
+        return listaVendaCabecalho;
     }
 
-    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
-        this.vendaCabecalhoList = vendaCabecalhoList;
+    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
+        this.listaVendaCabecalho = listaVendaCabecalho;
     }
 
     public ColaboradorVO getColaborador() {

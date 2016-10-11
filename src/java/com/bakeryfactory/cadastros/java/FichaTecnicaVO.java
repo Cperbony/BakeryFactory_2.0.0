@@ -43,25 +43,25 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "ficha_tecnica")
+@Table(name = "FICHA_TECNICA")
 public class FichaTecnicaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "id_produto_filho")
+    @Column(name = "ID_PRODUTO_FILHO")
     private Integer idProdutoFilho;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @Column(name = "sequencia_producao")
+    @Column(name = "SEQUENCIA_PRODUCAO")
     private Integer sequenciaProducao;
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
 

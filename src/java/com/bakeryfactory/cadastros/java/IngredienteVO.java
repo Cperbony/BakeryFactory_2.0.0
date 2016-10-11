@@ -46,39 +46,44 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "ingrediente")
+@Table(name = "INGREDIENTE")
 public class IngredienteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome_ingred")
+    @Column(name = "NOME_INGRED")
     private String nomeIngred;
-    @Column(name = "unidade_medida")
+    @Column(name = "UNIDADE_MEDIDA")
     private String unidadeMedida;
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private Integer quantidade;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "peso")
+    @Column(name = "PESO")
     private BigDecimal peso;
-    @Column(name = "valor_unitario")
+    @Column(name = "VALOR_UNITARIO")
     private BigDecimal valorUnitario;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<IngredientesReceitasVO> ingredientesReceitasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<MarcaVO> marcaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheList;
-    @JoinColumn(name = "receituario_controle_custo_id", referencedColumnName = "id")
+
+    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
-    private List<CompraPedidoDetalheVO> compraPedidoDetalheList;
+    private List<IngredientesReceitasVO> listaIngredientesReceitas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    private List<MarcaVO> listaMarca;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
 
     public IngredienteVO() {
     }
@@ -143,28 +148,28 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
         this.valorTotal = valorTotal;
     }
 
-    public List<IngredientesReceitasVO> getIngredientesReceitasList() {
-        return ingredientesReceitasList;
+    public List<IngredientesReceitasVO> getListaIngredientesReceitas() {
+        return listaIngredientesReceitas;
     }
 
-    public void setIngredientesReceitasList(List<IngredientesReceitasVO> ingredientesReceitasList) {
-        this.ingredientesReceitasList = ingredientesReceitasList;
+    public void setListaIngredientesReceitas(List<IngredientesReceitasVO> listaIngredientesReceitas) {
+        this.listaIngredientesReceitas = listaIngredientesReceitas;
     }
 
-    public List<MarcaVO> getMarcaList() {
-        return marcaList;
+    public List<MarcaVO> getListaMarca() {
+        return listaMarca;
     }
 
-    public void setMarcaList(List<MarcaVO> marcaList) {
-        this.marcaList = marcaList;
+    public void setListaMarca(List<MarcaVO> listaMarca) {
+        this.listaMarca = listaMarca;
     }
 
-    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheList() {
-        return compraCotacaoDetalheList;
+    public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
+        return listaCompraCotacaoDetalhe;
     }
 
-    public void setCompraCotacaoDetalheList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheList) {
-        this.compraCotacaoDetalheList = compraCotacaoDetalheList;
+    public void setListaCompraCotacaoDetalhe(List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe) {
+        this.listaCompraCotacaoDetalhe = listaCompraCotacaoDetalhe;
     }
 
     public ReceituarioControleCustoVO getReceituarioControleCusto() {
@@ -175,12 +180,12 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
         this.receituarioControleCusto = receituarioControleCusto;
     }
 
-    public List<CompraPedidoDetalheVO> getCompraPedidoDetalheList() {
-        return compraPedidoDetalheList;
+    public List<CompraPedidoDetalheVO> getListaCompraPedidoDetalhe() {
+        return listaCompraPedidoDetalhe;
     }
 
-    public void setCompraPedidoDetalheList(List<CompraPedidoDetalheVO> compraPedidoDetalheList) {
-        this.compraPedidoDetalheList = compraPedidoDetalheList;
+    public void setListaCompraPedidoDetalhe(List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe) {
+        this.listaCompraPedidoDetalhe = listaCompraPedidoDetalhe;
     }
 
     @Override
@@ -207,5 +212,5 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.IngredienteVO[ id=" + id + " ]";
     }
-    
+
 }

@@ -42,6 +42,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -49,67 +51,82 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "produto")
+@Table(name = "PRODUTO")
 public class ProdutoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "gtin")
+    @Column(name = "GTIN")
     private String gtin;
-    @Column(name = "codigo_interno")
+    @Column(name = "CODIGO_INTERNO")
     private String codigoInterno;
-    @Column(name = "ncm")
+    @Column(name = "NCM")
     private String ncm;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "descricao_pdv")
+    @Column(name = "DESCRICAO_PDV")
     private String descricaoPdv;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "estoque_minimo")
+    @Column(name = "ESTOQUE_MINIMO")
     private BigDecimal estoqueMinimo;
-    @Column(name = "estoque_maximo")
+    @Column(name = "ESTOQUE_MAXIMO")
     private BigDecimal estoqueMaximo;
-    @Column(name = "estoque_ideal")
+    @Column(name = "ESTOQUE_IDEAL")
     private BigDecimal estoqueIdeal;
-    @Column(name = "excluido")
+    @Column(name = "EXCLUIDO")
     private Character excluido;
-    @Column(name = "inativo")
+    @Column(name = "INATIVO")
     private Character inativo;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "data_alteracao")
+    @Column(name = "DATA_ALTERACAO")
     @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
-    @Column(name = "classe_abc")
+    @Column(name = "CLASSE_ABC")
     private Character classeAbc;
     @Column(name = "peso")
     private BigDecimal peso;
-    @Column(name = "imagem")
+    @Column(name = "IMAGEM")
     private String imagem;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<FichaTecnicaVO> fichaTecnicaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ReceitaVO> receitaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<PcpOpDetalheVO> pcpOpDetalheList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<VendaDetalheVO> vendaDetalheList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList;
-    @JoinColumn(name = "produto_subgrupo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PRODUTO_SUBGRUPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoSubgrupoVO produtoSubgrupo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId")
-    private List<ReceituarioControleCustoVO> receituarioControleCustoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<FichaTecnicaVO> listaFichaTecnica;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ReceitaVO> listaReceita;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpOpDetalheVO> listaPcpOpDetalhe;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaDetalheVO> listaVendaDetalhe;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ReceituarioControleCustoVO> listaReceituarioControleCusto;
 
     public ProdutoVO() {
     }
@@ -254,52 +271,52 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.imagem = imagem;
     }
 
-    public List<FichaTecnicaVO> getFichaTecnicaList() {
-        return fichaTecnicaList;
+    public List<FichaTecnicaVO> getListaFichaTecnica() {
+        return listaFichaTecnica;
     }
 
-    public void setFichaTecnicaList(List<FichaTecnicaVO> fichaTecnicaList) {
-        this.fichaTecnicaList = fichaTecnicaList;
+    public void setListaFichaTecnica(List<FichaTecnicaVO> listaFichaTecnica) {
+        this.listaFichaTecnica = listaFichaTecnica;
     }
 
-    public List<ReceitaVO> getReceitaList() {
-        return receitaList;
+    public List<ReceitaVO> getListaReceita() {
+        return listaReceita;
     }
 
-    public void setReceitaList(List<ReceitaVO> receitaList) {
-        this.receitaList = receitaList;
+    public void setListaReceita(List<ReceitaVO> listaReceita) {
+        this.listaReceita = listaReceita;
     }
 
-    public List<PcpOpDetalheVO> getPcpOpDetalheList() {
-        return pcpOpDetalheList;
+    public List<PcpOpDetalheVO> getListaPcpOpDetalhe() {
+        return listaPcpOpDetalhe;
     }
 
-    public void setPcpOpDetalheList(List<PcpOpDetalheVO> pcpOpDetalheList) {
-        this.pcpOpDetalheList = pcpOpDetalheList;
+    public void setListaPcpOpDetalhe(List<PcpOpDetalheVO> listaPcpOpDetalhe) {
+        this.listaPcpOpDetalhe = listaPcpOpDetalhe;
     }
 
-    public List<VendaOrcamentoDetalheVO> getVendaOrcamentoDetalheList() {
-        return vendaOrcamentoDetalheList;
+    public List<VendaOrcamentoDetalheVO> getListaVendaOrcamentoDetalhe() {
+        return listaVendaOrcamentoDetalhe;
     }
 
-    public void setVendaOrcamentoDetalheList(List<VendaOrcamentoDetalheVO> vendaOrcamentoDetalheList) {
-        this.vendaOrcamentoDetalheList = vendaOrcamentoDetalheList;
+    public void setListaVendaOrcamentoDetalhe(List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe) {
+        this.listaVendaOrcamentoDetalhe = listaVendaOrcamentoDetalhe;
     }
 
-    public List<VendaDetalheVO> getVendaDetalheList() {
-        return vendaDetalheList;
+    public List<VendaDetalheVO> getListaVendaDetalhe() {
+        return listaVendaDetalhe;
     }
 
-    public void setVendaDetalheList(List<VendaDetalheVO> vendaDetalheList) {
-        this.vendaDetalheList = vendaDetalheList;
+    public void setListaVendaDetalhe(List<VendaDetalheVO> listaVendaDetalhe) {
+        this.listaVendaDetalhe = listaVendaDetalhe;
     }
 
-    public List<ProdutoTabelaPrecoVO> getProdutoTabelaPrecoList() {
-        return produtoTabelaPrecoList;
+    public List<ProdutoTabelaPrecoVO> getListaProdutoTabelaPreco() {
+        return listaProdutoTabelaPreco;
     }
 
-    public void setProdutoTabelaPrecoList(List<ProdutoTabelaPrecoVO> produtoTabelaPrecoList) {
-        this.produtoTabelaPrecoList = produtoTabelaPrecoList;
+    public void setListaProdutoTabelaPreco(List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco) {
+        this.listaProdutoTabelaPreco = listaProdutoTabelaPreco;
     }
 
     public ProdutoSubgrupoVO getProdutoSubgrupo() {
@@ -310,12 +327,12 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.produtoSubgrupo = produtoSubgrupo;
     }
 
-    public List<ReceituarioControleCustoVO> getReceituarioControleCustoList() {
-        return receituarioControleCustoList;
+    public List<ReceituarioControleCustoVO> getListaReceituarioControleCusto() {
+        return listaReceituarioControleCusto;
     }
 
-    public void setReceituarioControleCustoList(List<ReceituarioControleCustoVO> receituarioControleCustoList) {
-        this.receituarioControleCustoList = receituarioControleCustoList;
+    public void setListaReceituarioControleCusto(List<ReceituarioControleCustoVO> listaReceituarioControleCusto) {
+        this.listaReceituarioControleCusto = listaReceituarioControleCusto;
     }
 
     @Override

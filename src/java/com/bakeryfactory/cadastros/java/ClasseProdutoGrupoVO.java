@@ -36,6 +36,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -57,7 +59,8 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "classeProdutoGrupoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "classeProdutoGrupoId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProdutoSubgrupoVO> listaProdutoSubgrupo;
 
     public ClasseProdutoGrupoVO() {

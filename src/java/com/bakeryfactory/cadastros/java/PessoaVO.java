@@ -79,16 +79,21 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="EMPRESA_PESSOA", joinColumns={@JoinColumn(name="ID_PESSOA")}, inverseJoinColumns={@JoinColumn(name="ID_EMPRESA")})
     private List<EmpresaVO> listaEmpresa;
+    
     @OneToOne(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL)
     private PessoaFisicaVO pessoaFisica;
+    
     @OneToOne(fetch=FetchType.EAGER, mappedBy="pessoa", cascade = CascadeType.ALL)
     private PessoaJuridicaVO pessoaJuridica;
+    
     @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PessoaEnderecoVO> listaEndereco;
+    
     @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PessoaContatoVO> listaContato;
+    
     @OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL, orphanRemoval = true)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PessoaTelefoneVO> listaTelefone;

@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,31 +48,38 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "vendedor")
+@Table(name = "VENDEDOR")
 public class VendedorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "comissao")
+    @Column(name = "COMISSAO")
     private BigDecimal comissao;
-    @Column(name = "meta_vendas")
+    @Column(name = "META_VENDAS")
     private BigDecimal metaVendas;
-    @Column(name = "gerente")
+    @Column(name = "GERENTE")
     private Character gerente;
-    @Column(name = "taxa_gerente")
+    @Column(name = "TAXA_GERENTE")
     private BigDecimal taxaGerente;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaCabecalhoVO> vendaCabecalhoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendedorId")
-    private List<VendaComissaoVO> vendaComissaoList;
-    @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,  mappedBy = "vendedor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCabecalhoVO> listaVendaCabecalho;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendedor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendedor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaComissaoVO> listaVendaComissao;
+    
+    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
 
@@ -121,28 +130,28 @@ public class VendedorVO extends ValueObjectImpl implements Serializable {
         this.taxaGerente = taxaGerente;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
-        return vendaCabecalhoList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
+        return listaVendaCabecalho;
     }
 
-    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
-        this.vendaCabecalhoList = vendaCabecalhoList;
+    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
+        this.listaVendaCabecalho = listaVendaCabecalho;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
-        return vendaOrcamentoCabecalhoList;
+    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
+        return listaVendaOrcamentoCabecalho;
     }
 
-    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
-        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
+    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho) {
+        this.listaVendaOrcamentoCabecalho = listaVendaOrcamentoCabecalho;
     }
 
-    public List<VendaComissaoVO> getVendaComissaoList() {
-        return vendaComissaoList;
+    public List<VendaComissaoVO> getListaVendaComissao() {
+        return listaVendaComissao;
     }
 
-    public void setVendaComissaoList(List<VendaComissaoVO> vendaComissaoList) {
-        this.vendaComissaoList = vendaComissaoList;
+    public void setListaVendaComissao(List<VendaComissaoVO> listaVendaComissao) {
+        this.listaVendaComissao = listaVendaComissao;
     }
 
     public ColaboradorVO getColaborador() {

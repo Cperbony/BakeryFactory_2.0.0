@@ -32,9 +32,13 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -42,21 +46,27 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "setor")
+@Table(name = "SETOR")
 public class SetorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "setor_descricao")
+    @Column(name = "SETOR_DESCRICAO")
     private String setorDescricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "setorId")
-    private List<ColaboradorVO> colaboradorList;
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private EmpresaVO empresa;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "setor")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ColaboradorVO> listaColaborador;
 
     public SetorVO() {
     }
@@ -89,13 +99,22 @@ public class SetorVO extends ValueObjectImpl implements Serializable {
         this.setorDescricao = setorDescricao;
     }
 
-    public List<ColaboradorVO> getColaboradorList() {
-        return colaboradorList;
+    public List<ColaboradorVO> getListaColaborador() {
+        return listaColaborador;
     }
 
-    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
-        this.colaboradorList = colaboradorList;
+    public void setListaColaborador(List<ColaboradorVO> listaColaborador) {
+        this.listaColaborador = listaColaborador;
     }
+
+    public EmpresaVO getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(EmpresaVO empresa) {
+        this.empresa = empresa;
+    }
+    
 
     @Override
     public String toString() {

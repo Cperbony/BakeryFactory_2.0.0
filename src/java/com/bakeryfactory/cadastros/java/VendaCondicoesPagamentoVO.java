@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,41 +48,48 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_condicoes_pagamento")
+@Table(name = "VENDA_CONDICOES_PAGAMENTO")
 public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "faturamento_minimo")
+    @Column(name = "FATURAMENTO_MINIMO")
     private BigDecimal faturamentoMinimo;
-    @Column(name = "faturamento_maximo")
+    @Column(name = "FATURAMENTO_MAXIMO")
     private BigDecimal faturamentoMaximo;
-    @Column(name = "indice_correcao")
+    @Column(name = "INDICE_CORRECAO")
     private BigDecimal indiceCorrecao;
-    @Column(name = "dias_tolerancia")
+    @Column(name = "DIAS_TOLERANCIA")
     private Integer diasTolerancia;
-    @Column(name = "valor_tolerancia")
+    @Column(name = "VALOR_TOLERANCIA")
     private BigDecimal valorTolerancia;
-    @Column(name = "prazo_medio")
+    @Column(name = "PRAZO_MEDIO")
     private Integer prazoMedio;
-    @Column(name = "vista_prazo")
+    @Column(name = "VISTA_PRAZO")
     private Character vistaPrazo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaCondicoesParcelaVO> vendaCondicoesParcelaList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaCabecalhoVO> vendaCabecalhoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCondicoesPagamentoId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCondicoesParcelaVO> listaVendaCondicoesParcela;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCabecalhoVO> listaVendaCabecalho;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho;
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
 
@@ -171,28 +180,28 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
         this.vistaPrazo = vistaPrazo;
     }
 
-    public List<VendaCondicoesParcelaVO> getVendaCondicoesParcelaList() {
-        return vendaCondicoesParcelaList;
+    public List<VendaCondicoesParcelaVO> getListaVendaCondicoesParcela() {
+        return listaVendaCondicoesParcela;
     }
 
-    public void setVendaCondicoesParcelaList(List<VendaCondicoesParcelaVO> vendaCondicoesParcelaList) {
-        this.vendaCondicoesParcelaList = vendaCondicoesParcelaList;
+    public void setListaVendaCondicoesParcela(List<VendaCondicoesParcelaVO> listaVendaCondicoesParcela) {
+        this.listaVendaCondicoesParcela = listaVendaCondicoesParcela;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
-        return vendaCabecalhoList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
+        return listaVendaCabecalho;
     }
 
-    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
-        this.vendaCabecalhoList = vendaCabecalhoList;
+    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
+        this.listaVendaCabecalho = listaVendaCabecalho;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
-        return vendaOrcamentoCabecalhoList;
+    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
+        return listaVendaOrcamentoCabecalho;
     }
 
-    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
-        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
+    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho) {
+        this.listaVendaOrcamentoCabecalho = listaVendaOrcamentoCabecalho;
     }
 
     public EmpresaVO getEmpresa() {

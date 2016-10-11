@@ -43,40 +43,42 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_frete")
+@Table(name = "VENDA_FRETE")
 public class VendaFreteVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "conhecimento")
+    @Column(name = "CONHECIMENTO")
     private Integer conhecimento;
-    @Column(name = "responsavel")
+    @Column(name = "RESPONSAVEL")
     private Character responsavel;
-    @Column(name = "placa")
+    @Column(name = "PLACA")
     private String placa;
-    @Column(name = "uf_placa")
+    @Column(name = "UF_PLACA")
     private String ufPlaca;
-    @Column(name = "selo_fiscal")
+    @Column(name = "SELO_FISCAL")
     private Integer seloFiscal;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade_volume")
+    @Column(name = "QUANTIDADE_VOLUME")
     private BigDecimal quantidadeVolume;
-    @Column(name = "marca_volume")
+    @Column(name = "MARCA_VOLUME")
     private String marcaVolume;
-    @Column(name = "especie_volume")
+    @Column(name = "ESPECIE_VOLUME")
     private String especieVolume;
-    @Column(name = "peso_bruto")
+    @Column(name = "PESO_BRUTO")
     private BigDecimal pesoBruto;
-    @Column(name = "peso_liquido")
+    @Column(name = "PESO_LIQUIDO")
     private BigDecimal pesoLiquido;
-    @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_TRANSPORTADORA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TransportadoraVO transportadora;
-    @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CABECALHO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCabecalhoVO vendaCabecalho;
 

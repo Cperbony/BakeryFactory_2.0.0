@@ -43,21 +43,22 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "estado_civil")
+@Table(name = "ESTADO_CIVIL")
 public class EstadoCivilVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoCivilId")
-    private List<PessoaFisicaVO> pessoaFisicaList;
+    private List<PessoaFisicaVO> listaPessoaFisica;
 
     public EstadoCivilVO() {
     }
@@ -90,12 +91,12 @@ public class EstadoCivilVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<PessoaFisicaVO> getPessoaFisicaList() {
-        return pessoaFisicaList;
+    public List<PessoaFisicaVO> getListaPessoaFisica() {
+        return listaPessoaFisica;
     }
 
-    public void setPessoaFisicaList(List<PessoaFisicaVO> pessoaFisicaList) {
-        this.pessoaFisicaList = pessoaFisicaList;
+    public void setListaPessoaFisica(List<PessoaFisicaVO> listaPessoaFisica) {
+        this.listaPessoaFisica = listaPessoaFisica;
     }
 
     @Override

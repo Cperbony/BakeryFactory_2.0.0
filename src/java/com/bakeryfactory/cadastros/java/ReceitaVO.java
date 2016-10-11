@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,33 +48,38 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "receita")
+@Table(name = "RECEITA")
 public class ReceitaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome_prod")
+    @Column(name = "NOME_PROD")
     private String nomeProd;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "porcentagem_receita")
+    @Column(name = "PORCENTAGEM_RECEITA")
     private BigDecimal porcentagemReceita;
-    @Column(name = "tipo_receita")
+    @Column(name = "TIPO_RECEITA")
     private String tipoReceita;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "ingrediente_massa")
+    @Column(name = "INGREDIENTE_MASSA")
     private String ingredienteMassa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaId")
-    private List<IngredientesReceitasVO> ingredientesReceitasList;
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "receitaVO")
-    private List<ModoPreparoVO> modoPreparoList;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receita")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<IngredientesReceitasVO> listaIngredientesReceitas;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receitaVO")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ModoPreparoVO> listaModoPreparo;
 
     public ReceitaVO() {
     }
@@ -129,12 +136,12 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
         this.ingredienteMassa = ingredienteMassa;
     }
 
-    public List<IngredientesReceitasVO> getIngredientesReceitasList() {
-        return ingredientesReceitasList;
+    public List<IngredientesReceitasVO> getListaIngredientesReceitas() {
+        return listaIngredientesReceitas;
     }
 
-    public void setIngredientesReceitasList(List<IngredientesReceitasVO> ingredientesReceitasList) {
-        this.ingredientesReceitasList = ingredientesReceitasList;
+    public void setListaIngredientesReceitas(List<IngredientesReceitasVO> listaIngredientesReceitas) {
+        this.listaIngredientesReceitas = listaIngredientesReceitas;
     }
 
     public ProdutoVO getProduto() {
@@ -145,12 +152,12 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
         this.produto = produto;
     }
 
-    public List<ModoPreparoVO> getModoPreparoList() {
-        return modoPreparoList;
+    public List<ModoPreparoVO> getListaModoPreparo() {
+        return listaModoPreparo;
     }
 
-    public void setModoPreparoList(List<ModoPreparoVO> modoPreparoList) {
-        this.modoPreparoList = modoPreparoList;
+    public void setListaModoPreparo(List<ModoPreparoVO> listaModoPreparo) {
+        this.listaModoPreparo = listaModoPreparo;
     }
 
     @Override
@@ -177,5 +184,5 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.ReceitaVO[ id=" + id + " ]";
     }
-    
+
 }

@@ -48,56 +48,61 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "fornecedor")
+@Table(name = "FORNECEDOR")
 public class FornecedorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "desde")
+    @Column(name = "DESDE")
     @Temporal(TemporalType.DATE)
     private Date desde;
-    @Column(name = "optante_simples_nacional")
+    @Column(name = "OPTANTE_SIMPLES_NACIONAL")
     private Character optanteSimplesNacional;
-    @Column(name = "localizacao")
+    @Column(name = "LOCALIZACAO")
     private Character localizacao;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "sofre_retencao")
+    @Column(name = "SOFRE_RETENCAO")
     private Character sofreRetencao;
-    @Column(name = "cheque_nominal_a")
+    @Column(name = "CHEQUE_NOMINAL_A")
     private String chequeNominalA;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "conta_remetente")
+    @Column(name = "CONTA_REMETENTE")
     private String contaRemetente;
-    @Column(name = "prazo_medio_entrega")
+    @Column(name = "PRAZO_MEDIO_ENTREGA")
     private Integer prazoMedioEntrega;
-    @Column(name = "gera_faturamento")
+    @Column(name = "GERA_FATURAMENTO")
     private Character geraFaturamento;
-    @Column(name = "numero_dias_primeiro_venc")
+    @Column(name = "NUM_DIAS_PRIMEIRO_VENCIMENTO")
     private Integer numeroDiasPrimeiroVenc;
-    @Column(name = "numero_dias_intervalo")
+    @Column(name = "NUM_DIAS_INTERVALO")
     private Integer numeroDiasIntervalo;
-    @Column(name = "quantidade_parcelas")
+    @Column(name = "QUANTIDADE_PARCELAS")
     private Integer quantidadeParcelas;
-    @Column(name = "classificacao_contabil_conta")
+    @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId")
-    private List<CompraCotacaoDetalheVO> compraCotacaoDetalheList;
+    private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId")
-    private List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList;
-    @JoinColumn(name = "atividade_for_cli_id", referencedColumnName = "id")
+    private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
+    
+    @JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private AtividadeForCliVO atividadeForCli;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    @JoinColumn(name = "situacao_for_cli_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SituacaoForCliVO situacaoForCli;
 
@@ -228,20 +233,20 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<CompraCotacaoDetalheVO> getCompraCotacaoDetalheList() {
-        return compraCotacaoDetalheList;
+    public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
+        return listaCompraCotacaoDetalhe;
     }
 
-    public void setCompraCotacaoDetalheList(List<CompraCotacaoDetalheVO> compraCotacaoDetalheList) {
-        this.compraCotacaoDetalheList = compraCotacaoDetalheList;
+    public void setListaCompraCotacaoDetalhe(List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe) {
+        this.listaCompraCotacaoDetalhe = listaCompraCotacaoDetalhe;
     }
 
-    public List<CompraFornecedorCotacaoVO> getCompraFornecedorCotacaoList() {
-        return compraFornecedorCotacaoList;
+    public List<CompraFornecedorCotacaoVO> getListaCompraFornecedorCotacao() {
+        return listaCompraFornecedorCotacao;
     }
 
-    public void setCompraFornecedorCotacaoList(List<CompraFornecedorCotacaoVO> compraFornecedorCotacaoList) {
-        this.compraFornecedorCotacaoList = compraFornecedorCotacaoList;
+    public void setListaCompraFornecedorCotacao(List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao) {
+        this.listaCompraFornecedorCotacao = listaCompraFornecedorCotacao;
     }
 
     public AtividadeForCliVO getAtividadeForCli() {

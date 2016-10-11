@@ -43,25 +43,27 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "papel")
+@Table(name = "PAPEL")
 public class PapelVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "acesso_completo")
+    @Column(name = "ACESSO_COMPLETO")
     private Character acessoCompleto;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
-    private List<UsuarioVO> usuarioList;
+    private List<UsuarioVO> listaUsuario;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papelId")
-    private List<PapelFuncaoVO> papelFuncaoList;
+    private List<PapelFuncaoVO> listaPapelFuncao;
 
     public PapelVO() {
     }
@@ -102,20 +104,20 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
         this.acessoCompleto = acessoCompleto;
     }
 
-    public List<UsuarioVO> getUsuarioList() {
-        return usuarioList;
+    public List<UsuarioVO> getListaUsuario() {
+        return listaUsuario;
     }
 
-    public void setUsuarioList(List<UsuarioVO> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setListaUsuario(List<UsuarioVO> listaUsuario) {
+        this.listaUsuario = listaUsuario;
     }
 
-    public List<PapelFuncaoVO> getPapelFuncaoList() {
-        return papelFuncaoList;
+    public List<PapelFuncaoVO> getListaPapelFuncao() {
+        return listaPapelFuncao;
     }
 
-    public void setPapelFuncaoList(List<PapelFuncaoVO> papelFuncaoList) {
-        this.papelFuncaoList = papelFuncaoList;
+    public void setListaPapelFuncao(List<PapelFuncaoVO> listaPapelFuncao) {
+        this.listaPapelFuncao = listaPapelFuncao;
     }
 
     @Override

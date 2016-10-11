@@ -42,20 +42,21 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "marca")
+@Table(name = "MARCA")
 public class MarcaVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @JoinColumn(name = "ingrediente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_IGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private IngredienteVO ingrediente;
 

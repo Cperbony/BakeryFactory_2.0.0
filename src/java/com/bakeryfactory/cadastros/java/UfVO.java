@@ -38,6 +38,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -52,19 +54,22 @@ public class UfVO extends ValueObjectImpl implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "sigla")
+    @Column(name = "SIGLA")
     private String sigla;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "codigo_ibge")
+    @Column(name = "CODIGO_IBGE")
     private Integer codigoIbge;
-    @JoinColumn(name = "pais_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PAIS", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PaisVO pais;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ufId")
-    private List<MunicipioVO> municipioList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "uf")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<MunicipioVO> listaMunicipio;
 
     public UfVO() {
     }
@@ -113,12 +118,12 @@ public class UfVO extends ValueObjectImpl implements Serializable {
         this.pais = pais;
     }
 
-    public List<MunicipioVO> getMunicipioList() {
-        return municipioList;
+    public List<MunicipioVO> getListaMunicipio() {
+        return listaMunicipio;
     }
 
-    public void setMunicipioList(List<MunicipioVO> municipioList) {
-        this.municipioList = municipioList;
+    public void setListaMunicipio(List<MunicipioVO> listaMunicipio) {
+        this.listaMunicipio = listaMunicipio;
     }
 
     @Override

@@ -61,6 +61,7 @@ public class PessoaContatoVO extends ValueObjectImpl implements Serializable {
     private String foneResidencial;
     @Column(name = "FONE_CELULAR")
     private String foneCelular;
+    
     @JoinColumn(name = "PESSOA_ID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;

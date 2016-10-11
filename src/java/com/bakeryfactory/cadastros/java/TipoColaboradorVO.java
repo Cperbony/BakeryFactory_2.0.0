@@ -36,6 +36,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -43,21 +45,23 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "tipo_colaborador")
+@Table(name = "TIPO_COLABORADOR")
 public class TipoColaboradorVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "descricao")
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "tipoColaboradorId")
-    private List<ColaboradorVO> colaboradorList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "tipoColaborador")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<ColaboradorVO> listaColaborador;
 
     public TipoColaboradorVO() {
     }
@@ -90,12 +94,12 @@ public class TipoColaboradorVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public List<ColaboradorVO> getColaboradorList() {
-        return colaboradorList;
+    public List<ColaboradorVO> getListaColaborador() {
+        return listaColaborador;
     }
 
-    public void setColaboradorList(List<ColaboradorVO> colaboradorList) {
-        this.colaboradorList = colaboradorList;
+    public void setListaColaborador(List<ColaboradorVO> listaColaborador) {
+        this.listaColaborador = listaColaborador;
     }
 
     @Override

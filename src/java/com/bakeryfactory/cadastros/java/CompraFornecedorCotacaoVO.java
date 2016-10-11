@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -69,7 +71,8 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
     @Column(name = "TOTAL")
     private BigDecimal total;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraFornecedorCotacaoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraFornecedorCotacao")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
     
     @JoinColumn(name = "ID_COMPRA_COTACAO", referencedColumnName = "ID")

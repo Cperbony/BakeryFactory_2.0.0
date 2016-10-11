@@ -43,23 +43,24 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "modo_preparo")
+@Table(name = "MODO_PREPARO")
 public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected ModoPreparoVOPK modoPreparoVOPK;
-    @Column(name = "descricao_preparo")
+    @Column(name = "DESCRICAO_PREPARO")
     private String descricaoPreparo;
-    @Column(name = "tempo_preparo")
+    @Column(name = "TEMPO_PREPARO")
     private String tempoPreparo;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "rendimento")
+    @Column(name = "RENDIMENTO")
     private BigDecimal rendimento;
-    @Column(name = "data_revisao")
+    @Column(name = "DATA_REVISAO")
     @Temporal(TemporalType.DATE)
     private Date dataRevisao;
-    @JoinColumn(name = "receita_id", referencedColumnName = "id", insertable = false, updatable = false)
+    
+    @JoinColumn(name = "ID_RECEITA", referencedColumnName = "ID", insertable = false, updatable = false)
     @ManyToOne(optional = false)
     private ReceitaVO receita;
 

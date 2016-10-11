@@ -39,6 +39,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,34 +48,38 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pcp_op_detalhe")
+@Table(name = "PCP_OP_DETALHE")
 public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade_produzir")
+    @Column(name = "QUANTIDADE_PRODUZIR")
     private BigDecimal quantidadeProduzir;
-    @Column(name = "quantidade_produzida")
+    @Column(name = "QUANTIDADE_PRODUZIDA")
     private BigDecimal quantidadeProduzida;
-    @Column(name = "quantidade_entregue")
+    @Column(name = "QUANTIDADE_ENTREGUE")
     private BigDecimal quantidadeEntregue;
-    @Column(name = "custo_previsto")
+    @Column(name = "CUSTO_PREVISTO")
     private BigDecimal custoPrevisto;
-    @Column(name = "custo_realizado")
+    @Column(name = "CUSTO_REALIZADO")
     private BigDecimal custoRealizado;
-    @JoinColumn(name = "pcp_op_cabecalho_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PCP_OP_CABECALHO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PcpOpCabecalhoVO pcpOpCabecalho;
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpDetalheId")
-    private List<PcpServicoVO> pcpServicoList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpOpDetalhe")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PcpServicoVO> listaPcpServico;
 
     public PcpOpDetalheVO() {
     }
@@ -146,12 +152,12 @@ public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
         this.produto = produto;
     }
 
-    public List<PcpServicoVO> getPcpServicoList() {
-        return pcpServicoList;
+    public List<PcpServicoVO> getListaPcpServico() {
+        return listaPcpServico;
     }
 
-    public void setPcpServicoList(List<PcpServicoVO> pcpServicoList) {
-        this.pcpServicoList = pcpServicoList;
+    public void setListaPcpServico(List<PcpServicoVO> listaPcpServico) {
+        this.listaPcpServico = listaPcpServico;
     }
 
     @Override

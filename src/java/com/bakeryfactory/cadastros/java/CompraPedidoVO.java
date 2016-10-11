@@ -42,6 +42,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -112,13 +114,15 @@ public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
     private Integer diasPrimeiroVencimento;
     @Column(name = "DIAS_INTERVALO")
     private Integer diasIntervalo;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraPedido")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraCotacaoPedidoDetalheVO> listaCompraCotacaoPedidoDetalhe;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraPedidoId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraPedido")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
-    
+
     @JoinColumn(name = "ID_COMPRA_TIPO_PEDIDO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private CompraTipoPedidoVO compraTipoPedido;
@@ -386,5 +390,5 @@ public class CompraPedidoVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.CompraPedidoVO[ id=" + id + " ]";
     }
-    
+
 }

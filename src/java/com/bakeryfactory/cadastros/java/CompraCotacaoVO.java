@@ -39,6 +39,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -62,11 +64,13 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
     private String descricao;
     @Column(name = "SITUACAO")
     private Character situacao;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraCotacaoId")
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
 
     public CompraCotacaoVO() {
@@ -148,5 +152,5 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.CompraCotacaoVO[ id=" + id + " ]";
     }
-    
+
 }

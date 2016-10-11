@@ -45,23 +45,24 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "pessoa_alteracao")
+@Table(name = "PESSOA_ALTERACAO")
 public class PessoaAlteracaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_alteracao")
+    @Column(name = "DATA_ALTERACAO")
     @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
-    @Column(name = "objeto_antigo")
+    @Column(name = "OBJETO_ANTIGO")
     private String objetoAntigo;
-    @Column(name = "objeto_novo")
+    @Column(name = "OBJETO_NOVO")
     private String objetoNovo;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
 

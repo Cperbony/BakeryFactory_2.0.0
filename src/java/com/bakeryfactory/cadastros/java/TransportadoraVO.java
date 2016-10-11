@@ -41,6 +41,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,33 +50,42 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "transportadora")
+@Table(name = "TRANSPORTADORA")
 public class TransportadoraVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_cadastro")
+    @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "classificacao_contabil_conta")
+    @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportadoraId")
-    private List<TransportadoraMunicipioVO> transportadoraMunicipioList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportadoraId")
-    private List<VendaCabecalhoVO> vendaCabecalhoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportadoraId")
-    private List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList;
-    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "transportadoraId")
-    private List<VendaFreteVO> vendaFreteList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transportadora")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<TransportadoraMunicipioVO> listaTransportadoraMunicipio;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transportadora")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaCabecalhoVO> listaVendaCabecalho;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transportadora")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho;
+   
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transportadora")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaFreteVO> listaVendaFrete;
 
     public TransportadoraVO() {
     }
@@ -115,28 +126,28 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<TransportadoraMunicipioVO> getTransportadoraMunicipioList() {
-        return transportadoraMunicipioList;
+    public List<TransportadoraMunicipioVO> getListaTransportadoraMunicipio() {
+        return listaTransportadoraMunicipio;
     }
 
-    public void setTransportadoraMunicipioList(List<TransportadoraMunicipioVO> transportadoraMunicipioList) {
-        this.transportadoraMunicipioList = transportadoraMunicipioList;
+    public void setListaTransportadoraMunicipio(List<TransportadoraMunicipioVO> listaTransportadoraMunicipio) {
+        this.listaTransportadoraMunicipio = listaTransportadoraMunicipio;
     }
 
-    public List<VendaCabecalhoVO> getVendaCabecalhoList() {
-        return vendaCabecalhoList;
+    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
+        return listaVendaCabecalho;
     }
 
-    public void setVendaCabecalhoList(List<VendaCabecalhoVO> vendaCabecalhoList) {
-        this.vendaCabecalhoList = vendaCabecalhoList;
+    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
+        this.listaVendaCabecalho = listaVendaCabecalho;
     }
 
-    public List<VendaOrcamentoCabecalhoVO> getVendaOrcamentoCabecalhoList() {
-        return vendaOrcamentoCabecalhoList;
+    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
+        return listaVendaOrcamentoCabecalho;
     }
 
-    public void setVendaOrcamentoCabecalhoList(List<VendaOrcamentoCabecalhoVO> vendaOrcamentoCabecalhoList) {
-        this.vendaOrcamentoCabecalhoList = vendaOrcamentoCabecalhoList;
+    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho) {
+        this.listaVendaOrcamentoCabecalho = listaVendaOrcamentoCabecalho;
     }
 
     public PessoaVO getPessoa() {
@@ -147,12 +158,12 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public List<VendaFreteVO> getVendaFreteList() {
-        return vendaFreteList;
+    public List<VendaFreteVO> getListaVendaFrete() {
+        return listaVendaFrete;
     }
 
-    public void setVendaFreteList(List<VendaFreteVO> vendaFreteList) {
-        this.vendaFreteList = vendaFreteList;
+    public void setListaVendaFrete(List<VendaFreteVO> listaVendaFrete) {
+        this.listaVendaFrete = listaVendaFrete;
     }
 
     @Override

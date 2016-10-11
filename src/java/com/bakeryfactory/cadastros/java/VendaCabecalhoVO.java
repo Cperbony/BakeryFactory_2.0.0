@@ -42,6 +42,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -49,76 +51,90 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_cabecalho")
+@Table(name = "VENDA_CABECALHO")
 public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_venda")
+    @Column(name = "DATA_VENDA")
     @Temporal(TemporalType.DATE)
     private Date dataVenda;
-    @Column(name = "data_saida")
+    @Column(name = "DATA_SAIDA")
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
-    @Column(name = "hora_saida")
+    @Column(name = "HORA_SAIDA")
     private String horaSaida;
-    @Column(name = "numero_fatura")
+    @Column(name = "NUMERO_FATURA")
     private Integer numeroFatura;
-    @Column(name = "local_entrega")
+    @Column(name = "LOCAL_ENTREGA")
     private String localEntrega;
-    @Column(name = "local_cobranca")
+    @Column(name = "LOCAL_COBRANCA")
     private String localCobranca;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "taxa_comissao")
+    @Column(name = "TAXA_COMISSAO")
     private BigDecimal taxaComissao;
-    @Column(name = "taxa_desconto")
+    @Column(name = "VALOR_COMISSAO")
+    private BigDecimal valorComissao;
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @Column(name = "tipo_frete")
+    @Column(name = "TIPO_FRETE")
     private Character tipoFrete;
-    @Column(name = "forma_pagamento")
+    @Column(name = "FORMA_PAGAMENTO")
     private Character formaPagamento;
-    @Column(name = "valor_frete")
+    @Column(name = "VALOR_FRETE")
     private BigDecimal valorFrete;
-    @Column(name = "valor_seguro")
+    @Column(name = "VALOR_SEGURO")
     private BigDecimal valorSeguro;
-    @Column(name = "observacao")
+    @Column(name = "OBSERVACAO")
     private String observacao;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_CLIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ClienteVO cliente;
-    @JoinColumn(name = "nota_fiscal_tipo_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_NOTA_FISCAL_TIPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private NotaFiscalTipoVO notaFiscalTipo;
-    @JoinColumn(name = "transportadora_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_TRANSPORTADORA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TransportadoraVO transportadora;
-    @JoinColumn(name = "venda_condicoes_pagamento_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CONDICOES_AGMENTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
-    @JoinColumn(name = "venda_romaneio_entrega_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_ROMANEIO_ENTREGA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaRomaneioEntregaVO vendaRomaneioEntrega;
-    @JoinColumn(name = "vendedor_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDEDOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaComissaoVO> vendaComissaoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaFreteVO> vendaFreteList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalhoId")
-    private List<VendaDetalheVO> vendaDetalheList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCabecalho")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaComissaoVO> listaVendaComissao;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalho")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaFreteVO> listaVendaFrete;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalho")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<VendaDetalheVO> listaVendaDetalhe;
 
     public VendaCabecalhoVO() {
     }
@@ -197,6 +213,14 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     public void setTaxaComissao(BigDecimal taxaComissao) {
         this.taxaComissao = taxaComissao;
+    }
+
+    public BigDecimal getValorComissao() {
+        return valorComissao;
+    }
+
+    public void setValorComissao(BigDecimal valorComissao) {
+        this.valorComissao = valorComissao;
     }
 
     public BigDecimal getTaxaDesconto() {
@@ -319,28 +343,28 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
         this.vendedor = vendedor;
     }
 
-    public List<VendaComissaoVO> getVendaComissaoList() {
-        return vendaComissaoList;
+    public List<VendaComissaoVO> getListaVendaComissao() {
+        return listaVendaComissao;
     }
 
-    public void setVendaComissaoList(List<VendaComissaoVO> vendaComissaoList) {
-        this.vendaComissaoList = vendaComissaoList;
+    public void setListaVendaComissao(List<VendaComissaoVO> listaVendaComissao) {
+        this.listaVendaComissao = listaVendaComissao;
     }
 
-    public List<VendaFreteVO> getVendaFreteList() {
-        return vendaFreteList;
+    public List<VendaFreteVO> getListaVendaFrete() {
+        return listaVendaFrete;
     }
 
-    public void setVendaFreteList(List<VendaFreteVO> vendaFreteList) {
-        this.vendaFreteList = vendaFreteList;
+    public void setListaVendaFrete(List<VendaFreteVO> listaVendaFrete) {
+        this.listaVendaFrete = listaVendaFrete;
     }
 
-    public List<VendaDetalheVO> getVendaDetalheList() {
-        return vendaDetalheList;
+    public List<VendaDetalheVO> getListaVendaDetalhe() {
+        return listaVendaDetalhe;
     }
 
-    public void setVendaDetalheList(List<VendaDetalheVO> vendaDetalheList) {
-        this.vendaDetalheList = vendaDetalheList;
+    public void setListaVendaDetalhe(List<VendaDetalheVO> listaVendaDetalhe) {
+        this.listaVendaDetalhe = listaVendaDetalhe;
     }
 
     @Override

@@ -45,28 +45,30 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "municipio")
+@Table(name = "MUNICIPIO")
 public class MunicipioVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "nome")
+    @Column(name = "NOME")
     private String nome;
-    @Column(name = "codigo_ibge")
+    @Column(name = "CODIGO_IBGE")
     private Integer codigoIbge;
-    @Column(name = "codigo_receita_federal")
+    @Column(name = "CODIGO_RECEITA_FEDERAL")
     private Integer codigoReceitaFederal;
-    @Column(name = "codigo_estadual")
+    @Column(name = "CODIGO_ESTADUAL")
     private Integer codigoEstadual;
-    @Column(name = "uf_sigla")
+    @Column(name = "UF_SIGLA")
     private String ufSigla;
+    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "municipioId")
-    private List<TransportadoraMunicipioVO> transportadoraMunicipioList;
-    @JoinColumn(name = "uf_id", referencedColumnName = "id")
+    private List<TransportadoraMunicipioVO> listaTransportadoraMunicipio;
+    
+    @JoinColumn(name = "ID_UF", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private UfVO uf;
 
@@ -125,12 +127,12 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
         this.ufSigla = ufSigla;
     }
 
-    public List<TransportadoraMunicipioVO> getTransportadoraMunicipioList() {
-        return transportadoraMunicipioList;
+    public List<TransportadoraMunicipioVO> getListaTransportadoraMunicipio() {
+        return listaTransportadoraMunicipio;
     }
 
-    public void setTransportadoraMunicipioList(List<TransportadoraMunicipioVO> transportadoraMunicipioList) {
-        this.transportadoraMunicipioList = transportadoraMunicipioList;
+    public void setListaTransportadoraMunicipio(List<TransportadoraMunicipioVO> listaTransportadoraMunicipio) {
+        this.listaTransportadoraMunicipio = listaTransportadoraMunicipio;
     }
 
     public UfVO getUf() {

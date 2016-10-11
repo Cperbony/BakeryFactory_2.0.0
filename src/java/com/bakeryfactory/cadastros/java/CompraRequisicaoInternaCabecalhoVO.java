@@ -39,6 +39,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -46,27 +48,29 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "requisicao_interna_cabecalho")
-public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_REQUISICAO_INTERNA_CABECALHO")
+public class CompraRequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
-    @Column(name = "data_requisicao")
+    @Column(name = "DATA_REQUISICAO")
     @Temporal(TemporalType.DATE)
     private Date dataRequisicao;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraRequisicaoInternaCabecalhoId")
-    private List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicaoInternaCabecalho")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraRequisicaoInternaDetalheVO> listaCompraRequisicaoInternaDetalhe;
 
-    public RequisicaoInternaCabecalhoVO() {
+    public CompraRequisicaoInternaCabecalhoVO() {
     }
 
-    public RequisicaoInternaCabecalhoVO(Integer id) {
+    public CompraRequisicaoInternaCabecalhoVO(Integer id) {
         this.id = id;
     }
 
@@ -94,17 +98,17 @@ public class RequisicaoInternaCabecalhoVO extends ValueObjectImpl implements Ser
         this.situacao = situacao;
     }
 
-    public List<RequisicaoInternaDetalheVO> getRequisicaoInternaDetalheList() {
-        return requisicaoInternaDetalheList;
+    public List<CompraRequisicaoInternaDetalheVO> getListaCompraRequisicaoInternaDetalhe() {
+        return listaCompraRequisicaoInternaDetalhe;
     }
 
-    public void setRequisicaoInternaDetalheList(List<RequisicaoInternaDetalheVO> requisicaoInternaDetalheList) {
-        this.requisicaoInternaDetalheList = requisicaoInternaDetalheList;
+    public void setListaCompraRequisicaoInternaDetalhe(List<CompraRequisicaoInternaDetalheVO> listaCompraRequisicaoInternaDetalhe) {
+        this.listaCompraRequisicaoInternaDetalhe = listaCompraRequisicaoInternaDetalhe;
     }
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.RequisicaoInternaCabecalhoVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraRequisicaoInternaCabecalhoVO[ id=" + id + " ]";
     }
     
 }

@@ -46,31 +46,33 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_comissao")
+@Table(name = "VENDA_COMISSAO")
 public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "valor_venda")
+    @Column(name = "VALOR_VENDA")
     private BigDecimal valorVenda;
-    @Column(name = "tipo_contabil")
+    @Column(name = "TIPO_CONTABIL")
     private Character tipoContabil;
-    @Column(name = "valor_comissao")
+    @Column(name = "VALOR_COMISSAO")
     private BigDecimal valorComissao;
-    @Column(name = "situacao")
+    @Column(name = "SITUACAO")
     private Character situacao;
-    @Column(name = "data_lancamento")
+    @Column(name = "DATA_LANCAMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataLancamento;
-    @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CABECALHO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCabecalhoVO vendaCabecalho;
-    @JoinColumn(name = "vendedor_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDEDOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
 

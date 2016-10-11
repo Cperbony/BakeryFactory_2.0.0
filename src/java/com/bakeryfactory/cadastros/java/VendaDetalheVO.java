@@ -43,39 +43,42 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "venda_detalhe")
+@Table(name = "VENDA_DETALHE")
 public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "id")
+    @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "quantidade")
+    @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
-    @Column(name = "valor_unitario")
+    @Column(name = "VALOR_UNITARIO")
     private BigDecimal valorUnitario;
-    @Column(name = "valor_subtotal")
+    @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
-    @Column(name = "taxa_desconto")
+    @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
-    @Column(name = "valor_desconto")
+    @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "valor_total")
+    @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
-    @Column(name = "taxa_comissao")
+    @Column(name = "TAXA_COMISSAO")
     private BigDecimal taxaComissao;
-    @Column(name = "valor_comissao")
+    @Column(name = "VALOR_COMISSAO")
     private BigDecimal valorComissao;
-    @JoinColumn(name = "empresa_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
-    @JoinColumn(name = "produto_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
-    @JoinColumn(name = "venda_cabecalho_id", referencedColumnName = "id")
+    
+    @JoinColumn(name = "ID_VENDA_CABECALHO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private VendaCabecalhoVO vendaCabecalho;
 
