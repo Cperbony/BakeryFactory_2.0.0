@@ -64,6 +64,10 @@ public class CargoVO extends ValueObjectImpl implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "SALARIO")
     private BigDecimal salario;
+    @Column(name = "CBO_1994")
+    private String cbo1994;
+    @Column(name = "CBO_2002")
+    private String cbo2002;
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cargo")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -127,6 +131,24 @@ public class CargoVO extends ValueObjectImpl implements Serializable {
     public void setEmpresa(EmpresaVO empresa) {
         this.empresa = empresa;
     }
+
+    public String getCbo1994() {
+        return cbo1994;
+    }
+
+    public void setCbo1994(String cbo1994) {
+        this.cbo1994 = cbo1994;
+    }
+
+    public String getCbo2002() {
+        return cbo2002;
+    }
+
+    public void setCbo2002(String cbo2002) {
+        this.cbo2002 = cbo2002;
+    }
+    
+    
     
 
     @Override

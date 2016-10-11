@@ -257,7 +257,7 @@ public class Menu implements MDIController, LoginController {
     @Override
     public void loginSuccessful(Map loginInfo) {
         //Domain tipo de pessoa, que aperecerá nos combos da aplicação
-        //PESSOA E CORELATOS
+        //PESSOA E CORRELATOS
         Domain tipoPessoa = new Domain("tipoPessoa");
         tipoPessoa.addDomainPair("F", "Física");
         tipoPessoa.addDomainPair("J", "Jurídica");
