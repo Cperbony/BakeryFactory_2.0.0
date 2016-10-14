@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
@@ -35,32 +34,32 @@ import org.openswing.swing.util.java.Consts;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/10/2016
+ * @date 13/10/2016
  */
-public class CargoDetalheController extends FormController{
-    
-    private CargoDetalhe cargoDetalhe = null;
-    private String pk = null;
-    private CargoGrid cargoGrid = null;
-    private String acaoServidor;
+public class MunicipioDetalheController extends FormController {
 
-    public CargoDetalheController(CargoGrid cargoGrid, String pk) {
-        this.cargoGrid = cargoGrid;
+    private MunicipioDetalhe municipioDetalhe = null;
+    private String pk = null;
+    private MunicipioGrid municipioGrid = null;
+    private final String acaoServidor;
+
+    public MunicipioDetalheController(MunicipioGrid municipioGrid, String pk) {
+        this.municipioGrid = municipioGrid;
         this.pk = pk;
-        this.acaoServidor = "cargoDetalheAction";
-        cargoDetalhe = new CargoDetalhe(this);
-        cargoDetalhe.setParentFrame(this.cargoGrid);
-        this.cargoGrid.pushFrame(cargoDetalhe);
-        MDIFrame.add(cargoDetalhe);
-    
-        if(pk != null) {
-            cargoDetalhe.getForm1().setMode(Consts.READONLY);
-            cargoDetalhe.getForm1().reload();
-        }  else {
-            cargoDetalhe.getForm1().setMode(Consts.INSERT);
+        this.acaoServidor = "municipioDetalheAction";
+        municipioDetalhe = new MunicipioDetalhe(this);
+        municipioDetalhe.setParentFrame(this.municipioGrid);
+        this.municipioGrid.pushFrame(municipioDetalhe);
+        MDIFrame.add(municipioDetalhe);
+
+        if (pk != null) {
+            municipioDetalhe.getForm1().setMode(Consts.READONLY);
+            municipioDetalhe.getForm1().reload();
+        } else {
+            municipioDetalhe.getForm1().setMode(Consts.INSERT);
         }
     }
-    
+
     /**
      * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
      *
@@ -80,6 +79,7 @@ public class CargoDetalheController extends FormController{
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
@@ -89,8 +89,8 @@ public class CargoDetalheController extends FormController{
      */
     @Override
     public void afterInsertData() {
-        cargoGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(cargoDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        municipioGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(municipioDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -111,7 +111,7 @@ public class CargoDetalheController extends FormController{
      */
     @Override
     public void afterEditData() {
-        cargoGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(cargoDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        municipioGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(municipioDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 }

@@ -24,6 +24,7 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.CargoVO;
+import com.bakeryfactory.cadastros.java.MunicipioVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,16 +42,16 @@ import org.openswing.swing.util.client.ClientUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date 11/10/2016
+ * @date 13/10/2016
  */
-public class CargoGridController extends GridController implements GridDataLocator {
+public class MunicipioGridController extends GridController implements GridDataLocator {
 
-    private CargoGrid grid;
+    private MunicipioGrid grid;
     private String acaoServidor;
 
-    public CargoGridController() {
-        grid = new CargoGrid(this);
-        acaoServidor = "cargoGridAction";
+    public MunicipioGridController() {
+        grid = new MunicipioGrid(this);
+        acaoServidor = "municipioGridAction";
         MDIFrame.add(grid);
     }
 
@@ -63,7 +64,7 @@ public class CargoGridController extends GridController implements GridDataLocat
 
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        new CargoDetalheController(this.grid, null);
+        new MunicipioDetalheController(this.grid, null);
         return false;
     }
 
@@ -88,8 +89,8 @@ public class CargoGridController extends GridController implements GridDataLocat
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        CargoVO cargo = (CargoVO) persistentObject;
-        new CargoDetalheController(grid, cargo.getId().toString());
+        MunicipioVO municipio = (MunicipioVO) persistentObject;
+        new MunicipioDetalheController(grid, municipio.getId().toString());
     }
 
     /**

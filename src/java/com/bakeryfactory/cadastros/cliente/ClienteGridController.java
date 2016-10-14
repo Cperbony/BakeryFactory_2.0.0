@@ -24,12 +24,12 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.CargoVO;
+import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.openswing.swing.client.GridControl;
-import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
@@ -41,29 +41,29 @@ import org.openswing.swing.util.client.ClientUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date 11/10/2016
+ * @date 13/10/2016
  */
-public class CargoGridController extends GridController implements GridDataLocator {
-
-    private CargoGrid grid;
+public class ClienteGridController extends GridController implements GridDataLocator {
+    
+    private ClienteGrid grid;
     private String acaoServidor;
-
-    public CargoGridController() {
-        grid = new CargoGrid(this);
-        acaoServidor = "cargoGridAction";
+    
+    public ClienteGridController() {
+        grid = new ClienteGrid(this);
+        acaoServidor = "clienteGridAction";
         MDIFrame.add(grid);
     }
-
+    
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         //Define os Parâmetros da Grid
         otherGridParams.put("acao", Constantes.LOAD);
         return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
-
+    
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        new CargoDetalheController(this.grid, null);
+        new ClienteDetalheController(this.grid, null);
         return false;
     }
 
@@ -88,8 +88,8 @@ public class CargoGridController extends GridController implements GridDataLocat
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        CargoVO cargo = (CargoVO) persistentObject;
-        new CargoDetalheController(grid, cargo.getId().toString());
+        ClienteVO cliente = (ClienteVO) persistentObject;
+        new ClienteDetalheController(grid, cliente.getId().toString());
     }
 
     /**
@@ -108,8 +108,8 @@ public class CargoGridController extends GridController implements GridDataLocat
 
         //Seta os Parâmetros da Grid
         GridParams pars = new GridParams(0, 0, null, null, null, otherGridParams);
-
+        
         return ClientUtils.getData(acaoServidor, pars);
     }
-
+    
 }

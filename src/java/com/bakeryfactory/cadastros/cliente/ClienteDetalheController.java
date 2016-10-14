@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
+import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -35,32 +35,37 @@ import org.openswing.swing.util.java.Consts;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/10/2016
+ * @date 13/10/2016
  */
-public class CargoDetalheController extends FormController{
-    
-    private CargoDetalhe cargoDetalhe = null;
-    private String pk = null;
-    private CargoGrid cargoGrid = null;
+public class ClienteDetalheController extends FormController {
+
+    private ClienteDetalhe clienteDetalhe = null;
+    private String pk;
+    private ClienteGrid clienteGrid = null;
     private String acaoServidor;
 
-    public CargoDetalheController(CargoGrid cargoGrid, String pk) {
-        this.cargoGrid = cargoGrid;
+    public ClienteDetalheController(ClienteGrid clienteGrid, String pk) {
+        this.clienteGrid = clienteGrid;
         this.pk = pk;
-        this.acaoServidor = "cargoDetalheAction";
-        cargoDetalhe = new CargoDetalhe(this);
-        cargoDetalhe.setParentFrame(this.cargoGrid);
-        this.cargoGrid.pushFrame(cargoDetalhe);
-        MDIFrame.add(cargoDetalhe);
-    
-        if(pk != null) {
-            cargoDetalhe.getForm1().setMode(Consts.READONLY);
-            cargoDetalhe.getForm1().reload();
-        }  else {
-            cargoDetalhe.getForm1().setMode(Consts.INSERT);
+        this.acaoServidor = "clienteDetalheAction";
+        clienteDetalhe = new ClienteDetalhe(this);
+        clienteDetalhe.setParentFrame(this.clienteGrid);
+        this.clienteGrid.pushFrame(clienteDetalhe);
+        MDIFrame.add(clienteDetalhe);
+
+        try {
+            clienteDetalhe.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+        }
+
+        if (pk != null) {
+            clienteDetalhe.getForm1().setMode(Consts.READONLY);
+            clienteDetalhe.getForm1().reload();
+        } else {
+            clienteDetalhe.getForm1().setMode(Consts.INSERT);
         }
     }
-    
+
     /**
      * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
      *
@@ -80,6 +85,7 @@ public class CargoDetalheController extends FormController{
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
@@ -89,8 +95,8 @@ public class CargoDetalheController extends FormController{
      */
     @Override
     public void afterInsertData() {
-        cargoGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(cargoDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        clienteGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(clienteDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -111,7 +117,7 @@ public class CargoDetalheController extends FormController{
      */
     @Override
     public void afterEditData() {
-        cargoGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(cargoDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        clienteGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(clienteDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 }
