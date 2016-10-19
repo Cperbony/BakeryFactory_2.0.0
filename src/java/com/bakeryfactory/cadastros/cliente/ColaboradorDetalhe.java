@@ -40,18 +40,19 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class ColaboradorDetalhe extends InternalFrame {
 
-    private PessoaLookup pessoaLookup;
-    private TipoColaboradorLookup tipoColaboraborLookup;
-    private SituacaoColaboradorLookup situacaoColaboradorLookup;
-    private TipoAdmissaoLookup tipoAdmissaoLookup;
-    private NivelFormacaoLookup nivelFormacaoLookup;
-    private CargoLookup cargoLookup;
-    private ContaContabilLookup contaContabilLookup;
-    private SindicatoLookup sindicatoLookup;
-    private SetorLookup setorLookup;
+    private final PessoaLookup pessoaLookup;
+    private final TipoColaboradorLookup tipoColaboraborLookup;
+    private final SituacaoColaboradorLookup situacaoColaboradorLookup;
+    private final TipoAdmissaoLookup tipoAdmissaoLookup;
+    private final NivelFormacaoLookup nivelFormacaoLookup;
+    private final CargoLookup cargoLookup;
+    private final ContaContabilLookup contaContabilLookup;
+    private final SindicatoLookup sindicatoLookup;
+    private final SetorLookup setorLookup;
 
     /**
      * Creates new form ColaboradorDetalhe
+     * @param controller
      */
     public ColaboradorDetalhe(ColaboradorDetalheController controller) {
         initComponents();
@@ -225,6 +226,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         jSeparator2 = new javax.swing.JSeparator();
 
         setTitle("Bakery Factory - Colaborador Detalhes");
+        setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Colaborador"));
@@ -237,8 +239,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
         form1.setVOClassName("com.t2tierp.cadastros.java.ColaboradorVO");

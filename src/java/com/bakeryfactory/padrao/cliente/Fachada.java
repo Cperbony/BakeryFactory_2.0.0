@@ -23,8 +23,10 @@
  */
 package com.bakeryfactory.padrao.cliente;
 
+import com.bakeryfactory.cadastros.cliente.AtividadeForCliGridController;
+import com.bakeryfactory.cadastros.cliente.ClienteGridController;
 import com.bakeryfactory.cadastros.cliente.EstadoCivilGridController;
-import com.bakeryfactory.cadastros.java.EstadoCivilVO;
+import com.bakeryfactory.cadastros.cliente.PessoaGridController;
 import javax.swing.JOptionPane;
 import org.openswing.swing.mdi.client.ClientFacade;
 
@@ -32,30 +34,111 @@ import org.openswing.swing.mdi.client.ClientFacade;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date 11/09/2016
  */
-public class Fachada implements ClientFacade{
+public class Fachada implements ClientFacade {
 
     public Fachada() {
     }
-    
+
     //PESSOA
-    public void getEstadoCivil(){
+    public void getEstadoCivil() {
         new EstadoCivilGridController();
     }
-    
-    public void getPessoa(){
-       // new PessoaGridController();
+
+    public void getPessoa() {
+        new PessoaGridController();
     }
 
     //CLIENTE • FORNECEDOR • TRANSPORTADORA
-    
+    public void getAtividadeForCli() {
+        new AtividadeForCliGridController();
+    }
+
+    public void getSituacaoForCli() {
+       // new SituacaoForCliGridController();
+    }
+
+    public void getCliente() {
+        new ClienteGridController();
+    }
+
+    public void getTransportadora() {
+        //new TransportadoraGridController();
+    }
+
     //COLABORADORES
-    
+    public void getTipoAdmissao() {
+        // new TipoAdmissaoGridController;
+    }
+
+    public void getColaborador() {
+        // new ColaboradorGridController;
+    }
+
     //SETORES
-    
+    public void getSetor() {
+        // new SetorGridController;
+    }
+
     //ENDEREÇO
+    public void getPais() {
+        //new PaisGridController;
+    }
+
+    public void getUf() {
+        //new UfGridController;
+    }
+
+    public void getMunicipio() {
+        //    new MunicipioGridController;
+    }
+
+    public void getCep() {
+        //new CepGridController;
+    }
+    
+    
+
+    //INGREDIENTE
+    public void getIngrediente() {
+        // new IngredienteGridController();
+    }
+    
+    
+    
+    
+    
+     //RECEITA
+    public void getReceita() {
+        // new ReceitaGridController();
+    }
+    
     
     
     //PRODUTO
+    public void getProdutoMarca() {
+     //   new ProdutoMarcaGridController();
+    }
+
+    public void getNcm() {
+       // new NcmGridController();
+    }
+
+    public void getUnidadeProduto() {
+       // new UnidadeProdutoGridController();
+    }
+
+    public void getProdutoGrupo() {
+       // new ProdutoGrupoGridController();
+    }
+
+    public void getProdutoSubGrupo() {
+      //  new ProdutoSubGrupoGridController();
+    }
+
+    public void getProduto() {
+      //  new ProdutoGridController();
+    }
+    
     
     
     //FUNÇÕES E TABELAS

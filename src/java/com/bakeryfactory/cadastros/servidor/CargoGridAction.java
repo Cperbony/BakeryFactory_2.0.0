@@ -23,11 +23,7 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.java.AtividadeForCliVO;
 import com.bakeryfactory.cadastros.java.CargoVO;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
-import com.bakeryfactory.cadastros.java.EstadoCivilVO;
-import com.bakeryfactory.cadastros.java.PessoaVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.util.ArrayList;

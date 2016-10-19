@@ -24,9 +24,6 @@
 package com.bakeryfactory.cadastros.servidor;
 
 import com.bakeryfactory.cadastros.java.ClienteVO;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
-import com.bakeryfactory.cadastros.java.EstadoCivilVO;
-import com.bakeryfactory.cadastros.java.PessoaVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.util.ArrayList;

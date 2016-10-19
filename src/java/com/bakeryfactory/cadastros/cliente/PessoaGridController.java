@@ -40,7 +40,7 @@ import org.openswing.swing.util.client.ClientUtils;
  *
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
-class PessoaGridController extends GridController implements GridDataLocator{
+public class PessoaGridController extends GridController implements GridDataLocator{
 
     private PessoaGrid grid;
     private String acaoServidor;

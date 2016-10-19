@@ -23,6 +23,7 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.pcp.java.PcpServicoColaboradorVO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

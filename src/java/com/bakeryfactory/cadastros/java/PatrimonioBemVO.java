@@ -23,6 +23,7 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -77,7 +78,8 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
     private String numeroNotaFiscal;
     @Column(name = "CHAVE_NFE")
     private String chaveNfe;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBemId")
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBem")
     private List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento;
 
     public PatrimonioBemVO() {

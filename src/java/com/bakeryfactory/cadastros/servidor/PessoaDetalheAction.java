@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.servidor;
 
 import com.bakeryfactory.cadastros.java.EmpresaVO;
-import com.bakeryfactory.cadastros.java.EstadoCivilVO;
 import com.bakeryfactory.cadastros.java.PessoaContatoVO;
 import com.bakeryfactory.cadastros.java.PessoaEnderecoVO;
 import com.bakeryfactory.cadastros.java.PessoaFisicaVO;
@@ -34,7 +33,6 @@ import com.bakeryfactory.cadastros.java.PessoaVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.servlet.ServletContext;
@@ -44,15 +42,11 @@ import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
-import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.server.Action;
 import org.openswing.swing.server.UserSessionParameters;
-import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
