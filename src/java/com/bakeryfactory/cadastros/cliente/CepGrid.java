@@ -30,13 +30,13 @@ import org.openswing.swing.mdi.client.InternalFrame;
  *
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  */
-public class FornecedorGrid extends InternalFrame {
+public class CepGrid extends InternalFrame {
 
     /**
      * Creates new form TempGrid
      * @param controller
      */
-    public FornecedorGrid(FornecedorGridController controller) {
+    public CepGrid(CepGridController controller) {
         initComponents();
         gridControl1.setController(controller);
         gridControl1.setGridDataLocator(controller);
@@ -59,25 +59,22 @@ public class FornecedorGrid extends InternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
-        insertButton1 = new org.openswing.swing.client.InsertButton();
-        deleteButton1 = new org.openswing.swing.client.DeleteButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         gridControl1 = new org.openswing.swing.client.GridControl();
+        textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
-        dateColumn6 = new org.openswing.swing.table.columns.client.DateColumn();
-        comboColumn8 = new org.openswing.swing.table.columns.client.ComboColumn();
-        dateColumn9 = new org.openswing.swing.table.columns.client.DateColumn();
+        textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
+        textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
+        integerColumn8 = new org.openswing.swing.table.columns.client.IntegerColumn();
 
         setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Fornecedor"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("CEP"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel1.add(insertButton1);
-        jPanel1.add(deleteButton1);
         jPanel1.add(reloadButton1);
         jPanel1.add(navigatorBar1);
 
@@ -89,57 +86,47 @@ public class FornecedorGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        gridControl1.setDeleteButton(deleteButton1);
-        gridControl1.setFunctionId("fornecedor");
-        gridControl1.setInsertButton(insertButton1);
+        gridControl1.setFunctionId("cep");
         gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
-        gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.FornecedorVO");
+        gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.CepVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        textColumn3.setColumnFilterable(true);
-        textColumn3.setColumnName("pessoa.nome");
-        textColumn3.setColumnSortable(true);
-        textColumn3.setHeaderColumnName("Nome");
+        textColumn2.setColumnName("cep");
+        textColumn2.setHeaderColumnName("Cep");
+        textColumn2.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControl1.getColumnContainer().add(textColumn2);
+
+        textColumn3.setColumnName("logradouro");
+        textColumn3.setHeaderColumnName("Logradouro");
         textColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        textColumn3.setPreferredWidth(200);
         gridControl1.getColumnContainer().add(textColumn3);
 
-        textColumn4.setColumnFilterable(true);
-        textColumn4.setColumnName("atividadeForCli.nome");
-        textColumn4.setColumnSortable(true);
-        textColumn4.setHeaderColumnName("Atividade");
+        textColumn4.setColumnName("complemento");
+        textColumn4.setHeaderColumnName("Complemento");
         textColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn4);
 
-        textColumn5.setColumnFilterable(true);
-        textColumn5.setColumnName("situacaoForCli.nome");
-        textColumn5.setColumnSortable(true);
-        textColumn5.setHeaderColumnName("Situação");
+        textColumn5.setColumnName("bairro");
+        textColumn5.setHeaderColumnName("Bairro");
         textColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn5);
 
-        dateColumn6.setColumnFilterable(true);
-        dateColumn6.setColumnName("desde");
-        dateColumn6.setColumnSortable(true);
-        dateColumn6.setHeaderColumnName("Desde");
-        dateColumn6.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControl1.getColumnContainer().add(dateColumn6);
+        textColumn6.setColumnName("municipio");
+        textColumn6.setHeaderColumnName("Município");
+        textColumn6.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControl1.getColumnContainer().add(textColumn6);
 
-        comboColumn8.setColumnFilterable(true);
-        comboColumn8.setColumnName("localizacao");
-        comboColumn8.setColumnSortable(true);
-        comboColumn8.setDomainId("fornecedorLocalizacao");
-        comboColumn8.setHeaderColumnName("Localização");
-        comboColumn8.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControl1.getColumnContainer().add(comboColumn8);
+        textColumn7.setColumnName("uf");
+        textColumn7.setHeaderColumnName("Uf");
+        textColumn7.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControl1.getColumnContainer().add(textColumn7);
 
-        dateColumn9.setColumnFilterable(true);
-        dateColumn9.setColumnName("dataCadastro");
-        dateColumn9.setColumnSortable(true);
-        dateColumn9.setHeaderColumnName("Data Cadastro");
-        dateColumn9.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControl1.getColumnContainer().add(dateColumn9);
+        integerColumn8.setColumnName("codigoIbgeMunicipio");
+        integerColumn8.setHeaderColumnName("Codigo Ibge Município");
+        integerColumn8.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        integerColumn8.setPreferredWidth(150);
+        gridControl1.getColumnContainer().add(integerColumn8);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -154,17 +141,16 @@ public class FornecedorGrid extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn8;
-    private org.openswing.swing.table.columns.client.DateColumn dateColumn6;
-    private org.openswing.swing.table.columns.client.DateColumn dateColumn9;
-    private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.GridControl gridControl1;
-    private org.openswing.swing.client.InsertButton insertButton1;
+    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn8;
     private javax.swing.JPanel jPanel1;
     private org.openswing.swing.client.NavigatorBar navigatorBar1;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn2;
     private org.openswing.swing.table.columns.client.TextColumn textColumn3;
     private org.openswing.swing.table.columns.client.TextColumn textColumn4;
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn6;
+    private org.openswing.swing.table.columns.client.TextColumn textColumn7;
     // End of variables declaration//GEN-END:variables
 }

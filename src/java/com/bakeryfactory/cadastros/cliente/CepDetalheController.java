@@ -38,43 +38,38 @@ import org.openswing.swing.util.java.Consts;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date 15/10/2016
  */
-public class TempDetalheController extends FormController {
+public class CepDetalheController extends FormController {
 
-    private TempDetalhe tempDetalhe = null;
+    private CepDetalhe cepDetalhe = null;
     private String pk = null;
-    private FornecedorGrid tempGrid = null;
-    private String acaoServidor;
+    private CepGrid cepGrid = null;
+    private final String acaoServidor;
 
-    public TempDetalheController(FornecedorGrid tempGrid, String pk) {
-        this.tempGrid = tempGrid;
+    public CepDetalheController(CepGrid cepGrid, String pk) {
+        this.cepGrid = cepGrid;
         this.pk = pk;
-        this.acaoServidor = "padraoAcao_DetalheAction";
-        tempDetalhe = new TempDetalhe(this);
-        tempDetalhe.setParentFrame(this.tempGrid);
-        this.tempGrid.pushFrame(tempDetalhe);
-        MDIFrame.add(tempDetalhe);
+        this.acaoServidor = "cepDetalheAction";
+        cepDetalhe = new CepDetalhe(this);
+        cepDetalhe.setParentFrame(this.cepGrid);
+        this.cepGrid.pushFrame(cepDetalhe);
+        MDIFrame.add(cepDetalhe);
 
-        try {
-            tempDetalhe.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-        }
-        
         if (pk != null) {
-            tempDetalhe.getForm1().setMode(Consts.READONLY);
-            tempDetalhe.getForm1().reload();
+            cepDetalhe.getForm1().setMode(Consts.READONLY);
+            cepDetalhe.getForm1().reload();
         } else {
-            tempDetalhe.getForm1().setMode(Consts.INSERT);
+            cepDetalhe.getForm1().setMode(Consts.INSERT);
         }
     }
 
-/**
- * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
- *
- * @param valueObjectClass value object class
- * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
- */
-@Override
-        public Response loadData(Class valueObjectClass) {
+    /**
+     * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
+     *
+     * @param valueObjectClass value object class
+     * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
+     */
+    @Override
+    public Response loadData(Class valueObjectClass) {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
 
@@ -87,7 +82,7 @@ public class TempDetalheController extends FormController {
      * @throws java.lang.Exception
      */
     @Override
-        public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+    public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
 
@@ -95,9 +90,9 @@ public class TempDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in INSERT mode.
      */
     @Override
-        public void afterInsertData() {
-        tempGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(tempDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    public void afterInsertData() {
+        cepGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(cepDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -109,7 +104,7 @@ public class TempDetalheController extends FormController {
      * @throws java.lang.Exception
      */
     @Override
-        public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
     }
 
@@ -117,22 +112,9 @@ public class TempDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in EDIT mode.
      */
     @Override
-        public void afterEditData() {
-        tempGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(tempDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
-    } 
-    
-     /**
-   * Callback method invoked each time an input control is edited: this method define if the new value if valid.
-   * Default behaviour: input control value is valid.
-   * @param attributeName attribute name related to the input control currently edited
-   * @param oldValue old input control value (before editing)
-   * @param newValue new input control value (just edited)
-   * @return <code>true</code> if input control value is valid, <code>false</code> otherwise
-   */
-    @Override
-  public boolean validateControl(String attributeName,Object oldValue,Object newValue) {
-    return true;
-  }
+    public void afterEditData() {
+        cepGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(cepDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

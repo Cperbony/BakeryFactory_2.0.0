@@ -26,6 +26,7 @@ package com.bakeryfactory.cadastros.cliente;
 
 import temp.com.bakeryfactory.cliente.*;
 import com.bakeryfactory.cadastros.java.ColaboradorVO;
+import com.bakeryfactory.cadastros.java.FornecedorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,14 +45,14 @@ import org.openswing.swing.util.client.ClientUtils;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date   13/10/2016
  */
-public class TempGridController extends GridController implements GridDataLocator{
+public class FornecedorGridController extends GridController implements GridDataLocator{
     
     private FornecedorGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
-    public TempGridController() {
+    public FornecedorGridController() {
         grid = new FornecedorGrid(this);
-        acaoServidor = "tempGridAction";
+        acaoServidor = "fornecedorGridAction";
         MDIFrame.add(grid);
     }
     
@@ -64,7 +65,7 @@ public class TempGridController extends GridController implements GridDataLocato
     
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        new TempDetalheController(this.grid, null);
+        new FornecedorDetalheController(this.grid, null);
         return false;
     }
 
@@ -89,8 +90,8 @@ public class TempGridController extends GridController implements GridDataLocato
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        ColaboradorVO colaborador = (ColaboradorVO) persistentObject;
-        new TempDetalheController(grid, colaborador.getId().toString());
+        FornecedorVO fornecedor = (FornecedorVO) persistentObject;
+        new FornecedorDetalheController(grid, fornecedor.getId().toString());
     }
 
     /**
