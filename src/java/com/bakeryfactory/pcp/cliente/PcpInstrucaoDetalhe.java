@@ -75,7 +75,7 @@ public class PcpInstrucaoDetalhe extends InternalFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PCP Instrução"));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 10));
         jPanel1.add(editButton1);
         jPanel1.add(reloadButton1);
         jPanel1.add(saveButton1);
@@ -104,6 +104,7 @@ public class PcpInstrucaoDetalhe extends InternalFrame {
 
         textControl2.setAttributeName("codigo");
         textControl2.setEnabled(false);
+        textControl2.setLinkLabel(lblCodigo);
         textControl2.setMaxCharacters(3);
         textControl2.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -123,6 +124,7 @@ public class PcpInstrucaoDetalhe extends InternalFrame {
 
         textControl3.setAttributeName("descricao");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblDescricao);
         textControl3.setMaxCharacters(100);
         textControl3.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();

@@ -47,7 +47,7 @@ public class PcpOpCabecalhoDetalheController extends FormController {
     private PcpOpCabecalhoDetalhe pcpOpCabecalhoDetalhe = null;
     private String pk = null;
     private PcpOpCabecalhoGrid pcpOpCabecalhoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public PcpOpCabecalhoDetalheController(PcpOpCabecalhoGrid pcpOpCabecalhoGrid, String pk) {
         this.pcpOpCabecalhoGrid = pcpOpCabecalhoGrid;

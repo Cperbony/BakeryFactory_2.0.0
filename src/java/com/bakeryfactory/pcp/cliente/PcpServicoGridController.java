@@ -72,10 +72,10 @@ public class PcpServicoGridController extends GridController implements GridData
         if (grid.getGrid1().getMode() != Consts.INSERT) {
             if (opDetalhe != null) {
                 if (opDetalhe.getListaPcpServico() != null) {
-                    grid.getColaboradorController().setServico(opDetalhe.getListaPcpServico().get(rowNumber));
+                    grid.getColaboradorGridController().setServico(opDetalhe.getListaPcpServico().get(rowNumber));
                     grid.getGridControlColaborador().reloadData();
 
-                    grid.getEquipamentoController().setServico(opDetalhe.getListaPcpServico().get(rowNumber));
+                    grid.getEquipamentoGridController().setServico(opDetalhe.getListaPcpServico().get(rowNumber));
                     grid.getGridControlEquipamento().reloadData();
                 }
             }

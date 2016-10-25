@@ -23,7 +23,11 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.vendas.java.VendaOrcamentoDetalheVO;
+import com.bakeryfactory.vendas.java.VendaDetalheVO;
 import com.bakeryfactory.pcp.java.PcpOpDetalheVO;
+import com.bakeryfactory.tributacao.java.TributGrupoTributarioVO;
+import com.bakeryfactory.tributacao.java.TributIcmsCustomCabVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -37,12 +41,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
@@ -87,6 +90,8 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
+    @Column(name = "FOTO_PRODUTO")
+    private String fotoProduto;
     @Column(name = "DATA_ALTERACAO")
     @Temporal(TemporalType.DATE)
     private Date dataAlteracao;
@@ -94,37 +99,61 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     private Character classeAbc;
     @Column(name = "peso")
     private BigDecimal peso;
-    @Column(name = "IMAGEM")
-    private String imagem;
-    
+    @Transient
+    private byte[] imagem;
+
     @JoinColumn(name = "ID_PRODUTO_SUBGRUPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoSubgrupoVO produtoSubgrupo;
+
+    @JoinColumn(name = "ID_UNIDADE_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private UnidadeProdutoVO unidadeProduto;
     
+    @JoinColumn(name = "ID_SUB_GRUPO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoSubgrupoVO produtoSubGrupo;
+    
+    @JoinColumn(name = "ID_MARCA_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne
+    private ProdutoMarcaVO produtoMarca;
+    
+    @JoinColumn(name = "ID_GRUPO_TRIBUTARIO", referencedColumnName = "ID")
+    @ManyToOne
+    private TributGrupoTributarioVO tributGrupoTributario;
+    
+    @JoinColumn(name = "ID_ALMOXARIFADO", referencedColumnName = "ID")
+    @ManyToOne
+    private AlmoxarifadoVO almoxarifado;
+    
+    @JoinColumn(name = "ID_TRIBUT_ICMS_CUSTOM_CAB", referencedColumnName = "ID")
+    @ManyToOne
+    private TributIcmsCustomCabVO tributIcmsCustomCab;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FichaTecnicaVO> listaFichaTecnica;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ReceitaVO> listaReceita;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpOpDetalheVO> listaPcpOpDetalhe;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaDetalheVO> listaVendaDetalhe;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ReceituarioControleCustoVO> listaReceituarioControleCusto;
@@ -240,6 +269,14 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
+    public String getFotoProduto() {
+        return fotoProduto;
+    }
+
+    public void setFotoProduto(String fotoProduto) {
+        this.fotoProduto = fotoProduto;
+    }
+
     public Date getDataAlteracao() {
         return dataAlteracao;
     }
@@ -264,14 +301,63 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.peso = peso;
     }
 
-    public String getImagem() {
+    public byte[] getImagem() {
         return imagem;
     }
 
-    public void setImagem(String imagem) {
+    public void setImagem(byte[] imagem) {
         this.imagem = imagem;
     }
 
+    public UnidadeProdutoVO getUnidadeProduto() {
+        return unidadeProduto;
+    }
+
+    public void setUnidadeProduto(UnidadeProdutoVO unidadeProduto) {
+        this.unidadeProduto = unidadeProduto;
+    }
+
+    public ProdutoSubgrupoVO getProdutoSubGrupo() {
+        return produtoSubGrupo;
+    }
+
+    public void setProdutoSubGrupo(ProdutoSubgrupoVO produtoSubGrupo) {
+        this.produtoSubGrupo = produtoSubGrupo;
+    }
+
+    public ProdutoMarcaVO getProdutoMarca() {
+        return produtoMarca;
+    }
+
+    public void setProdutoMarca(ProdutoMarcaVO produtoMarca) {
+        this.produtoMarca = produtoMarca;
+    }
+
+    public TributGrupoTributarioVO getTributGrupoTributario() {
+        return tributGrupoTributario;
+    }
+
+    public void setTributGrupoTributario(TributGrupoTributarioVO tributGrupoTributario) {
+        this.tributGrupoTributario = tributGrupoTributario;
+    }
+
+    public AlmoxarifadoVO getAlmoxarifado() {
+        return almoxarifado;
+    }
+
+    public void setAlmoxarifado(AlmoxarifadoVO almoxarifado) {
+        this.almoxarifado = almoxarifado;
+    }
+
+    public TributIcmsCustomCabVO getTributIcmsCustomCab() {
+        return tributIcmsCustomCab;
+    }
+
+    public void setTributIcmsCustomCab(TributIcmsCustomCabVO tributIcmsCustomCab) {
+        this.tributIcmsCustomCab = tributIcmsCustomCab;
+    }
+
+    
     public List<FichaTecnicaVO> getListaFichaTecnica() {
         return listaFichaTecnica;
     }
@@ -360,5 +446,5 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.ProdutoVO[ id=" + id + " ]";
     }
-    
+
 }

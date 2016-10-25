@@ -39,6 +39,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
         <Property name="alignment" type="int" value="0"/>
+        <Property name="verticalGap" type="int" value="10"/>
       </Layout>
       <SubComponents>
         <Component class="org.openswing.swing.client.InsertButton" name="insertButton1">
@@ -83,7 +84,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;inicio&quot;" type="code"/>
             </Property>
-            <Property name="headerColumnName" type="java.lang.String" value="Inicio"/>
+            <Property name="headerColumnName" type="java.lang.String" value="In&#xed;cio"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>

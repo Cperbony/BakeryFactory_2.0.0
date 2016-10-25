@@ -157,7 +157,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanelOrdemProd.setBorder(javax.swing.BorderFactory.createTitledBorder("Ordem de Produção"));
-        jPanelOrdemProd.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelOrdemProd.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 10));
         jPanelOrdemProd.add(editButtonOrdemProd);
         jPanelOrdemProd.add(reloadButtonOrdemProd);
         jPanelOrdemProd.add(saveButtonOrdemProd);
@@ -169,8 +169,11 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanelOrdemProd, gridBagConstraints);
 
-        form1.setVOClassName("com.t2tierp.pcp.java.PcpOpCabecalhoVO");
+        form1.setVOClassName("com.bakeryfactory.pcp.java.PcpOpCabecalhoVO");
+        form1.setEditButton(editButtonOrdemProd);
         form1.setFunctionId("pcpOpCabecalho");
+        form1.setReloadButton(reloadButtonOrdemProd);
+        form1.setSaveButton(saveButtonOrdemProd);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblInicio.setText("Início:");
@@ -329,7 +332,13 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         jPanel2.add(jPanelProduto, gridBagConstraints);
 
         gridControlProdutos.setAutoLoadData(false);
+        gridControlProdutos.setDeleteButton(deleteButtonProduto);
+        gridControlProdutos.setEditButton(editButtonProduto);
         gridControlProdutos.setFunctionId("pcpOpDetalhe");
+        gridControlProdutos.setInsertButton(insertButtonProduto);
+        gridControlProdutos.setNavBar(navigatorBarProduto);
+        gridControlProdutos.setReloadButton(reloadButtonProduto);
+        gridControlProdutos.setSaveButton(saveButtonProduto);
         gridControlProdutos.setValueObjectClassName("com.bakeryfactory.pcp.java.PcpOpDetalheVO");
         gridControlProdutos.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 

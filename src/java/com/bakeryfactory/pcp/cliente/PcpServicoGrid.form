@@ -121,7 +121,7 @@
             </Property>
             <Property name="editableOnEdit" type="boolean" value="true"/>
             <Property name="editableOnInsert" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Inicio Realizado"/>
+            <Property name="headerColumnName" type="java.lang.String" value="In&#xed;cio Realizado"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>
@@ -147,7 +147,7 @@
             </Property>
             <Property name="editableOnEdit" type="boolean" value="true"/>
             <Property name="editableOnInsert" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Termino Previsto"/>
+            <Property name="headerColumnName" type="java.lang.String" value="T&#xe9;rmino Previsto"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>
@@ -161,7 +161,7 @@
             </Property>
             <Property name="editableOnEdit" type="boolean" value="true"/>
             <Property name="editableOnInsert" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Termino Realizado"/>
+            <Property name="headerColumnName" type="java.lang.String" value="T&#xe9;rmino Realizado"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>
@@ -240,7 +240,22 @@
         <Container class="org.openswing.swing.client.GridControl" name="gridControlColaborador">
           <Properties>
             <Property name="autoLoadData" type="boolean" value="false"/>
+            <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="deleteButtonColaborador"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButtonColaborador"/>
+            </Property>
             <Property name="functionId" type="java.lang.String" value="pcpServicoColaborador"/>
+            <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="insertButtonColaborador"/>
+            </Property>
+            <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="reloadButtonColaborador"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButtonColaborador"/>
+            </Property>
             <Property name="valueObjectClassName" type="java.lang.String" value="com.bakeryfactory.pcp.java.PcpServicoColaboradorVO"/>
           </Properties>
           <Constraints>
@@ -251,8 +266,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
             <Property name="alignment" type="int" value="0"/>
-            <Property name="horizontalGap" type="int" value="0"/>
-            <Property name="verticalGap" type="int" value="0"/>
           </Layout>
           <SubComponents>
             <Component class="org.openswing.swing.table.columns.client.CodLookupColumn" name="codLookupColaboradores">
@@ -315,7 +328,22 @@
         <Container class="org.openswing.swing.client.GridControl" name="gridControlEquipamentos">
           <Properties>
             <Property name="autoLoadData" type="boolean" value="false"/>
+            <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="deleteButtonEquipamento"/>
+            </Property>
+            <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="editButtonEquipamento"/>
+            </Property>
             <Property name="functionId" type="java.lang.String" value="pcpServicoEquipamento"/>
+            <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="insertButtonEquipamento"/>
+            </Property>
+            <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="reloadButtonServicos"/>
+            </Property>
+            <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="saveButtonEquipamento"/>
+            </Property>
             <Property name="valueObjectClassName" type="java.lang.String" value="com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO"/>
           </Properties>
           <Constraints>
@@ -326,8 +354,6 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
             <Property name="alignment" type="int" value="0"/>
-            <Property name="horizontalGap" type="int" value="0"/>
-            <Property name="verticalGap" type="int" value="0"/>
           </Layout>
           <SubComponents>
             <Component class="org.openswing.swing.table.columns.client.CodLookupColumn" name="codLookupEquipamentos">

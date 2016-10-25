@@ -45,7 +45,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class PcpInstrucaoGridController extends GridController implements GridDataLocator {
 
     private PcpInstrucaoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public PcpInstrucaoGridController() {
         grid = new PcpInstrucaoGrid(this);

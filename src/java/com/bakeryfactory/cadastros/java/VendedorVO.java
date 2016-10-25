@@ -23,6 +23,9 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.vendas.java.VendaCabecalhoVO;
+import com.bakeryfactory.vendas.java.VendaComissaoVO;
+import com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

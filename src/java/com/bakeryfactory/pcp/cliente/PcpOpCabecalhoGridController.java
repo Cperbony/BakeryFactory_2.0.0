@@ -23,11 +23,8 @@
  */
 package com.bakeryfactory.pcp.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.pcp.java.PcpOpCabecalhoVO;
-import com.bakeryfactory.pcp.java.PcpOpDetalheVO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +37,6 @@ import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
 import org.openswing.swing.util.client.ClientUtils;
-import org.openswing.swing.util.java.Consts;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
@@ -49,7 +45,7 @@ import org.openswing.swing.util.java.Consts;
 public class PcpOpCabecalhoGridController extends GridController implements GridDataLocator {
 
     private PcpOpCabecalhoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public PcpOpCabecalhoGridController() {
         grid = new PcpOpCabecalhoGrid(this);

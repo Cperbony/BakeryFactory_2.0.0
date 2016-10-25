@@ -44,7 +44,7 @@ import org.openswing.swing.util.java.Consts;
 public class PcpOpDetalheGridController extends GridController implements GridDataLocator {
 
     private PcpOpCabecalhoDetalhe detalhe;
-    private String acaoServidor;
+    private final String acaoServidor;
     private String idPcpCabecalho;
 
     public PcpOpDetalheGridController(PcpOpCabecalhoDetalhe detalhe) {
@@ -84,6 +84,7 @@ public class PcpOpDetalheGridController extends GridController implements GridDa
      *
      * @return <code>true</code> allows to go to EDIT mode, <code>false</code> the mode change is interrupted
      */
+    @Override
     public boolean beforeEditGrid(GridControl grid) {
         habilitaEdicaoForm();
         return true;
@@ -108,6 +109,7 @@ public class PcpOpDetalheGridController extends GridController implements GridDa
      *
      * @return <code>true</code> allows the deleting to continue, <code>false</code> the deleting is interrupted
      */
+    @Override
     public boolean beforeDeleteGrid(GridControl grid) {
         habilitaEdicaoForm();
         return true;

@@ -77,7 +77,7 @@ public class PcpOpCabecalhoGrid extends InternalFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PCP - Ordem de Produção"));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 10));
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
         jPanel1.add(reloadButton1);
@@ -100,7 +100,7 @@ public class PcpOpCabecalhoGrid extends InternalFrame {
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         dateColumn3.setColumnName("inicio");
-        dateColumn3.setHeaderColumnName("Inicio");
+        dateColumn3.setHeaderColumnName("Início");
         dateColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(dateColumn3);
 
@@ -148,8 +148,6 @@ public class PcpOpCabecalhoGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(gridControl1, gridBagConstraints);
-
-        getAccessibleContext().setAccessibleName("Bakery Factory - PCP");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

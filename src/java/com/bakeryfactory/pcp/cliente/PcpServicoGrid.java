@@ -34,8 +34,8 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class PcpServicoGrid extends InternalFrame {
 
-    private PcpServicoColaboradorGridController colaboradorController;
-    private PcpServicoEquipamentoGridController equipamentoController;
+    private PcpServicoColaboradorGridController colaboradorGridController;
+    private PcpServicoEquipamentoGridController equipamentoGridController;
     private ColaboradorLookup colaboradorLookupController;
     private EquipamentoServicoLookup equipamentoLookupController;
 
@@ -49,13 +49,13 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlServicos.setController(controller);
         gridControlServicos.setGridDataLocator(controller);
 
-        colaboradorController = new PcpServicoColaboradorGridController();
-        gridControlColaborador.setController(colaboradorController);
-        gridControlColaborador.setGridDataLocator(colaboradorController);
+        colaboradorGridController = new PcpServicoColaboradorGridController();
+        gridControlColaborador.setController(colaboradorGridController);
+        gridControlColaborador.setGridDataLocator(colaboradorGridController);
 
-        equipamentoController = new PcpServicoEquipamentoGridController();
-        gridControlEquipamentos.setController(equipamentoController);
-        gridControlEquipamentos.setGridDataLocator(equipamentoController);
+        equipamentoGridController = new PcpServicoEquipamentoGridController();
+        gridControlEquipamentos.setController(equipamentoGridController);
+        gridControlEquipamentos.setGridDataLocator(equipamentoGridController);
 
         setModal(true);
         setSize(800, 600);
@@ -77,12 +77,12 @@ public class PcpServicoGrid extends InternalFrame {
         return gridControlServicos;
     }
 
-    public PcpServicoColaboradorGridController getColaboradorController() {
-        return colaboradorController;
+    public PcpServicoColaboradorGridController getColaboradorGridController() {
+        return colaboradorGridController;
     }
 
-    public PcpServicoEquipamentoGridController getEquipamentoController() {
-        return equipamentoController;
+    public PcpServicoEquipamentoGridController getEquipamentoGridController() {
+        return equipamentoGridController;
     }
 
     public org.openswing.swing.client.GridControl getGridControlColaborador() {
@@ -185,7 +185,7 @@ public class PcpServicoGrid extends InternalFrame {
         dateColumn3.setColumnName("inicioRealizado");
         dateColumn3.setEditableOnEdit(true);
         dateColumn3.setEditableOnInsert(true);
-        dateColumn3.setHeaderColumnName("Inicio Realizado");
+        dateColumn3.setHeaderColumnName("Início Realizado");
         dateColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControlServicos.getColumnContainer().add(dateColumn3);
 
@@ -199,7 +199,7 @@ public class PcpServicoGrid extends InternalFrame {
         dateColumn10.setColumnName("terminoPrevisto");
         dateColumn10.setEditableOnEdit(true);
         dateColumn10.setEditableOnInsert(true);
-        dateColumn10.setHeaderColumnName("Termino Previsto");
+        dateColumn10.setHeaderColumnName("Término Previsto");
         dateColumn10.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         dateColumn10.setPreferredWidth(120);
         gridControlServicos.getColumnContainer().add(dateColumn10);
@@ -207,7 +207,7 @@ public class PcpServicoGrid extends InternalFrame {
         dateColumn4.setColumnName("terminoRealizado");
         dateColumn4.setEditableOnEdit(true);
         dateColumn4.setEditableOnInsert(true);
-        dateColumn4.setHeaderColumnName("Termino Realizado");
+        dateColumn4.setHeaderColumnName("Término Realizado");
         dateColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         dateColumn4.setPreferredWidth(120);
         gridControlServicos.getColumnContainer().add(dateColumn4);
@@ -256,8 +256,14 @@ public class PcpServicoGrid extends InternalFrame {
         jPanelColaboradores.add(jPanelColaborador, gridBagConstraints);
 
         gridControlColaborador.setAutoLoadData(false);
+        gridControlColaborador.setDeleteButton(deleteButtonColaborador);
+        gridControlColaborador.setEditButton(editButtonColaborador);
         gridControlColaborador.setFunctionId("pcpServicoColaborador");
+        gridControlColaborador.setInsertButton(insertButtonColaborador);
+        gridControlColaborador.setReloadButton(reloadButtonColaborador);
+        gridControlColaborador.setSaveButton(saveButtonColaborador);
         gridControlColaborador.setValueObjectClassName("com.bakeryfactory.pcp.java.PcpServicoColaboradorVO");
+        gridControlColaborador.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         codLookupColaboradores.setColumnName("colaborador.pessoa.nome");
         codLookupColaboradores.setEditableOnEdit(true);
@@ -302,8 +308,14 @@ public class PcpServicoGrid extends InternalFrame {
         jPanelEquipamentos.add(jPanelEquipamento, gridBagConstraints);
 
         gridControlEquipamentos.setAutoLoadData(false);
+        gridControlEquipamentos.setDeleteButton(deleteButtonEquipamento);
+        gridControlEquipamentos.setEditButton(editButtonEquipamento);
         gridControlEquipamentos.setFunctionId("pcpServicoEquipamento");
+        gridControlEquipamentos.setInsertButton(insertButtonEquipamento);
+        gridControlEquipamentos.setReloadButton(reloadButtonServicos);
+        gridControlEquipamentos.setSaveButton(saveButtonEquipamento);
         gridControlEquipamentos.setValueObjectClassName("com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO");
+        gridControlEquipamentos.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         codLookupEquipamentos.setColumnName("patrimBem.nome");
         codLookupEquipamentos.setEditableOnEdit(true);

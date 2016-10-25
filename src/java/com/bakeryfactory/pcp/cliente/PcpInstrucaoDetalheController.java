@@ -23,9 +23,7 @@
  */
 package com.bakeryfactory.pcp.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
 import com.bakeryfactory.padrao.java.Constantes;
-import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -43,7 +41,7 @@ public class PcpInstrucaoDetalheController extends FormController {
     private PcpInstrucaoDetalhe pcpInstrucaoDetalhe = null;
     private String pk = null;
     private PcpInstrucaoGrid pcpInstrucaoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public PcpInstrucaoDetalheController(PcpInstrucaoGrid pcpInstrucaoGrid, String pk) {
         this.pcpInstrucaoGrid = pcpInstrucaoGrid;
@@ -77,7 +75,6 @@ public class PcpInstrucaoDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

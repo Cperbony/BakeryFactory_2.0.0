@@ -71,7 +71,7 @@ public class PcpInstrucaoGrid extends InternalFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("PCP Instrução"));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 10));
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
         jPanel1.add(reloadButton1);
@@ -87,20 +87,19 @@ public class PcpInstrucaoGrid extends InternalFrame {
 
         gridControl1.setDeleteButton(deleteButton1);
         gridControl1.setFunctionId("pcpInstrucao");
+        gridControl1.setInsertButton(insertButton1);
         gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.pcp.java.InstrucaoVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        textColumn2.setAdditionalHeaderColumnName("Código");
         textColumn2.setColumnName("codigo");
-        textColumn2.setHeaderColumnName("Codigo");
+        textColumn2.setHeaderColumnName("Código");
         textColumn2.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn2);
 
-        textColumn3.setAdditionalHeaderColumnName("Descrição");
         textColumn3.setColumnName("descricao");
-        textColumn3.setHeaderColumnName("Descricao");
+        textColumn3.setHeaderColumnName("Descrição");
         textColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn3.setPreferredWidth(400);
         gridControl1.getColumnContainer().add(textColumn3);

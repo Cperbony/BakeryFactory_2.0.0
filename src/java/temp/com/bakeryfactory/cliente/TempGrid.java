@@ -60,7 +60,7 @@ public class TempGrid extends InternalFrame {
 
         gridControl1 = new org.openswing.swing.client.GridControl();
 
-        setTitle("Bakery Factory - Cadastros");
+        setTitle("Bakery Factory - Vendas");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         gridControl1.setFunctionId("produto");

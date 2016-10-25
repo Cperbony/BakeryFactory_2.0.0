@@ -73,11 +73,10 @@ public class TempDetalhe extends InternalFrame {
         form1 = new org.openswing.swing.form.client.Form();
         jTabbedPaneDados = new javax.swing.JTabbedPane();
         jPanel3 = new javax.swing.JPanel();
-        jSeparator2 = new javax.swing.JSeparator();
         codLookupControl = new org.openswing.swing.client.CodLookupControl();
         textControl7 = new org.openswing.swing.client.TextControl();
 
-        setTitle("Bakery Factory - Cadastros Detalhes");
+        setTitle("Bakery Factory - Vendas");
         setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
@@ -99,14 +98,6 @@ public class TempDetalhe extends InternalFrame {
         form1.setLayout(new java.awt.CardLayout());
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
-        gridBagConstraints.gridwidth = 7;
-        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.weighty = 1.0;
-        jPanel3.add(jSeparator2, gridBagConstraints);
 
         codLookupControl.setAllowOnlyNumbers(true);
         codLookupControl.setAttributeName("produtoSubGrupo.id");
@@ -152,7 +143,6 @@ public class TempDetalhe extends InternalFrame {
     private org.openswing.swing.form.client.Form form1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPaneDados;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;

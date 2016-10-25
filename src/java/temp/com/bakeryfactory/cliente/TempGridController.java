@@ -46,7 +46,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class TempGridController extends GridController implements GridDataLocator{
     
     private TempGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public TempGridController() {
         grid = new TempGrid(this);
