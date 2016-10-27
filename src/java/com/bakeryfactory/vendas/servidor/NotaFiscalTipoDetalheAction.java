@@ -21,44 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.servidor;
+package com.bakeryfactory.vendas.servidor;
 
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
-import java.util.ArrayList;
+import com.bakeryfactory.vendas.java.NotaFiscalTipoVO;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.type.Type;
+import org.hibernate.criterion.Restrictions;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
-import org.openswing.swing.message.send.java.GridParams;
+import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.server.Action;
 import org.openswing.swing.server.UserSessionParameters;
-import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date 07/10/2016
+ * @date 08/10/2016
  */
-public class TempGridAction implements Action {
-
-    public TempGridAction() {
-    }
+public class NotaFiscalTipoDetalheAction implements Action {
 
     @Override
     public String getRequestName() {
-        return "temp_GridAction";
+        return "notaFiscalTipoDetalheAction";
     }
 
     @Override
     public Response executeCommand(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        GridParams pars = (GridParams) inputPar;
-        Integer acao = (Integer) pars.getOtherGridParams().get("acao");
+        Object[] pars = (Object[]) inputPar;
+        Integer acao = (Integer) pars[0];
 
         switch (acao) {
             case Constantes.LOAD: {
@@ -79,26 +74,18 @@ public class TempGridAction implements Action {
 
     private Response load(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
-        GridParams pars = (GridParams) inputPar;
-        String baseSQL = "select CLIENTE from com.bakeryfactory.cadastros.java.ClienteVO as CLIENTE";
+        Object[] pars = (Object[]) inputPar;
+        String pk = (String) pars[1];
+
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Response res = HibernateUtils.getBlockFromQuery(
-                    pars.getAction(),
-                    pars.getStartPos(),
-                    Constantes.TAMANHO_BLOCO,
-                    pars.getFilteredColumns(),
-                    pars.getCurrentSortedColumns(),
-                    pars.getCurrentSortedVersusColumns(),
-                    com.bakeryfactory.vendas.java.NotaFiscalModeloVO.class,
-                    baseSQL,
-                    new Object[0],
-                    new Type[0],
-                    "CLIENTE",
-                    HibernateUtil.getSessionFactory(),
-                    session
-            );
-            return res;
+            Criteria criteria = session.createCriteria(NotaFiscalTipoVO.class);
+            criteria.add(Restrictions.eq("id", Integer.valueOf(pk)));
+
+            NotaFiscalTipoVO notaFiscalTipo = (NotaFiscalTipoVO) criteria.uniqueResult();
+
+            return new VOResponse(notaFiscalTipo);
+
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
@@ -112,31 +99,52 @@ public class TempGridAction implements Action {
     }
 
     private Response insert(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        return null;
-    }
-
-    private Response update(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        return null;
-    }
-
-    private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         try {
-            GridParams pars = (GridParams) inputPar;
-            ArrayList persistentObjects = (ArrayList) pars.getOtherGridParams().get("persistentObjects");
-
-            ClienteVO vo = null;
+            Object[] pars = (Object[]) inputPar;
+            NotaFiscalTipoVO notaFiscalTipo = (NotaFiscalTipoVO) pars[1];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            for (int i = 0; i < persistentObjects.size(); i++) {
-                vo = (ClienteVO) persistentObjects.get(i);
-                session.delete(vo);
-                session.flush();
-            }
+            session.save(notaFiscalTipo);
+
             session.getTransaction().commit();
-            return new VOListResponse(persistentObjects, false, persistentObjects.size());
+
+            return new VOResponse(notaFiscalTipo);
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
+            return new ErrorResponse(ex.getMessage());
+        } finally {
+            try {
+                if (session != null) {
+                    session.close();
+                }
+            } catch (Exception ex1) {
+                ex1.printStackTrace();
+            }
+        }
+    }
+
+    private Response update(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
+        Session session = null;
+        try {
+            Object[] pars = (Object[]) inputPar;
+            NotaFiscalTipoVO notaFiscalTipo = (NotaFiscalTipoVO) pars[2];
+
+            session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+
+            session.update(notaFiscalTipo);
+
+            session.getTransaction().commit();
+
+            return new VOResponse(notaFiscalTipo);
+
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -149,7 +157,12 @@ public class TempGridAction implements Action {
                     session.close();
                 }
             } catch (Exception ex1) {
+                ex1.printStackTrace();
             }
         }
+    }
+
+    private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
+        return null;
     }
 }

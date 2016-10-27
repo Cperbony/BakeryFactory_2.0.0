@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.servidor;
+package com.bakeryfactory.vendas.servidor;
 
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
+import com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -45,14 +45,14 @@ import org.openswing.swing.util.server.HibernateUtils;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date 07/10/2016
  */
-public class TempGridAction implements Action {
+public class VendaCondicoesPagamentoGridAction implements Action {
 
-    public TempGridAction() {
+    public VendaCondicoesPagamentoGridAction() {
     }
 
     @Override
     public String getRequestName() {
-        return "temp_GridAction";
+        return "vendaCondicoesPagamentoGridAction";
     }
 
     @Override
@@ -80,7 +80,7 @@ public class TempGridAction implements Action {
     private Response load(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         GridParams pars = (GridParams) inputPar;
-        String baseSQL = "select CLIENTE from com.bakeryfactory.cadastros.java.ClienteVO as CLIENTE";
+        String baseSQL = "select VENDA_CONDICOES_PAGAMENTO from com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO as VENDA_CONDICOES_PAGAMENTO";
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Response res = HibernateUtils.getBlockFromQuery(
@@ -90,11 +90,11 @@ public class TempGridAction implements Action {
                     pars.getFilteredColumns(),
                     pars.getCurrentSortedColumns(),
                     pars.getCurrentSortedVersusColumns(),
-                    com.bakeryfactory.vendas.java.NotaFiscalModeloVO.class,
+                    com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO.class,
                     baseSQL,
                     new Object[0],
                     new Type[0],
-                    "CLIENTE",
+                    "VENDA_CONDICOES_PAGAMENTO",
                     HibernateUtil.getSessionFactory(),
                     session
             );
@@ -125,13 +125,13 @@ public class TempGridAction implements Action {
             GridParams pars = (GridParams) inputPar;
             ArrayList persistentObjects = (ArrayList) pars.getOtherGridParams().get("persistentObjects");
 
-            ClienteVO vo = null;
+            VendaCondicoesPagamentoVO vo = null;
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
             for (int i = 0; i < persistentObjects.size(); i++) {
-                vo = (ClienteVO) persistentObjects.get(i);
+                vo = (VendaCondicoesPagamentoVO) persistentObjects.get(i);
                 session.delete(vo);
                 session.flush();
             }

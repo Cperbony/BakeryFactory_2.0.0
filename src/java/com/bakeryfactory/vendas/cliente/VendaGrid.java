@@ -36,7 +36,7 @@ public class VendaGrid extends InternalFrame {
      * Creates new form TempGrid
      * @param controller
      */
-    public VendaGrid(VendaDetalheGridController controller) {
+    public VendaGrid(VendaGridController controller) {
         initComponents();
         gridControl1.setController(controller);
         gridControl1.setGridDataLocator(controller);

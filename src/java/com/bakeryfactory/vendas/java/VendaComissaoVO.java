@@ -35,8 +35,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -60,11 +58,11 @@ public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "VALOR_VENDA")
     private BigDecimal valorVenda;
     @Column(name = "TIPO_CONTABIL")
-    private Character tipoContabil;
+    private String tipoContabil;
     @Column(name = "VALOR_COMISSAO")
     private BigDecimal valorComissao;
     @Column(name = "SITUACAO")
-    private Character situacao;
+    private String situacao;
     @Column(name = "DATA_LANCAMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataLancamento;
@@ -100,11 +98,11 @@ public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
         this.valorVenda = valorVenda;
     }
 
-    public Character getTipoContabil() {
+    public String getTipoContabil() {
         return tipoContabil;
     }
 
-    public void setTipoContabil(Character tipoContabil) {
+    public void setTipoContabil(String tipoContabil) {
         this.tipoContabil = tipoContabil;
     }
 
@@ -116,11 +114,11 @@ public class VendaComissaoVO extends ValueObjectImpl implements Serializable {
         this.valorComissao = valorComissao;
     }
 
-    public Character getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(Character situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
