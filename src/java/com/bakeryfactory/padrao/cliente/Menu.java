@@ -309,6 +309,18 @@ public class Menu implements MDIController, LoginController {
         dominioMes.addDomainPair("10", "Outubro");
         dominioMes.addDomainPair("11", "Novembro");
         dominioMes.addDomainPair("12", "Dezembro");
+        
+        // DOMÍNIOS NOTA FISCAL - FORMAS PAGAMENTO
+        Domain dominioTipoOperacao = new Domain("tipoOperacao");
+        dominioTipoOperacao.addDomainPair("0", "0 - Entrada");
+        dominioTipoOperacao.addDomainPair("1", "1 - Saída");
+        
+        Domain dominioFormaPagamento = new Domain("formaPagamento");
+        dominioFormaPagamento.addDomainPair("0", "0 - À Vista");
+        dominioFormaPagamento.addDomainPair("1", "1 - À Prazo");
+        dominioFormaPagamento.addDomainPair("2", "2 - Outros");
+        
+        
 
         //COMPRAS
         Domain dominioCompraTipoRequisicao = new Domain("compraTipoRequisicao");
@@ -362,19 +374,68 @@ public class Menu implements MDIController, LoginController {
         dominioProdutoClasse.addDomainPair("A", "A");
         dominioProdutoClasse.addDomainPair("B", "B");
         dominioProdutoClasse.addDomainPair("C", "C");
+        
+        Domain dominioProdutoIat = new Domain("produtoIat");
+        dominioProdutoIat.addDomainPair("A", "Arredondamento");
+        dominioProdutoIat.addDomainPair("T", "Truncamento");
+        
+        Domain dominioProdutoIppt = new Domain("produtoIppt");
+        dominioProdutoIppt.addDomainPair("P", "Próprio");
+        dominioProdutoIppt.addDomainPair("T", "Terceiro");
 
         //Empresa
         Domain dominioEmpresaTipo = new Domain("empresaTipo");
         dominioEmpresaTipo.addDomainPair("M", "Matriz");
         dominioEmpresaTipo.addDomainPair("F", "Filial");
         dominioEmpresaTipo.addDomainPair("D", "Depósito");
+        
+        Domain dominioClienteTipoFrete = new Domain("clienteTipoFrete");
+        dominioClienteTipoFrete.addDomainPair("E", "Emitente");
+        dominioClienteTipoFrete.addDomainPair("D", "Destinatário");
+        dominioClienteTipoFrete.addDomainPair("S", "Sem Frete");
+        dominioClienteTipoFrete.addDomainPair("T", "Terceiros");
+        
+        Domain dominioClienteFormaDesconto = new Domain("clienteFormaDesconto");
+        dominioClienteFormaDesconto.addDomainPair("P", "Produto");
+        dominioClienteFormaDesconto.addDomainPair("F", "Fim do Pedido");
+        
+        Domain dominioFornecedorLocalizacao = new Domain("fornecedorLocalizacao");
+        dominioFornecedorLocalizacao.addDomainPair("N", "Nacional");
+        dominioFornecedorLocalizacao.addDomainPair("E", "Exterior");
 
+        Domain dominioColaboradorFormaPagamento = new Domain("colaboradorFormaPagamento");
+        dominioColaboradorFormaPagamento.addDomainPair("1", "Dinheiro");
+        dominioColaboradorFormaPagamento.addDomainPair("2", "Cheque");
+        dominioColaboradorFormaPagamento.addDomainPair("3", "Conta");
+        
+        Domain dominioSindicatoTipo = new Domain("sindicatoTipo");
+        dominioSindicatoTipo.addDomainPair("E", "Empregados");
+        dominioSindicatoTipo.addDomainPair("P", "Patronal");
+        
+        
+        
+        
         //Registros Feriados
         Domain dominioFeriadosTipo = new Domain("feriadosTipo");
         dominioFeriadosTipo.addDomainPair("F", "Fixo");
         dominioFeriadosTipo.addDomainPair("M", "Móvel");
+        
+        
+        Domain dominioTransporteModalidadeFrete = new Domain("transporteModalidadeFrete");
+        dominioTransporteModalidadeFrete.addDomainPair(0, "Conta Emitente");
+        dominioTransporteModalidadeFrete.addDomainPair(1, "Conta Destinatário");
+        dominioTransporteModalidadeFrete.addDomainPair(2, "Conta Terceiros");
+        dominioTransporteModalidadeFrete.addDomainPair(3, "Sem Frete");
+        
+        Domain dominioRequisicaoInternaSituacao = new Domain("requisicaoInternaSituacao");
+        dominioRequisicaoInternaSituacao.addDomainPair("A", "Aberta");
+        dominioRequisicaoInternaSituacao.addDomainPair("D", "Deferida");
+        dominioRequisicaoInternaSituacao.addDomainPair("I", "Indeferida");
+        
+        
 
         domains.clear();
+        
         domains.put(tipoPessoa.getDomainId(), tipoPessoa);
         domains.put(tipoSangue.getDomainId(), tipoSangue);
         domains.put(dominioSexo.getDomainId(), dominioSexo);
@@ -383,6 +444,8 @@ public class Menu implements MDIController, LoginController {
         domains.put(dominioNaoSim.getDomainId(), dominioNaoSim);
         domains.put(dominioTipoTelefone.getDomainId(), dominioTipoTelefone);
         domains.put(dominioMes.getDomainId(), dominioMes);
+        domains.put(dominioTipoOperacao.getDomainId(), dominioTipoOperacao);
+        domains.put(dominioFormaPagamento.getDomainId(), dominioFormaPagamento);
         
         domains.put(dominioCompraTipoRequisicao.getDomainId(), dominioCompraTipoRequisicao);
         domains.put(dominioCompraTipoPedido.getDomainId(), dominioCompraTipoPedido);
@@ -396,9 +459,19 @@ public class Menu implements MDIController, LoginController {
         
         domains.put(dominioProdutoTipo.getDomainId(), dominioProdutoTipo);
         domains.put(dominioProdutoClasse.getDomainId(), dominioProdutoClasse);
+        domains.put(dominioProdutoIat.getDomainId(), dominioProdutoIat);
+        domains.put(dominioProdutoIppt.getDomainId(), dominioProdutoIppt);
         domains.put(dominioEmpresaTipo.getDomainId(), dominioEmpresaTipo);
+        domains.put(dominioClienteTipoFrete.getDomainId(), dominioClienteTipoFrete);
+        domains.put(dominioClienteFormaDesconto.getDomainId(), dominioClienteFormaDesconto);
+        domains.put(dominioFornecedorLocalizacao.getDomainId(), dominioFornecedorLocalizacao);
+        domains.put(dominioColaboradorFormaPagamento.getDomainId(), dominioColaboradorFormaPagamento);
+        domains.put(dominioSindicatoTipo.getDomainId(), dominioSindicatoTipo);
         
         domains.put(dominioFeriadosTipo.getDomainId(), dominioFeriadosTipo);
+        
+        domains.put(dominioTransporteModalidadeFrete.getDomainId(), dominioTransporteModalidadeFrete);
+        domains.put(dominioRequisicaoInternaSituacao.getDomainId(), dominioRequisicaoInternaSituacao);
 
         MDIFrame mdi = new MDIFrame(this);
 

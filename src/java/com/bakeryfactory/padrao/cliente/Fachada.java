@@ -26,7 +26,21 @@ package com.bakeryfactory.padrao.cliente;
 import com.bakeryfactory.cadastros.cliente.AtividadeForCliGridController;
 import com.bakeryfactory.cadastros.cliente.ClienteGridController;
 import com.bakeryfactory.cadastros.cliente.EstadoCivilGridController;
+import com.bakeryfactory.cadastros.cliente.FornecedorGridController;
 import com.bakeryfactory.cadastros.cliente.PessoaGridController;
+import com.bakeryfactory.cadastros.cliente.ProdutoGridController;
+import com.bakeryfactory.cadastros.cliente.ProdutoGrupoGridController;
+import com.bakeryfactory.cadastros.cliente.ProdutoSubGrupoGridController;
+import com.bakeryfactory.cadastros.cliente.SituacaoForCliGridController;
+import com.bakeryfactory.cadastros.cliente.UnidadeProdutoGridController;
+import com.bakeryfactory.pcp.cliente.PcpInstrucaoGridController;
+import com.bakeryfactory.pcp.cliente.PcpOpCabecalhoGridController;
+import com.bakeryfactory.vendas.cliente.NotaFiscalTipoGridController;
+import com.bakeryfactory.vendas.cliente.VendaCondicoesPagamentoGridController;
+import com.bakeryfactory.vendas.cliente.VendaFreteGridController;
+import com.bakeryfactory.vendas.cliente.VendaGridController;
+import com.bakeryfactory.vendas.cliente.VendaOrcamentoGridController;
+import com.bakeryfactory.vendas.cliente.VendaRomaneioEntregaGridController;
 import javax.swing.JOptionPane;
 import org.openswing.swing.mdi.client.ClientFacade;
 
@@ -54,11 +68,15 @@ public class Fachada implements ClientFacade {
     }
 
     public void getSituacaoForCli() {
-       // new SituacaoForCliGridController();
+        new SituacaoForCliGridController();
     }
 
     public void getCliente() {
         new ClienteGridController();
+    }
+    
+    public void getFornecedor() {
+        new FornecedorGridController();
     }
 
     public void getTransportadora() {
@@ -95,52 +113,78 @@ public class Fachada implements ClientFacade {
     public void getCep() {
         //new CepGridController;
     }
-    
-    
 
     //INGREDIENTE
     public void getIngrediente() {
         // new IngredienteGridController();
     }
-    
-    
-    
-    
-    
-     //RECEITA
+
+    //RECEITA
     public void getReceita() {
         // new ReceitaGridController();
     }
-    
-    
-    
+
     //PRODUTO
     public void getProdutoMarca() {
-     //   new ProdutoMarcaGridController();
+        //   new ProdutoMarcaGridController();
     }
 
     public void getNcm() {
-       // new NcmGridController();
+        // new NcmGridController();
     }
 
+    //PCP
     public void getUnidadeProduto() {
-       // new UnidadeProdutoGridController();
+        new UnidadeProdutoGridController();
     }
 
     public void getProdutoGrupo() {
-       // new ProdutoGrupoGridController();
+        new ProdutoGrupoGridController();
     }
 
     public void getProdutoSubGrupo() {
-      //  new ProdutoSubGrupoGridController();
+        new ProdutoSubGrupoGridController();
     }
 
     public void getProduto() {
-      //  new ProdutoGridController();
+        new ProdutoGridController();
+    }
+    
+    public void getPcpInstrucao() {
+        new PcpInstrucaoGridController();
+    }
+    
+    public void getPcpOrdemProducao() {
+        new PcpOpCabecalhoGridController();
     }
     
     
-    
+
+    //VENDAS
+    public void getTipoNotaFiscal() {
+        new NotaFiscalTipoGridController();
+    }
+
+    public void getVendaCondicoesPagamento() {
+        new VendaCondicoesPagamentoGridController();
+    }
+
+    public void getVendaOrcamento() {
+        new VendaOrcamentoGridController();
+    }
+
+    public void getVenda() {
+        new VendaGridController();
+    }
+
+    public void getVendaFrete() {
+        new VendaFreteGridController();
+    }
+
+    public void getVendaRomaneioEntrega() {
+        new VendaRomaneioEntregaGridController();
+    }
+
     //FUNÇÕES E TABELAS
     public void getFuncaoPadrao() {
         JOptionPane.showMessageDialog(null, "Acesso não autorizado!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
