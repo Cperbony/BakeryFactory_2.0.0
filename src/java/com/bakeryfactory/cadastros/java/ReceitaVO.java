@@ -35,8 +35,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
@@ -77,7 +75,7 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<IngredientesReceitasVO> listaIngredientesReceitas;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receitaVO")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receita")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ModoPreparoVO> listaModoPreparo;
 

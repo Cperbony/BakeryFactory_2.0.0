@@ -24,7 +24,6 @@
 package com.bakeryfactory.pcp.java;
 
 import com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO;
-import com.bakeryfactory.pcp.java.PcpServicoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -37,8 +36,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;

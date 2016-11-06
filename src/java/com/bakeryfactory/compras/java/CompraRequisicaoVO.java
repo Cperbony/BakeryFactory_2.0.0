@@ -36,8 +36,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -66,7 +64,7 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
     @Column(name = "OBSERVACAO")
     private String observacao;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicaoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicao")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe;
     

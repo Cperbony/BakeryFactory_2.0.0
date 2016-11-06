@@ -32,8 +32,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -62,7 +60,7 @@ public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "HABILITADO")
     private Character habilitado;
     
-    @JoinColumn(name = "ID_FUNCAO", referencedColumnName = "IS")
+    @JoinColumn(name = "ID_FUNCAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private FuncaoVO funcao;
     

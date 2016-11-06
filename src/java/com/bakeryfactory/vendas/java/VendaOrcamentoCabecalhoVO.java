@@ -110,7 +110,7 @@ public class VendaOrcamentoCabecalhoVO extends ValueObjectImpl implements Serial
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaOrcamentoCabecalhoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaOrcamentoCabecalho")
     private List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe;
 
     public VendaOrcamentoCabecalhoVO() {

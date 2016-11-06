@@ -32,8 +32,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.LazyCollection;
@@ -59,7 +57,7 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "classeProdutoGrupoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "classeProdutoGrupo")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<ProdutoSubgrupoVO> listaProdutoSubgrupo;
 

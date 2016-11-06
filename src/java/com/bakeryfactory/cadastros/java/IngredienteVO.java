@@ -37,8 +37,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
@@ -63,7 +61,6 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     private String unidadeMedida;
     @Column(name = "QUANTIDADE")
     private Integer quantidade;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PESO")
     private BigDecimal peso;
     @Column(name = "VALOR_UNITARIO")
@@ -75,16 +72,16 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<IngredientesReceitasVO> listaIngredientesReceitas;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<MarcaVO> listaMarca;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingredienteId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
 
     public IngredienteVO() {

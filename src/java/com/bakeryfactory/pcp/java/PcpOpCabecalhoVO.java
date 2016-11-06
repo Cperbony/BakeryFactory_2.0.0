@@ -82,10 +82,10 @@ public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalhoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalho")
     private List<PcpInstrucaoOpVO> pcpInstrucaoOpList;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalhoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalho")
     private List<PcpOpDetalheVO> listaPcpOpDetalhe;
 
     public PcpOpCabecalhoVO() {

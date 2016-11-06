@@ -38,6 +38,7 @@ public class BakeryFactoryControllerCallbacks extends ControllerCallbacks {
 
     /**
      * Method called by the init method of Controller class, as last instruction.
+     * @param context
      */
     @Override
     public void afterInit(ServletContext context) {

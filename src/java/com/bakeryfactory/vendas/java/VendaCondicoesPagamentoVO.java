@@ -75,19 +75,15 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
     private Integer prazoMedio;
     @Column(name = "VISTA_PRAZO")
     private Character vistaPrazo;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaCondicoesParcelaVO> listaVendaCondicoesParcela;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaCabecalhoVO> listaVendaCabecalho;
-    
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho;
-    
+
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
@@ -179,14 +175,6 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
         this.vistaPrazo = vistaPrazo;
     }
 
-    public List<VendaCondicoesParcelaVO> getListaVendaCondicoesParcela() {
-        return listaVendaCondicoesParcela;
-    }
-
-    public void setListaVendaCondicoesParcela(List<VendaCondicoesParcelaVO> listaVendaCondicoesParcela) {
-        this.listaVendaCondicoesParcela = listaVendaCondicoesParcela;
-    }
-
     public List<VendaCabecalhoVO> getListaVendaCabecalho() {
         return listaVendaCabecalho;
     }
@@ -215,5 +203,5 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
     public String toString() {
         return "com.bakeryfactory.cadastros.java.VendaCondicoesPagamentoVO[ id=" + id + " ]";
     }
-    
+
 }

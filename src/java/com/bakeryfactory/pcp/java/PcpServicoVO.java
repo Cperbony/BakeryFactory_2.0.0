@@ -36,8 +36,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -98,11 +96,11 @@ public class PcpServicoVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private ProdutoCalculoPrecoMedidasVO produtoCalculoPrecoMedidas;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServicoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServico")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpServicoColaboradorVO> listaPcpServicoColaborador;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServicoId")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpServico")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento;
 

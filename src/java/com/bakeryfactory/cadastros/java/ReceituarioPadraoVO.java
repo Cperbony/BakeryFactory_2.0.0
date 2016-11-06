@@ -25,13 +25,15 @@ package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -44,8 +46,12 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ReceituarioPadraoVOPK receituarioPadraoVOPK;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Column(name = "NOME_PRODUTO")
     private String nomeProduto;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -71,28 +77,12 @@ public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable
     private Integer baseCalcPerdas;
     @Column(name = "PERDA_COMUM")
     private Integer perdaComum;
-    
-    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID", insertable = false, updatable = false)
+
+    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
 
     public ReceituarioPadraoVO() {
-    }
-
-    public ReceituarioPadraoVO(ReceituarioPadraoVOPK receituarioPadraoVOPK) {
-        this.receituarioPadraoVOPK = receituarioPadraoVOPK;
-    }
-
-    public ReceituarioPadraoVO(int id, int receituarioControleCustoId) {
-        this.receituarioPadraoVOPK = new ReceituarioPadraoVOPK(id, receituarioControleCustoId);
-    }
-
-    public ReceituarioPadraoVOPK getReceituarioPadraoVOPK() {
-        return receituarioPadraoVOPK;
-    }
-
-    public void setReceituarioPadraoVOPK(ReceituarioPadraoVOPK receituarioPadraoVOPK) {
-        this.receituarioPadraoVOPK = receituarioPadraoVOPK;
     }
 
     public String getNomeProduto() {
@@ -200,28 +190,8 @@ public class ReceituarioPadraoVO extends ValueObjectImpl implements Serializable
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (receituarioPadraoVOPK != null ? receituarioPadraoVOPK.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ReceituarioPadraoVO)) {
-            return false;
-        }
-        ReceituarioPadraoVO other = (ReceituarioPadraoVO) object;
-        if ((this.receituarioPadraoVOPK == null && other.receituarioPadraoVOPK != null) || (this.receituarioPadraoVOPK != null && !this.receituarioPadraoVOPK.equals(other.receituarioPadraoVOPK))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.ReceituarioPadraoVO[ receituarioPadraoVOPK=" + receituarioPadraoVOPK + " ]";
+        return "ReceituarioPadraoVO{" + "id=" + id + ", nomeProduto=" + nomeProduto + ", pesoBola=" + pesoBola + ", numeroDivisao=" + numeroDivisao + ", perdaComum=" + perdaComum + '}';
     }
-    
+
 }

@@ -26,13 +26,15 @@ package com.bakeryfactory.cadastros.java;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -47,40 +49,34 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
 public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected ModoPreparoVOPK modoPreparoVOPK;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Column(name = "DESCRICAO_PREPARO")
     private String descricaoPreparo;
     @Column(name = "TEMPO_PREPARO")
     private String tempoPreparo;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "RENDIMENTO")
     private BigDecimal rendimento;
     @Column(name = "DATA_REVISAO")
     @Temporal(TemporalType.DATE)
     private Date dataRevisao;
-    
-    @JoinColumn(name = "ID_RECEITA", referencedColumnName = "ID", insertable = false, updatable = false)
+
+    @JoinColumn(name = "ID_RECEITA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceitaVO receita;
 
     public ModoPreparoVO() {
     }
 
-    public ModoPreparoVO(ModoPreparoVOPK modoPreparoVOPK) {
-        this.modoPreparoVOPK = modoPreparoVOPK;
+    public Integer getId() {
+        return id;
     }
 
-    public ModoPreparoVO(int id, int receitaId) {
-        this.modoPreparoVOPK = new ModoPreparoVOPK(id, receitaId);
-    }
-
-    public ModoPreparoVOPK getModoPreparoVOPK() {
-        return modoPreparoVOPK;
-    }
-
-    public void setModoPreparoVOPK(ModoPreparoVOPK modoPreparoVOPK) {
-        this.modoPreparoVOPK = modoPreparoVOPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getDescricaoPreparo() {
@@ -124,28 +120,7 @@ public class ModoPreparoVO extends ValueObjectImpl implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (modoPreparoVOPK != null ? modoPreparoVOPK.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ModoPreparoVO)) {
-            return false;
-        }
-        ModoPreparoVO other = (ModoPreparoVO) object;
-        if ((this.modoPreparoVOPK == null && other.modoPreparoVOPK != null) || (this.modoPreparoVOPK != null && !this.modoPreparoVOPK.equals(other.modoPreparoVOPK))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.ModoPreparoVO[ modoPreparoVOPK=" + modoPreparoVOPK + " ]";
+        return "ModoPreparoVO{" + "id=" + id + ", receita=" + receita + '}';
     }
-    
 }

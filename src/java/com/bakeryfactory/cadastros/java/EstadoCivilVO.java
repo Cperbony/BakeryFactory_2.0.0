@@ -32,8 +32,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
@@ -57,7 +55,7 @@ public class EstadoCivilVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoCivilId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoCivil")
     private List<PessoaFisicaVO> listaPessoaFisica;
 
     public EstadoCivilVO() {

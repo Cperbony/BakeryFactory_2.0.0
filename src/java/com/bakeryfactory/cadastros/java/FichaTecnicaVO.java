@@ -33,8 +33,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -61,6 +59,7 @@ public class FichaTecnicaVO extends ValueObjectImpl implements Serializable {
     private BigDecimal quantidade;
     @Column(name = "SEQUENCIA_PRODUCAO")
     private Integer sequenciaProducao;
+    
     @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;

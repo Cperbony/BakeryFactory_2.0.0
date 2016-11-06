@@ -35,8 +35,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -54,7 +52,6 @@ public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializab
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "QUANTIDADE")
     private BigDecimal quantidade;
     @Column(name = "VALOR_UNITARIO")

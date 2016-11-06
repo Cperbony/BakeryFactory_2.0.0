@@ -35,8 +35,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
@@ -74,7 +72,7 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private NotaFiscalModeloVO notaFiscalModelo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipoId")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipo")
     private List<VendaCabecalhoVO> listaVendaCabecalhoVO;
 
     public NotaFiscalTipoVO() {

@@ -57,7 +57,6 @@
         <mapping class="com.bakeryfactory.cadastros.java.IngredientesReceitasVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.MarcaVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVOPK"/>
         <mapping class="com.bakeryfactory.cadastros.java.MunicipioVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.NcmVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.NivelFormacaoVO"/>      
@@ -79,7 +78,6 @@
         <mapping class="com.bakeryfactory.cadastros.java.ReceitaVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ReceituarioPadraoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ReceituarioPadraoVOPK"/>
         <mapping class="com.bakeryfactory.cadastros.java.SetorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.SituacaoColaboradorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.SituacaoForCliVO"/>
