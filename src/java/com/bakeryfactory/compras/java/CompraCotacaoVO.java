@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -33,8 +33,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -50,8 +48,8 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "COMPRA_REQUISICAO")
-public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_COTACAO")
+public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,32 +57,26 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "DATA_REQUISICAO")
+    @Column(name = "DATA_COTACAO")
     @Temporal(TemporalType.DATE)
-    private Date dataRequisicao;
-    @Column(name = "OBSERVACAO")
-    private String observacao;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicaoId")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicao")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
-    
-    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private ColaboradorVO colaborador;
-    
-    @JoinColumn(name = "ID_COMPRA_TIPO_REQUISICAO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private CompraTipoRequisicaoVO compraTipoRequisicao;
+    private Date dataCotacao;
+    @Column(name = "DESCRICAO")
+    private String descricao;
+    @Column(name = "SITUACAO")
+    private Character situacao;
 
-    public CompraRequisicaoVO() {
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
+
+    public CompraCotacaoVO() {
     }
 
-    public CompraRequisicaoVO(Integer id) {
+    public CompraCotacaoVO(Integer id) {
         this.id = id;
     }
 
@@ -96,52 +88,44 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
         this.id = id;
     }
 
-    public Date getDataRequisicao() {
-        return dataRequisicao;
+    public Date getDataCotacao() {
+        return dataCotacao;
     }
 
-    public void setDataRequisicao(Date dataRequisicao) {
-        this.dataRequisicao = dataRequisicao;
+    public void setDataCotacao(Date dataCotacao) {
+        this.dataCotacao = dataCotacao;
     }
 
-    public String getObservacao() {
-        return observacao;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setObservacao(String observacao) {
-        this.observacao = observacao;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public List<CompraRequisicaoDetalheVO> getListaCompraRequisicaoDetalhe() {
-        return listaCompraRequisicaoDetalhe;
+    public Character getSituacao() {
+        return situacao;
     }
 
-    public void setListaCompraRequisicaoDetalhe(List<CompraRequisicaoDetalheVO> listaCompraRequisicaoDetalhe) {
-        this.listaCompraRequisicaoDetalhe = listaCompraRequisicaoDetalhe;
+    public void setSituacao(Character situacao) {
+        this.situacao = situacao;
     }
 
-    public List<CompraRequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
-        return listaRequisicaoInternaDetalhe;
+    public List<CompraReqCotacaoDetalheVO> getListaCompraReqCotacaoDetalhe() {
+        return listaCompraReqCotacaoDetalhe;
     }
 
-    public void setListaRequisicaoInternaDetalhe(List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
-        this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
+    public void setListaCompraReqCotacaoDetalhe(List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe) {
+        this.listaCompraReqCotacaoDetalhe = listaCompraReqCotacaoDetalhe;
     }
 
-    public ColaboradorVO getColaborador() {
-        return colaborador;
+    public List<CompraFornecedorCotacaoVO> getListaCompraFornecedorCotacao() {
+        return listaCompraFornecedorCotacao;
     }
 
-    public void setColaborador(ColaboradorVO colaborador) {
-        this.colaborador = colaborador;
-    }
-
-    public CompraTipoRequisicaoVO getCompraTipoRequisicao() {
-        return compraTipoRequisicao;
-    }
-
-    public void setCompraTipoRequisicao(CompraTipoRequisicaoVO compraTipoRequisicao) {
-        this.compraTipoRequisicao = compraTipoRequisicao;
+    public void setListaCompraFornecedorCotacao(List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao) {
+        this.listaCompraFornecedorCotacao = listaCompraFornecedorCotacao;
     }
 
     @Override
@@ -154,10 +138,10 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraRequisicaoVO)) {
+        if (!(object instanceof CompraCotacaoVO)) {
             return false;
         }
-        CompraRequisicaoVO other = (CompraRequisicaoVO) object;
+        CompraCotacaoVO other = (CompraCotacaoVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -166,7 +150,7 @@ public class CompraRequisicaoVO extends ValueObjectImpl implements Serializable 
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.CompraRequisicaoVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraCotacaoVO[ id=" + id + " ]";
     }
-    
+
 }

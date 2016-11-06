@@ -21,9 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
+import com.bakeryfactory.cadastros.java.ProdutoVO;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -47,8 +49,8 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "COMPRA_TIPO_REQUISICAO")
-public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_REQUISICAO_DETALHE")
+public class CompraRequisicaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -56,25 +58,30 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "CODIGO")
-    private String codigo;
-    @Column(name = "NOME")
-    private String nome;
-    @Column(name = "DESCRICAO")
-    private String descricao;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraTipoRequisicao")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraRequisicaoVO> listaCompraRequisicao;
-    
-    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "QUANTIDADE")
+    private BigDecimal quantidade;
+    @Column(name = "QUANTIDADE_COTADA")
+    private BigDecimal quantidadeCotada;
+    @Column(name = "ITEM_COTADO")
+    private Character itemCotado;
+    @JoinColumn(name = "ID_COMPRA_REQUISICAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private EmpresaVO empresa;
+    private CompraRequisicaoVO compraRequisicao;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraRequisicaoDetalhe")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoVO produto;
+    
 
-    public CompraTipoRequisicaoVO() {
+    public CompraRequisicaoDetalheVO() {
     }
 
-    public CompraTipoRequisicaoVO(Integer id) {
+    public CompraRequisicaoDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -86,45 +93,55 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
         this.id = id;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public BigDecimal getQuantidade() {
+        return quantidade;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setQuantidade(BigDecimal quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public String getNome() {
-        return nome;
+    public BigDecimal getQuantidadeCotada() {
+        return quantidadeCotada;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setQuantidadeCotada(BigDecimal quantidadeCotada) {
+        this.quantidadeCotada = quantidadeCotada;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public Character getItemCotado() {
+        return itemCotado;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setItemCotado(Character itemCotado) {
+        this.itemCotado = itemCotado;
     }
 
-    public List<CompraRequisicaoVO> getListaCompraRequisicao() {
-        return listaCompraRequisicao;
+    public CompraRequisicaoVO getCompraRequisicao() {
+        return compraRequisicao;
     }
 
-    public void setListaCompraRequisicao(List<CompraRequisicaoVO> listaCompraRequisicao) {
-        this.listaCompraRequisicao = listaCompraRequisicao;
+    public void setCompraRequisicao(CompraRequisicaoVO compraRequisicao) {
+        this.compraRequisicao = compraRequisicao;
     }
 
-    public EmpresaVO getEmpresa() {
-        return empresa;
+    public List<CompraReqCotacaoDetalheVO> getListaCompraReqCotacaoDetalhe() {
+        return listaCompraReqCotacaoDetalhe;
     }
 
-    public void setEmpresa(EmpresaVO empresa) {
-        this.empresa = empresa;
+    public void setListaCompraReqCotacaoDetalhe(List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe) {
+        this.listaCompraReqCotacaoDetalhe = listaCompraReqCotacaoDetalhe;
     }
+
+    public ProdutoVO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -136,10 +153,10 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraTipoRequisicaoVO)) {
+        if (!(object instanceof CompraRequisicaoDetalheVO)) {
             return false;
         }
-        CompraTipoRequisicaoVO other = (CompraTipoRequisicaoVO) object;
+        CompraRequisicaoDetalheVO other = (CompraRequisicaoDetalheVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -148,7 +165,7 @@ public class CompraTipoRequisicaoVO extends ValueObjectImpl implements Serializa
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.CompraTipoRequisicaoVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraRequisicaoDetalheVO[ id=" + id + " ]";
     }
     
 }

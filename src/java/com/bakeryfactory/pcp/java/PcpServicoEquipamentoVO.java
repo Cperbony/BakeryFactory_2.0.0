@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.pcp.java;
 
-import com.bakeryfactory.cadastros.java.PatrimonioBemVO;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;

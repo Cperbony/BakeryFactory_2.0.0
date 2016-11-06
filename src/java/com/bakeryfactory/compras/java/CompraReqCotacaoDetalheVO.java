@@ -21,26 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
+import java.math.BigDecimal;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,8 +43,8 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "COMPRA_COTACAO")
-public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_REQ_COTACAO_DETALHE")
+public class CompraReqCotacaoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,26 +52,22 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "DATA_COTACAO")
-    @Temporal(TemporalType.DATE)
-    private Date dataCotacao;
-    @Column(name = "DESCRICAO")
-    private String descricao;
-    @Column(name = "SITUACAO")
-    private Character situacao;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "QUANTIDADE_COTADA")
+    private BigDecimal quantidadeCotada;
+    
+    @JoinColumn(name = "ID_COMPRA_COTACAO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private CompraCotacaoVO compraCotacao;
+    
+    @JoinColumn(name = "ID_COMPRA_REQUISICAO_DETALHE", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private CompraRequisicaoDetalheVO compraRequisicaoDetalhe;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraCotacao")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
-
-    public CompraCotacaoVO() {
+    public CompraReqCotacaoDetalheVO() {
     }
 
-    public CompraCotacaoVO(Integer id) {
+    public CompraReqCotacaoDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -88,44 +79,28 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public Date getDataCotacao() {
-        return dataCotacao;
+    public BigDecimal getQuantidadeCotada() {
+        return quantidadeCotada;
     }
 
-    public void setDataCotacao(Date dataCotacao) {
-        this.dataCotacao = dataCotacao;
+    public void setQuantidadeCotada(BigDecimal quantidadeCotada) {
+        this.quantidadeCotada = quantidadeCotada;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public CompraCotacaoVO getCompraCotacao() {
+        return compraCotacao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setCompraCotacao(CompraCotacaoVO compraCotacao) {
+        this.compraCotacao = compraCotacao;
     }
 
-    public Character getSituacao() {
-        return situacao;
+    public CompraRequisicaoDetalheVO getCompraRequisicaoDetalhe() {
+        return compraRequisicaoDetalhe;
     }
 
-    public void setSituacao(Character situacao) {
-        this.situacao = situacao;
-    }
-
-    public List<CompraReqCotacaoDetalheVO> getListaCompraReqCotacaoDetalhe() {
-        return listaCompraReqCotacaoDetalhe;
-    }
-
-    public void setListaCompraReqCotacaoDetalhe(List<CompraReqCotacaoDetalheVO> listaCompraReqCotacaoDetalhe) {
-        this.listaCompraReqCotacaoDetalhe = listaCompraReqCotacaoDetalhe;
-    }
-
-    public List<CompraFornecedorCotacaoVO> getListaCompraFornecedorCotacao() {
-        return listaCompraFornecedorCotacao;
-    }
-
-    public void setListaCompraFornecedorCotacao(List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao) {
-        this.listaCompraFornecedorCotacao = listaCompraFornecedorCotacao;
+    public void setCompraRequisicaoDetalhe(CompraRequisicaoDetalheVO compraRequisicaoDetalhe) {
+        this.compraRequisicaoDetalhe = compraRequisicaoDetalhe;
     }
 
     @Override
@@ -138,10 +113,10 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraCotacaoVO)) {
+        if (!(object instanceof CompraReqCotacaoDetalheVO)) {
             return false;
         }
-        CompraCotacaoVO other = (CompraCotacaoVO) object;
+        CompraReqCotacaoDetalheVO other = (CompraReqCotacaoDetalheVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -150,7 +125,7 @@ public class CompraCotacaoVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.CompraCotacaoVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraReqCotacaoDetalheVO[ id=" + id + " ]";
     }
-
+    
 }

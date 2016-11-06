@@ -23,6 +23,8 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.compras.java.CompraRequisicaoVO;
+import com.bakeryfactory.compras.java.CompraRequisicaoInternaDetalheVO;
 import com.bakeryfactory.vendas.java.VendaRomaneioEntregaVO;
 import com.bakeryfactory.pcp.java.PcpServicoColaboradorVO;
 import java.io.Serializable;

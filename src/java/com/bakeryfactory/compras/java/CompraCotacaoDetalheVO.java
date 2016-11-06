@@ -21,8 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
+import com.bakeryfactory.cadastros.java.FornecedorVO;
+import com.bakeryfactory.cadastros.java.IngredienteVO;
+import com.bakeryfactory.cadastros.java.ProdutoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

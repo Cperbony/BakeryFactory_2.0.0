@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.pcp.java;
 
+import com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO;
 import com.bakeryfactory.pcp.java.PcpServicoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;

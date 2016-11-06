@@ -23,6 +23,8 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.compras.java.CompraCotacaoDetalheVO;
+import com.bakeryfactory.compras.java.CompraFornecedorCotacaoVO;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

@@ -21,13 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
+import com.bakeryfactory.cadastros.java.IngredienteVO;
+import com.bakeryfactory.cadastros.java.ProdutoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,10 +37,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -48,8 +45,8 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "COMPRA_FORNECEDOR_COTACAO")
-public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_PEDIDO_DETALHE")
+public class CompraPedidoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -57,36 +54,52 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Column(name = "PRAZO_ENTREGA")
-    private String prazoEntrega;
-    @Column(name = "VENDA_CONDICOES_PAGAMENTO")
-    private String vendaCondicoesPagamento;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "QUANTIDADE")
+    private BigDecimal quantidade;
+    @Column(name = "VALOR_UNITARIO")
+    private BigDecimal valorUnitario;
     @Column(name = "VALOR_SUBTOTAL")
     private BigDecimal valorSubtotal;
     @Column(name = "TAXA_DESCONTO")
     private BigDecimal taxaDesconto;
     @Column(name = "VALOR_DESCONTO")
     private BigDecimal valorDesconto;
-    @Column(name = "TOTAL")
-    private BigDecimal total;
+    @Column(name = "VALOR_TOTAL")
+    private BigDecimal valorTotal;
+    @Column(name = "CST_CSOSN")
+    private String cstCsosn;
+    @Column(name = "CFOP")
+    private Integer cfop;
+    @Column(name = "BASE_CALCULO_ICMS")
+    private BigDecimal baseCalculoIcms;
+    @Column(name = "VALOR_ICMS")
+    private BigDecimal valorIcms;
+    @Column(name = "VALOR_IPI")
+    private BigDecimal valorIpi;
+    @Column(name = "ALIQUOTA_ICMS")
+    private BigDecimal aliquotaIcms;
+    @Column(name = "ALIQUOTA_IPI")
+    private BigDecimal aliquotaIpi;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "compraFornecedorCotacao")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
-    
-    @JoinColumn(name = "ID_COMPRA_COTACAO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_COMPRA_PEDIDO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private CompraCotacaoVO compraCotacao;
+    private CompraPedidoVO compraPedido;
     
-    @JoinColumn(name = "ID_FORNECEDOR", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private FornecedorVO fornecedor;
+    private IngredienteVO ingrediente;
+    
+    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private ProdutoVO produto;
+    
+    
 
-    public CompraFornecedorCotacaoVO() {
+    public CompraPedidoDetalheVO() {
     }
 
-    public CompraFornecedorCotacaoVO(Integer id) {
+    public CompraPedidoDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -98,20 +111,20 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
         this.id = id;
     }
 
-    public String getPrazoEntrega() {
-        return prazoEntrega;
+    public BigDecimal getQuantidade() {
+        return quantidade;
     }
 
-    public void setPrazoEntrega(String prazoEntrega) {
-        this.prazoEntrega = prazoEntrega;
+    public void setQuantidade(BigDecimal quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public String getVendaCondicoesPagamento() {
-        return vendaCondicoesPagamento;
+    public BigDecimal getValorUnitario() {
+        return valorUnitario;
     }
 
-    public void setVendaCondicoesPagamento(String vendaCondicoesPagamento) {
-        this.vendaCondicoesPagamento = vendaCondicoesPagamento;
+    public void setValorUnitario(BigDecimal valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     public BigDecimal getValorSubtotal() {
@@ -138,37 +151,95 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
         this.valorDesconto = valorDesconto;
     }
 
-    public BigDecimal getTotal() {
-        return total;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setTotal(BigDecimal total) {
-        this.total = total;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
-    public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
-        return listaCompraCotacaoDetalhe;
+    public String getCstCsosn() {
+        return cstCsosn;
     }
 
-    public void setListaCompraCotacaoDetalhe(List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe) {
-        this.listaCompraCotacaoDetalhe = listaCompraCotacaoDetalhe;
+    public void setCstCsosn(String cstCsosn) {
+        this.cstCsosn = cstCsosn;
     }
 
-    public CompraCotacaoVO getCompraCotacao() {
-        return compraCotacao;
+    public Integer getCfop() {
+        return cfop;
     }
 
-    public void setCompraCotacao(CompraCotacaoVO compraCotacao) {
-        this.compraCotacao = compraCotacao;
+    public void setCfop(Integer cfop) {
+        this.cfop = cfop;
     }
 
-    public FornecedorVO getFornecedor() {
-        return fornecedor;
+    public BigDecimal getBaseCalculoIcms() {
+        return baseCalculoIcms;
     }
 
-    public void setFornecedor(FornecedorVO fornecedor) {
-        this.fornecedor = fornecedor;
+    public void setBaseCalculoIcms(BigDecimal baseCalculoIcms) {
+        this.baseCalculoIcms = baseCalculoIcms;
     }
+
+    public BigDecimal getValorIcms() {
+        return valorIcms;
+    }
+
+    public void setValorIcms(BigDecimal valorIcms) {
+        this.valorIcms = valorIcms;
+    }
+
+    public BigDecimal getValorIpi() {
+        return valorIpi;
+    }
+
+    public void setValorIpi(BigDecimal valorIpi) {
+        this.valorIpi = valorIpi;
+    }
+
+    public BigDecimal getAliquotaIcms() {
+        return aliquotaIcms;
+    }
+
+    public void setAliquotaIcms(BigDecimal aliquotaIcms) {
+        this.aliquotaIcms = aliquotaIcms;
+    }
+
+    public BigDecimal getAliquotaIpi() {
+        return aliquotaIpi;
+    }
+
+    public void setAliquotaIpi(BigDecimal aliquotaIpi) {
+        this.aliquotaIpi = aliquotaIpi;
+    }
+
+    public CompraPedidoVO getCompraPedido() {
+        return compraPedido;
+    }
+
+    public void setCompraPedido(CompraPedidoVO compraPedido) {
+        this.compraPedido = compraPedido;
+    }
+
+    public IngredienteVO getIngrediente() {
+        return ingrediente;
+    }
+
+    public void setIngrediente(IngredienteVO ingrediente) {
+        this.ingrediente = ingrediente;
+    }
+
+    public ProdutoVO getProduto() {
+        return produto;
+    }
+
+    public void setProduto(ProdutoVO produto) {
+        this.produto = produto;
+    }
+    
+    
 
     @Override
     public int hashCode() {
@@ -180,10 +251,10 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof CompraFornecedorCotacaoVO)) {
+        if (!(object instanceof CompraPedidoDetalheVO)) {
             return false;
         }
-        CompraFornecedorCotacaoVO other = (CompraFornecedorCotacaoVO) object;
+        CompraPedidoDetalheVO other = (CompraPedidoDetalheVO) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -192,7 +263,7 @@ public class CompraFornecedorCotacaoVO extends ValueObjectImpl implements Serial
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.CompraFornecedorCotacaoVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraPedidoDetalheVO[ id=" + id + " ]";
     }
     
 }

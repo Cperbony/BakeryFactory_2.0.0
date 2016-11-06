@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package com.bakeryfactory.cadastros.java;
+package com.bakeryfactory.compras.java;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -43,8 +43,8 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
 @Entity
-@Table(name = "COMPRA_REQUISICAO_INTERNA_DETALHE")
-public class CompraRequisicaoInternaDetalheVO extends ValueObjectImpl implements Serializable {
+@Table(name = "COMPRA_COTACAO_PEDIDO_DETALHE")
+public class CompraCotacaoPedidoDetalheVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -53,25 +53,21 @@ public class CompraRequisicaoInternaDetalheVO extends ValueObjectImpl implements
     @Column(name = "ID")
     private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "QUANTIDADE")
-    private BigDecimal quantidade;
+    @Column(name = "QUANTIDADE_PEDIDA")
+    private BigDecimal quantidadePedida;
     
-    @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_COMPRA_COTACAO_DETALHE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private ColaboradorVO colaborador;
+    private CompraCotacaoDetalheVO compraCotacaoDetalhe;
     
-    @JoinColumn(name = "ID_COMPRA_REQUISICAO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_COMPRA_PEDIDO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private CompraRequisicaoVO compraRequisicao;
-    
-    @JoinColumn(name = "ID_COMPRA_REQUISICAO_INTERNA_CABECALHO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private CompraRequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho;
+    private CompraPedidoVO compraPedido;
 
-    public CompraRequisicaoInternaDetalheVO() {
+    public CompraCotacaoPedidoDetalheVO() {
     }
 
-    public CompraRequisicaoInternaDetalheVO(Integer id) {
+    public CompraCotacaoPedidoDetalheVO(Integer id) {
         this.id = id;
     }
 
@@ -83,41 +79,53 @@ public class CompraRequisicaoInternaDetalheVO extends ValueObjectImpl implements
         this.id = id;
     }
 
-    public BigDecimal getQuantidade() {
-        return quantidade;
+    public BigDecimal getQuantidadePedida() {
+        return quantidadePedida;
     }
 
-    public void setQuantidade(BigDecimal quantidade) {
-        this.quantidade = quantidade;
+    public void setQuantidadePedida(BigDecimal quantidadePedida) {
+        this.quantidadePedida = quantidadePedida;
     }
 
-    public ColaboradorVO getColaborador() {
-        return colaborador;
+    public CompraCotacaoDetalheVO getCompraCotacaoDetalhe() {
+        return compraCotacaoDetalhe;
     }
 
-    public void setColaborador(ColaboradorVO colaborador) {
-        this.colaborador = colaborador;
+    public void setCompraCotacaoDetalhe(CompraCotacaoDetalheVO compraCotacaoDetalhe) {
+        this.compraCotacaoDetalhe = compraCotacaoDetalhe;
     }
 
-    public CompraRequisicaoVO getCompraRequisicao() {
-        return compraRequisicao;
+    public CompraPedidoVO getCompraPedido() {
+        return compraPedido;
     }
 
-    public void setCompraRequisicao(CompraRequisicaoVO compraRequisicao) {
-        this.compraRequisicao = compraRequisicao;
+    public void setCompraPedido(CompraPedidoVO compraPedido) {
+        this.compraPedido = compraPedido;
     }
 
-    public CompraRequisicaoInternaCabecalhoVO getCompraRequisicaoInternaCabecalho() {
-        return compraRequisicaoInternaCabecalho;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
     }
 
-    public void setCompraRequisicaoInternaCabecalho(CompraRequisicaoInternaCabecalhoVO compraRequisicaoInternaCabecalho) {
-        this.compraRequisicaoInternaCabecalho = compraRequisicaoInternaCabecalho;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof CompraCotacaoPedidoDetalheVO)) {
+            return false;
+        }
+        CompraCotacaoPedidoDetalheVO other = (CompraCotacaoPedidoDetalheVO) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
     }
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.RequisicaoInternaDetalheVO[ id=" + id + " ]";
+        return "com.bakeryfactory.cadastros.java.CompraCotacaoPedidoDetalheVO[ id=" + id + " ]";
     }
     
 }

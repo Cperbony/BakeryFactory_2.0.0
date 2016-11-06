@@ -9,10 +9,10 @@
     </head>
     <body>
         <center>
-            <h1>Projeto T2Ti ERP 2.0 - Cadastros Base</h1>
+            <h1>Backery Factory - Controle de Produção de Panificadoras</h1>
             <br />
-            <a href="T2TiERP.jnlp">
-                <img src="imagens/t2ti_erp_2.jpg" style="border: none;" alt="T2Ti ERP" />
+            <a href="BakeryFactory.jnlp">
+                <img src="imagens/Bakery_Factory_logo.jpg" style="border: none;" alt="Bakery Factory" />
             </a>
             <br />
             Clique na imagem acima para acessar o sistema.

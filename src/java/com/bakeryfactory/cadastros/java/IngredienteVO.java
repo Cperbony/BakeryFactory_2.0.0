@@ -23,6 +23,8 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.compras.java.CompraCotacaoDetalheVO;
+import com.bakeryfactory.compras.java.CompraPedidoDetalheVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;

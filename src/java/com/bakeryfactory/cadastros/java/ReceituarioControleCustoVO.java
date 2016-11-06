@@ -23,6 +23,7 @@
  */
 package com.bakeryfactory.cadastros.java;
 
+import com.bakeryfactory.pcp.java.ProdutoCalculoPrecoMedidasVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
