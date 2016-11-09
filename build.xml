@@ -8,7 +8,7 @@
 <!-- You can turn off the Compile on Save (or Deploy on Save) setting -->
 <!-- in the project's Project Properties dialog box.-->
 <project name="BakeryFactory" default="default" basedir=".">
-    <description>Builds, tests, and runs the project BakeryFactory.</description>
+    <description>Construção do Projeto Bakery Factory</description>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -74,11 +74,11 @@
     para montar o pacote necessario para a aplicação que desce para o cliente
     -->
     <target name="-post-compile" depends="signlib, bakeryfactory">
-        <echo>Executando target '-post-compile'</echo>
+        <echo>Executando a target '-post-compile'</echo>
     </target>
     <!-- assina os jars que compõem a aplicação do cliente -->
     <target name="signlib" description="Assina os JARs">
-        <echo>Executando target 'signlib'</echo>
+        <echo>Executando a target 'signlib'</echo>
         <mkdir dir="${build}/${signedlib}"/>
         <copy todir="${build}/${signedlib}">
             <fileset dir="${lib}/openswing">
@@ -119,35 +119,9 @@
                 <include name="*.jar" />
             </fileset>
         </copy>
-
-        <copy todir="${tmp}/com/bakeryfactory/cadastros/cliente">
-            <fileset dir="${build.classes.dir}/com/bakeryfactory/cadastros/cliente">
-                <include name="*.*" />
-            </fileset>
-        </copy>
-
-        <copy todir="${tmp}/com/bakeryfactory/cadastros/java">
-            <fileset dir="${build.classes.dir}/com/bakeryfactory/cadastros/java">
-                <include name="*.*" />
-            </fileset>
-        </copy>
-
-    <!--
-    AGUARDANDO PARA DECISÃO COM O CLIENTE
-
-        <copy todir="${tmp}/com/bakeryfactory/contabilidade/java">
-            <fileset dir="${build.classes.dir}/com/bakeryfactory/contabilidade/java">
-                <include name="*.*" />
-            </fileset>
-        </copy>
         
-            <copy todir="${tmp}/com/bakeryfactory/tributacao/java">
-        <fileset dir="${build.classes.dir}/com/bakeryfactory/tributacao/java">
-            <include name="*.*" />
-        </fileset>
-    </copy>
-        -->
-
+        <!-- CLASSES PADRÃO PARA TODOS OS MÓDULOS -->
+        
         <copy todir="${tmp}/com/bakeryfactory/padrao/cliente">
             <fileset dir="${build.classes.dir}/com/bakeryfactory/padrao/cliente">
                 <include name="*.*" />
@@ -159,6 +133,80 @@
                 <include name="*.*" />
             </fileset>
         </copy>
+        
+        <!-- CADASTROS -->
+        <copy todir="${tmp}/com/bakeryfactory/cadastros/cliente">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/cadastros/cliente">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <copy todir="${tmp}/com/bakeryfactory/cadastros/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/cadastros/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        
+        <!-- CLASSES PCP -->
+        
+        <copy todir="${tmp}/com/bakeryfactory/pcp/cliente">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/pcp/cliente">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <copy todir="${tmp}/com/bakeryfactory/pcp/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/pcp/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        
+        <!-- CLASSES VENDAS -->
+        <copy todir="${tmp}/com/bakeryfactory/vendas/cliente">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/vendas/cliente">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <copy todir="${tmp}/com/bakeryfactory/vendas/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/vendas/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        
+        <!-- COMPRAS 
+        <copy todir="${tmp}/com/bakeryfactory/compras/cliente">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/compras/cliente">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <copy todir="${tmp}/com/bakeryfactory/compras/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/compras/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        -->
+        
+        
+        
+        <!-- AGUARDANDO PARA DECISÃO COM O CLIENTE -->
+        
+        <!-- CONTABILIDADE -->
+        <copy todir="${tmp}/com/bakeryfactory/contabilidade/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/contabilidade/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        
+        <!-- TRIBUTAÇÃO -->
+        <copy todir="${tmp}/com/bakeryfactory/tributacao/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/tributacao/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+    
+        <!-- AGUARDANDO PARA DECISÃO COM O CLIENTE -->
 
 
 
