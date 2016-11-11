@@ -66,26 +66,26 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     private Date dataCadastro;
     @Column(name = "ADMINISTRADOR")
     private Character administrador;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<AuditoriaVO> listaAuditoria;
-    
+
     @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ColaboradorVO colaborador;
-    
-    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private EmpresaVO empresa;
-    
+
     @JoinColumn(name = "ID_PAPEL", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PapelVO papel;
-    
+
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
+
+    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private EmpresaVO empresa;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<AuditoriaVO> listaAuditoria;
 
     public UsuarioVO() {
     }
@@ -178,5 +178,5 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.UsuarioVO[ id=" + id + " ]";
     }
-    
+
 }

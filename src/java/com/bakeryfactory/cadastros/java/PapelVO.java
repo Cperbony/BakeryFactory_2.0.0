@@ -34,6 +34,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -58,9 +60,11 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
     private Character acessoCompleto;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papel")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<UsuarioVO> listaUsuario;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papel")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<PapelFuncaoVO> listaPapelFuncao;
 
     public PapelVO() {

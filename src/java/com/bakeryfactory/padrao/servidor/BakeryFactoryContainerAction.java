@@ -68,7 +68,7 @@ public class BakeryFactoryContainerAction implements Action {
             String password = ((String[]) inputPar)[1];
             session = HibernateUtil.getSessionFactory().openSession();
 
-            String baseSQL = "from USUARIO in class com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login'" + username + "' and USUARIO.senha='" + password + "'";
+            String baseSQL = "from USUARIO in class com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login='" + username + "' and USUARIO.senha='" + password + "'";
             UsuarioVO vo = (UsuarioVO) session.createQuery(baseSQL).uniqueResult();
 
             VOResponse voResponse = new VOResponse(vo);

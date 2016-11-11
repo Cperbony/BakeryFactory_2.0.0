@@ -403,6 +403,5 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
 
         a = new VendaRomaneioEntregaDetalheGridAction();
         put(a.getRequestName(), a);
-
     }
 }

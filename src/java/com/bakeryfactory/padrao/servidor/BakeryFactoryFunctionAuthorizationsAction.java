@@ -266,5 +266,4 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
             }
         }
     }
-
 }

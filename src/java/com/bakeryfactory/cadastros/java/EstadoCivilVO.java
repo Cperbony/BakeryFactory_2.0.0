@@ -34,6 +34,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -56,8 +58,9 @@ public class EstadoCivilVO extends ValueObjectImpl implements Serializable {
     private String descricao;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estadoCivil")
-    private List<PessoaFisicaVO> listaPessoaFisica;
-
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<PessoaFisicaVO> listaPessoaFisica; 
+    
     public EstadoCivilVO() {
     }
 

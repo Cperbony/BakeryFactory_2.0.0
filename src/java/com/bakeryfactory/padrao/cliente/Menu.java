@@ -77,7 +77,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * Method used to destroy application.
      */
-    @Override
+    
     public void stopApplication() {
         ClientUtils.getData("closeApplication", Boolean.TRUE);
         System.exit(0);
@@ -88,7 +88,7 @@ public class Menu implements MDIController, LoginController {
      *
      * @return <code>true</code> if application functions must be viewed inside a tree panel of MDI Frame, <code>false</code> no tree is viewed
      */
-    @Override
+    
     public boolean viewFunctionsInTreePanel() {
         return true;
     }
@@ -98,7 +98,7 @@ public class Menu implements MDIController, LoginController {
      *
      * @return <code>true</code> if application functions must be viewed in the menubar of MDI Frame, <code>false</code> otherwise
      */
-    @Override
+    
     public boolean viewFunctionsInMenuBar() {
         return true;
     }
@@ -106,7 +106,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return <code>true</code> if the MDI frame must show a login menu in the menubar, <code>false</code> no login menu item will be added
      */
-    @Override
+    
     public boolean viewLoginInMenuBar() {
         return true;
     }
@@ -114,12 +114,12 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return application title
      */
-    @Override
+    
     public String getMDIFrameTitle() {
         return "Bakery Factory - Controle de Produção de Panificadora";
     }
 
-    @Override
+    
     public String getAboutText() {
         return "Aplicação: Bakery Factory\n"
                 + "\n"
@@ -151,7 +151,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return image name to view in the about dialog window
      */
-    @Override
+    
     public String getAboutImage() {
         return "about.jpg";
     }
@@ -160,7 +160,7 @@ public class Menu implements MDIController, LoginController {
      * @param parentFrame parent frame
      * @return a dialog window to logon the application; the method can return null if viewLoginInMenuBar returns false
      */
-    @Override
+    
     public JDialog viewLoginDialog(JFrame parentFrame) {
         JDialog d = new LoginDialog(parentFrame, true, this);
         return d;
@@ -169,7 +169,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return maximum number of failed login
      */
-    @Override
+    
     public int getMaxAttempts() {
         return 3;
     }
@@ -179,8 +179,9 @@ public class Menu implements MDIController, LoginController {
      *
      * @param loginInfo login information, like nomeUsuario, password, ...
      * @return <code>true</code> if user is correcly authenticated, <code>false</code> otherwise
+     * @throws java.lang.Exception
      */
-    @Override
+
     public boolean authenticateUser(Map loginInfo) throws Exception {
         nomeUsuario = (String) loginInfo.get("username");
         String password = (String) loginInfo.get("password");
@@ -195,26 +196,33 @@ public class Menu implements MDIController, LoginController {
         loginInfo.put("password", password);
 
         Response response = ClientUtils.getData("login", new String[]{nomeUsuario, password});
+        
         if (response.isError()) {
             throw new Exception(response.getErrorMessage());
         }
 
         String languageId = ((TextResponse) response).getMessage();
 
+        response = ClientUtils.getData("containerAction", new String[]{nomeUsuario, password});
+        if (response.isError()) {
+            throw new Exception(response.getErrorMessage());
+        }
+
         UsuarioVO usuario = (UsuarioVO) ((VOResponse) response).getVo();
         Container.setContainer(usuario);
 
         response = ClientUtils.getData("getButtonAuthorizations", usuario);
+        
         if (response.isError()) {
             throw new Exception(response.getErrorMessage());
         }
         ButtonsAuthorizations buttonsAuthorizations = (ButtonsAuthorizations) ((VOResponse) response).getVo();
 
         Hashtable xmlFiles = new Hashtable();
-        xmlFiles.put("EN", "Resouces_en.xml");
-        xmlFiles.put("IT", "Resouces_it.xml");
-        xmlFiles.put("ES", "Resouces_es.xml");
-        xmlFiles.put("PT_BR", "Resouces_ptBR.xml");
+        xmlFiles.put("EN", "Resources_en.xml");
+        xmlFiles.put("IT", "Resources_it.xml");
+        xmlFiles.put("ES", "Resources_es.xml");
+        xmlFiles.put("PT_BR", "Resources_ptBR.xml");
 
         ClientSettings clientSettings = new ClientSettings(new XMLResourcesFactory(xmlFiles, true),
                 domains, buttonsAuthorizations, false);
@@ -237,7 +245,7 @@ public class Menu implements MDIController, LoginController {
      *
      * @param frame
      */
-    @Override
+    
     public void afterMDIcreation(MDIFrame frame) {
         GenericStatusPanel userPanel = new GenericStatusPanel();
         userPanel.setColumns(12);
@@ -249,12 +257,12 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return @see JFrame getExtendedState method
      */
-    @Override
+    
     public int getExtendedState() {
         return JFrame.MAXIMIZED_BOTH;
     }
 
-    @Override
+    
     public void loginSuccessful(Map loginInfo) {
         //Domain tipo de pessoa, que aperecerá nos combos da aplicação
         //PESSOA E CORRELATOS
@@ -309,18 +317,16 @@ public class Menu implements MDIController, LoginController {
         dominioMes.addDomainPair("10", "Outubro");
         dominioMes.addDomainPair("11", "Novembro");
         dominioMes.addDomainPair("12", "Dezembro");
-        
+
         // DOMÍNIOS NOTA FISCAL - FORMAS PAGAMENTO
         Domain dominioTipoOperacao = new Domain("tipoOperacao");
         dominioTipoOperacao.addDomainPair("0", "0 - Entrada");
         dominioTipoOperacao.addDomainPair("1", "1 - Saída");
-        
+
         Domain dominioFormaPagamento = new Domain("formaPagamento");
         dominioFormaPagamento.addDomainPair("0", "0 - À Vista");
         dominioFormaPagamento.addDomainPair("1", "1 - À Prazo");
         dominioFormaPagamento.addDomainPair("2", "2 - Outros");
-        
-        
 
         //COMPRAS
         Domain dominioCompraTipoRequisicao = new Domain("compraTipoRequisicao");
@@ -374,11 +380,11 @@ public class Menu implements MDIController, LoginController {
         dominioProdutoClasse.addDomainPair("A", "A");
         dominioProdutoClasse.addDomainPair("B", "B");
         dominioProdutoClasse.addDomainPair("C", "C");
-        
+
         Domain dominioProdutoIat = new Domain("produtoIat");
         dominioProdutoIat.addDomainPair("A", "Arredondamento");
         dominioProdutoIat.addDomainPair("T", "Truncamento");
-        
+
         Domain dominioProdutoIppt = new Domain("produtoIppt");
         dominioProdutoIppt.addDomainPair("P", "Próprio");
         dominioProdutoIppt.addDomainPair("T", "Terceiro");
@@ -388,17 +394,17 @@ public class Menu implements MDIController, LoginController {
         dominioEmpresaTipo.addDomainPair("M", "Matriz");
         dominioEmpresaTipo.addDomainPair("F", "Filial");
         dominioEmpresaTipo.addDomainPair("D", "Depósito");
-        
+
         Domain dominioClienteTipoFrete = new Domain("clienteTipoFrete");
         dominioClienteTipoFrete.addDomainPair("E", "Emitente");
         dominioClienteTipoFrete.addDomainPair("D", "Destinatário");
         dominioClienteTipoFrete.addDomainPair("S", "Sem Frete");
         dominioClienteTipoFrete.addDomainPair("T", "Terceiros");
-        
+
         Domain dominioClienteFormaDesconto = new Domain("clienteFormaDesconto");
         dominioClienteFormaDesconto.addDomainPair("P", "Produto");
         dominioClienteFormaDesconto.addDomainPair("F", "Fim do Pedido");
-        
+
         Domain dominioFornecedorLocalizacao = new Domain("fornecedorLocalizacao");
         dominioFornecedorLocalizacao.addDomainPair("N", "Nacional");
         dominioFornecedorLocalizacao.addDomainPair("E", "Exterior");
@@ -407,35 +413,29 @@ public class Menu implements MDIController, LoginController {
         dominioColaboradorFormaPagamento.addDomainPair("1", "Dinheiro");
         dominioColaboradorFormaPagamento.addDomainPair("2", "Cheque");
         dominioColaboradorFormaPagamento.addDomainPair("3", "Conta");
-        
+
         Domain dominioSindicatoTipo = new Domain("sindicatoTipo");
         dominioSindicatoTipo.addDomainPair("E", "Empregados");
         dominioSindicatoTipo.addDomainPair("P", "Patronal");
-        
-        
-        
-        
+
         //Registros Feriados
         Domain dominioFeriadosTipo = new Domain("feriadosTipo");
         dominioFeriadosTipo.addDomainPair("F", "Fixo");
         dominioFeriadosTipo.addDomainPair("M", "Móvel");
-        
-        
+
         Domain dominioTransporteModalidadeFrete = new Domain("transporteModalidadeFrete");
         dominioTransporteModalidadeFrete.addDomainPair(0, "Conta Emitente");
         dominioTransporteModalidadeFrete.addDomainPair(1, "Conta Destinatário");
         dominioTransporteModalidadeFrete.addDomainPair(2, "Conta Terceiros");
         dominioTransporteModalidadeFrete.addDomainPair(3, "Sem Frete");
-        
+
         Domain dominioRequisicaoInternaSituacao = new Domain("requisicaoInternaSituacao");
         dominioRequisicaoInternaSituacao.addDomainPair("A", "Aberta");
         dominioRequisicaoInternaSituacao.addDomainPair("D", "Deferida");
         dominioRequisicaoInternaSituacao.addDomainPair("I", "Indeferida");
-        
-        
 
         domains.clear();
-        
+
         domains.put(tipoPessoa.getDomainId(), tipoPessoa);
         domains.put(tipoSangue.getDomainId(), tipoSangue);
         domains.put(dominioSexo.getDomainId(), dominioSexo);
@@ -446,17 +446,17 @@ public class Menu implements MDIController, LoginController {
         domains.put(dominioMes.getDomainId(), dominioMes);
         domains.put(dominioTipoOperacao.getDomainId(), dominioTipoOperacao);
         domains.put(dominioFormaPagamento.getDomainId(), dominioFormaPagamento);
-        
+
         domains.put(dominioCompraTipoRequisicao.getDomainId(), dominioCompraTipoRequisicao);
         domains.put(dominioCompraTipoPedido.getDomainId(), dominioCompraTipoPedido);
         domains.put(dominioCompraSituacaoCotacao.getDomainId(), dominioCompraSituacaoCotacao);
         domains.put(dominioCompraTipoFrete.getDomainId(), dominioCompraTipoFrete);
-               
+
         domains.put(dominioVendaOrcamentoTipo.getDomainId(), dominioVendaOrcamentoTipo);
         domains.put(dominioVendaOrcamentoSituacao.getDomainId(), dominioVendaOrcamentoSituacao);
         domains.put(dominioVendaResponsavelFrete.getDomainId(), dominioVendaResponsavelFrete);
         domains.put(dominioVendaRomaneioSituacao.getDomainId(), dominioVendaRomaneioSituacao);
-        
+
         domains.put(dominioProdutoTipo.getDomainId(), dominioProdutoTipo);
         domains.put(dominioProdutoClasse.getDomainId(), dominioProdutoClasse);
         domains.put(dominioProdutoIat.getDomainId(), dominioProdutoIat);
@@ -467,9 +467,9 @@ public class Menu implements MDIController, LoginController {
         domains.put(dominioFornecedorLocalizacao.getDomainId(), dominioFornecedorLocalizacao);
         domains.put(dominioColaboradorFormaPagamento.getDomainId(), dominioColaboradorFormaPagamento);
         domains.put(dominioSindicatoTipo.getDomainId(), dominioSindicatoTipo);
-        
+
         domains.put(dominioFeriadosTipo.getDomainId(), dominioFeriadosTipo);
-        
+
         domains.put(dominioTransporteModalidadeFrete.getDomainId(), dominioTransporteModalidadeFrete);
         domains.put(dominioRequisicaoInternaSituacao.getDomainId(), dominioRequisicaoInternaSituacao);
 
@@ -480,7 +480,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return <code>true</code> if the MDI frame must show a change language menu in the menubar, <code>false</code> no change language menu item will be added
      */
-    @Override
+    
     public boolean viewChangeLanguageInMenuBar() {
         return true;
     }
@@ -488,7 +488,7 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return list of languages supported by the application
      */
-    @Override
+    
     public ArrayList getLanguages() {
         ArrayList list = new ArrayList();
         list.add(new Language("EN", "English"));
@@ -503,17 +503,17 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return application functions (ApplicationFunction objects), organized as a tree
      */
-    @Override
+    
     public DefaultTreeModel getApplicationFunctions() {
         return (DefaultTreeModel) ((VOResponse) ClientUtils.getData("getFunctionAuthorizations", Container.getContainer().get("usuario"))).getVo();
     }
 
-    @Override
+    
     public boolean viewFileMenu() {
         return true;
     }
 
-    @Override
+    
     public boolean viewOpenedWindowIcons() {
         return true;
     }
