@@ -24,18 +24,13 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -57,13 +52,6 @@ public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "atividadeForCli")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ClienteVO> listaCliente;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "atividadeForCli")
-     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<FornecedorVO> listaFornecedor;
 
     public AtividadeForCliVO() {
     }
@@ -94,22 +82,6 @@ public class AtividadeForCliVO extends ValueObjectImpl implements Serializable {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public List<ClienteVO> getListaCliente() {
-        return listaCliente;
-    }
-
-    public void setListaCliente(List<ClienteVO> listaCliente) {
-        this.listaCliente = listaCliente;
-    }
-
-    public List<FornecedorVO> getListaFornecedor() {
-        return listaFornecedor;
-    }
-
-    public void setListaFornecedor(List<FornecedorVO> listaFornecedor) {
-        this.listaFornecedor = listaFornecedor;
     }
 
     @Override

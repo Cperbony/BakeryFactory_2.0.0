@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.padrao.servidor;
 
 import java.util.Hashtable;
@@ -32,10 +31,11 @@ import org.openswing.swing.internationalization.server.ServerResourcesFactory;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   11/09/2016
+ * @date 11/09/2016
  */
-public class XMLResources extends ServerResourcesFactory{
-    
+public class XMLResources extends ServerResourcesFactory {
+
+    private Hashtable xmlFiles = null;
     private XMLResourcesFactory factory = null;
 
     public XMLResources() {
@@ -43,10 +43,11 @@ public class XMLResources extends ServerResourcesFactory{
 
     /**
      * Method called by the server controller (Controller object) to initialize the factory.
+     *
      * @param context
      */
     public void init(ServletContext context) {
-        Hashtable xmlFiles = new Hashtable();
+        xmlFiles = new Hashtable();
         xmlFiles.put("PT_BR", this.getClass().getResource("/").getPath() + "Resources_ptBR.xml");
         xmlFiles.put("EN", this.getClass().getResource("/").getPath() + "Resources_en.xml");
         xmlFiles.put("IT", this.getClass().getResource("/").getPath() + "Resources_it.xml");
@@ -56,6 +57,7 @@ public class XMLResources extends ServerResourcesFactory{
 
     /**
      * Load dictionary, according to the specified language id.
+     *
      * @param langId language id identifier
      */
     public final void setLanguage(String langId) throws UnsupportedOperationException {
@@ -74,7 +76,16 @@ public class XMLResources extends ServerResourcesFactory{
      * @return internationalization settings, according with the language specified
      */
     public final Resources getResources(String langId) throws UnsupportedOperationException {
+       // if(factory == null){
+       //     JOptionPane.showMessageDialog(null, "Não Há Nenhum Idioma XML Disponível!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+       // }
         return factory.getResources(langId);
-    }
+        /*
+        Resources resources = (Resources) factory.getResources(langId);
+        if (resources != null) {
+            return resources;
+        }
+        return factory.getResources(langId);
 
+         */    }
 }

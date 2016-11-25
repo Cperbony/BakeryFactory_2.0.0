@@ -65,9 +65,10 @@ public class ClienteGrid extends InternalFrame {
         dateColumn7 = new org.openswing.swing.table.columns.client.DateColumn();
         dateColumn8 = new org.openswing.swing.table.columns.client.DateColumn();
 
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastros Clientes"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Clientes"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
@@ -105,10 +106,9 @@ public class ClienteGrid extends InternalFrame {
         textColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn5);
 
-        textColumn6.setColumnFilterable(true);
         textColumn6.setColumnName("situacaoForCli.nome");
         textColumn6.setColumnSortable(true);
-        textColumn6.setHeaderColumnName("Situacao");
+        textColumn6.setHeaderColumnName("Situação");
         textColumn6.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn6);
 

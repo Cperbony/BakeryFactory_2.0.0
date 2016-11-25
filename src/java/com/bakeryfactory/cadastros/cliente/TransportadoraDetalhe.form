@@ -90,6 +90,9 @@
               <Connection code="&quot;contabilConta.id&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblContaContabil"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -129,6 +132,9 @@
               <Connection code="&quot;pessoa.id&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPessoa"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="10"/>
             <Property name="required" type="boolean" value="true"/>
           </Properties>
@@ -171,6 +177,9 @@
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="enabledOnEdit" type="boolean" value="false"/>
             <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblDataCadastro"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

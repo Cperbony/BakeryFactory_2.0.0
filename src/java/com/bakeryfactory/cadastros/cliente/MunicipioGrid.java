@@ -34,6 +34,7 @@ public class MunicipioGrid extends InternalFrame {
 
     /**
      * Creates new form MunicipioGrid
+     * @param controller
      */
     public MunicipioGrid(MunicipioGridController controller) {
         initComponents();
@@ -60,13 +61,17 @@ public class MunicipioGrid extends InternalFrame {
         integerColumn5 = new org.openswing.swing.table.columns.client.IntegerColumn();
         integerColumn6 = new org.openswing.swing.table.columns.client.IntegerColumn();
         jPanel1 = new javax.swing.JPanel();
+        insertButton1 = new org.openswing.swing.client.InsertButton();
+        editButton1 = new org.openswing.swing.client.EditButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
 
         setTitle("Bakery Factory - Cadastro Município");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        gridControl1.setEditButton(editButton1);
         gridControl1.setFunctionId("municipio");
+        gridControl1.setInsertButton(insertButton1);
         gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.MunicipioVO");
@@ -113,6 +118,8 @@ public class MunicipioGrid extends InternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Municípios"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.add(insertButton1);
+        jPanel1.add(editButton1);
         jPanel1.add(reloadButton1);
         jPanel1.add(navigatorBar1);
 
@@ -129,7 +136,9 @@ public class MunicipioGrid extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.GridControl gridControl1;
+    private org.openswing.swing.client.InsertButton insertButton1;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn4;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn5;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn6;

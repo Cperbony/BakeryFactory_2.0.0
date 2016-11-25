@@ -69,10 +69,13 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
     private BigDecimal precoVenda;
     @Column(name = "MARK_UP_APLICADO")
     private BigDecimal markUpAplicado;
+    /*
+    
     
     @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ReceituarioControleCustoVO receituarioControleCusto;
+    */
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produtoCalculoPrecoMedidas")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -140,7 +143,9 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
     public void setMarkUpAplicado(BigDecimal markUpAplicado) {
         this.markUpAplicado = markUpAplicado;
     }
-
+/*
+    
+    
     public ReceituarioControleCustoVO getReceituarioControleCusto() {
         return receituarioControleCusto;
     }
@@ -148,6 +153,7 @@ public class ProdutoCalculoPrecoMedidasVO extends ValueObjectImpl implements Ser
     public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
         this.receituarioControleCusto = receituarioControleCusto;
     }
+*/
 
     public List<PcpServicoVO> getListPcpServico() {
         return listPcpServico;

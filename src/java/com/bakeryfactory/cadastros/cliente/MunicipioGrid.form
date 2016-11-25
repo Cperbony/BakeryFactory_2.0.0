@@ -24,7 +24,13 @@
   <SubComponents>
     <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
       <Properties>
+        <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="editButton1"/>
+        </Property>
         <Property name="functionId" type="java.lang.String" value="municipio"/>
+        <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="insertButton1"/>
+        </Property>
         <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="navigatorBar1"/>
         </Property>
@@ -124,6 +130,10 @@
         <Property name="alignment" type="int" value="0"/>
       </Layout>
       <SubComponents>
+        <Component class="org.openswing.swing.client.InsertButton" name="insertButton1">
+        </Component>
+        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
+        </Component>
         <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton1">
         </Component>
         <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">

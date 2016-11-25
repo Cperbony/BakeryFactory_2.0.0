@@ -24,7 +24,7 @@
 
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO;
+import com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -88,7 +88,7 @@ public class ProdutoSubGrupoGridController extends GridController implements Gri
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        ProdutoSubgrupoVO produtoSubgrupo = (ProdutoSubgrupoVO) persistentObject;
+        ProdutoSubGrupoVO produtoSubgrupo = (ProdutoSubGrupoVO) persistentObject;
         new ProdutoSubGrupoDetalheController(grid, produtoSubgrupo.getId().toString());
     }
 

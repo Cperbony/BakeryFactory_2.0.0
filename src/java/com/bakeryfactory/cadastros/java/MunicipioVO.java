@@ -24,17 +24,12 @@
 package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
@@ -62,13 +57,6 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
     private Integer codigoEstadual;
     @Column(name = "UF_SIGLA")
     private String ufSigla;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "municipio")
-    private List<TransportadoraMunicipioVO> listaTransportadoraMunicipio;
-    
-    @JoinColumn(name = "ID_UF", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private UfVO uf;
 
     public MunicipioVO() {
     }
@@ -125,22 +113,6 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
         this.ufSigla = ufSigla;
     }
 
-    public List<TransportadoraMunicipioVO> getListaTransportadoraMunicipio() {
-        return listaTransportadoraMunicipio;
-    }
-
-    public void setListaTransportadoraMunicipio(List<TransportadoraMunicipioVO> listaTransportadoraMunicipio) {
-        this.listaTransportadoraMunicipio = listaTransportadoraMunicipio;
-    }
-
-    public UfVO getUf() {
-        return uf;
-    }
-
-    public void setUf(UfVO uf) {
-        this.uf = uf;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -165,5 +137,5 @@ public class MunicipioVO extends ValueObjectImpl implements Serializable {
     public String toString() {
         return "com.bakeryfactory.cadastros.java.MunicipioVO[ id=" + id + " ]";
     }
-    
+
 }

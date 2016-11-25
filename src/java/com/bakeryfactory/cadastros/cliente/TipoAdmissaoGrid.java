@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.InternalFrame;
 

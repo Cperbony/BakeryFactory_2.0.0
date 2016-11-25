@@ -88,7 +88,7 @@ public class PessoaEnderecoGridAction implements Action {
                     pars.getFilteredColumns(),
                     pars.getCurrentSortedColumns(),
                     pars.getCurrentSortedVersusColumns(),
-                    com.bakeryfactory.cadastros.java.PessoaVO.class,
+                    com.bakeryfactory.cadastros.java.PessoaEnderecoVO.class,
                     baseSQL,
                     new Object[0],
                     new Type[0],

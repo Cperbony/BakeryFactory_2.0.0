@@ -34,6 +34,7 @@ public class ProdutoGrid extends InternalFrame {
 
     /**
      * Creates new form ProdutoGrid
+     *
      * @param controller
      */
     public ProdutoGrid(ProdutoGridController controller) {
@@ -145,7 +146,7 @@ public class ProdutoGrid extends InternalFrame {
         textColumn9.setColumnFilterable(true);
         textColumn9.setColumnName("codigoInterno");
         textColumn9.setColumnSortable(true);
-        textColumn9.setHeaderColumnName("Codigo Interno");
+        textColumn9.setHeaderColumnName("Código Interno");
         textColumn9.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn9);
 
@@ -207,7 +208,7 @@ public class ProdutoGrid extends InternalFrame {
         dateColumn46.setColumnFilterable(true);
         dateColumn46.setColumnName("dataAlteracao");
         dateColumn46.setColumnSortable(true);
-        dateColumn46.setHeaderColumnName("Data Alteracao");
+        dateColumn46.setHeaderColumnName("Data Alteração");
         dateColumn46.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(dateColumn46);
 

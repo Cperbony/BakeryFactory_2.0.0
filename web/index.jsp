@@ -9,14 +9,15 @@
     </head>
     <body>
         <center>
-            <h1>Backery Factory - Controle de Produção de Panificadoras</h1>
+            <h1>Bakery Factory - Controle de Produção de Panificadora</h1>
             <br />
             <a href="BakeryFactory.jnlp">
                 <img src="imagens/Bakery_Factory_logo.jpg" style="border: none;" alt="Bakery Factory" />
             </a>
             <br />
             Clique na imagem acima para acessar o sistema.
+
+            <h6>Obs.: é necessário ter instalado o <a href="http://www.java.com">Java</a> versão 1.6 ou superior.</h6>
         </center>
-        <h6>Obs.: é necessário ter instalado o <a href="http://www.java.com">Java</a> versão 1.6 ou superior.</h6>
     </body>
 </html>

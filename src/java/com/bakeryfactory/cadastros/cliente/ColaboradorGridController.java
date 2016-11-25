@@ -21,10 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
@@ -33,7 +31,6 @@ import java.util.Map;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.table.client.GridController;
@@ -42,43 +39,30 @@ import org.openswing.swing.util.client.ClientUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   13/10/2016
+ * @date 13/10/2016
  */
-public class ColaboradorGridController extends GridController implements GridDataLocator{
-    
+public class ColaboradorGridController extends GridController implements GridDataLocator {
+
     private ColaboradorGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public ColaboradorGridController() {
         grid = new ColaboradorGrid(this);
         acaoServidor = "colaboradorGridAction";
         MDIFrame.add(grid);
     }
-    
-     @Override
+
+    @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         //Define os Parâmetros da Grid
         otherGridParams.put("acao", Constantes.LOAD);
         return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
-    
+
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
         new ColaboradorDetalheController(this.grid, null);
         return false;
-    }
-
-    /**
-     * Method invoked when the user has clicked on save button and the grid is in INSERT mode.
-     *
-     * @param rowNumbers row indexes related to the new rows to save
-     * @param newValueObjects list of new value objects to save
-     * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
-     * @throws java.lang.Exception
-     */
-    @Override
-    public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
-        return new VOListResponse(newValueObjects, false, newValueObjects.size());
     }
 
     /**
@@ -109,7 +93,7 @@ public class ColaboradorGridController extends GridController implements GridDat
 
         //Seta os Parâmetros da Grid
         GridParams pars = new GridParams(0, 0, null, null, null, otherGridParams);
-        
+
         return ClientUtils.getData(acaoServidor, pars);
     }
 

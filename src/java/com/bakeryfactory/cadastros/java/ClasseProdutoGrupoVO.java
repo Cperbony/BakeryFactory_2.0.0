@@ -59,7 +59,7 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
     
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "classeProdutoGrupo")
     @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ProdutoSubgrupoVO> listaProdutoSubgrupo;
+    private List<ProdutoSubGrupoVO> listaProdutoSubgrupo;
 
     public ClasseProdutoGrupoVO() {
     }
@@ -92,11 +92,11 @@ public class ClasseProdutoGrupoVO extends ValueObjectImpl implements Serializabl
         this.descricao = descricao;
     }
 
-    public List<ProdutoSubgrupoVO> getListaProdutoSubgrupo() {
+    public List<ProdutoSubGrupoVO> getListaProdutoSubgrupo() {
         return listaProdutoSubgrupo;
     }
 
-    public void setListaProdutoSubgrupo(List<ProdutoSubgrupoVO> listaProdutoSubgrupo) {
+    public void setListaProdutoSubgrupo(List<ProdutoSubGrupoVO> listaProdutoSubgrupo) {
         this.listaProdutoSubgrupo = listaProdutoSubgrupo;
     }
 

@@ -62,12 +62,14 @@ public class EstadoCivilGrid extends InternalFrame {
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
 
-        setTitle("Bakery Factory - Cadastros Estado Civil");
+        setTitle("Bakery Factory - Cadastros");
         setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado Civil"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+
+        insertButton1.setAttributeName("nome");
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
         jPanel1.add(reloadButton1);
@@ -96,7 +98,7 @@ public class EstadoCivilGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn2);
 
         textColumn3.setColumnName("descricao");
-        textColumn3.setHeaderColumnName("Descricao");
+        textColumn3.setHeaderColumnName("Descrição");
         textColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn3.setPreferredWidth(300);
         gridControl1.getColumnContainer().add(textColumn3);
@@ -108,6 +110,8 @@ public class EstadoCivilGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(gridControl1, gridBagConstraints);
+
+        getAccessibleContext().setAccessibleName("Bakery Factory - Cadastros");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

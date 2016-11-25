@@ -40,15 +40,30 @@
         <Property name="alignment" type="int" value="0"/>
       </Layout>
       <SubComponents>
+        <Component class="org.openswing.swing.client.InsertButton" name="insertButton1">
+        </Component>
+        <Component class="org.openswing.swing.client.EditButton" name="editButton1">
+        </Component>
         <Component class="org.openswing.swing.client.ReloadButton" name="reloadButton1">
         </Component>
         <Component class="org.openswing.swing.client.NavigatorBar" name="navigatorBar1">
+        </Component>
+        <Component class="org.openswing.swing.client.DeleteButton" name="deleteButton1">
         </Component>
       </SubComponents>
     </Container>
     <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
       <Properties>
+        <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="deleteButton1"/>
+        </Property>
+        <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="editButton1"/>
+        </Property>
         <Property name="functionId" type="java.lang.String" value="cep"/>
+        <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="insertButton1"/>
+        </Property>
         <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="navigatorBar1"/>
         </Property>
@@ -127,7 +142,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;uf&quot;" type="code"/>
             </Property>
-            <Property name="headerColumnName" type="java.lang.String" value="Uf"/>
+            <Property name="headerColumnName" type="java.lang.String" value="UF"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>
@@ -138,7 +153,7 @@
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;codigoIbgeMunicipio&quot;" type="code"/>
             </Property>
-            <Property name="headerColumnName" type="java.lang.String" value="Codigo Ibge Munic&#xed;pio"/>
+            <Property name="headerColumnName" type="java.lang.String" value="C&#xf3;digo Ibge Munic&#xed;pio"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>

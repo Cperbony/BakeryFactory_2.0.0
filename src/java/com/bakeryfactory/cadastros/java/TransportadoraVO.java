@@ -23,14 +23,10 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.vendas.java.VendaCabecalhoVO;
-import com.bakeryfactory.vendas.java.VendaFreteVO;
-import com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO;
+import com.bakeryfactory.contabilidade.java.ContabilContaVO;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,12 +34,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -72,6 +65,12 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private PessoaVO pessoa;
     
+    @JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
+    private ContabilContaVO contabilConta;
+    
+    /*
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "transportadora")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<TransportadoraMunicipioVO> listaTransportadoraMunicipio;
@@ -88,6 +87,9 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaFreteVO> listaVendaFrete;
 
+*/
+    
+    
     public TransportadoraVO() {
     }
 
@@ -127,30 +129,6 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
 
-    public List<TransportadoraMunicipioVO> getListaTransportadoraMunicipio() {
-        return listaTransportadoraMunicipio;
-    }
-
-    public void setListaTransportadoraMunicipio(List<TransportadoraMunicipioVO> listaTransportadoraMunicipio) {
-        this.listaTransportadoraMunicipio = listaTransportadoraMunicipio;
-    }
-
-    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
-        return listaVendaCabecalho;
-    }
-
-    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
-        this.listaVendaCabecalho = listaVendaCabecalho;
-    }
-
-    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
-        return listaVendaOrcamentoCabecalho;
-    }
-
-    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho) {
-        this.listaVendaOrcamentoCabecalho = listaVendaOrcamentoCabecalho;
-    }
-
     public PessoaVO getPessoa() {
         return pessoa;
     }
@@ -159,13 +137,15 @@ public class TransportadoraVO extends ValueObjectImpl implements Serializable {
         this.pessoa = pessoa;
     }
 
-    public List<VendaFreteVO> getListaVendaFrete() {
-        return listaVendaFrete;
+    public ContabilContaVO getContabilConta() {
+        return contabilConta;
     }
 
-    public void setListaVendaFrete(List<VendaFreteVO> listaVendaFrete) {
-        this.listaVendaFrete = listaVendaFrete;
+    public void setContabilConta(ContabilContaVO contabilConta) {
+        this.contabilConta = contabilConta;
     }
+    
+    
 
     @Override
     public String toString() {

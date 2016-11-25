@@ -115,13 +115,9 @@ public class TransportadoraDetalheAction implements Action {
             if (criteria.uniqueResult() != null) {
                 throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
             }
-            /**
-             *
-             * TODO CONTA CONTÁBIL
-             *
-             * if (transportadora.getContaContabil.getId() == null) { transportadora.setContabilConta(null); }
-             *
-             */
+            if (transportadora.getContabilConta().getId() == null) {
+                transportadora.setContabilConta(null);
+            }
 
             transportadora.setDataCadastro(new Date());
             session.save(transportadora);
@@ -164,13 +160,10 @@ public class TransportadoraDetalheAction implements Action {
                 throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
             }
 
-            /**
-             *
-             * TODO CONTA CONTÁBIL
-             *
-             * if (transportadora.getContaContabil.getId() == null) { transportadora.setContabilConta(null); }
-             *
-             */
+            if (transportadora.getContabilConta().getId() == null) {
+                transportadora.setContabilConta(null);
+            }
+
             session.update(transportadora);
 
             session.getTransaction().commit();

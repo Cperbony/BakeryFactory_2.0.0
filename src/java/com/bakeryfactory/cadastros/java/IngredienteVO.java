@@ -78,12 +78,15 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<MarcaVO> listaMarca;
 
+    /*
+    
+   
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
     private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
-
+     */
     public IngredienteVO() {
     }
 
@@ -163,6 +166,7 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
         this.listaMarca = listaMarca;
     }
 
+    /*
     public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
         return listaCompraCotacaoDetalhe;
     }
@@ -170,21 +174,21 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     public void setListaCompraCotacaoDetalhe(List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe) {
         this.listaCompraCotacaoDetalhe = listaCompraCotacaoDetalhe;
     }
-
-    public ReceituarioControleCustoVO getReceituarioControleCusto() {
-        return receituarioControleCusto;
-    }
-
-    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
-        this.receituarioControleCusto = receituarioControleCusto;
-    }
-
+    
     public List<CompraPedidoDetalheVO> getListaCompraPedidoDetalhe() {
         return listaCompraPedidoDetalhe;
     }
 
     public void setListaCompraPedidoDetalhe(List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe) {
         this.listaCompraPedidoDetalhe = listaCompraPedidoDetalhe;
+    }
+     */
+    public ReceituarioControleCustoVO getReceituarioControleCusto() {
+        return receituarioControleCusto;
+    }
+
+    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
+        this.receituarioControleCusto = receituarioControleCusto;
     }
 
     @Override

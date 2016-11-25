@@ -42,7 +42,7 @@ public class CargoDetalheController extends FormController{
     private CargoDetalhe cargoDetalhe = null;
     private String pk = null;
     private CargoGrid cargoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public CargoDetalheController(CargoGrid cargoGrid, String pk) {
         this.cargoGrid = cargoGrid;
@@ -76,10 +76,10 @@ public class CargoDetalheController extends FormController{
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }

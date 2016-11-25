@@ -23,6 +23,9 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -30,15 +33,36 @@ import org.openswing.swing.mdi.client.InternalFrame;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  */
 public class CargoDetalhe extends InternalFrame {
+    
+    private final LookupController empresaController;
 
     /**
      * Creates new form CargoDetalhe
      * @param controller
      */
     public CargoDetalhe(CargoDetalheController controller) {
+        this.empresaController = new LookupController();
         initComponents();
         
         form1.setFormController(controller);
+        
+        /*
+        * Configuração do Lookup para a Pessoa relacionada
+         */
+        empresaController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.EmpresaVO");
+        empresaController.addLookup2ParentLink("id", "empresa.id");
+        empresaController.addLookup2ParentLink("nomeFantasia", "empresa.nomeFantasia");
+        empresaController.setHeaderColumnName("id", "ID");
+        empresaController.setHeaderColumnName("nomeFantasia", "Nome Fantasia");
+        empresaController.setFrameTitle("Importa Dados da Empresa");
+
+        empresaController.setVisibleStatusPanel(true);
+        empresaController.setVisibleColumn("id", true);
+        empresaController.setVisibleColumn("nomeFantasia", true);
+        empresaController.setFramePreferedSize(new Dimension(600, 500));
+
+        empresaController.setLookupDataLocator(new LookupDataLocatorGenerico(empresaController.getLookupValueObjectClassName()));
+        codLookupControlEmpresa.setLookupController(empresaController);
     }
     
     public org.openswing.swing.form.client.Form getForm1() {
@@ -54,89 +78,109 @@ public class CargoDetalhe extends InternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         form1 = new org.openswing.swing.form.client.Form();
+        lblempresaNomeFantasia = new org.openswing.swing.client.LabelControl();
         lblNome = new org.openswing.swing.client.LabelControl();
         textControl3 = new org.openswing.swing.client.TextControl();
-        lblDetalhe = new org.openswing.swing.client.LabelControl();
+        lblDescricao = new org.openswing.swing.client.LabelControl();
         lblSalario = new org.openswing.swing.client.LabelControl();
         numericControl5 = new org.openswing.swing.client.NumericControl();
-        lblCbo1994 = new org.openswing.swing.client.LabelControl();
+        lblempresaRelacionada = new org.openswing.swing.client.LabelControl();
         textControl6 = new org.openswing.swing.client.TextControl();
         lblCbo2002 = new org.openswing.swing.client.LabelControl();
         textControl7 = new org.openswing.swing.client.TextControl();
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
+        codLookupControlEmpresa = new org.openswing.swing.client.CodLookupControl();
+        lblCbo1995 = new org.openswing.swing.client.LabelControl();
+        textControl1 = new org.openswing.swing.client.TextControl();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         editButton1 = new org.openswing.swing.client.EditButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
 
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.CargoVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.CargoVO");
+        form1.setEditButton(editButton1);
         form1.setFunctionId("cargo");
+        form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
+
+        lblempresaNomeFantasia.setText("Empresa Nome Fantasia:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(lblempresaNomeFantasia, gridBagConstraints);
 
         lblNome.setLabel("Nome:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         form1.add(lblNome, gridBagConstraints);
 
         textControl3.setAttributeName("nome");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblNome);
         textControl3.setMaxCharacters(50);
         textControl3.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl3, gridBagConstraints);
 
-        lblDetalhe.setLabel("Descricao:");
+        lblDescricao.setText("Descrição:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(lblDetalhe, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(lblDescricao, gridBagConstraints);
 
-        lblSalario.setLabel("Salario:");
+        lblSalario.setText("Salário:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         form1.add(lblSalario, gridBagConstraints);
 
         numericControl5.setAttributeName("salario");
         numericControl5.setDecimals(2);
         numericControl5.setEnabled(false);
+        numericControl5.setLinkLabel(lblSalario);
         numericControl5.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(numericControl5, gridBagConstraints);
 
-        lblCbo1994.setLabel("Cbo 1994:");
+        lblempresaRelacionada.setText("Empresa Relacionada:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(lblCbo1994, gridBagConstraints);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(lblempresaRelacionada, gridBagConstraints);
 
         textControl6.setAttributeName("cbo1994");
         textControl6.setEnabled(false);
         textControl6.setMaxCharacters(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl6, gridBagConstraints);
@@ -144,9 +188,9 @@ public class CargoDetalhe extends InternalFrame {
         lblCbo2002.setLabel("Cbo 2002:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 0;
+        gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         form1.add(lblCbo2002, gridBagConstraints);
 
         textControl7.setAttributeName("cbo2002");
@@ -154,25 +198,60 @@ public class CargoDetalhe extends InternalFrame {
         textControl7.setMaxCharacters(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl7, gridBagConstraints);
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 3;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 30;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         form1.add(textAreaControl1, gridBagConstraints);
+
+        codLookupControlEmpresa.setAllowOnlyNumbers(true);
+        codLookupControlEmpresa.setAttributeName("empresa.id");
+        codLookupControlEmpresa.setEnabled(false);
+        codLookupControlEmpresa.setLinkLabel(lblempresaRelacionada);
+        codLookupControlEmpresa.setMaxCharacters(10);
+        codLookupControlEmpresa.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(codLookupControlEmpresa, gridBagConstraints);
+
+        lblCbo1995.setLabel("Cbo 1994:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 2;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(lblCbo1995, gridBagConstraints);
+
+        textControl1.setAttributeName("empresa.nomeFantasia");
+        textControl1.setEnabled(false);
+        textControl1.setEnabledOnEdit(false);
+        textControl1.setEnabledOnInsert(false);
+        textControl1.setLinkLabel(lblempresaNomeFantasia);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
+        form1.add(textControl1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
@@ -205,19 +284,23 @@ public class CargoDetalhe extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.client.CodLookupControl codLookupControlEmpresa;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.form.client.Form form1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private org.openswing.swing.client.LabelControl lblCbo1994;
+    private org.openswing.swing.client.LabelControl lblCbo1995;
     private org.openswing.swing.client.LabelControl lblCbo2002;
-    private org.openswing.swing.client.LabelControl lblDetalhe;
+    private org.openswing.swing.client.LabelControl lblDescricao;
     private org.openswing.swing.client.LabelControl lblNome;
     private org.openswing.swing.client.LabelControl lblSalario;
+    private org.openswing.swing.client.LabelControl lblempresaNomeFantasia;
+    private org.openswing.swing.client.LabelControl lblempresaRelacionada;
     private org.openswing.swing.client.NumericControl numericControl5;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.TextAreaControl textAreaControl1;
+    private org.openswing.swing.client.TextControl textControl1;
     private org.openswing.swing.client.TextControl textControl3;
     private org.openswing.swing.client.TextControl textControl6;
     private org.openswing.swing.client.TextControl textControl7;

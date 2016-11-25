@@ -151,7 +151,7 @@
               <Connection code="&quot;codigoInterno&quot;" type="code"/>
             </Property>
             <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Codigo Interno"/>
+            <Property name="headerColumnName" type="java.lang.String" value="C&#xf3;digo Interno"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>
@@ -261,7 +261,7 @@
               <Connection code="&quot;dataAlteracao&quot;" type="code"/>
             </Property>
             <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Data Alteracao"/>
+            <Property name="headerColumnName" type="java.lang.String" value="Data Altera&#xe7;&#xe3;o"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>

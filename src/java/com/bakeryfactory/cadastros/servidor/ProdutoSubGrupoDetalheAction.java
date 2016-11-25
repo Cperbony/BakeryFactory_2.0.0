@@ -23,7 +23,7 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO;
+import com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import javax.servlet.ServletContext;
@@ -79,10 +79,10 @@ public class ProdutoSubGrupoDetalheAction implements Action {
 
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Criteria criteria = session.createCriteria(ProdutoSubgrupoVO.class);
+            Criteria criteria = session.createCriteria(ProdutoSubGrupoVO.class);
             criteria.add(Restrictions.eq("id", Integer.valueOf(pk)));
 
-            ProdutoSubgrupoVO produtoSubgrupo = (ProdutoSubgrupoVO) criteria.uniqueResult();
+            ProdutoSubGrupoVO produtoSubgrupo = (ProdutoSubGrupoVO) criteria.uniqueResult();
 
             return new VOResponse(produtoSubgrupo);
 
@@ -102,7 +102,7 @@ public class ProdutoSubGrupoDetalheAction implements Action {
         Session session = null;
         try {
             Object[] pars = (Object[]) inputPar;
-            ProdutoSubgrupoVO produtoSubgrupo = (ProdutoSubgrupoVO) pars[1];
+            ProdutoSubGrupoVO produtoSubgrupo = (ProdutoSubGrupoVO) pars[1];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -133,7 +133,7 @@ public class ProdutoSubGrupoDetalheAction implements Action {
         Session session = null;
         try {
             Object[] pars = (Object[]) inputPar;
-            ProdutoSubgrupoVO produtoSubgrupo = (ProdutoSubgrupoVO) pars[2];
+            ProdutoSubGrupoVO produtoSubgrupo = (ProdutoSubGrupoVO) pars[2];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();

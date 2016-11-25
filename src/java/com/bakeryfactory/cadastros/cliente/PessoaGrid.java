@@ -34,6 +34,7 @@ public class PessoaGrid extends InternalFrame {
 
     /**
      * Creates new form PessoaGrid
+     * @param controller
      */
     public PessoaGrid(PessoaGridController controller) {
         initComponents();
@@ -72,7 +73,7 @@ public class PessoaGrid extends InternalFrame {
         comboColumn5 = new org.openswing.swing.table.columns.client.ComboColumn();
 
         setBackground(new java.awt.Color(240, 240, 240));
-        setTitle("Bakery Factory - Cadastros Pessoa");
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa"));
@@ -94,6 +95,7 @@ public class PessoaGrid extends InternalFrame {
         gridControl1.setDeleteButton(deleteButton1);
         gridControl1.setFunctionId("pessoa");
         gridControl1.setInsertButton(insertButton1);
+        gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));

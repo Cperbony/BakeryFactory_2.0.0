@@ -23,10 +23,9 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.AtividadeLookup;
-import com.bakeryfactory.cadastros.lookups.ContaContabilLookup;
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
-import com.bakeryfactory.cadastros.lookups.SituacaoLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -35,10 +34,10 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class FornecedorDetalhe extends InternalFrame {
 
-    private final PessoaLookup pessoaLookupController;
-    private AtividadeLookup atividadeLookupController;
-    private SituacaoLookup situacaoLookupController;
-    private ContaContabilLookup contaContabilLookup;
+    private LookupController pessoaLookupController;
+    private LookupController atividadeLookupController;
+    private LookupController situacaoLookupController;
+    private LookupController contaContabilLookup;
 
     /**
      * Creates new form ColaboradorDetalhe
@@ -46,21 +45,84 @@ public class FornecedorDetalhe extends InternalFrame {
      * @param controller
      */
     public FornecedorDetalhe(FornecedorDetalheController controller) {
+        this.contaContabilLookup = new LookupController();
+        this.situacaoLookupController = new LookupController();
+        this.atividadeLookupController = new LookupController();
+        this.pessoaLookupController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
 
-        //Configuração Lookup Pessoa
-        pessoaLookupController = new PessoaLookup();
+        /*
+         * Configurações do lookup da pessoa
+         */
+        pessoaLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
+        pessoaLookupController.addLookup2ParentLink("id", "pessoa.id");
+        pessoaLookupController.addLookup2ParentLink("nome", "pessoa.nome");
+        pessoaLookupController.setHeaderColumnName("id", "ID");
+        pessoaLookupController.setHeaderColumnName("nome", "Nome");
+        pessoaLookupController.setFrameTitle("Importa Pessoa");
+
+        pessoaLookupController.setVisibleStatusPanel(true);
+        pessoaLookupController.setVisibleColumn("id", true);
+        pessoaLookupController.setVisibleColumn("nome", true);
+        pessoaLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        pessoaLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(pessoaLookupController.getLookupValueObjectClassName()));
         codLookupControlPessoa.setLookupController(pessoaLookupController);
-        
-        atividadeLookupController = new AtividadeLookup();
-        codLookupControlAtividade.setLookupController(atividadeLookupController);
-        
-        situacaoLookupController = new SituacaoLookup();
+
+        /*
+         * Configurações do lookup da situacao
+         */
+        situacaoLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.SituacaoForCliVO");
+        situacaoLookupController.addLookup2ParentLink("id", "situacaoForCli.id");
+        situacaoLookupController.addLookup2ParentLink("nome", "situacaoForCli.nome");
+        situacaoLookupController.setHeaderColumnName("id", "ID");
+        situacaoLookupController.setHeaderColumnName("nome", "Nome");
+        situacaoLookupController.setFrameTitle("Importa Situação");
+
+        situacaoLookupController.setVisibleStatusPanel(true);
+        situacaoLookupController.setVisibleColumn("id", true);
+        situacaoLookupController.setVisibleColumn("nome", true);
+        situacaoLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        situacaoLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(situacaoLookupController.getLookupValueObjectClassName()));
         codLookupControlSituacao.setLookupController(situacaoLookupController);
-        
-        contaContabilLookup = new ContaContabilLookup();
+
+        /*
+         * Configurações do lookup da atividade
+         */
+        atividadeLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.AtividadeForCliVO");
+        atividadeLookupController.addLookup2ParentLink("id", "atividadeForCli.id");
+        atividadeLookupController.addLookup2ParentLink("nome", "atividadeForCli.nome");
+        atividadeLookupController.setHeaderColumnName("id", "ID");
+        atividadeLookupController.setHeaderColumnName("nome", "Nome");
+        atividadeLookupController.setFrameTitle("Importa Atividade");
+
+        atividadeLookupController.setVisibleStatusPanel(true);
+        atividadeLookupController.setVisibleColumn("id", true);
+        atividadeLookupController.setVisibleColumn("nome", true);
+        atividadeLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        atividadeLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(atividadeLookupController.getLookupValueObjectClassName()));
+        codLookupControlAtividade.setLookupController(atividadeLookupController);
+
+        /*
+         * Configurações do lookup da conta contabil
+         */
+        contaContabilLookup.setLookupValueObjectClassName("com.bakeryfactory.contabilidade.java.ContabilContaVO");
+        contaContabilLookup.addLookup2ParentLink("id", "contabilConta.id");
+        contaContabilLookup.addLookup2ParentLink("descricao", "contabilConta.descricao");
+        contaContabilLookup.setHeaderColumnName("id", "ID");
+        contaContabilLookup.setHeaderColumnName("descricao", "Descrição");
+        contaContabilLookup.setFrameTitle("Importa Conta Contábil");
+
+        contaContabilLookup.setVisibleStatusPanel(true);
+        contaContabilLookup.setVisibleColumn("id", true);
+        contaContabilLookup.setVisibleColumn("descricao", true);
+        contaContabilLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        contaContabilLookup.setLookupDataLocator(new LookupDataLocatorGenerico(contaContabilLookup.getLookupValueObjectClassName()));
         codLookupControlContaContabil.setLookupController(contaContabilLookup);
 
     }
@@ -144,7 +206,10 @@ public class FornecedorDetalhe extends InternalFrame {
         getContentPane().add(jPanel1, gridBagConstraints);
 
         form1.setVOClassName("com.bakeryfactory.cadastros.java.FornecedorVO");
+        form1.setEditButton(editButton1);
         form1.setFunctionId("fornecedor");
+        form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblDesde.setLabel("Desde:");

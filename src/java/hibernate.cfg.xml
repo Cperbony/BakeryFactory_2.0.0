@@ -37,10 +37,10 @@
         <!-- classes mapeadas Módulo CADASTROS BASE-->
         <mapping class="com.bakeryfactory.cadastros.java.AlmoxarifadoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.AtividadeForCliVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.AuditoriaVO"/>
+
         <mapping class="com.bakeryfactory.cadastros.java.CargoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.CepVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ClasseProdutoGrupoVO"/>
+
         <mapping class="com.bakeryfactory.cadastros.java.ClienteVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ColaboradorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.CongeladoVO"/>
@@ -53,10 +53,9 @@
         <mapping class="com.bakeryfactory.cadastros.java.FichaTecnicaVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.FornecedorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.FuncaoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.IngredienteVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.IngredientesReceitasVO"/>
+
         <mapping class="com.bakeryfactory.cadastros.java.MarcaVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVO"/>
+        
         <mapping class="com.bakeryfactory.cadastros.java.MunicipioVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.NcmVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.NivelFormacaoVO"/>      
@@ -72,17 +71,18 @@
         <mapping class="com.bakeryfactory.cadastros.java.PessoaVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoGrupoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoMarcaVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoTabelaPrecoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ReceitaVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ReceituarioPadraoVO"/>
+        
+
         <mapping class="com.bakeryfactory.cadastros.java.SetorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.SituacaoColaboradorVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.SindicatoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.SituacaoForCliVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.TabelaPrecoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.TipoAdmissaoVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.TipoRelacionamentoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.TipoColaboradorVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.TransportadoraMunicipioVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.TransportadoraVO"/>
@@ -92,6 +92,18 @@
         <mapping class="com.bakeryfactory.cadastros.java.UsuarioVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.VendedorVO"/>
         
+        <!-- classes mapeadas Módulo CADASTROS BASE a serem finalizadas
+        
+         <mapping class="com.bakeryfactory.cadastros.java.AuditoriaVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ClasseProdutoGrupoVO"/>
+         <mapping class="com.bakeryfactory.cadastros.java.IngredienteVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.IngredientesReceitasVO"/>
+              <mapping class="com.bakeryfactory.cadastros.java.ReceitaVO"/>
+  <mapping class="com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ReceituarioPadraoVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVO"/>
+        -->
+
         <!-- classes mapeadas Módulo VENDAS-->
         <mapping class="com.bakeryfactory.vendas.java.VendaCabecalhoVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaComissaoVO"/>
@@ -115,20 +127,21 @@
         <mapping class="com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO"/>
         <mapping class="com.bakeryfactory.pcp.java.PcpServicoVO"/>
         
-        <!-- classes mapeadas Módulo COMPRAS -->
-        <mapping class="com.bakeryfactory.compras.java.CompraCotacaoDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraCotacaoPedidoDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraCotacaoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraFornecedorCotacaoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraPedidoDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraPedidoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraReqCotacaoDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoInternaCabecalhoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoInternaDetalheVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraTipoPedidoVO"/>
-        <mapping class="com.bakeryfactory.compras.java.CompraTipoRequisicaoVO"/>
+        <!-- classes mapeadas Módulo COMPRAS 
+       <mapping class="com.bakeryfactory.compras.java.CompraCotacaoDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraCotacaoPedidoDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraCotacaoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraFornecedorCotacaoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraPedidoDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraPedidoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraReqCotacaoDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoInternaCabecalhoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoInternaDetalheVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraRequisicaoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraTipoPedidoVO"/>
+       <mapping class="com.bakeryfactory.compras.java.CompraTipoRequisicaoVO"/>
+        -->
         
         <!-- classes mapeadas Módulo CONTABILIDADE-->
         <mapping class="com.bakeryfactory.contabilidade.java.ContabilContaVO"/>

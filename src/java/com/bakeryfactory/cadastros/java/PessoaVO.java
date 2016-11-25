@@ -60,19 +60,19 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
     @Column(name = "NOME")
     private String nome;
     @Column(name = "TIPO")
-    private Character tipo;
+    private String tipo;
     @Column(name = "EMAIL")
     private String email;
     @Column(name = "SITE")
     private String site;
     @Column(name = "CLIENTE")
-    private Character cliente;
+    private String cliente;
     @Column(name = "FORNECEDOR")
-    private Character fornecedor;
+    private String fornecedor;
     @Column(name = "COLABORADOR")
-    private Character colaborador;
+    private String colaborador;
     @Column(name = "TRANSPORTADORA")
-    private Character transportadora;
+    private String transportadora;
     
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name="EMPRESA_PESSOA", joinColumns={@JoinColumn(name="ID_PESSOA")}, inverseJoinColumns={@JoinColumn(name="ID_EMPRESA")})
@@ -120,11 +120,11 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
         this.nome = nome;
     }
 
-    public Character getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(Character tipo) {
+    public void setTipo(String tipo) {
         this.tipo = tipo;
     }
 
@@ -144,35 +144,35 @@ public class PessoaVO extends ValueObjectImpl implements Serializable {
         this.site = site;
     }
 
-    public Character getCliente() {
+    public String getCliente() {
         return cliente;
     }
 
-    public void setCliente(Character cliente) {
+    public void setCliente(String cliente) {
         this.cliente = cliente;
     }
 
-    public Character getFornecedor() {
+    public String getFornecedor() {
         return fornecedor;
     }
 
-    public void setFornecedor(Character fornecedor) {
+    public void setFornecedor(String fornecedor) {
         this.fornecedor = fornecedor;
     }
 
-    public Character getColaborador() {
+    public String getColaborador() {
         return colaborador;
     }
 
-    public void setColaborador(Character colaborador) {
+    public void setColaborador(String colaborador) {
         this.colaborador = colaborador;
     }
 
-    public Character getTransportadora() {
+    public String getTransportadora() {
         return transportadora;
     }
 
-    public void setTransportadora(Character transportadora) {
+    public void setTransportadora(String transportadora) {
         this.transportadora = transportadora;
     }
 

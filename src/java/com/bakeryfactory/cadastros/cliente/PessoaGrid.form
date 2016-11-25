@@ -5,7 +5,7 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="f0" green="f0" red="f0" type="rgb"/>
     </Property>
-    <Property name="title" type="java.lang.String" value="Bakery Factory - Cadastros Pessoa"/>
+    <Property name="title" type="java.lang.String" value="Bakery Factory - Cadastros"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -64,6 +64,9 @@
         <Property name="functionId" type="java.lang.String" value="pessoa"/>
         <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="insertButton1"/>
+        </Property>
+        <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="navigatorBar1"/>
         </Property>
         <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="reloadButton1"/>

@@ -23,6 +23,7 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
+import com.bakeryfactory.cadastros.java.PessoaVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -40,59 +41,66 @@ import org.openswing.swing.util.client.ClientUtils;
  *
  * @author Claudinei Aparecido Perboni • contact: cperbony@gmail.com
  */
-public class PessoaGridController extends GridController implements GridDataLocator{
+public class PessoaGridController extends GridController implements GridDataLocator {
 
-    private PessoaGrid grid;
-    private String acaoServidor;
+    private final PessoaGrid grid;
+    private final String acaoServidor;
 
     public PessoaGridController() {
         grid = new PessoaGrid(this);
         acaoServidor = "pessoaGridAction";
         MDIFrame.add(grid);
     }
-    
-    
-    
-    
+
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
-       //Define os parâmetros da Grid
-       otherGridParams.put("acao",Constantes.LOAD);
-       return ClientUtils.getData(acaoServidor,new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
+        //Define os parâmetros da Grid
+        otherGridParams.put("acao", Constantes.LOAD);
+        return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
-    
-      /**
-   * Callback method invoked on pressing INSERT button.
-   * @return <code>true</code> allows to go to INSERT mode, <code>false</code> the mode change is interrupted
-   */
-  public boolean beforeInsertGrid(GridControl grid) {
-    return true;
-  }
 
-  
     /**
-   * Callback method invoked when the user has double clicked on the selected row of the grid.
-   * @param rowNumber selected row index
-   * @param persistentObject v.o. related to the selected row
-   */
-  public void doubleClick(int rowNumber,ValueObject persistentObject) {
-  }
+     * Callback method invoked on pressing INSERT button.
+     *
+     * @param grid
+     * @return <code>true</code> allows to go to INSERT mode, <code>false</code> the mode change is interrupted
+     */
+    @Override
+    public boolean beforeInsertGrid(GridControl grid) {
+        new PessoaDetalheController(this.grid, null);
+        return false;
+    }
 
-   /**
-   * Method invoked when the user has clicked on delete button and the grid is in READONLY mode.
-   * @param persistentObjects value objects to delete (related to the currently selected rows)
-   * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
-   */
-  public Response deleteRecords(ArrayList persistentObjects) throws Exception {
-    //Define os Parãmatros da Grid
-    Map otherGridParams = new HashMap();
-    otherGridParams.put("acao", Constantes.DELETE);
-    otherGridParams.put("persistentObjects", persistentObjects);
-    
-    //Seta os Parãmetros da GRID
-    GridParams pars = new GridParams(0, 0, null, null, null, otherGridParams);
-    
-    return ClientUtils.getData(acaoServidor, pars);
-  }
+    /**
+     * Callback method invoked when the user has double clicked on the selected row of the grid.
+     *
+     * @param rowNumber selected row index
+     * @param persistentObject v.o. related to the selected row
+     */
+    @Override
+    public void doubleClick(int rowNumber, ValueObject persistentObject) {
+        PessoaVO pessoa = (PessoaVO) persistentObject;
+        new PessoaDetalheController(grid, pessoa.getId().toString());
+    }
+
+    /**
+     * Method invoked when the user has clicked on delete button and the grid is in READONLY mode.
+     *
+     * @param persistentObjects value objects to delete (related to the currently selected rows)
+     * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
+     */
+    @Override
+    public Response deleteRecords(ArrayList persistentObjects) throws Exception {
+        //Define os Parãmatros da Grid
+        Map otherGridParams = new HashMap();
+        otherGridParams.put("acao", Constantes.DELETE);
+        otherGridParams.put("persistentObjects", persistentObjects);
+
+        //Seta os Parãmetros da GRID
+        GridParams pars = new GridParams(0, 0, null, null, null, otherGridParams);
+
+        return ClientUtils.getData(acaoServidor, pars);
+    }
 
 }

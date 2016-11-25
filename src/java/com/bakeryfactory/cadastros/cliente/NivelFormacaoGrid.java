@@ -72,6 +72,9 @@ public class NivelFormacaoGrid extends InternalFrame {
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         gridControl1.setFunctionId("nivelFormacao");
+        gridControl1.setInsertButton(insertButton1);
+        gridControl1.setNavBar(navigatorBar1);
+        gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.NivelFormacaoVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
@@ -82,19 +85,19 @@ public class NivelFormacaoGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn2);
 
         integerColumn4.setColumnName("grauInstrucaoCaged");
-        integerColumn4.setHeaderColumnName("Grau Instrucao Caged");
+        integerColumn4.setHeaderColumnName("Grau Instrução Caged");
         integerColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         integerColumn4.setPreferredWidth(130);
         gridControl1.getColumnContainer().add(integerColumn4);
 
         integerColumn5.setColumnName("grauInstrucaoSefip");
-        integerColumn5.setHeaderColumnName("Grau Instrucao Sefip");
+        integerColumn5.setHeaderColumnName("Grau Instrução Sefip");
         integerColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         integerColumn5.setPreferredWidth(130);
         gridControl1.getColumnContainer().add(integerColumn5);
 
         integerColumn6.setColumnName("grauInstrucaoRais");
-        integerColumn6.setHeaderColumnName("Grau Instrucao Rais");
+        integerColumn6.setHeaderColumnName("Grau Instrução Rais");
         integerColumn6.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         integerColumn6.setPreferredWidth(130);
         gridControl1.getColumnContainer().add(integerColumn6);

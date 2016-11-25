@@ -62,6 +62,7 @@ public class AtividadeForCliGrid extends InternalFrame {
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
 
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Atividade Cliente"));
@@ -92,7 +93,7 @@ public class AtividadeForCliGrid extends InternalFrame {
         gridControlAtividadeForCli.getColumnContainer().add(textColumn2);
 
         textColumn3.setColumnName("descricao");
-        textColumn3.setHeaderColumnName("Descricao");
+        textColumn3.setHeaderColumnName("Descrição");
         textColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn3.setPreferredWidth(300);
         gridControlAtividadeForCli.getColumnContainer().add(textColumn3);

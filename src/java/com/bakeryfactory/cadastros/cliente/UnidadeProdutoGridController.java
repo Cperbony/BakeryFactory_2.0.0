@@ -24,8 +24,6 @@
 
 package com.bakeryfactory.cadastros.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.cadastros.java.UnidadeProdutoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;

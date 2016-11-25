@@ -33,6 +33,7 @@ public class EstadoCivilDetalhe extends InternalFrame {
 
     /**
      * Creates new form EstadoCivilDetalhe
+     * @param controller
      */
     public EstadoCivilDetalhe(EstadoCivilDetalheController controller) {
         initComponents();
@@ -67,6 +68,7 @@ public class EstadoCivilDetalhe extends InternalFrame {
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
         jSeparator1 = new javax.swing.JSeparator();
 
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Estado Civil"));
@@ -141,8 +143,6 @@ public class EstadoCivilDetalhe extends InternalFrame {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.ipadx = 1;
-        gridBagConstraints.ipady = 1;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         getContentPane().add(form1, gridBagConstraints);

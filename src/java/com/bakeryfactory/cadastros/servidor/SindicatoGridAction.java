@@ -21,40 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.servidor;
+package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.servidor.*;
-import com.bakeryfactory.cadastros.java.ClienteVO;
+import com.bakeryfactory.cadastros.java.SindicatoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
+import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOResponse;
+import org.openswing.swing.message.receive.java.VOListResponse;
+import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.server.Action;
 import org.openswing.swing.server.UserSessionParameters;
+import org.openswing.swing.util.server.HibernateUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date 08/10/2016
+ * @date 07/10/2016
  */
-public class TempDetalheAction implements Action {
+public class SindicatoGridAction implements Action {
+
+    public SindicatoGridAction() {
+    }
 
     @Override
     public String getRequestName() {
-        return "temp_DetalheAction";
+        return "sindicatoGridAction";
     }
 
     @Override
     public Response executeCommand(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        Object[] pars = (Object[]) inputPar;
-        Integer acao = (Integer) pars[0];
+        GridParams pars = (GridParams) inputPar;
+        Integer acao = (Integer) pars.getOtherGridParams().get("acao");
 
         switch (acao) {
             case Constantes.LOAD: {
@@ -75,18 +79,26 @@ public class TempDetalheAction implements Action {
 
     private Response load(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
-        Object[] pars = (Object[]) inputPar;
-        String pk = (String) pars[1];
-
+        GridParams pars = (GridParams) inputPar;
+        String baseSQL = "select SINDICATO from com.bakeryfactory.cadastros.java.SindicatoVO as SINDICATO";
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Criteria criteria = session.createCriteria(ClienteVO.class);
-            criteria.add(Restrictions.eq("id", Integer.valueOf(pk)));
-
-            ClienteVO cliente = (ClienteVO) criteria.uniqueResult();
-
-            return new VOResponse(cliente);
-
+            Response res = HibernateUtils.getBlockFromQuery(
+                    pars.getAction(),
+                    pars.getStartPos(),
+                    Constantes.TAMANHO_BLOCO,
+                    pars.getFilteredColumns(),
+                    pars.getCurrentSortedColumns(),
+                    pars.getCurrentSortedVersusColumns(),
+                    com.bakeryfactory.cadastros.java.SindicatoVO.class,
+                    baseSQL,
+                    new Object[0],
+                    new Type[0],
+                    "SINDICATO",
+                    HibernateUtil.getSessionFactory(),
+                    session
+            );
+            return res;
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
@@ -100,80 +112,31 @@ public class TempDetalheAction implements Action {
     }
 
     private Response insert(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        Session session = null;
-        try {
-            Object[] pars = (Object[]) inputPar;
-            ClienteVO cliente = (ClienteVO) pars[1];
-
-            session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-
-            Criteria criteria = session.createCriteria(ClienteVO.class);
-            criteria.add(Restrictions.eq("pessoa", cliente.getPessoa()));
-
-            if (criteria.uniqueResult() != null) {
-                throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
-            }
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
-            session.save(cliente);
-
-            session.getTransaction().commit();
-
-            return new VOResponse(cliente);
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            if (session != null) {
-                session.getTransaction().rollback();
-            }
-            return new ErrorResponse(ex.getMessage());
-        } finally {
-            try {
-                if (session != null) {
-                    session.close();
-                }
-            } catch (Exception ex1) {
-                ex1.printStackTrace();
-            }
-        }
+        return null;
     }
 
     private Response update(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
+        return null;
+    }
+
+    private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         try {
-            Object[] pars = (Object[]) inputPar;
-            ClienteVO cliente = (ClienteVO) pars[2];
+            GridParams pars = (GridParams) inputPar;
+            ArrayList persistentObjects = (ArrayList) pars.getOtherGridParams().get("persistentObjects");
+
+            SindicatoVO vo = null;
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            Criteria criteria = session.createCriteria(ClienteVO.class);
-            criteria.add(Restrictions.eq("pessoa", cliente.getPessoa()));
-            criteria.add(Restrictions.ne("id", cliente.getId()));
-
-            if (criteria.uniqueResult() != null) {
-                throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
+            for (int i = 0; i < persistentObjects.size(); i++) {
+                vo = (SindicatoVO) persistentObjects.get(i);
+                session.delete(vo);
+                session.flush();
             }
-
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
-            session.update(cliente);
-
             session.getTransaction().commit();
-
-            return new VOResponse(cliente);
-
+            return new VOListResponse(persistentObjects, false, persistentObjects.size());
         } catch (Exception ex) {
             if (session != null) {
                 session.getTransaction().rollback();
@@ -186,12 +149,7 @@ public class TempDetalheAction implements Action {
                     session.close();
                 }
             } catch (Exception ex1) {
-                ex1.printStackTrace();
             }
         }
-    }
-
-    private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
-        return null;
     }
 }

@@ -75,17 +75,17 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private PapelVO papel;
 
-    @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private PessoaVO pessoa;
+    //@JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
+   // @ManyToOne(optional = false)
+    //private PessoaVO pessoa;
 
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<AuditoriaVO> listaAuditoria;
+    //@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "usuario")
+   // @LazyCollection(LazyCollectionOption.FALSE)
+    //private List<AuditoriaVO> listaAuditoria;
 
     public UsuarioVO() {
     }
@@ -133,7 +133,9 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     public void setAdministrador(Character administrador) {
         this.administrador = administrador;
     }
-
+/*
+    
+    
     public List<AuditoriaVO> getListaAuditoria() {
         return listaAuditoria;
     }
@@ -141,6 +143,7 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     public void setListaAuditoria(List<AuditoriaVO> listaAuditoria) {
         this.listaAuditoria = listaAuditoria;
     }
+    */
 
     public ColaboradorVO getColaborador() {
         return colaborador;
@@ -165,6 +168,9 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     public void setPapel(PapelVO papel) {
         this.papel = papel;
     }
+/**
+ * 
+ * @return 
 
     public PessoaVO getPessoa() {
         return pessoa;
@@ -173,6 +179,7 @@ public class UsuarioVO extends ValueObjectImpl implements Serializable {
     public void setPessoa(PessoaVO pessoa) {
         this.pessoa = pessoa;
     }
+    *  */
 
     @Override
     public String toString() {

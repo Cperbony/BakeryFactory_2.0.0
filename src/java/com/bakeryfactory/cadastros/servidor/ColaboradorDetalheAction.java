@@ -113,13 +113,17 @@ public class ColaboradorDetalheAction implements Action {
             if (criteria.uniqueResult() != null) {
                 throw new Exception("Já existe um Colaborador vinculado à pessoa selecionada.");
             }
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
+            if (colaborador.getContabilConta().getId() == null) {
+                colaborador.setContabilConta(null);
+            }
+
+            if (colaborador.getSindicato().getId() == null) {
+                colaborador.setSindicato(null);
+            }
+
+            if (colaborador.getTipoAdmissao().getId() == null) {
+                colaborador.setTipoAdmissao(null);
+            }
             session.save(colaborador);
 
             session.getTransaction().commit();
@@ -159,17 +163,21 @@ public class ColaboradorDetalheAction implements Action {
             if (criteria.uniqueResult() != null) {
                 throw new Exception("Já existe um Colaborador vinculado à pessoa selecionada.");
             }
-            
-             /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
+
+            if (colaborador.getContabilConta().getId() == null) {
+                colaborador.setContabilConta(null);
+            }
+
+            if (colaborador.getSindicato().getId() == null) {
+                colaborador.setSindicato(null);
+            }
+
+            if (colaborador.getTipoAdmissao().getId() == null) {
+                colaborador.setTipoAdmissao(null);
+            }
 
             session.update(colaborador);
-            
+
             session.getTransaction().commit();
 
             return new VOResponse(colaborador);

@@ -26,9 +26,7 @@ package com.bakeryfactory.vendas.java;
 import com.bakeryfactory.cadastros.java.EmpresaVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,10 +34,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -74,15 +69,7 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
     @Column(name = "PRAZO_MEDIO")
     private Integer prazoMedio;
     @Column(name = "VISTA_PRAZO")
-    private Character vistaPrazo;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaCabecalhoVO> listaVendaCabecalho;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCondicoesPagamento")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho;
+    private String vistaPrazo;
 
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -167,28 +154,12 @@ public class VendaCondicoesPagamentoVO extends ValueObjectImpl implements Serial
         this.prazoMedio = prazoMedio;
     }
 
-    public Character getVistaPrazo() {
+    public String getVistaPrazo() {
         return vistaPrazo;
     }
 
-    public void setVistaPrazo(Character vistaPrazo) {
+    public void setVistaPrazo(String vistaPrazo) {
         this.vistaPrazo = vistaPrazo;
-    }
-
-    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
-        return listaVendaCabecalho;
-    }
-
-    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
-        this.listaVendaCabecalho = listaVendaCabecalho;
-    }
-
-    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
-        return listaVendaOrcamentoCabecalho;
-    }
-
-    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> listaVendaOrcamentoCabecalho) {
-        this.listaVendaOrcamentoCabecalho = listaVendaOrcamentoCabecalho;
     }
 
     public EmpresaVO getEmpresa() {

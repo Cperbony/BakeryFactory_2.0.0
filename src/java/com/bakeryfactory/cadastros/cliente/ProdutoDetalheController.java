@@ -43,7 +43,7 @@ public class ProdutoDetalheController extends FormController {
     private ProdutoDetalhe produtoDetalhe = null;
     private String pk = null;
     private ProdutoGrid produtoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
     private boolean chamadoOutroModulo = false;
 
     public ProdutoDetalheController(ProdutoGrid produtoGrid, String pk) {
@@ -96,11 +96,9 @@ public class ProdutoDetalheController extends FormController {
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         ProdutoVO produto = (ProdutoVO) newPersistentObject;
-
-        //TODO Checar o Grupo Tributário de Produtos
-        //if(produto.getTributGrupoTributario().getID() == null && produto.getTributIcmsCustomCab().getId() == null) {
-        //return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
-        //}
+        if (produto.getTributGrupoTributario().getId() == null && produto.getTributIcmsCustomCab().getId() == null) {
+            return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
+        }
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
 
@@ -128,10 +126,9 @@ public class ProdutoDetalheController extends FormController {
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         ProdutoVO produto = (ProdutoVO) persistentObject;
-        //TODO Checar o Grupo Tributário de Produtos
-        //if(produto.getTributGrupoTributario().getID() == null && produto.getTributIcmsCustomCab().getId() == null) {
-        //return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
-        //}
+        if(produto.getTributGrupoTributario().getId() == null && produto.getTributIcmsCustomCab().getId() == null) {
+        return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
+        }
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
     }
 
@@ -152,16 +149,19 @@ public class ProdutoDetalheController extends FormController {
      * @param newValue new input control value (just edited)
      * @return <code>true</code> if input control value is valid, <code>false</code> otherwise
      */
+    
     // TODO grupo tributário
+    @Override
     public boolean validateControl(String attributeName, Object oldValue, Object newValue) {
         if (attributeName.equals("tributGrupoTributario.id")) {
             ProdutoVO produto = (ProdutoVO) produtoDetalhe.getForm1().getVOModel().getValueObject();
-            //produto.getTributIcmsCustomCab().setId(null);
-            //produto.getTributIcmsCustomCab().setDescricao(null);
+            produto.getTributIcmsCustomCab().setId(null);
+            produto.getTributIcmsCustomCab().setDescricao(null);
             produtoDetalhe.getForm1().pull();
         } else if (attributeName.equals("tributIcmsCustomCab.id")) {
             ProdutoVO produto = (ProdutoVO) produtoDetalhe.getForm1().getVOModel().getValueObject();
-            //produto.getTributGrupoTributario().setId(null); produto.getTributGrupoTributario().setDescricao(null);
+            produto.getTributGrupoTributario().setId(null);
+            produto.getTributGrupoTributario().setDescricao(null);
             produtoDetalhe.getForm1().pull();
         }
         return super.validateControl(attributeName, oldValue, newValue);

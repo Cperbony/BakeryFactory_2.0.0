@@ -72,8 +72,11 @@ public class AlmoxarifadoDetalhe extends InternalFrame {
         setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.AlmoxarifadoVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.AlmoxarifadoVO");
+        form1.setEditButton(editButton1);
         form1.setFunctionId("almoxarifado");
+        form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblNome.setLabel("Nome:");

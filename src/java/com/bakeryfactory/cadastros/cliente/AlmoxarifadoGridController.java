@@ -46,7 +46,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class AlmoxarifadoGridController extends GridController implements GridDataLocator{
     
     private AlmoxarifadoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public AlmoxarifadoGridController() {
         grid = new AlmoxarifadoGrid(this);

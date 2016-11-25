@@ -103,24 +103,30 @@ public class EstadoCivilDetalheAction implements Action {
         try {
             Object[] pars = (Object[]) inputPar;
             EstadoCivilVO estadoCivil = (EstadoCivilVO) pars[1];
-            
+
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
             session.save(estadoCivil);
             session.getTransaction().commit();
-            
+
             return new VOResponse(estadoCivil);
-            
+
         } catch (Exception ex) {
             ex.printStackTrace();
+            if (session != null) {
+                session.getTransaction().rollback();
+            }
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {
-                session.close();
+                if (session != null) {
+                    session.close();
+                }
             } catch (Exception ex1) {
+                ex1.printStackTrace();
             }
         }
-        }
+    }
 
     private Response update(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
@@ -134,12 +140,12 @@ public class EstadoCivilDetalheAction implements Action {
             session.getTransaction().commit();
 
             return new VOResponse(estadoCivil);
-            
+
         } catch (Exception ex) {
+            ex.printStackTrace();
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {

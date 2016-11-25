@@ -89,8 +89,11 @@ public class SituacaoColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.SituacaoColaboradorVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.SituacaoColaboradorVO");
+        form1.setEditButton(editButton1);
         form1.setFunctionId("situacaoColaborador");
+        form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblCod.setText("Código:");

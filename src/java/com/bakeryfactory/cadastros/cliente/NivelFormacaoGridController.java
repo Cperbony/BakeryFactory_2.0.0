@@ -24,7 +24,6 @@
 
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.cadastros.java.NivelFormacaoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
@@ -47,7 +46,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class NivelFormacaoGridController extends GridController implements GridDataLocator{
     
     private NivelFormacaoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public NivelFormacaoGridController() {
         grid = new NivelFormacaoGrid(this);

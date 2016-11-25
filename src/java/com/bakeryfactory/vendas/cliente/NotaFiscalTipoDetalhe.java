@@ -23,8 +23,6 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
 import com.bakeryfactory.vendas.lookups.ModeloNFLookup;
 import org.openswing.swing.mdi.client.InternalFrame;
 

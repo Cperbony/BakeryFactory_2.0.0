@@ -51,7 +51,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
+    <Container class="org.openswing.swing.client.GridControl" name="gridControlTransp">
       <Properties>
         <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="deleteButton1"/>

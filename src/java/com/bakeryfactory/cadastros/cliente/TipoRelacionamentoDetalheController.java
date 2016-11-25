@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.cliente;
+package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
 import java.beans.PropertyVetoException;
@@ -37,43 +37,43 @@ import org.openswing.swing.util.java.Consts;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date 15/10/2016
  */
-public class TempDetalheController extends FormController {
+public class TipoRelacionamentoDetalheController extends FormController {
 
-    private TempDetalhe tempDetalhe = null;
+    private TipoRelacionamentoDetalhe tipoRelacionamentoDetalhe = null;
     private String pk = null;
-    private TempGrid tempGrid = null;
-    private String acaoServidor;
+    private TipoRelacionamentoGrid tipoRelacionamentoGrid = null;
+    private final String acaoServidor;
 
-    public TempDetalheController(TempGrid tempGrid, String pk) {
-        this.tempGrid = tempGrid;
+    public TipoRelacionamentoDetalheController(TipoRelacionamentoGrid tipoRelacionamentoGrid, String pk) {
+        this.tipoRelacionamentoGrid = tipoRelacionamentoGrid;
         this.pk = pk;
-        this.acaoServidor = "padraoAcao_DetalheAction";
-        tempDetalhe = new TempDetalhe(this);
-        tempDetalhe.setParentFrame(this.tempGrid);
-        this.tempGrid.pushFrame(tempDetalhe);
-        MDIFrame.add(tempDetalhe);
+        this.acaoServidor = "tipoRelacionamentoDetalheAction";
+        tipoRelacionamentoDetalhe = new TipoRelacionamentoDetalhe(this);
+        tipoRelacionamentoDetalhe.setParentFrame(this.tipoRelacionamentoGrid);
+        this.tipoRelacionamentoGrid.pushFrame(tipoRelacionamentoDetalhe);
+        MDIFrame.add(tipoRelacionamentoDetalhe);
 
         try {
-            tempDetalhe.setMaximum(true);
+            tipoRelacionamentoDetalhe.setMaximum(true);
         } catch (PropertyVetoException ex) {
         }
-        
+
         if (pk != null) {
-            tempDetalhe.getForm1().setMode(Consts.READONLY);
-            tempDetalhe.getForm1().reload();
+            tipoRelacionamentoDetalhe.getForm1().setMode(Consts.READONLY);
+            tipoRelacionamentoDetalhe.getForm1().reload();
         } else {
-            tempDetalhe.getForm1().setMode(Consts.INSERT);
+            tipoRelacionamentoDetalhe.getForm1().setMode(Consts.INSERT);
         }
     }
 
-/**
- * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
- *
- * @param valueObjectClass value object class
- * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
- */
-@Override
-        public Response loadData(Class valueObjectClass) {
+    /**
+     * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
+     *
+     * @param valueObjectClass value object class
+     * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
+     */
+    @Override
+    public Response loadData(Class valueObjectClass) {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
 
@@ -81,12 +81,11 @@ public class TempDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */
     @Override
-        public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+    public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
 
@@ -94,9 +93,9 @@ public class TempDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in INSERT mode.
      */
     @Override
-        public void afterInsertData() {
-        tempGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(tempDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    public void afterInsertData() {
+        tipoRelacionamentoGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(tipoRelacionamentoDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**
@@ -108,7 +107,7 @@ public class TempDetalheController extends FormController {
      * @throws java.lang.Exception
      */
     @Override
-        public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
     }
 
@@ -116,22 +115,9 @@ public class TempDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in EDIT mode.
      */
     @Override
-        public void afterEditData() {
-        tempGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(tempDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
-    } 
-    
-     /**
-   * Callback method invoked each time an input control is edited: this method define if the new value if valid.
-   * Default behaviour: input control value is valid.
-   * @param attributeName attribute name related to the input control currently edited
-   * @param oldValue old input control value (before editing)
-   * @param newValue new input control value (just edited)
-   * @return <code>true</code> if input control value is valid, <code>false</code> otherwise
-   */
-    @Override
-  public boolean validateControl(String attributeName,Object oldValue,Object newValue) {
-    return true;
-  }
+    public void afterEditData() {
+        tipoRelacionamentoGrid.getGrid1().reloadData();
+        JOptionPane.showMessageDialog(tipoRelacionamentoDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
 
 }

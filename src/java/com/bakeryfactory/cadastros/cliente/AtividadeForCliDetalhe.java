@@ -33,6 +33,7 @@ public class AtividadeForCliDetalhe extends InternalFrame {
 
     /**
      * Creates new form AtividadeForCliDetalhe
+     * @param controller
      */
     public AtividadeForCliDetalhe(AtividadeForCliDetalheController controller) {
         initComponents();

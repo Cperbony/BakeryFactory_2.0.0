@@ -54,6 +54,9 @@ import org.openswing.swing.server.UserSessionParameters;
  */
 public class PessoaDetalheAction implements Action {
 
+    public PessoaDetalheAction() {
+    }
+
     @Override
     public String getRequestName() {
         return "pessoaDetalheAction";
@@ -122,39 +125,13 @@ public class PessoaDetalheAction implements Action {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            if (pessoa.getTipo().equals("F")) {
-                Criteria criteria = session.createCriteria(PessoaFisicaVO.class);
-                criteria.add(Restrictions.eq("cpf", pessoaFisica.getCpf()));
-                if (criteria.uniqueResult() != null) {
-                    throw new Exception("O CPF informado já esta cadastrado no Banco de Dados");
-                }
-            } else {
-                Criteria criteria = session.createCriteria(PessoaJuridicaVO.class);
-                criteria.add(Restrictions.eq("cnpj", pessoaJuridica.getCnpj()));
-                if (criteria.uniqueResult() != null) {
-                    throw new Exception("O CNPJ informado já esta cadastrado no Banco de Dados");
-                }
-            }
+            insertOnTipoPessoa(pessoa, session, pessoaFisica, pessoaJuridica);
 
-            for (int i = 0; i < listaContato.size(); i++) {
-                listaContato.get(i).setPessoa(pessoa);
-            }
+            getListaContatos(listaContato, pessoa);
+            getListaEnderecos(listaEndereco, pessoa);
+            getListaTelefones(listaTelefone, pessoa);
 
-            for (int i = 0; i < listaEndereco.size(); i++) {
-                listaEndereco.get(i).setPessoa(pessoa);
-            }
-
-            for (int i = 0; i < listaTelefone.size(); i++) {
-                listaTelefone.get(i).setPessoa(pessoa);
-            }
-
-            if (pessoa.getTipo().equals("F")) {
-                pessoaFisica.setPessoa(pessoa);
-                pessoa.setPessoaFisica(pessoaFisica);
-            } else {
-                pessoaJuridica.setPessoa(pessoa);
-                pessoa.setPessoaJuridica(pessoaJuridica);
-            }
+            checaTipoPessoa(pessoa, pessoaFisica, pessoaJuridica);
 
             pessoa.setListaContato(listaContato);
             pessoa.setListaEndereco(listaEndereco);
@@ -184,12 +161,55 @@ public class PessoaDetalheAction implements Action {
         }
     }
 
+    public void insertOnTipoPessoa(PessoaVO pessoa, Session session, PessoaFisicaVO pessoaFisica, PessoaJuridicaVO pessoaJuridica) throws Exception {
+        if (pessoa.getTipo().equals("F")) {
+            Criteria criteria = session.createCriteria(PessoaFisicaVO.class);
+            criteria.add(Restrictions.eq("cpf", pessoaFisica.getCpf()));
+            if (criteria.uniqueResult() != null) {
+                throw new Exception("O CPF informado já esta cadastrado no Banco de Dados");
+            }
+        } else {
+            Criteria criteria = session.createCriteria(PessoaJuridicaVO.class);
+            criteria.add(Restrictions.eq("cnpj", pessoaJuridica.getCnpj()));
+            if (criteria.uniqueResult() != null) {
+                throw new Exception("O CNPJ informado já esta cadastrado no Banco de Dados");
+            }
+        }
+    }
+
+    public void checaTipoPessoa(PessoaVO pessoa, PessoaFisicaVO pessoaFisica, PessoaJuridicaVO pessoaJuridica) {
+        if (pessoa.getTipo().equals("F")) {
+            pessoaFisica.setPessoa(pessoa);
+            pessoa.setPessoaFisica(pessoaFisica);
+        } else {
+            pessoaJuridica.setPessoa(pessoa);
+            pessoa.setPessoaJuridica(pessoaJuridica);
+        }
+    }
+
+    public void getListaTelefones(List<PessoaTelefoneVO> listaTelefone, PessoaVO pessoa) {
+        for (int i = 0; i < listaTelefone.size(); i++) {
+            listaTelefone.get(i).setPessoa(pessoa);
+        }
+    }
+
+    public void getListaEnderecos(List<PessoaEnderecoVO> listaEndereco, PessoaVO pessoa) {
+        for (int i = 0; i < listaEndereco.size(); i++) {
+            listaEndereco.get(i).setPessoa(pessoa);
+        }
+    }
+
+    public void getListaContatos(List<PessoaContatoVO> listaContato, PessoaVO pessoa) {
+        for (int i = 0; i < listaContato.size(); i++) {
+            listaContato.get(i).setPessoa(pessoa);
+        }
+    }
+
     private Response update(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         try {
             Object[] pars = (Object[]) inputPar;
-            PessoaVO pessoa = (PessoaVO) pars[1];
-            EmpresaVO empresa = (EmpresaVO) pars[2];
+            PessoaVO pessoa = (PessoaVO) pars[2];
             PessoaFisicaVO pessoaFisica = (PessoaFisicaVO) pars[3];
             PessoaJuridicaVO pessoaJuridica = (PessoaJuridicaVO) pars[4];
             List<PessoaContatoVO> listaContato = (Vector) pars[5];
@@ -199,28 +219,8 @@ public class PessoaDetalheAction implements Action {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            if (pessoa.getTipo().equals("F")) {
-                Criteria criteria = session.createCriteria(PessoaFisicaVO.class);
-                criteria.add(Restrictions.eq("cpf", pessoaFisica.getCpf()));
-                criteria.add(Restrictions.eq("pessoa", pessoa));
-                if (criteria.uniqueResult() != null) {
-                    throw new Exception("O CPF informado já esta cadastrado no Banco de Dados");
-                }
-            } else {
-                Criteria criteria = session.createCriteria(PessoaJuridicaVO.class);
-                criteria.add(Restrictions.eq("cnpj", pessoaJuridica.getCnpj()));
-                criteria.add(Restrictions.eq("pessoa", pessoa));
-                if (criteria.uniqueResult() != null) {
-                    throw new Exception("O CNPJ informado já esta cadastrado no Banco de Dados");
-                }
-            }
-
-            if (pessoa.getTipo().equals("F")) {
-                pessoa.setPessoaFisica(pessoaFisica);
-            } else {
-                pessoa.setPessoaJuridica(pessoaJuridica);
-            }
-
+            updateOnTipoPessoa(pessoa, session, pessoaFisica, pessoaJuridica);
+            toSetTipoPessoa(pessoa, pessoaFisica, pessoaJuridica);
             pessoa.setListaContato(listaContato);
             pessoa.setListaEndereco(listaEndereco);
             pessoa.setListaTelefone(listaTelefone);
@@ -244,6 +244,32 @@ public class PessoaDetalheAction implements Action {
             } catch (Exception ex1) {
                 ex1.printStackTrace();
             }
+        }
+    }
+
+    public void toSetTipoPessoa(PessoaVO pessoa, PessoaFisicaVO pessoaFisica, PessoaJuridicaVO pessoaJuridica) {
+        if (pessoa.getTipo().equals("F")) {
+            pessoa.setPessoaFisica(pessoaFisica);
+        } else {
+            pessoa.setPessoaJuridica(pessoaJuridica);
+        }
+    }
+
+    public void updateOnTipoPessoa(PessoaVO pessoa, Session session, PessoaFisicaVO pessoaFisica, PessoaJuridicaVO pessoaJuridica) throws Exception {
+        if (pessoa.getTipo().equals("F")) {
+            Criteria criteria = session.createCriteria(PessoaFisicaVO.class);
+            criteria.add(Restrictions.eq("cpf", pessoaFisica.getCpf()));
+            criteria.add(Restrictions.ne("pessoa", pessoa));
+           /* if (criteria.uniqueResult() != null) {
+                throw new Exception("O CPF informado já esta cadastrado no Banco de Dados");
+            }*/
+        } else {
+            Criteria criteria = session.createCriteria(PessoaJuridicaVO.class);
+            criteria.add(Restrictions.eq("cnpj", pessoaJuridica.getCnpj()));
+            criteria.add(Restrictions.ne("pessoa", pessoa));
+           /* if (criteria.uniqueResult() != null) {
+                throw new Exception("O CNPJ informado já esta cadastrado no Banco de Dados");
+            }*/
         }
     }
 

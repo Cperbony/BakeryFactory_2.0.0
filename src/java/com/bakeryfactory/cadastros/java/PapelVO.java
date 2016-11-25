@@ -57,7 +57,7 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
     @Column(name = "ACESSO_COMPLETO")
-    private Character acessoCompleto;
+    private String acessoCompleto;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "papel")
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -98,11 +98,11 @@ public class PapelVO extends ValueObjectImpl implements Serializable {
         this.descricao = descricao;
     }
 
-    public Character getAcessoCompleto() {
+    public String getAcessoCompleto() {
         return acessoCompleto;
     }
 
-    public void setAcessoCompleto(Character acessoCompleto) {
+    public void setAcessoCompleto(String acessoCompleto) {
         this.acessoCompleto = acessoCompleto;
     }
 

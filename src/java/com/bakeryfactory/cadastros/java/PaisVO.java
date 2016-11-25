@@ -61,8 +61,6 @@ public class PaisVO extends ValueObjectImpl implements Serializable {
     @Column(name = "SIGLA3")
     private String sigla3;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pais")
-    private List<UfVO> listaUf;
 
     public PaisVO() {
     }
@@ -117,14 +115,6 @@ public class PaisVO extends ValueObjectImpl implements Serializable {
 
     public void setSigla3(String sigla3) {
         this.sigla3 = sigla3;
-    }
-
-    public List<UfVO> getListaUf() {
-        return listaUf;
-    }
-
-    public void setListaUf(List<UfVO> listaUf) {
-        this.listaUf = listaUf;
     }
 
     @Override

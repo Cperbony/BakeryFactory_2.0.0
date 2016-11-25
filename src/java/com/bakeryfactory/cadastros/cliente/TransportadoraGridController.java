@@ -24,9 +24,7 @@
 
 package com.bakeryfactory.cadastros.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
-import com.bakeryfactory.cadastros.java.TipoColaboradorVO;
+import com.bakeryfactory.cadastros.java.TransportadoraVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,8 +88,8 @@ public class TransportadoraGridController extends GridController implements Grid
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        TipoColaboradorVO tipoColaborador = (TipoColaboradorVO) persistentObject;
-        new TransportadoraDetalheController(grid, tipoColaborador.getId().toString());
+        TransportadoraVO transportadora = (TransportadoraVO) persistentObject;
+        new TransportadoraDetalheController(grid, transportadora.getId().toString());
     }
 
     /**

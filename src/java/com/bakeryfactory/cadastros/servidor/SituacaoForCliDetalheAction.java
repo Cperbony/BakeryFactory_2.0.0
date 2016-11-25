@@ -134,31 +134,16 @@ public class SituacaoForCliDetalheAction implements Action {
         Session session = null;
         try {
             Object[] pars = (Object[]) inputPar;
-            ClienteVO cliente = (ClienteVO) pars[2];
+            SituacaoForCliVO situacaoForCli = (SituacaoForCliVO) pars[2];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            Criteria criteria = session.createCriteria(ClienteVO.class);
-            criteria.add(Restrictions.eq("pessoa", cliente.getPessoa()));
-            criteria.add(Restrictions.ne("id", cliente.getId()));
-
-            if (criteria.uniqueResult() != null) {
-                throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
-            }
-
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
-            session.update(cliente);
+            session.update(situacaoForCli);
 
             session.getTransaction().commit();
 
-            return new VOResponse(cliente);
+            return new VOResponse(situacaoForCli);
 
         } catch (Exception ex) {
             if (session != null) {

@@ -77,6 +77,7 @@ public class EstadoCivilGridController extends GridController implements GridDat
      * @param rowNumber selected row index
      * @param persistentObject v.o. related to the selected row
      */
+    @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
         EstadoCivilVO estadoCivil = (EstadoCivilVO) persistentObject;
         new EstadoCivilDetalheController(grid, estadoCivil.getId().toString());
@@ -87,7 +88,9 @@ public class EstadoCivilGridController extends GridController implements GridDat
      *
      * @param persistentObjects value objects to delete (related to the currently selected rows)
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         Map otherGridParams = new HashMap();
         otherGridParams.put("acao", Constantes.DELETE);

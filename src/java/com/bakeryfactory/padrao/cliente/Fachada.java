@@ -23,15 +23,33 @@
  */
 package com.bakeryfactory.padrao.cliente;
 
+import com.bakeryfactory.cadastros.cliente.AlmoxarifadoGridController;
+import com.bakeryfactory.cadastros.cliente.IngredienteGridController;
 import com.bakeryfactory.cadastros.cliente.AtividadeForCliGridController;
+import com.bakeryfactory.cadastros.cliente.CargoGridController;
+import com.bakeryfactory.cadastros.cliente.CepGridController;
 import com.bakeryfactory.cadastros.cliente.ClienteGridController;
+import com.bakeryfactory.cadastros.cliente.ColaboradorGridController;
 import com.bakeryfactory.cadastros.cliente.EstadoCivilGridController;
 import com.bakeryfactory.cadastros.cliente.FornecedorGridController;
+import com.bakeryfactory.cadastros.cliente.MunicipioGridController;
+import com.bakeryfactory.cadastros.cliente.NcmGridController;
+import com.bakeryfactory.cadastros.cliente.NivelFormacaoGridController;
+import com.bakeryfactory.cadastros.cliente.PaisGridController;
+import com.bakeryfactory.cadastros.cliente.SindicatoGridController;
 import com.bakeryfactory.cadastros.cliente.PessoaGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoGrupoGridController;
+import com.bakeryfactory.cadastros.cliente.ProdutoMarcaGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoSubGrupoGridController;
+import com.bakeryfactory.cadastros.cliente.SetorGridController;
+import com.bakeryfactory.cadastros.cliente.SituacaoColaboradorGridController;
 import com.bakeryfactory.cadastros.cliente.SituacaoForCliGridController;
+import com.bakeryfactory.cadastros.cliente.TipoAdmissaoGridController;
+import com.bakeryfactory.cadastros.cliente.TipoColaboradorGridController;
+import com.bakeryfactory.cadastros.cliente.TipoRelacionamentoGridController;
+import com.bakeryfactory.cadastros.cliente.TransportadoraGridController;
+import com.bakeryfactory.cadastros.cliente.UfGridController;
 import com.bakeryfactory.cadastros.cliente.UnidadeProdutoGridController;
 import com.bakeryfactory.pcp.cliente.PcpInstrucaoGridController;
 import com.bakeryfactory.pcp.cliente.PcpOpCabecalhoGridController;
@@ -74,66 +92,89 @@ public class Fachada implements ClientFacade {
     public void getCliente() {
         new ClienteGridController();
     }
-    
+
     public void getFornecedor() {
         new FornecedorGridController();
     }
 
     public void getTransportadora() {
-        //new TransportadoraGridController();
+        new TransportadoraGridController();
     }
 
     //COLABORADORES
     public void getTipoAdmissao() {
-        // new TipoAdmissaoGridController;
+        new TipoAdmissaoGridController();
     }
 
     public void getColaborador() {
-        // new ColaboradorGridController;
+        new ColaboradorGridController();
     }
 
-    //SETORES
+    public void getTipoColaborador() {
+        new TipoColaboradorGridController();
+    }
+
+    public void getTipoRelacionamento() {
+        new TipoRelacionamentoGridController();
+    }
+
+    public void getSituacaoColaborador() {
+        new SituacaoColaboradorGridController();
+    }
+
+    public void getCargo() {
+        new CargoGridController();
+    }
+
+    public void getNivelFormacao() {
+        new NivelFormacaoGridController();
+    }
+
+    //OUTROS
+    public void getSindicato() {
+        new SindicatoGridController();
+    }
+
+    //DIVEROS - SETORES
     public void getSetor() {
-        // new SetorGridController;
+        new SetorGridController();
+    }
+
+    public void getAlmoxarifado() {
+        new AlmoxarifadoGridController();
     }
 
     //ENDEREÇO
     public void getPais() {
-        //new PaisGridController;
+        new PaisGridController();
     }
 
     public void getUf() {
-        //new UfGridController;
+        new UfGridController();
     }
 
     public void getMunicipio() {
-        //    new MunicipioGridController;
+        new MunicipioGridController();
     }
 
     public void getCep() {
-        //new CepGridController;
+        new CepGridController();
     }
 
-    //INGREDIENTE
-    public void getIngrediente() {
-        // new IngredienteGridController();
+    //PCP - PRODUTOS
+    public void getProduto() {
+        new ProdutoGridController();
     }
 
-    //RECEITA
-    public void getReceita() {
-        // new ReceitaGridController();
-    }
-
-    //PRODUTO
     public void getProdutoMarca() {
-        //   new ProdutoMarcaGridController();
+        new ProdutoMarcaGridController();
     }
 
     public void getNcm() {
-        // new NcmGridController();
+        new NcmGridController();
     }
 
-    //PCP
+
     public void getUnidadeProduto() {
         new UnidadeProdutoGridController();
     }
@@ -146,19 +187,25 @@ public class Fachada implements ClientFacade {
         new ProdutoSubGrupoGridController();
     }
 
-    public void getProduto() {
-        new ProdutoGridController();
+    public void getIngrediente() {
+        new IngredienteGridController();
     }
-    
+
+    public void getReceita() {
+        // new ReceitaGridController();
+    }
+
+    public void getModoPreparo() {
+        // new ModoPreparoGridController();
+    }
+
     public void getPcpInstrucao() {
         new PcpInstrucaoGridController();
     }
-    
+
     public void getPcpOrdemProducao() {
         new PcpOpCabecalhoGridController();
     }
-    
-    
 
     //VENDAS
     public void getTipoNotaFiscal() {

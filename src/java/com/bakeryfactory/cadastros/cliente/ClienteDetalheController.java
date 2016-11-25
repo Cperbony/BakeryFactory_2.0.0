@@ -42,7 +42,7 @@ public class ClienteDetalheController extends FormController {
     private ClienteDetalhe clienteDetalhe = null;
     private String pk;
     private ClienteGrid clienteGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public ClienteDetalheController(ClienteGrid clienteGrid, String pk) {
         this.clienteGrid = clienteGrid;
@@ -81,7 +81,6 @@ public class ClienteDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

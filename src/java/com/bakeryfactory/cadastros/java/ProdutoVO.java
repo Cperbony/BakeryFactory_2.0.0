@@ -76,7 +76,32 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     private String descricao;
     @Column(name = "DESCRICAO_PDV")
     private String descricaoPdv;
-    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "VALOR_COMPRA")
+    private BigDecimal valorCompra;
+    @Column(name = "VALOR_VENDA")
+    private BigDecimal valorVenda;
+    @Column(name = "PRECO_VENDA_MINIMO")
+    private BigDecimal precoVendaMinimo;
+    @Column(name = "PRECO_SUGERIDO")
+    private BigDecimal precoSugerido;
+    @Column(name = "CUSTO_UNITARIO")
+    private BigDecimal custoUnitario;
+    @Column(name = "CUSTO_PRODUCAO")
+    private BigDecimal custoProducao;
+    @Column(name = "CUSTO_MEDIO_LIQUIDO")
+    private BigDecimal custoMedioLiquido;
+    @Column(name = "PRECO_LUCRO_ZERO")
+    private BigDecimal precoLucroZero;
+    @Column(name = "PRECO_LUCRO_MINIMO")
+    private BigDecimal precoLucroMinimo;
+    @Column(name = "PRECO_LUCRO_MAXIMO")
+    private BigDecimal precoLucroMaximo;
+    @Column(name = "MARKUP")
+    private BigDecimal markup;
+    @Column(name = "QUANTIDADE_ESTOQUE")
+    private BigDecimal quantidadeEstoque;
+    @Column(name = "QUANTIDADE_ESTOQUE_ANTERIOR")
+    private BigDecimal quantidadeEstoqueAnterior;
     @Column(name = "ESTOQUE_MINIMO")
     private BigDecimal estoqueMinimo;
     @Column(name = "ESTOQUE_MAXIMO")
@@ -84,48 +109,76 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "ESTOQUE_IDEAL")
     private BigDecimal estoqueIdeal;
     @Column(name = "EXCLUIDO")
-    private Character excluido;
+    private String excluido;
     @Column(name = "INATIVO")
-    private Character inativo;
-    @Column(name = "DATA_CADASTRO")
+    private String inativo;
     @Temporal(TemporalType.DATE)
+    @Column(name = "DATA_CADASTRO")
     private Date dataCadastro;
     @Column(name = "FOTO_PRODUTO")
     private String fotoProduto;
-    @Column(name = "DATA_ALTERACAO")
-    @Temporal(TemporalType.DATE)
-    private Date dataAlteracao;
+    @Column(name = "EX_TIPI")
+    private String exTipi;
+    @Column(name = "CODIGO_LST")
+    private String codigoLst;
     @Column(name = "CLASSE_ABC")
-    private Character classeAbc;
-    @Column(name = "peso")
+    private String classeAbc;
+    @Column(name = "IAT")
+    private String iat;
+    @Column(name = "IPPT")
+    private String ippt;
+    @Column(name = "TIPO_ITEM_SPED")
+    private String tipoItemSped;
+    @Column(name = "PESO")
     private BigDecimal peso;
+    @Column(name = "PORCENTO_COMISSAO")
+    private BigDecimal porcentoComissao;
+    @Column(name = "PONTO_PEDIDO")
+    private BigDecimal pontoPedido;
+    @Column(name = "LOTE_ECONOMICO_COMPRA")
+    private BigDecimal loteEconomicoCompra;
+    @Column(name = "ALIQUOTA_ICMS_PAF")
+    private BigDecimal aliquotaIcmsPaf;
+    @Column(name = "ALIQUOTA_ISSQN_PAF")
+    private BigDecimal aliquotaIssqnPaf;
+    @Column(name = "TOTALIZADOR_PARCIAL")
+    private String totalizadorParcial;
+    @Column(name = "CODIGO_BALANCA")
+    private Integer codigoBalanca;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "DATA_ALTERACAO")
+    private Date dataAlteracao;
+    @Column(name = "TIPO")
+    private String tipo;
+    @Column(name = "SERVICO")
+    private String servico;
+
     @Transient
     private byte[] imagem;
 
-    @JoinColumn(name = "ID_PRODUTO_SUBGRUPO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private ProdutoSubgrupoVO produtoSubgrupo;
+    @Transient
+    private BigDecimal encargosVenda;
 
     @JoinColumn(name = "ID_UNIDADE_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private UnidadeProdutoVO unidadeProduto;
-    
+
     @JoinColumn(name = "ID_SUB_GRUPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
-    private ProdutoSubgrupoVO produtoSubGrupo;
-    
+    private ProdutoSubGrupoVO produtoSubGrupo;
+
     @JoinColumn(name = "ID_MARCA_PRODUTO", referencedColumnName = "ID")
     @ManyToOne
     private ProdutoMarcaVO produtoMarca;
-    
+
     @JoinColumn(name = "ID_GRUPO_TRIBUTARIO", referencedColumnName = "ID")
     @ManyToOne
     private TributGrupoTributarioVO tributGrupoTributario;
-    
+
     @JoinColumn(name = "ID_ALMOXARIFADO", referencedColumnName = "ID")
     @ManyToOne
     private AlmoxarifadoVO almoxarifado;
-    
+
     @JoinColumn(name = "ID_TRIBUT_ICMS_CUSTOM_CAB", referencedColumnName = "ID")
     @ManyToOne
     private TributIcmsCustomCabVO tributIcmsCustomCab;
@@ -134,35 +187,8 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<FichaTecnicaVO> listaFichaTecnica;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ReceitaVO> listaReceita;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<PcpOpDetalheVO> listaPcpOpDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaDetalheVO> listaVendaDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ReceituarioControleCustoVO> listaReceituarioControleCusto;
-
+   
     public ProdutoVO() {
-    }
-
-    public ProdutoVO(Integer id) {
-        this.id = id;
     }
 
     public Integer getId() {
@@ -221,6 +247,110 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.descricaoPdv = descricaoPdv;
     }
 
+    public BigDecimal getValorCompra() {
+        return valorCompra;
+    }
+
+    public void setValorCompra(BigDecimal valorCompra) {
+        this.valorCompra = valorCompra;
+    }
+
+    public BigDecimal getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(BigDecimal valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+
+    public BigDecimal getPrecoVendaMinimo() {
+        return precoVendaMinimo;
+    }
+
+    public void setPrecoVendaMinimo(BigDecimal precoVendaMinimo) {
+        this.precoVendaMinimo = precoVendaMinimo;
+    }
+
+    public BigDecimal getPrecoSugerido() {
+        return precoSugerido;
+    }
+
+    public void setPrecoSugerido(BigDecimal precoSugerido) {
+        this.precoSugerido = precoSugerido;
+    }
+
+    public BigDecimal getCustoUnitario() {
+        return custoUnitario;
+    }
+
+    public void setCustoUnitario(BigDecimal custoUnitario) {
+        this.custoUnitario = custoUnitario;
+    }
+
+    public BigDecimal getCustoProducao() {
+        return custoProducao;
+    }
+
+    public void setCustoProducao(BigDecimal custoProducao) {
+        this.custoProducao = custoProducao;
+    }
+
+    public BigDecimal getCustoMedioLiquido() {
+        return custoMedioLiquido;
+    }
+
+    public void setCustoMedioLiquido(BigDecimal custoMedioLiquido) {
+        this.custoMedioLiquido = custoMedioLiquido;
+    }
+
+    public BigDecimal getPrecoLucroZero() {
+        return precoLucroZero;
+    }
+
+    public void setPrecoLucroZero(BigDecimal precoLucroZero) {
+        this.precoLucroZero = precoLucroZero;
+    }
+
+    public BigDecimal getPrecoLucroMinimo() {
+        return precoLucroMinimo;
+    }
+
+    public void setPrecoLucroMinimo(BigDecimal precoLucroMinimo) {
+        this.precoLucroMinimo = precoLucroMinimo;
+    }
+
+    public BigDecimal getPrecoLucroMaximo() {
+        return precoLucroMaximo;
+    }
+
+    public void setPrecoLucroMaximo(BigDecimal precoLucroMaximo) {
+        this.precoLucroMaximo = precoLucroMaximo;
+    }
+
+    public BigDecimal getMarkup() {
+        return markup;
+    }
+
+    public void setMarkup(BigDecimal markup) {
+        this.markup = markup;
+    }
+
+    public BigDecimal getQuantidadeEstoque() {
+        return quantidadeEstoque;
+    }
+
+    public void setQuantidadeEstoque(BigDecimal quantidadeEstoque) {
+        this.quantidadeEstoque = quantidadeEstoque;
+    }
+
+    public BigDecimal getQuantidadeEstoqueAnterior() {
+        return quantidadeEstoqueAnterior;
+    }
+
+    public void setQuantidadeEstoqueAnterior(BigDecimal quantidadeEstoqueAnterior) {
+        this.quantidadeEstoqueAnterior = quantidadeEstoqueAnterior;
+    }
+
     public BigDecimal getEstoqueMinimo() {
         return estoqueMinimo;
     }
@@ -245,19 +375,19 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.estoqueIdeal = estoqueIdeal;
     }
 
-    public Character getExcluido() {
+    public String getExcluido() {
         return excluido;
     }
 
-    public void setExcluido(Character excluido) {
+    public void setExcluido(String excluido) {
         this.excluido = excluido;
     }
 
-    public Character getInativo() {
+    public String getInativo() {
         return inativo;
     }
 
-    public void setInativo(Character inativo) {
+    public void setInativo(String inativo) {
         this.inativo = inativo;
     }
 
@@ -277,20 +407,52 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.fotoProduto = fotoProduto;
     }
 
-    public Date getDataAlteracao() {
-        return dataAlteracao;
+    public String getExTipi() {
+        return exTipi;
     }
 
-    public void setDataAlteracao(Date dataAlteracao) {
-        this.dataAlteracao = dataAlteracao;
+    public void setExTipi(String exTipi) {
+        this.exTipi = exTipi;
     }
 
-    public Character getClasseAbc() {
+    public String getCodigoLst() {
+        return codigoLst;
+    }
+
+    public void setCodigoLst(String codigoLst) {
+        this.codigoLst = codigoLst;
+    }
+
+    public String getClasseAbc() {
         return classeAbc;
     }
 
-    public void setClasseAbc(Character classeAbc) {
+    public void setClasseAbc(String classeAbc) {
         this.classeAbc = classeAbc;
+    }
+
+    public String getIat() {
+        return iat;
+    }
+
+    public void setIat(String iat) {
+        this.iat = iat;
+    }
+
+    public String getIppt() {
+        return ippt;
+    }
+
+    public void setIppt(String ippt) {
+        this.ippt = ippt;
+    }
+
+    public String getTipoItemSped() {
+        return tipoItemSped;
+    }
+
+    public void setTipoItemSped(String tipoItemSped) {
+        this.tipoItemSped = tipoItemSped;
     }
 
     public BigDecimal getPeso() {
@@ -301,12 +463,92 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.peso = peso;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public BigDecimal getPorcentoComissao() {
+        return porcentoComissao;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setPorcentoComissao(BigDecimal porcentoComissao) {
+        this.porcentoComissao = porcentoComissao;
+    }
+
+    public BigDecimal getPontoPedido() {
+        return pontoPedido;
+    }
+
+    public void setPontoPedido(BigDecimal pontoPedido) {
+        this.pontoPedido = pontoPedido;
+    }
+
+    public BigDecimal getLoteEconomicoCompra() {
+        return loteEconomicoCompra;
+    }
+
+    public void setLoteEconomicoCompra(BigDecimal loteEconomicoCompra) {
+        this.loteEconomicoCompra = loteEconomicoCompra;
+    }
+
+    public BigDecimal getAliquotaIcmsPaf() {
+        return aliquotaIcmsPaf;
+    }
+
+    public void setAliquotaIcmsPaf(BigDecimal aliquotaIcmsPaf) {
+        this.aliquotaIcmsPaf = aliquotaIcmsPaf;
+    }
+
+    public BigDecimal getAliquotaIssqnPaf() {
+        return aliquotaIssqnPaf;
+    }
+
+    public void setAliquotaIssqnPaf(BigDecimal aliquotaIssqnPaf) {
+        this.aliquotaIssqnPaf = aliquotaIssqnPaf;
+    }
+
+    public String getTotalizadorParcial() {
+        return totalizadorParcial;
+    }
+
+    public void setTotalizadorParcial(String totalizadorParcial) {
+        this.totalizadorParcial = totalizadorParcial;
+    }
+
+    public Integer getCodigoBalanca() {
+        return codigoBalanca;
+    }
+
+    public void setCodigoBalanca(Integer codigoBalanca) {
+        this.codigoBalanca = codigoBalanca;
+    }
+
+    public Date getDataAlteracao() {
+        return dataAlteracao;
+    }
+
+    public void setDataAlteracao(Date dataAlteracao) {
+        this.dataAlteracao = dataAlteracao;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getServico() {
+        return servico;
+    }
+
+    public void setServico(String servico) {
+        this.servico = servico;
+    }
+
+    public BigDecimal getEncargosVenda() {
+        return encargosVenda;
+    }
+
+    public void setEncargosVenda(BigDecimal encargosVenda) {
+        this.encargosVenda = encargosVenda;
     }
 
     public UnidadeProdutoVO getUnidadeProduto() {
@@ -317,11 +559,11 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.unidadeProduto = unidadeProduto;
     }
 
-    public ProdutoSubgrupoVO getProdutoSubGrupo() {
+    public ProdutoSubGrupoVO getProdutoSubGrupo() {
         return produtoSubGrupo;
     }
 
-    public void setProdutoSubGrupo(ProdutoSubgrupoVO produtoSubGrupo) {
+    public void setProdutoSubGrupo(ProdutoSubGrupoVO produtoSubGrupo) {
         this.produtoSubGrupo = produtoSubGrupo;
     }
 
@@ -357,7 +599,6 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.tributIcmsCustomCab = tributIcmsCustomCab;
     }
 
-    
     public List<FichaTecnicaVO> getListaFichaTecnica() {
         return listaFichaTecnica;
     }
@@ -366,60 +607,12 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.listaFichaTecnica = listaFichaTecnica;
     }
 
-    public List<ReceitaVO> getListaReceita() {
-        return listaReceita;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setListaReceita(List<ReceitaVO> listaReceita) {
-        this.listaReceita = listaReceita;
-    }
-
-    public List<PcpOpDetalheVO> getListaPcpOpDetalhe() {
-        return listaPcpOpDetalhe;
-    }
-
-    public void setListaPcpOpDetalhe(List<PcpOpDetalheVO> listaPcpOpDetalhe) {
-        this.listaPcpOpDetalhe = listaPcpOpDetalhe;
-    }
-
-    public List<VendaOrcamentoDetalheVO> getListaVendaOrcamentoDetalhe() {
-        return listaVendaOrcamentoDetalhe;
-    }
-
-    public void setListaVendaOrcamentoDetalhe(List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe) {
-        this.listaVendaOrcamentoDetalhe = listaVendaOrcamentoDetalhe;
-    }
-
-    public List<VendaDetalheVO> getListaVendaDetalhe() {
-        return listaVendaDetalhe;
-    }
-
-    public void setListaVendaDetalhe(List<VendaDetalheVO> listaVendaDetalhe) {
-        this.listaVendaDetalhe = listaVendaDetalhe;
-    }
-
-    public List<ProdutoTabelaPrecoVO> getListaProdutoTabelaPreco() {
-        return listaProdutoTabelaPreco;
-    }
-
-    public void setListaProdutoTabelaPreco(List<ProdutoTabelaPrecoVO> listaProdutoTabelaPreco) {
-        this.listaProdutoTabelaPreco = listaProdutoTabelaPreco;
-    }
-
-    public ProdutoSubgrupoVO getProdutoSubgrupo() {
-        return produtoSubgrupo;
-    }
-
-    public void setProdutoSubgrupo(ProdutoSubgrupoVO produtoSubgrupo) {
-        this.produtoSubgrupo = produtoSubgrupo;
-    }
-
-    public List<ReceituarioControleCustoVO> getListaReceituarioControleCusto() {
-        return listaReceituarioControleCusto;
-    }
-
-    public void setListaReceituarioControleCusto(List<ReceituarioControleCustoVO> listaReceituarioControleCusto) {
-        this.listaReceituarioControleCusto = listaReceituarioControleCusto;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
     @Override

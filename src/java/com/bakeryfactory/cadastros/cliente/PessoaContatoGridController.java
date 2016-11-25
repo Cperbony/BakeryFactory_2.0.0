@@ -27,7 +27,6 @@ import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.Map;
 import org.openswing.swing.client.GridControl;
-import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.send.java.GridParams;
@@ -42,13 +41,14 @@ import org.openswing.swing.util.java.Consts;
  */
 class PessoaContatoGridController extends GridController implements GridDataLocator {
 
-    private PessoaDetalhe pessoaDetalhe;
-    private String acaoServidor;
+    private final PessoaDetalhe pessoaDetalhe;
+    private final String acaoServidor;
     private String pk;
 
     public PessoaContatoGridController(PessoaDetalhe pessoaDetalhe) {
-        acaoServidor = "pessoaContatGridAction";
+        acaoServidor = "pessoaContatoGridAction";
         this.pessoaDetalhe = pessoaDetalhe;
+        
     }
 
     @Override
@@ -129,6 +129,7 @@ class PessoaContatoGridController extends GridController implements GridDataLoca
      * @param persistentObjects value objects to delete (related to the currently selected rows)
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      */
+    @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
     }

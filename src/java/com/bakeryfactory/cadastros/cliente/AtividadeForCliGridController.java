@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.AtividadeForCliVO;
-import com.bakeryfactory.cadastros.java.PessoaVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +37,6 @@ import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
 import org.openswing.swing.util.client.ClientUtils;
-import org.openswing.swing.util.java.Consts;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
@@ -47,7 +45,7 @@ import org.openswing.swing.util.java.Consts;
 public class AtividadeForCliGridController extends GridController implements GridDataLocator {
 
     private AtividadeForCliGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public AtividadeForCliGridController() {
         grid = new AtividadeForCliGrid(this);

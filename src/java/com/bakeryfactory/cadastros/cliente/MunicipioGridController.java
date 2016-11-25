@@ -30,7 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import org.openswing.swing.client.GridControl;
-import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
@@ -47,7 +46,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class MunicipioGridController extends GridController implements GridDataLocator {
 
     private MunicipioGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public MunicipioGridController() {
         grid = new MunicipioGrid(this);
@@ -112,5 +111,4 @@ public class MunicipioGridController extends GridController implements GridDataL
 
         return ClientUtils.getData(acaoServidor, pars);
     }
-
 }

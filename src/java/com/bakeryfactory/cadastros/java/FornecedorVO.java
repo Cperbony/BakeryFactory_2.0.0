@@ -23,13 +23,10 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.compras.java.CompraCotacaoDetalheVO;
-import com.bakeryfactory.compras.java.CompraFornecedorCotacaoVO;
+import com.bakeryfactory.contabilidade.java.ContabilContaVO;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,7 +34,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,14 +57,14 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date desde;
     @Column(name = "OPTANTE_SIMPLES_NACIONAL")
-    private Character optanteSimplesNacional;
+    private String optanteSimplesNacional;
     @Column(name = "LOCALIZACAO")
-    private Character localizacao;
+    private String localizacao;
     @Column(name = "DATA_CADASTRO")
     @Temporal(TemporalType.DATE)
     private Date dataCadastro;
     @Column(name = "SOFRE_RETENCAO")
-    private Character sofreRetencao;
+    private String sofreRetencao;
     @Column(name = "CHEQUE_NOMINAL_A")
     private String chequeNominalA;
     @Column(name = "OBSERVACAO")
@@ -78,22 +74,23 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     @Column(name = "PRAZO_MEDIO_ENTREGA")
     private Integer prazoMedioEntrega;
     @Column(name = "GERA_FATURAMENTO")
-    private Character geraFaturamento;
+    private String geraFaturamento;
     @Column(name = "NUM_DIAS_PRIMEIRO_VENCIMENTO")
-    private Integer numeroDiasPrimeiroVenc;
+    private Integer numDiasPrimeiroVenc;
     @Column(name = "NUM_DIAS_INTERVALO")
-    private Integer numeroDiasIntervalo;
+    private Integer numDiasIntervalo;
     @Column(name = "QUANTIDADE_PARCELAS")
     private Integer quantidadeParcelas;
     @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
     private String classificacaoContabilConta;
     
+    /*
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor")
     private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
     
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedor")
     private List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao;
-    
+    */
     @JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private AtividadeForCliVO atividadeForCli;
@@ -105,6 +102,10 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SituacaoForCliVO situacaoForCli;
+    
+    @JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
+    private ContabilContaVO contabilConta;
 
     public FornecedorVO() {
     }
@@ -129,19 +130,19 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
         this.desde = desde;
     }
 
-    public Character getOptanteSimplesNacional() {
+    public String getOptanteSimplesNacional() {
         return optanteSimplesNacional;
     }
 
-    public void setOptanteSimplesNacional(Character optanteSimplesNacional) {
+    public void setOptanteSimplesNacional(String optanteSimplesNacional) {
         this.optanteSimplesNacional = optanteSimplesNacional;
     }
 
-    public Character getLocalizacao() {
+    public String getLocalizacao() {
         return localizacao;
     }
 
-    public void setLocalizacao(Character localizacao) {
+    public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
     }
 
@@ -153,11 +154,11 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-    public Character getSofreRetencao() {
+    public String getSofreRetencao() {
         return sofreRetencao;
     }
 
-    public void setSofreRetencao(Character sofreRetencao) {
+    public void setSofreRetencao(String sofreRetencao) {
         this.sofreRetencao = sofreRetencao;
     }
 
@@ -193,28 +194,28 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
         this.prazoMedioEntrega = prazoMedioEntrega;
     }
 
-    public Character getGeraFaturamento() {
+    public String getGeraFaturamento() {
         return geraFaturamento;
     }
 
-    public void setGeraFaturamento(Character geraFaturamento) {
+    public void setGeraFaturamento(String geraFaturamento) {
         this.geraFaturamento = geraFaturamento;
     }
 
-    public Integer getNumeroDiasPrimeiroVenc() {
-        return numeroDiasPrimeiroVenc;
+    public Integer getNumDiasPrimeiroVenc() {
+        return numDiasPrimeiroVenc;
     }
 
-    public void setNumeroDiasPrimeiroVenc(Integer numeroDiasPrimeiroVenc) {
-        this.numeroDiasPrimeiroVenc = numeroDiasPrimeiroVenc;
+    public void setNumDiasPrimeiroVenc(Integer numDiasPrimeiroVenc) {
+        this.numDiasPrimeiroVenc = numDiasPrimeiroVenc;
     }
 
-    public Integer getNumeroDiasIntervalo() {
-        return numeroDiasIntervalo;
+    public Integer getNumDiasIntervalo() {
+        return numDiasIntervalo;
     }
 
-    public void setNumeroDiasIntervalo(Integer numeroDiasIntervalo) {
-        this.numeroDiasIntervalo = numeroDiasIntervalo;
+    public void setNumDiasIntervalo(Integer numDiasIntervalo) {
+        this.numDiasIntervalo = numDiasIntervalo;
     }
 
     public Integer getQuantidadeParcelas() {
@@ -232,7 +233,9 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     public void setClassificacaoContabilConta(String classificacaoContabilConta) {
         this.classificacaoContabilConta = classificacaoContabilConta;
     }
-
+/*
+    
+ 
     public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
         return listaCompraCotacaoDetalhe;
     }
@@ -248,7 +251,7 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     public void setListaCompraFornecedorCotacao(List<CompraFornecedorCotacaoVO> listaCompraFornecedorCotacao) {
         this.listaCompraFornecedorCotacao = listaCompraFornecedorCotacao;
     }
-
+   */
     public AtividadeForCliVO getAtividadeForCli() {
         return atividadeForCli;
     }
@@ -272,6 +275,16 @@ public class FornecedorVO extends ValueObjectImpl implements Serializable {
     public void setSituacaoForCli(SituacaoForCliVO situacaoForCli) {
         this.situacaoForCli = situacaoForCli;
     }
+
+    public ContabilContaVO getContabilConta() {
+        return contabilConta;
+    }
+
+    public void setContabilConta(ContabilContaVO contabilConta) {
+        this.contabilConta = contabilConta;
+    }
+    
+    
 
     @Override
     public int hashCode() {

@@ -25,29 +25,16 @@ package com.bakeryfactory.padrao.cliente;
 
 import com.bakeryfactory.cadastros.java.UsuarioVO;
 import com.bakeryfactory.padrao.java.Biblioteca;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import java.util.*;
+import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import org.openswing.swing.domains.java.Domain;
-import org.openswing.swing.internationalization.java.Language;
-import org.openswing.swing.internationalization.java.XMLResourcesFactory;
-import org.openswing.swing.mdi.client.ClientFacade;
-import org.openswing.swing.mdi.client.Clock;
-import org.openswing.swing.mdi.client.GenericStatusPanel;
-import org.openswing.swing.mdi.client.MDIController;
-import org.openswing.swing.mdi.client.MDIFrame;
-import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.TextResponse;
-import org.openswing.swing.message.receive.java.VOResponse;
-import org.openswing.swing.permissions.client.LoginController;
-import org.openswing.swing.permissions.client.LoginDialog;
-import org.openswing.swing.permissions.java.ButtonsAuthorizations;
-import org.openswing.swing.util.client.ClientSettings;
-import org.openswing.swing.util.client.ClientUtils;
-import org.openswing.swing.util.client.HessianObjectSender;
+import org.openswing.swing.internationalization.java.*;
+import org.openswing.swing.mdi.client.*;
+import org.openswing.swing.message.receive.java.*;
+import org.openswing.swing.permissions.client.*;
+import org.openswing.swing.permissions.java.*;
+import org.openswing.swing.util.client.*;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
@@ -56,12 +43,16 @@ import org.openswing.swing.util.client.HessianObjectSender;
 public class Menu implements MDIController, LoginController {
 
     private Fachada fachadaCliente = null;
-    private Hashtable domains = new Hashtable();
+    private Hashtable domains;
     private String nomeUsuario = null;
+    private ClientSettings clientSettings = null;
+    private Hashtable xmlFiles = null;
+    private ButtonsAuthorizations buttonsAuthorizations = null;
 
     public Menu() {
+        this.domains = new Hashtable();
         ClientUtils.setObjectSender(new HessianObjectSender());
-        fachadaCliente = new Fachada();
+        this.fachadaCliente = new Fachada();
         System.setProperty("SERVERURL", System.getProperty("jnlp.SERVERURL"));
         LoginDialog d = new LoginDialog(null, false, this);
     }
@@ -71,13 +62,12 @@ public class Menu implements MDIController, LoginController {
      * @return clientFacade, invoked by the MDI Frame tree/menu
      */
     public ClientFacade getClientFacade() {
-        return (ClientFacade) fachadaCliente;
+        return fachadaCliente;
     }
 
     /**
      * Method used to destroy application.
      */
-    
     public void stopApplication() {
         ClientUtils.getData("closeApplication", Boolean.TRUE);
         System.exit(0);
@@ -88,7 +78,6 @@ public class Menu implements MDIController, LoginController {
      *
      * @return <code>true</code> if application functions must be viewed inside a tree panel of MDI Frame, <code>false</code> no tree is viewed
      */
-    
     public boolean viewFunctionsInTreePanel() {
         return true;
     }
@@ -98,7 +87,6 @@ public class Menu implements MDIController, LoginController {
      *
      * @return <code>true</code> if application functions must be viewed in the menubar of MDI Frame, <code>false</code> otherwise
      */
-    
     public boolean viewFunctionsInMenuBar() {
         return true;
     }
@@ -106,7 +94,6 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return <code>true</code> if the MDI frame must show a login menu in the menubar, <code>false</code> no login menu item will be added
      */
-    
     public boolean viewLoginInMenuBar() {
         return true;
     }
@@ -114,12 +101,10 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return application title
      */
-    
     public String getMDIFrameTitle() {
-        return "Bakery Factory - Controle de Produção de Panificadora";
+        return "Bakery Factory - Controle de Produção para Panificadora";
     }
 
-    
     public String getAboutText() {
         return "Aplicação: Bakery Factory\n"
                 + "\n"
@@ -151,7 +136,6 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return image name to view in the about dialog window
      */
-    
     public String getAboutImage() {
         return "about.jpg";
     }
@@ -160,7 +144,6 @@ public class Menu implements MDIController, LoginController {
      * @param parentFrame parent frame
      * @return a dialog window to logon the application; the method can return null if viewLoginInMenuBar returns false
      */
-    
     public JDialog viewLoginDialog(JFrame parentFrame) {
         JDialog d = new LoginDialog(parentFrame, true, this);
         return d;
@@ -169,7 +152,6 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return maximum number of failed login
      */
-    
     public int getMaxAttempts() {
         return 3;
     }
@@ -181,7 +163,6 @@ public class Menu implements MDIController, LoginController {
      * @return <code>true</code> if user is correcly authenticated, <code>false</code> otherwise
      * @throws java.lang.Exception
      */
-
     public boolean authenticateUser(Map loginInfo) throws Exception {
         nomeUsuario = (String) loginInfo.get("username");
         String password = (String) loginInfo.get("password");
@@ -189,14 +170,15 @@ public class Menu implements MDIController, LoginController {
         if (nomeUsuario == null || password == null) {
             return false;
         }
-        nomeUsuario = nomeUsuario.toLowerCase();
-        password = Biblioteca.MD5String(nomeUsuario + password);
 
+        nomeUsuario = nomeUsuario.toLowerCase();
+        password =  Biblioteca.MD5String(nomeUsuario + password);
+        
         loginInfo.put("username", nomeUsuario);
         loginInfo.put("password", password);
 
         Response response = ClientUtils.getData("login", new String[]{nomeUsuario, password});
-        
+
         if (response.isError()) {
             throw new Exception(response.getErrorMessage());
         }
@@ -212,10 +194,10 @@ public class Menu implements MDIController, LoginController {
         Container.setContainer(usuario);
 
         response = ClientUtils.getData("getButtonAuthorizations", usuario);
-        
         if (response.isError()) {
             throw new Exception(response.getErrorMessage());
         }
+
         ButtonsAuthorizations buttonsAuthorizations = (ButtonsAuthorizations) ((VOResponse) response).getVo();
 
         Hashtable xmlFiles = new Hashtable();
@@ -224,14 +206,17 @@ public class Menu implements MDIController, LoginController {
         xmlFiles.put("ES", "Resources_es.xml");
         xmlFiles.put("PT_BR", "Resources_ptBR.xml");
 
-        ClientSettings clientSettings = new ClientSettings(new XMLResourcesFactory(xmlFiles, true),
-                domains, buttonsAuthorizations, false);
+        ClientSettings clientSettings = new ClientSettings(
+                new XMLResourcesFactory(xmlFiles, true),
+                domains,
+                buttonsAuthorizations,
+                false);
 
         ClientSettings.PERC_TREE_FOLDER = "folder3.gif";
         ClientSettings.BACKGROUND = "background4.jpg";
         ClientSettings.TREE_BACK = "treeback2.jpg";
         ClientSettings.FILTER_PANEL_ON_GRID = true;
-        ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "com.birosoft.Liquid.LiquidLookAndFeel";
+        ClientSettings.LOOK_AND_FEEL_CLASS_NAME = "com.birosoft.liquid.LiquidLookAndFeel";
         com.birosoft.liquid.LiquidLookAndFeel.setLiquidDecorations(true);
         ClientSettings.MAX_NR_OF_LOOPS_IN_ANALYZE_VO = 3;
 
@@ -240,12 +225,16 @@ public class Menu implements MDIController, LoginController {
         return true;
     }
 
+
+    public static void main(String[] argv) {
+        new Menu();
+    }
+
     /**
      * Method called after MDI creation.
      *
      * @param frame
      */
-    
     public void afterMDIcreation(MDIFrame frame) {
         GenericStatusPanel userPanel = new GenericStatusPanel();
         userPanel.setColumns(12);
@@ -257,12 +246,10 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return @see JFrame getExtendedState method
      */
-    
     public int getExtendedState() {
         return JFrame.MAXIMIZED_BOTH;
     }
 
-    
     public void loginSuccessful(Map loginInfo) {
         //Domain tipo de pessoa, que aperecerá nos combos da aplicação
         //PESSOA E CORRELATOS
@@ -388,6 +375,20 @@ public class Menu implements MDIController, LoginController {
         Domain dominioProdutoIppt = new Domain("produtoIppt");
         dominioProdutoIppt.addDomainPair("P", "Próprio");
         dominioProdutoIppt.addDomainPair("T", "Terceiro");
+        
+        Domain dominioProdutoTipoItemSped = new Domain("produtoTipoItemSped");
+        dominioProdutoTipoItemSped.addDomainPair("00", "Mercadoria para Revenda");
+        dominioProdutoTipoItemSped.addDomainPair("01", "Matéria-Prima");
+        dominioProdutoTipoItemSped.addDomainPair("02", "Embalagem");
+        dominioProdutoTipoItemSped.addDomainPair("03", "Produto em Processo");
+        dominioProdutoTipoItemSped.addDomainPair("04", "Produto Acabado");
+        dominioProdutoTipoItemSped.addDomainPair("05", "Subproduto");
+        dominioProdutoTipoItemSped.addDomainPair("06", "Produto Intermediário");
+        dominioProdutoTipoItemSped.addDomainPair("07", "Material de Uso e Consumo");
+        dominioProdutoTipoItemSped.addDomainPair("08", "Ativo Imobilizado");
+        dominioProdutoTipoItemSped.addDomainPair("09", "Serviços");
+        dominioProdutoTipoItemSped.addDomainPair("10", "Outros Insumos");
+        dominioProdutoTipoItemSped.addDomainPair("99", "Outras");
 
         //Empresa
         Domain dominioEmpresaTipo = new Domain("empresaTipo");
@@ -461,6 +462,7 @@ public class Menu implements MDIController, LoginController {
         domains.put(dominioProdutoClasse.getDomainId(), dominioProdutoClasse);
         domains.put(dominioProdutoIat.getDomainId(), dominioProdutoIat);
         domains.put(dominioProdutoIppt.getDomainId(), dominioProdutoIppt);
+        domains.put(dominioProdutoTipoItemSped.getDomainId(), dominioProdutoTipoItemSped);
         domains.put(dominioEmpresaTipo.getDomainId(), dominioEmpresaTipo);
         domains.put(dominioClienteTipoFrete.getDomainId(), dominioClienteTipoFrete);
         domains.put(dominioClienteFormaDesconto.getDomainId(), dominioClienteFormaDesconto);
@@ -480,7 +482,6 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return <code>true</code> if the MDI frame must show a change language menu in the menubar, <code>false</code> no change language menu item will be added
      */
-    
     public boolean viewChangeLanguageInMenuBar() {
         return true;
     }
@@ -488,7 +489,6 @@ public class Menu implements MDIController, LoginController {
     /**
      * @return list of languages supported by the application
      */
-    
     public ArrayList getLanguages() {
         ArrayList list = new ArrayList();
         list.add(new Language("EN", "English"));
@@ -497,29 +497,20 @@ public class Menu implements MDIController, LoginController {
         list.add(new Language("PT_BR", "Português do Brasil"));
 
         return list;
-
     }
 
     /**
      * @return application functions (ApplicationFunction objects), organized as a tree
      */
-    
     public DefaultTreeModel getApplicationFunctions() {
         return (DefaultTreeModel) ((VOResponse) ClientUtils.getData("getFunctionAuthorizations", Container.getContainer().get("usuario"))).getVo();
     }
 
-    
     public boolean viewFileMenu() {
         return true;
     }
 
-    
     public boolean viewOpenedWindowIcons() {
         return true;
     }
-
-    public static void main(String[] argv) {
-        new Menu();
-    }
-
 }

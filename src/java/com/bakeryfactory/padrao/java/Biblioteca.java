@@ -38,7 +38,6 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 import java.security.Key;
 import java.security.KeyStore;
-import java.security.KeyStoreException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
@@ -48,7 +47,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.InputMismatchException;
 import javax.swing.JFormattedTextField;
 
 /**
@@ -61,6 +59,7 @@ public class Biblioteca {
 
     public JFormattedTextField.AbstractFormatter formatoCpf() {
         return new JFormattedTextField.AbstractFormatter() {
+
             @Override
             public Object stringToValue(String text) throws ParseException {
                 String str = text.replace(".", "");
@@ -71,7 +70,7 @@ public class Biblioteca {
             @Override
             public String valueToString(Object value) throws ParseException {
                 String str = (String) value;
-                validaCPF(str);
+                //TODO: implementar código para validação do CPF
                 if (str.length() < 11) {
                     return null;
                 }
@@ -80,49 +79,11 @@ public class Biblioteca {
                 String strFormatado = str.substring(0, 3) + "."
                         + str.substring(3, 6) + "."
                         + str.substring(6, 9) + "-"
-                        + str.substring(9, 1);
+                        + str.substring(9, 11);
+
                 return strFormatado;
             }
         };
-
-    }
-
-    @SuppressWarnings("empty-statement")
-    public static boolean validaCPF(String strCpf) {
-        int d1, d2;
-        int digito1, digito2, resto;
-        int digitoCPF;
-        String nDigResult;
-
-        d1 = d2 = 0;
-        digito1 = digito2 = resto = 0;
-
-        for (int nCount = 1; nCount < strCpf.length() - 1; nCount++) {
-            digitoCPF = Integer.valueOf(strCpf.substring(nCount - 1, nCount));
-            d1 = d1 + (11 - nCount) * digitoCPF;
-            d2 = d2 + (12 - nCount) * digitoCPF;
-        };
-
-        resto = (d1 % 11);
-
-        if (resto < 2) {
-            digito1 = 0;
-        } else {
-            digito1 = 11 - resto;
-        }
-        d2 += 2 * digito1;
-        resto = (d2 % 11);
-
-        if (resto < 2) {
-            digito2 = 0;
-        } else {
-            digito2 = 11 - resto;
-        }
-
-        String nDigVerific = strCpf.substring(strCpf.length() - 2, strCpf.length());
-        nDigResult = String.valueOf(digito1) + String.valueOf(digito2);
-
-        return nDigVerific.equals(nDigResult);
     }
 
     public JFormattedTextField.AbstractFormatter formatoCnpj() {
@@ -139,7 +100,7 @@ public class Biblioteca {
             @Override
             public String valueToString(Object value) throws ParseException {
                 String str = (String) value;
-                cnpjValido(str);
+                //TODO: implementar código para validação do CNPJ
                 if (str.length() < 14) {
                     return null;
                 }
@@ -150,101 +111,35 @@ public class Biblioteca {
                         + str.substring(2, 5) + "."
                         + str.substring(5, 8) + "/"
                         + str.substring(8, 12) + "-"
-                        + str.substring(12, 14); //Exemplo: 10.793.118/0001-78
+                        + str.substring(12, 14);//10.793.118/0001-78
+
                 return strFormatado;
             }
         };
-
-    }
-
-    public static boolean cnpjValido(String CNPJ) {
-
-// considera-se erro CNPJ's formados por uma sequencia de numeros iguais
-        if (CNPJ.equals("00000000000000") || CNPJ.equals("11111111111111")
-                || CNPJ.equals("22222222222222") || CNPJ.equals("33333333333333")
-                || CNPJ.equals("44444444444444") || CNPJ.equals("55555555555555")
-                || CNPJ.equals("66666666666666") || CNPJ.equals("77777777777777")
-                || CNPJ.equals("88888888888888") || CNPJ.equals("99999999999999")
-                || (CNPJ.length() != 14)) {
-            return (false);
-        }
-
-        char dig13, dig14;
-        int sm, i, r, num, peso;
-
-        try {
-// Calculo do 1o. Digito Verificador
-            sm = 0;
-            peso = 2;
-            for (i = 11; i >= 0; i--) {
-// converte o i-ésimo caractere do CNPJ em um número:
-// por exemplo, transforma o caractere '0' no inteiro 0
-// (48 eh a posição de '0' na tabela ASCII)
-                num = (int) (CNPJ.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
-
-            r = sm % 11;
-            if ((r == 0) || (r == 1)) {
-                dig13 = '0';
-            } else {
-                dig13 = (char) ((11 - r) + 48);
-            }
-
-// Calculo do 2o. Digito Verificador
-            sm = 0;
-            peso = 2;
-            for (i = 12; i >= 0; i--) {
-                num = (int) (CNPJ.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso + 1;
-                if (peso == 10) {
-                    peso = 2;
-                }
-            }
-
-            r = sm % 11;
-            if ((r == 0) || (r == 1)) {
-                dig14 = '0';
-            } else {
-                dig14 = (char) ((11 - r) + 48);
-            }
-
-// Verifica se os dígitos calculados conferem com os dígitos informados.
-            if ((dig13 == CNPJ.charAt(12)) && (dig14 == CNPJ.charAt(13))) {
-                return (true);
-            } else {
-                return (false);
-            }
-        } catch (InputMismatchException erro) {
-            return (false);
-        }
     }
 
     public static void copiaArquivo(String origem, String destino) throws Exception {
         FileInputStream in = new FileInputStream(origem);
-        try (FileOutputStream out = new FileOutputStream(destino)) {
-            byte[] bb = new byte[in.available()];
-            in.read(bb);
-            out.write(bb);
-        }
+        FileOutputStream out = new FileOutputStream(destino);
+        byte[] bb = new byte[in.available()];
+        in.read(bb);
+        out.write(bb);
+        out.close();
     }
 
-    public static String MD5Arquivo(String nomeArquivo) {
+    public static String md5Arquivo(String nomeArquivo) {
         MessageDigest digest = null;
         try {
             digest = MessageDigest.getInstance("MD5");
         } catch (NoSuchAlgorithmException ex) {
+            ex.printStackTrace();
         }
         File f = new File(nomeArquivo);
         InputStream is = null;
         try {
             is = new FileInputStream(f);
         } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
         }
         byte[] buffer = new byte[8192];
         int read = 0;
@@ -257,10 +152,12 @@ public class Biblioteca {
             String output = bigInt.toString(16);
             return output;
         } catch (IOException e) {
+            e.printStackTrace();
         } finally {
             try {
                 is.close();
             } catch (IOException e) {
+                e.printStackTrace();
             }
         }
         return null;
@@ -292,29 +189,28 @@ public class Biblioteca {
         return buf.toString();
     }
 
-    public static byte[] geraAssinaturaArquivo(byte[] arquivoAssinar, File arquivoCertificado, char[] senha) throws KeyStoreException {
+    public static byte[] geraAssinaturaArquivo(byte[] arquivoAssinar, File arquivoCertificado, char[] senha) {
         try {
-            //carrega o Keystore
-            KeyStore ks = KeyStore.getInstance("PKC12");
+            //Carrega o KeyStore
+            KeyStore ks = KeyStore.getInstance("PKCS12");
             InputStream isCertificado = new FileInputStream(arquivoCertificado);
             ks.load(isCertificado, senha);
 
-            //pega a chave Privada
+            //pega a chave privada
             Key key = ks.getKey(ks.aliases().nextElement(), senha);
             PrivateKey privateKey = (PrivateKey) key;
 
-            //cria o objeto Signature informando o algoritimo de assinatura
+            //cria o objeto Signature infomando o algoritmo de assinatura
             //http://docs.oracle.com/javase/6/docs/technotes/guides/security/StandardNames.html
             Signature sign = Signature.getInstance("SHA1withRSA");
             sign.initSign(privateKey);
 
             sign.update(arquivoAssinar);
 
-            //gera a Assinatura
+            //gera a assinatura
             byte[] assinatura = sign.sign();
 
             return assinatura;
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -394,12 +290,10 @@ public class Biblioteca {
                 ? "0" + dataC.get(Calendar.HOUR_OF_DAY)
                 : "" + dataC.get(Calendar.HOUR_OF_DAY);
         resultado += ":";
-
         resultado += dataC.get(Calendar.MINUTE) < 10
                 ? "0" + dataC.get(Calendar.MINUTE)
                 : "" + dataC.get(Calendar.MINUTE);
         resultado += ":";
-
         resultado += dataC.get(Calendar.SECOND) < 10
                 ? "0" + dataC.get(Calendar.SECOND)
                 : "" + dataC.get(Calendar.SECOND);
@@ -418,21 +312,8 @@ public class Biblioteca {
         dataC.set(Calendar.HOUR_OF_DAY, Integer.valueOf(horas.substring(0, 2)));
         dataC.set(Calendar.MINUTE, Integer.valueOf(horas.substring(3, 5)));
         dataC.set(Calendar.SECOND, Integer.valueOf(horas.substring(6, 8)));
+
         return dataC;
-    }
-
-    /**
-     * Retorna o mes e ano no formato MM/AAAA
-     *
-     * @param dataA data
-     * @return String
-     */
-    public static String mesAno(Calendar dataA) throws Exception {
-        return new SimpleDateFormat("MM/yyyy").format(dataA.getTime());
-    }
-
-    public static String primeiraMaiuscula(String texto) {
-        return Character.toUpperCase(texto.charAt(0)) + texto.substring(1);
     }
 
     /**
@@ -442,24 +323,24 @@ public class Biblioteca {
      * @return byte[]
      */
     public static byte[] getBytesFromFile(File file) throws Exception {
-        //Converte o arquivo em array de bytes 
+        //converte o arquio em array de bytes
         InputStream is = new FileInputStream(file);
-        //Pega o tamanho do arquivo
+        // Get the size of the file
         long length = file.length();
-        //Cria o array de byte para armazenar a data
+        // Create the byte array to hold the data
         byte[] documento = new byte[(int) length];
-        //Ler nos bytes
+        // Read in the bytes
         int offset = 0;
         int numRead = 0;
         while (offset < documento.length
                 && (numRead = is.read(documento, offset, documento.length - offset)) >= 0) {
             offset += numRead;
         }
-        //Certificar que todos os bytes foram lidos
+        // Ensure all the bytes have been read in
         if (offset < documento.length) {
-            throw new IOException("Não pode completar the ler o arquivo " + file.getName());
+            throw new IOException("Não foi possível efetuar a leitura completa do arquivo " + file.getName());
         }
-        //Fecha o InputStream e retorna os bytes
+        // Close the input stream and return bytes
         is.close();
         return documento;
     }
@@ -477,100 +358,10 @@ public class Biblioteca {
         out.close();
     }
 
-    public static BigDecimal multiplica(BigDecimal valor1, BigDecimal valor2) {
-        BigDecimal resultado = valor1.multiply(valor2, MathContext.DECIMAL64);
-        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
-        return resultado;
-    }
-
-    public static BigDecimal divide(BigDecimal valor1, BigDecimal valor2) {
-        BigDecimal resultado = valor1.divide(valor2, MathContext.DECIMAL64);
-        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
-        return resultado;
-    }
-
-    public static BigDecimal subtrai(BigDecimal valor1, BigDecimal valor2) {
-        BigDecimal resultado = valor1.subtract(valor2, MathContext.DECIMAL64);
-        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
-        return resultado;
-    }
-
-    public static BigDecimal soma(BigDecimal valor1, BigDecimal valor2) {
-        BigDecimal resultado = valor1.add(valor2, MathContext.DECIMAL64);
-        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
-        return resultado;
-    }
-    
-    /**
-     * Verifica se o cpf informado e valido
-     *
-     * @param cpf CPF a validar
-     * @return  boolean
-     *
-     */
-    public static boolean cpfValido(String CPF) {
-        if (CPF.equals("00000000000") || CPF.equals("11111111111")
-                || CPF.equals("22222222222") || CPF.equals("33333333333")
-                || CPF.equals("44444444444") || CPF.equals("55555555555")
-                || CPF.equals("66666666666") || CPF.equals("77777777777")
-                || CPF.equals("88888888888") || CPF.equals("99999999999")
-                || (CPF.length() != 11)) {
-            return (false);
-        }
-
-        char dig10, dig11;
-        int sm, i, r, num, peso;
-
-        try {
-            // Calculo do 1o. Digito Verificador
-            sm = 0;
-            peso = 10;
-            for (i = 0; i < 9; i++) {
-                // converte o i-esimo caractere do CPF em um numero:
-                // por exemplo, transforma o caractere '0' no inteiro 0
-                // (48 eh a posicao de '0' na tabela ASCII)
-                num = (int) (CPF.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11)) {
-                dig10 = '0';
-            } else {
-                dig10 = (char) (r + 48); // converte no respectivo caractere numerico
-            }
-            // Calculo do 2o. Digito Verificador
-            sm = 0;
-            peso = 11;
-            for (i = 0; i < 10; i++) {
-                num = (int) (CPF.charAt(i) - 48);
-                sm = sm + (num * peso);
-                peso = peso - 1;
-            }
-
-            r = 11 - (sm % 11);
-            if ((r == 10) || (r == 11)) {
-                dig11 = '0';
-            } else {
-                dig11 = (char) (r + 48);
-            }
-
-            // Verifica se os digitos calculados conferem com os digitos informados.
-            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
     public static Object nullToEmpty(Object objeto) {
         Object atributo;
         try {
-            Field field[] = objeto.getClass().getDeclaredFields();
+            Field fields[] = objeto.getClass().getDeclaredFields();
             for (Field f : fields) {
 
                 if (!f.getName().equals("serialVersionUID")) {
@@ -635,10 +426,186 @@ public class Biblioteca {
                     }
                 }
             }
-        } catch (Exception e) {
-            //e.printStackTrace();
+        } catch (Exception ex) {
+            //ex.printStackTrace();
         }
         return objeto;
     }
 
+    public static String primeiraMaiuscula(String texto) {
+        return Character.toUpperCase(texto.charAt(0)) + texto.substring(1);
+    }
+
+    /**
+     * Retorna o mes e ano no formato MM/AAAA
+     *
+     * @param dataA data
+     * @return String
+     */
+    public static String mesAno(Calendar dataA) throws Exception {
+        return new SimpleDateFormat("MM/yyyy").format(dataA.getTime());
+    }
+
+    public static BigDecimal multiplica(BigDecimal valor1, BigDecimal valor2) {
+        BigDecimal resultado = valor1.multiply(valor2, MathContext.DECIMAL64);
+        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
+        return resultado;
+    }
+
+    public static BigDecimal divide(BigDecimal valor1, BigDecimal valor2) {
+        BigDecimal resultado = valor1.divide(valor2, MathContext.DECIMAL64);
+        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
+        return resultado;
+    }
+
+    public static BigDecimal subtrai(BigDecimal valor1, BigDecimal valor2) {
+        BigDecimal resultado = valor1.subtract(valor2, MathContext.DECIMAL64);
+        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
+        return resultado;
+    }
+
+    public static BigDecimal soma(BigDecimal valor1, BigDecimal valor2) {
+        BigDecimal resultado = valor1.add(valor2, MathContext.DECIMAL64);
+        resultado = resultado.setScale(Constantes.DECIMAIS_VALOR, RoundingMode.DOWN);
+        return resultado;
+    }
+
+    /**
+     * Verifica se o cpf informado e valido
+     *
+     * @param cpf CPF a validar
+     * @return boolean
+     *
+     */
+    public static boolean cpfValido(String CPF) {
+        if (CPF.equals("00000000000") || CPF.equals("11111111111")
+                || CPF.equals("22222222222") || CPF.equals("33333333333")
+                || CPF.equals("44444444444") || CPF.equals("55555555555")
+                || CPF.equals("66666666666") || CPF.equals("77777777777")
+                || CPF.equals("88888888888") || CPF.equals("99999999999")
+                || (CPF.length() != 11)) {
+            return (false);
+        }
+
+        char dig10, dig11;
+        int sm, i, r, num, peso;
+
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 10;
+            for (i = 0; i < 9; i++) {
+                // converte o i-esimo caractere do CPF em um numero:
+                // por exemplo, transforma o caractere '0' no inteiro 0
+                // (48 eh a posicao de '0' na tabela ASCII)
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig10 = '0';
+            } else {
+                dig10 = (char) (r + 48); // converte no respectivo caractere numerico
+            }
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 11;
+            for (i = 0; i < 10; i++) {
+                num = (int) (CPF.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso - 1;
+            }
+
+            r = 11 - (sm % 11);
+            if ((r == 10) || (r == 11)) {
+                dig11 = '0';
+            } else {
+                dig11 = (char) (r + 48);
+            }
+
+            // Verifica se os digitos calculados conferem com os digitos informados.
+            if ((dig10 == CPF.charAt(9)) && (dig11 == CPF.charAt(10))) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    /**
+     * Verifica se o cnpj informado e valido
+     *
+     * @param cnpj CNPJ a validar
+     * @return boolean
+     *
+     */
+    public static boolean cnpjValido(String cnpj) {
+        if (cnpj.equals("00000000000000") || cnpj.equals("11111111111111")
+                || cnpj.equals("22222222222222") || cnpj.equals("33333333333333")
+                || cnpj.equals("44444444444444") || cnpj.equals("55555555555555")
+                || cnpj.equals("66666666666666") || cnpj.equals("77777777777777")
+                || cnpj.equals("88888888888888") || cnpj.equals("99999999999999")
+                || (cnpj.length() != 14)) {
+            return (false);
+        }
+
+        char dig13, dig14;
+        int sm, i, r, num, peso;
+
+        try {
+            // Calculo do 1o. Digito Verificador
+            sm = 0;
+            peso = 2;
+            for (i = 11; i >= 0; i--) {
+                // converte o i-ésimo caractere do CNPJ em um número:
+                // por exemplo, transforma o caractere '0' no inteiro 0
+                // (48 eh a posição de '0' na tabela ASCII)
+                num = (int) (cnpj.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso + 1;
+                if (peso == 10) {
+                    peso = 2;
+                }
+            }
+
+            r = sm % 11;
+            if ((r == 0) || (r == 1)) {
+                dig13 = '0';
+            } else {
+                dig13 = (char) ((11 - r) + 48);
+            }
+
+            // Calculo do 2o. Digito Verificador
+            sm = 0;
+            peso = 2;
+            for (i = 12; i >= 0; i--) {
+                num = (int) (cnpj.charAt(i) - 48);
+                sm = sm + (num * peso);
+                peso = peso + 1;
+                if (peso == 10) {
+                    peso = 2;
+                }
+            }
+
+            r = sm % 11;
+            if ((r == 0) || (r == 1)) {
+                dig14 = '0';
+            } else {
+                dig14 = (char) ((11 - r) + 48);
+            }
+
+            // Verifica se os dígitos calculados conferem com os dígitos informados.
+            if ((dig13 == cnpj.charAt(12)) && (dig14 == cnpj.charAt(13))) {
+                return (true);
+            } else {
+                return (false);
+            }
+        } catch (Exception e) {
+            return (false);
+        }
+    }
 }

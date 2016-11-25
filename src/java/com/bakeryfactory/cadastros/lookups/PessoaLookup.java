@@ -33,7 +33,7 @@ import org.openswing.swing.lookup.client.LookupController;
  */
 public class PessoaLookup extends LookupController{
 
-    private LookupController pessoaController;
+    private final LookupController pessoaController;
 
     public PessoaLookup() {
         pessoaController = new LookupController();

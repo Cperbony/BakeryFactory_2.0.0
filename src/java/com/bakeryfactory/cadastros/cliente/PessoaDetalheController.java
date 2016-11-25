@@ -54,12 +54,13 @@ public class PessoaDetalheController extends FormController {
     private PessoaDetalhe pessoaDetalhe = null;
     private String pk = null;
     private PessoaGrid pessoaGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public PessoaDetalheController(PessoaGrid pessoaGrid, String pk) {
         this.pessoaGrid = pessoaGrid;
         this.pk = pk;
         this.acaoServidor = "pessoaDetalheAction";
+        pessoaDetalhe = new PessoaDetalhe(this);
         pessoaDetalhe.setParentFrame(this.pessoaGrid);
         this.pessoaGrid.pushFrame(pessoaDetalhe);
         MDIFrame.add(pessoaDetalhe);
@@ -86,6 +87,7 @@ public class PessoaDetalheController extends FormController {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
 
+    @Override
     public void loadDataCompleted(boolean error) {
         PessoaVO pessoa = (PessoaVO) pessoaDetalhe.getForm1().getVOModel().getValueObject();
         if (pessoa.getTipo().equals("F")) {
@@ -115,16 +117,18 @@ public class PessoaDetalheController extends FormController {
     /**
      * Method called by the Form panel to insert new data.
      *
-     * @param newValueObject value object to save
+     * @param newPersistentObject
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         PessoaVO pessoa = (PessoaVO) newPersistentObject;
         EmpresaVO empresa = (EmpresaVO) Container.getContainer().get("empresa");
 
         if (pessoa.getTipo().equals("F")) {
             if (!pessoaDetalhe.getFormPessoaFisica().save()) {
-                return new ErrorResponse("Erro ao Salvar os dados de Pessoa Física");
+                return new ErrorResponse("Erro ao Salvar os dados da Pessoa Física");
             }
             PessoaFisicaVO pessoaFisica = (PessoaFisicaVO) pessoaDetalhe.getFormPessoaFisica().getVOModel().getValueObject();
             if (!Biblioteca.cpfValido(pessoaFisica.getCpf())) {
@@ -167,6 +171,7 @@ public class PessoaDetalheController extends FormController {
     /**
      * Callback method called after saving SUCCESSFULLY data in INSERT mode.
      */
+    @Override
     public void afterInsertData() {
         pessoaGrid.getGrid1().reloadData();
         JOptionPane.showMessageDialog(pessoaDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
@@ -175,11 +180,17 @@ public class PessoaDetalheController extends FormController {
     /**
      * Callback method invoked on pressing EDIT button to check if edit mode is allowed.
      *
+     * @param form
      * @return <code>true</code> allows to go to EDIT mode, <code>false</code> the mode change is interrupted
      */
+    @Override
     public boolean beforeEditData(Form form) {
         PessoaVO pessoa = (PessoaVO) pessoaDetalhe.getForm1().getVOModel().getValueObject();
-        checarTipoPessoa(pessoa);
+        if (pessoa.getTipo().equals("F")) {
+            pessoaDetalhe.getFormPessoaFisica().setMode(Consts.EDIT);
+        } else {
+            pessoaDetalhe.getFormPessoaJuridica().setMode(Consts.EDIT);
+        }
         return super.beforeEditData(form);
     }
 
@@ -189,7 +200,9 @@ public class PessoaDetalheController extends FormController {
      * @param oldPersistentObject original value object, previous to the changes
      * @param persistentObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         PessoaVO pessoa = (PessoaVO) persistentObject;
 
@@ -230,6 +243,7 @@ public class PessoaDetalheController extends FormController {
     /**
      * Callback method called after saving SUCCESSFULLY data in EDIT mode.
      */
+    @Override
     public void afterEditData() {
         pessoaGrid.getGrid1().reloadData();
         JOptionPane.showMessageDialog(pessoaDetalhe, "Dados Alterados com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
@@ -243,6 +257,7 @@ public class PessoaDetalheController extends FormController {
      * @param newValue new input control value (just edited)
      * @return <code>true</code> if input control value is valid, <code>false</code> otherwise
      */
+    @Override
     public boolean validateControl(String attributeName, Object oldValue, Object newValue) {
         if (attributeName.equals("tipo")) {
             if (newValue.toString().equals("F")) {

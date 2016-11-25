@@ -37,32 +37,27 @@ import org.openswing.swing.util.java.Consts;
  *
  * @author Claudinei Aparecido Perboni <cperbony@gmail.com>
  */
-class PessoaEnderecoGridController extends GridController implements GridDataLocator{
+class PessoaEnderecoGridController extends GridController implements GridDataLocator {
 
-    private PessoaDetalhe pessoaDetalhe;
+    private final PessoaDetalhe pessoaDetalhe;
     private PessoaVO pessoa;
 
     public PessoaEnderecoGridController(PessoaDetalhe pessoaDetalhe) {
         this.pessoaDetalhe = pessoaDetalhe;
     }
-    
-    
+
     @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
-        if(pessoa != null && pessoa.getListaEndereco() != null) {
+        if (pessoa != null && pessoa.getListaEndereco() != null) {
             return new VOListResponse(pessoa.getListaEndereco(), false, pessoa.getListaEndereco().size());
         } else {
             return new VOListResponse();
         }
     }
-    
-    
+
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        if (pessoaDetalhe.getForm1().getMode() == Consts.READONLY) {
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -84,10 +79,7 @@ class PessoaEnderecoGridController extends GridController implements GridDataLoc
      */
     @Override
     public boolean beforeEditGrid(GridControl grid) {
-        if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -110,10 +102,7 @@ class PessoaEnderecoGridController extends GridController implements GridDataLoc
      */
     @Override
     public boolean beforeDeleteGrid(GridControl grid) {
-         if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -122,13 +111,19 @@ class PessoaEnderecoGridController extends GridController implements GridDataLoc
      * @param persistentObjects value objects to delete (related to the currently selected rows)
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      */
+    @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
+    }
+
+    public boolean getFormMode() {
+        if (pessoaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
     }
 
     public void setPessoa(PessoaVO pessoa) {
         this.pessoa = pessoa;
     }
-    
-    
 }

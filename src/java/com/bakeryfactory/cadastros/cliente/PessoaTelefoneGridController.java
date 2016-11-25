@@ -24,32 +24,29 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.PessoaVO;
-import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.Map;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
-import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;
-import org.openswing.swing.util.client.ClientUtils;
 import org.openswing.swing.util.java.Consts;
 
 /**
  *
  * @author Claudinei Aparecido Perboni <cperbony@gmail.com>
  */
-public class PessoaTelefoneGridController extends GridController implements GridDataLocator{
-    
-    private PessoaDetalhe pessoaDetalhe;
+public class PessoaTelefoneGridController extends GridController implements GridDataLocator {
+
+    private final PessoaDetalhe pessoaDetalhe;
     private PessoaVO pessoa;
 
     public PessoaTelefoneGridController(PessoaDetalhe pessoaDetalhe) {
         this.pessoaDetalhe = pessoaDetalhe;
     }
 
-     @Override
+    @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         if (pessoa != null && pessoa.getListaTelefone() != null) {
             return new VOListResponse(pessoa.getListaTelefone(), false, pessoa.getListaTelefone().size());
@@ -60,10 +57,7 @@ public class PessoaTelefoneGridController extends GridController implements Grid
 
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        if (pessoaDetalhe.getForm1().getMode() == Consts.READONLY) {
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -72,6 +66,7 @@ public class PessoaTelefoneGridController extends GridController implements Grid
      * @param rowNumbers row indexes related to the new rows to save
      * @param newValueObjects list of new value objects to save
      * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
@@ -81,14 +76,12 @@ public class PessoaTelefoneGridController extends GridController implements Grid
     /**
      * Callback method invoked on pressing EDIT button.
      *
+     * @param grid
      * @return <code>true</code> allows to go to EDIT mode, <code>false</code> the mode change is interrupted
      */
     @Override
     public boolean beforeEditGrid(GridControl grid) {
-        if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -98,6 +91,7 @@ public class PessoaTelefoneGridController extends GridController implements Grid
      * @param oldPersistentObjects old value objects, previous the changes; it can contains null objects, in case of new inserted rows
      * @param persistentObjects value objects related to the changed/new rows
      * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
     @Override
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
@@ -107,14 +101,12 @@ public class PessoaTelefoneGridController extends GridController implements Grid
     /**
      * Callback method invoked before deleting data when the grid was in READONLY mode (on pressing delete button).
      *
+     * @param grid
      * @return <code>true</code> allows the deleting to continue, <code>false</code> the deleting is interrupted
      */
     @Override
     public boolean beforeDeleteGrid(GridControl grid) {
-         if(pessoaDetalhe.getForm1().getMode() == Consts.READONLY){
-            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
-        }
-        return true;
+        return getFormMode();
     }
 
     /**
@@ -122,7 +114,9 @@ public class PessoaTelefoneGridController extends GridController implements Grid
      *
      * @param persistentObjects value objects to delete (related to the currently selected rows)
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
     }
@@ -130,5 +124,11 @@ public class PessoaTelefoneGridController extends GridController implements Grid
     public void setPessoa(PessoaVO pessoa) {
         this.pessoa = pessoa;
     }
-    
+
+    public boolean getFormMode() {
+        if (pessoaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            pessoaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+    }
 }

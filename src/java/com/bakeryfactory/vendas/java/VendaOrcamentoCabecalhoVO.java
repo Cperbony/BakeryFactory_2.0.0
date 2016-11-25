@@ -43,6 +43,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -110,8 +112,6 @@ public class VendaOrcamentoCabecalhoVO extends ValueObjectImpl implements Serial
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaOrcamentoCabecalho")
-    private List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe;
 
     public VendaOrcamentoCabecalhoVO() {
     }
@@ -278,14 +278,6 @@ public class VendaOrcamentoCabecalhoVO extends ValueObjectImpl implements Serial
 
     public void setVendedor(VendedorVO vendedor) {
         this.vendedor = vendedor;
-    }
-
-    public List<VendaOrcamentoDetalheVO> getListaVendaOrcamentoDetalhe() {
-        return listaVendaOrcamentoDetalhe;
-    }
-
-    public void setListaVendaOrcamentoDetalhe(List<VendaOrcamentoDetalheVO> listaVendaOrcamentoDetalhe) {
-        this.listaVendaOrcamentoDetalhe = listaVendaOrcamentoDetalhe;
     }
 
     @Override

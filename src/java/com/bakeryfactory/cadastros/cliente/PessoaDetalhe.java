@@ -35,15 +35,16 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class PessoaDetalhe extends InternalFrame {
 
-    private PessoaFisicaDetalheController pessoaFisicaController;
-    private PessoaJuridicaDetalheController pessoaJuridicaController;
-    private PessoaContatoGridController contatoController;
-    private PessoaEnderecoGridController enderecoController;
-    private PessoaTelefoneGridController telefoneController;
-    private LookupController estadoCivilController = new LookupController();
+    private final PessoaFisicaDetalheController pessoaFisicaController;
+    private final PessoaJuridicaDetalheController pessoaJuridicaController;
+    private final PessoaContatoGridController contatoController;
+    private final PessoaEnderecoGridController enderecoController;
+    private final PessoaTelefoneGridController telefoneController;
+    private final LookupController estadoCivilController;
 
     /**
      * Creates new form PessoaDetalhe
+     * @param controller
      */
     public PessoaDetalhe(PessoaDetalheController controller) {
         initComponents();
@@ -52,10 +53,16 @@ public class PessoaDetalhe extends InternalFrame {
         formattedTextControlCnpj.setEnabled(false);
 
         try {
-            MaskFormatter mask = new MaskFormatter("##.###.###/###-##");
+            MaskFormatter mask = new MaskFormatter("###.###.###-##");
+            mask.setValidCharacters("0123456789");
+            mask.setValueContainsLiteralCharacters(false);
+            formattedTextControlCpf.setFormatter(mask);
+            
+            mask = new MaskFormatter("##.###.###/####-##");
             mask.setValidCharacters("0123456789");
             mask.setValueContainsLiteralCharacters(false);
             formattedTextControlCnpj.setFormatter(mask);
+            
         } catch (Exception ex) {
             ex.printStackTrace();
         }
@@ -85,19 +92,20 @@ public class PessoaDetalhe extends InternalFrame {
         * Configurações do lookup do estado civil
         */
         
+        estadoCivilController = new LookupController();
         estadoCivilController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.EstadoCivilVO");
         estadoCivilController.addLookup2ParentLink("id", "estadoCivil.id");
         estadoCivilController.addLookup2ParentLink("nome", "estadoCivil.nome");
         estadoCivilController.setHeaderColumnName("id", "ID");
         estadoCivilController.setHeaderColumnName("nome", "Nome");
-        estadoCivilController.setFrameTitle("Importa Estado Civil");
-        
+        estadoCivilController.setFrameTitle("Importa Estado Civil da Pessoa");
+
         estadoCivilController.setVisibleStatusPanel(true);
         estadoCivilController.setVisibleColumn("id", true);
         estadoCivilController.setVisibleColumn("nome", true);
         estadoCivilController.setFramePreferedSize(new Dimension(600, 500));
-        
-        estadoCivilController.setLookupDataLocator(new LookupDataLocatorGenerico(estadoCivilController.getLookupValueObjectClassName()));
+
+        estadoCivilController.setLookupDataLocator(new LookupDataLocatorGenerico((estadoCivilController.getLookupValueObjectClassName())));
         codLookupEstadoCivil.setLookupController(estadoCivilController);
 
     }
@@ -174,10 +182,10 @@ public class PessoaDetalhe extends InternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        jPanel1 = new javax.swing.JPanel();
-        editButton1 = new org.openswing.swing.client.EditButton();
-        reloadButton1 = new org.openswing.swing.client.ReloadButton();
-        saveButton1 = new org.openswing.swing.client.SaveButton();
+        jPanelPessoaDet = new javax.swing.JPanel();
+        editButtonPessoa = new org.openswing.swing.client.EditButton();
+        reloadButtonPessoa = new org.openswing.swing.client.ReloadButton();
+        saveButtonPessoa = new org.openswing.swing.client.SaveButton();
         form1 = new org.openswing.swing.form.client.Form();
         lblNome = new org.openswing.swing.client.LabelControl();
         textControl1 = new org.openswing.swing.client.TextControl();
@@ -189,29 +197,29 @@ public class PessoaDetalhe extends InternalFrame {
         lblSite = new org.openswing.swing.client.LabelControl();
         jPanel2 = new javax.swing.JPanel();
         lblCliente = new org.openswing.swing.client.LabelControl();
-        comboBoxControl1 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlCliente = new org.openswing.swing.client.ComboBoxControl();
         lblFornecedor = new org.openswing.swing.client.LabelControl();
-        comboBoxControl3 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlFornecedor = new org.openswing.swing.client.ComboBoxControl();
         lblColaborador = new org.openswing.swing.client.LabelControl();
-        comboBoxControl4 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlColaborador = new org.openswing.swing.client.ComboBoxControl();
         lblTransportadora = new org.openswing.swing.client.LabelControl();
-        comboBoxControl5 = new org.openswing.swing.client.ComboBoxControl();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel3 = new javax.swing.JPanel();
+        cbControlTransportadora = new org.openswing.swing.client.ComboBoxControl();
+        jTabbedPanePessoas = new javax.swing.JTabbedPane();
+        jPanelPessTipoPessoa = new javax.swing.JPanel();
         formPessoaFisica = new org.openswing.swing.form.client.Form();
         lblEstadoCivil = new org.openswing.swing.client.LabelControl();
         codLookupEstadoCivil = new org.openswing.swing.client.CodLookupControl();
         lblCpf = new org.openswing.swing.client.LabelControl();
         lblDtaNascimento = new org.openswing.swing.client.LabelControl();
-        dateControl8 = new org.openswing.swing.client.DateControl();
+        dateControlDataNasc = new org.openswing.swing.client.DateControl();
         lblSexo = new org.openswing.swing.client.LabelControl();
-        comboBoxControl12 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlSexo = new org.openswing.swing.client.ComboBoxControl();
         lblNaturalidade = new org.openswing.swing.client.LabelControl();
         textControl10 = new org.openswing.swing.client.TextControl();
         lblNacionalidade = new org.openswing.swing.client.LabelControl();
         textControl11 = new org.openswing.swing.client.TextControl();
         lblRaca = new org.openswing.swing.client.LabelControl();
-        comboBoxControl13 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlRaca = new org.openswing.swing.client.ComboBoxControl();
         lblTipoSangue = new org.openswing.swing.client.LabelControl();
         lblNomeMae = new org.openswing.swing.client.LabelControl();
         textControl22 = new org.openswing.swing.client.TextControl();
@@ -229,15 +237,15 @@ public class PessoaDetalhe extends InternalFrame {
         textControl20 = new org.openswing.swing.client.TextControl();
         lblReservistaCategoria = new org.openswing.swing.client.LabelControl();
         numericControl21 = new org.openswing.swing.client.NumericControl();
-        comboBoxControl14 = new org.openswing.swing.client.ComboBoxControl();
+        cbControlTipoSangue = new org.openswing.swing.client.ComboBoxControl();
         jPanel9 = new javax.swing.JPanel();
         lblCnhNumero = new org.openswing.swing.client.LabelControl();
         textControl14 = new org.openswing.swing.client.TextControl();
         textControl15 = new org.openswing.swing.client.TextControl();
         lblCnhCategoria = new org.openswing.swing.client.LabelControl();
-        dateControl16 = new org.openswing.swing.client.DateControl();
+        dateControlCNHVenc = new org.openswing.swing.client.DateControl();
         lblCnhVencimento = new org.openswing.swing.client.LabelControl();
-        jPanel12 = new javax.swing.JPanel();
+        jPanelTitEleitoral = new javax.swing.JPanel();
         lblTitEleitoralNum = new org.openswing.swing.client.LabelControl();
         textControl17 = new org.openswing.swing.client.TextControl();
         lblTitEleitZona = new org.openswing.swing.client.LabelControl();
@@ -264,28 +272,28 @@ public class PessoaDetalhe extends InternalFrame {
         textControl13 = new org.openswing.swing.client.TextControl();
         formattedTextControlCnpj = new org.openswing.swing.client.FormattedTextControl();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel10 = new javax.swing.JPanel();
-        insertButton1 = new org.openswing.swing.client.InsertButton();
-        editButton2 = new org.openswing.swing.client.EditButton();
-        deleteButton1 = new org.openswing.swing.client.DeleteButton();
-        saveButton2 = new org.openswing.swing.client.SaveButton();
-        reloadButton2 = new org.openswing.swing.client.ReloadButton();
-        navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
+        jPanelPessoaContato = new javax.swing.JPanel();
+        jPanelContatos = new javax.swing.JPanel();
+        insertButtonContato = new org.openswing.swing.client.InsertButton();
+        editButtonContato = new org.openswing.swing.client.EditButton();
+        deleteButtonContato = new org.openswing.swing.client.DeleteButton();
+        saveButtonContato = new org.openswing.swing.client.SaveButton();
+        reloadButtonContato = new org.openswing.swing.client.ReloadButton();
+        navigatorBarContato = new org.openswing.swing.client.NavigatorBar();
         gridControlContatos = new org.openswing.swing.client.GridControl();
         textColumn4 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn5 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn8 = new org.openswing.swing.table.columns.client.TextColumn();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel11 = new javax.swing.JPanel();
-        insertButton2 = new org.openswing.swing.client.InsertButton();
-        editButton3 = new org.openswing.swing.client.EditButton();
-        deleteButton2 = new org.openswing.swing.client.DeleteButton();
-        saveButton3 = new org.openswing.swing.client.SaveButton();
-        reloadButton3 = new org.openswing.swing.client.ReloadButton();
-        navigatorBar2 = new org.openswing.swing.client.NavigatorBar();
+        jPanelPessoaEndereco = new javax.swing.JPanel();
+        jPanelEnderecos = new javax.swing.JPanel();
+        insertButtonEndereco = new org.openswing.swing.client.InsertButton();
+        editButtonEndereco = new org.openswing.swing.client.EditButton();
+        deleteButtonEndereco = new org.openswing.swing.client.DeleteButton();
+        saveButtonEndereco = new org.openswing.swing.client.SaveButton();
+        reloadButtonEndereco = new org.openswing.swing.client.ReloadButton();
+        navigatorBarEndereco = new org.openswing.swing.client.NavigatorBar();
         gridControlEndereco = new org.openswing.swing.client.GridControl();
         textColumn9 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn10 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -296,46 +304,48 @@ public class PessoaDetalhe extends InternalFrame {
         integerColumn10 = new org.openswing.swing.table.columns.client.IntegerColumn();
         textColumn15 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn16 = new org.openswing.swing.table.columns.client.TextColumn();
-        comboColumn14 = new org.openswing.swing.table.columns.client.ComboColumn();
-        comboColumn15 = new org.openswing.swing.table.columns.client.ComboColumn();
-        comboColumn16 = new org.openswing.swing.table.columns.client.ComboColumn();
-        comboColumn17 = new org.openswing.swing.table.columns.client.ComboColumn();
-        jPanel6 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
-        insertButton3 = new org.openswing.swing.client.InsertButton();
-        editButton4 = new org.openswing.swing.client.EditButton();
-        deleteButton3 = new org.openswing.swing.client.DeleteButton();
-        saveButton4 = new org.openswing.swing.client.SaveButton();
-        reloadButton4 = new org.openswing.swing.client.ReloadButton();
-        navigatorBar3 = new org.openswing.swing.client.NavigatorBar();
+        comboColumnPrincipal = new org.openswing.swing.table.columns.client.ComboColumn();
+        comboColumnEntrega = new org.openswing.swing.table.columns.client.ComboColumn();
+        comboColumnCobranca = new org.openswing.swing.table.columns.client.ComboColumn();
+        comboColumnCorrespondencia = new org.openswing.swing.table.columns.client.ComboColumn();
+        jPanelPessoaTel = new javax.swing.JPanel();
+        jPanelTelefone = new javax.swing.JPanel();
+        insertButtonTel = new org.openswing.swing.client.InsertButton();
+        editButtonTel = new org.openswing.swing.client.EditButton();
+        deleteButtonTel = new org.openswing.swing.client.DeleteButton();
+        saveButtonTel = new org.openswing.swing.client.SaveButton();
+        reloadButtonTel = new org.openswing.swing.client.ReloadButton();
+        navigatorBarTel = new org.openswing.swing.client.NavigatorBar();
         gridControlTelefone = new org.openswing.swing.client.GridControl();
-        comboColumn1 = new org.openswing.swing.table.columns.client.ComboColumn();
+        comboColumnTipo = new org.openswing.swing.table.columns.client.ComboColumn();
         textColumn19 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn18 = new org.openswing.swing.table.columns.client.TextColumn();
 
-        setTitle("Bakery Factory - Cadastro Detalhes Pessoa");
+        setTitle("Bakery Factory - Cadastros");
         setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa Detalhe"));
-        jPanel1.setMinimumSize(new java.awt.Dimension(205, 65));
-        jPanel1.setPreferredSize(new java.awt.Dimension(128, 65));
-        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel1.add(editButton1);
-        jPanel1.add(reloadButton1);
-        jPanel1.add(saveButton1);
+        jPanelPessoaDet.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa Detalhe"));
+        jPanelPessoaDet.setMinimumSize(new java.awt.Dimension(205, 65));
+        jPanelPessoaDet.setPreferredSize(new java.awt.Dimension(128, 65));
+        jPanelPessoaDet.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelPessoaDet.add(editButtonPessoa);
+        jPanelPessoaDet.add(reloadButtonPessoa);
+        jPanelPessoaDet.add(saveButtonPessoa);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
-        getContentPane().add(jPanel1, gridBagConstraints);
+        getContentPane().add(jPanelPessoaDet, gridBagConstraints);
 
-        form1.setEditButton(editButton1);
+        form1.setToolTipText("");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.PessoaVO");
+        form1.setEditButton(editButtonPessoa);
         form1.setFunctionId("pessoa");
-        form1.setReloadButton(reloadButton1);
-        form1.setSaveButton(saveButton1);
+        form1.setReloadButton(reloadButtonPessoa);
+        form1.setSaveButton(saveButtonPessoa);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblNome.setLabel("Nome:");
@@ -347,6 +357,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl1.setAttributeName("nome");
         textControl1.setEnabled(false);
+        textControl1.setLinkLabel(lblNome);
         textControl1.setMaxCharacters(150);
         textControl1.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -360,6 +371,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl2.setAttributeName("email");
         textControl2.setEnabled(false);
+        textControl2.setLinkLabel(lblEmail);
         textControl2.setMaxCharacters(250);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -400,6 +412,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl3.setAttributeName("site");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblSite);
         textControl3.setMaxCharacters(250);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -429,18 +442,18 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel2.add(lblCliente, gridBagConstraints);
 
-        comboBoxControl1.setAttributeName("cliente");
-        comboBoxControl1.setDomainId("naosim");
-        comboBoxControl1.setEnabled(false);
-        comboBoxControl1.setLinkLabel(lblCliente);
-        comboBoxControl1.setRequired(true);
+        cbControlCliente.setAttributeName("cliente");
+        cbControlCliente.setDomainId("naosim");
+        cbControlCliente.setEnabled(false);
+        cbControlCliente.setLinkLabel(lblCliente);
+        cbControlCliente.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl1, gridBagConstraints);
+        jPanel2.add(cbControlCliente, gridBagConstraints);
 
         lblFornecedor.setLabel("Fornecedor:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -450,18 +463,18 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel2.add(lblFornecedor, gridBagConstraints);
 
-        comboBoxControl3.setAttributeName("fornecedor");
-        comboBoxControl3.setDomainId("naosim");
-        comboBoxControl3.setEnabled(false);
-        comboBoxControl3.setLinkLabel(lblFornecedor);
-        comboBoxControl3.setRequired(true);
+        cbControlFornecedor.setAttributeName("fornecedor");
+        cbControlFornecedor.setDomainId("naosim");
+        cbControlFornecedor.setEnabled(false);
+        cbControlFornecedor.setLinkLabel(lblFornecedor);
+        cbControlFornecedor.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl3, gridBagConstraints);
+        jPanel2.add(cbControlFornecedor, gridBagConstraints);
 
         lblColaborador.setLabel("Colaborador:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -471,18 +484,18 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel2.add(lblColaborador, gridBagConstraints);
 
-        comboBoxControl4.setAttributeName("colaborador");
-        comboBoxControl4.setDomainId("naosim");
-        comboBoxControl4.setEnabled(false);
-        comboBoxControl4.setLinkLabel(lblColaborador);
-        comboBoxControl4.setRequired(true);
+        cbControlColaborador.setAttributeName("colaborador");
+        cbControlColaborador.setDomainId("naosim");
+        cbControlColaborador.setEnabled(false);
+        cbControlColaborador.setLinkLabel(lblColaborador);
+        cbControlColaborador.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl4, gridBagConstraints);
+        jPanel2.add(cbControlColaborador, gridBagConstraints);
 
         lblTransportadora.setLabel("Transportadora:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -492,18 +505,18 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel2.add(lblTransportadora, gridBagConstraints);
 
-        comboBoxControl5.setAttributeName("transportadora");
-        comboBoxControl5.setDomainId("naosim");
-        comboBoxControl5.setEnabled(false);
-        comboBoxControl5.setLinkLabel(lblTransportadora);
-        comboBoxControl5.setRequired(true);
+        cbControlTransportadora.setAttributeName("transportadora");
+        cbControlTransportadora.setDomainId("naosim");
+        cbControlTransportadora.setEnabled(false);
+        cbControlTransportadora.setLinkLabel(lblTransportadora);
+        cbControlTransportadora.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl5, gridBagConstraints);
+        jPanel2.add(cbControlTransportadora, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -519,14 +532,14 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(form1, gridBagConstraints);
 
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(727, 433));
-        jTabbedPane1.setPreferredSize(new java.awt.Dimension(1477, 437));
+        jTabbedPanePessoas.setMinimumSize(new java.awt.Dimension(727, 433));
+        jTabbedPanePessoas.setPreferredSize(new java.awt.Dimension(1477, 437));
 
-        jPanel3.setPreferredSize(new java.awt.Dimension(671, 410));
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        jPanelPessTipoPessoa.setPreferredSize(new java.awt.Dimension(671, 410));
+        jPanelPessTipoPessoa.setLayout(new java.awt.GridBagLayout());
 
-        formPessoaFisica.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa Fisica"));
-        formPessoaFisica.setVOClassName("com.t2tierp.cadastros.java.PessoaFisicaVO");
+        formPessoaFisica.setBorder(javax.swing.BorderFactory.createTitledBorder("PESSOA FÍSICA"));
+        formPessoaFisica.setVOClassName("com.bakeryfactory.cadastros.java.PessoaFisicaVO");
         formPessoaFisica.setFunctionId("pessoaFisica");
         formPessoaFisica.setLayout(new java.awt.GridBagLayout());
 
@@ -540,6 +553,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         codLookupEstadoCivil.setAttributeName("estadoCivil.nome");
         codLookupEstadoCivil.setEnabled(false);
+        codLookupEstadoCivil.setLinkLabel(lblEstadoCivil);
         codLookupEstadoCivil.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -565,14 +579,15 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         formPessoaFisica.add(lblDtaNascimento, gridBagConstraints);
 
-        dateControl8.setAttributeName("dataNascimento");
-        dateControl8.setEnabled(false);
+        dateControlDataNasc.setAttributeName("dataNascimento");
+        dateControlDataNasc.setEnabled(false);
+        dateControlDataNasc.setLinkLabel(lblDtaNascimento);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        formPessoaFisica.add(dateControl8, gridBagConstraints);
+        formPessoaFisica.add(dateControlDataNasc, gridBagConstraints);
 
         lblSexo.setLabel("Sexo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -582,16 +597,17 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         formPessoaFisica.add(lblSexo, gridBagConstraints);
 
-        comboBoxControl12.setAttributeName("sexo");
-        comboBoxControl12.setDomainId("sexo");
-        comboBoxControl12.setEnabled(false);
-        comboBoxControl12.setRequired(true);
+        cbControlSexo.setAttributeName("sexo");
+        cbControlSexo.setDomainId("sexo");
+        cbControlSexo.setEnabled(false);
+        cbControlSexo.setLinkLabel(lblSexo);
+        cbControlSexo.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        formPessoaFisica.add(comboBoxControl12, gridBagConstraints);
+        formPessoaFisica.add(cbControlSexo, gridBagConstraints);
 
         lblNaturalidade.setLabel("Naturalidade:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -603,6 +619,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl10.setAttributeName("naturalidade");
         textControl10.setEnabled(false);
+        textControl10.setLinkLabel(lblNaturalidade);
         textControl10.setMaxCharacters(100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -621,6 +638,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl11.setAttributeName("nacionalidade");
         textControl11.setEnabled(false);
+        textControl11.setLinkLabel(lblNacionalidade);
         textControl11.setMaxCharacters(100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -629,7 +647,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         formPessoaFisica.add(textControl11, gridBagConstraints);
 
-        lblRaca.setLabel("Raca:");
+        lblRaca.setText("Raça:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -637,16 +655,17 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         formPessoaFisica.add(lblRaca, gridBagConstraints);
 
-        comboBoxControl13.setAttributeName("raca");
-        comboBoxControl13.setDomainId("racaCor");
-        comboBoxControl13.setEnabled(false);
+        cbControlRaca.setAttributeName("raca");
+        cbControlRaca.setDomainId("racaCor");
+        cbControlRaca.setEnabled(false);
+        cbControlRaca.setLinkLabel(lblRaca);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 100;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        formPessoaFisica.add(comboBoxControl13, gridBagConstraints);
+        formPessoaFisica.add(cbControlRaca, gridBagConstraints);
 
         lblTipoSangue.setLabel("Tipo Sangue:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -656,7 +675,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         formPessoaFisica.add(lblTipoSangue, gridBagConstraints);
 
-        lblNomeMae.setLabel("Nome Mae:");
+        lblNomeMae.setText("Nome Mãe:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -666,6 +685,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl22.setAttributeName("nomeMae");
         textControl22.setEnabled(false);
+        textControl22.setLinkLabel(lblNomeMae);
         textControl22.setMaxCharacters(100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -686,6 +706,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl23.setAttributeName("nomePai");
         textControl23.setEnabled(false);
+        textControl23.setLinkLabel(lblNomePai);
         textControl23.setMaxCharacters(100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
@@ -699,7 +720,7 @@ public class PessoaDetalhe extends InternalFrame {
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("RG"));
         jPanel7.setLayout(new java.awt.GridBagLayout());
 
-        lblRG.setLabel("Rg:");
+        lblRG.setText("RG:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 10;
@@ -709,6 +730,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl6.setAttributeName("rg");
         textControl6.setEnabled(false);
+        textControl6.setLinkLabel(lblRG);
         textControl6.setMaxCharacters(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -718,7 +740,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel7.add(textControl6, gridBagConstraints);
 
-        lblOrgaoRg.setLabel("Orgao Rg:");
+        lblOrgaoRg.setText("Orgão RG:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 10;
@@ -728,6 +750,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl7.setAttributeName("orgaoRg");
         textControl7.setEnabled(false);
+        textControl7.setLinkLabel(lblOrgaoRg);
         textControl7.setMaxCharacters(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -738,6 +761,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         dateControl7.setAttributeName("dataEmissaoRg");
         dateControl7.setEnabled(false);
+        dateControl7.setLinkLabel(lblDataEmissaoRg);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 11;
@@ -745,7 +769,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel7.add(dateControl7, gridBagConstraints);
 
-        lblDataEmissaoRg.setLabel("Data Emissao Rg:");
+        lblDataEmissaoRg.setText("Data Emissão RG:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 10;
@@ -763,7 +787,7 @@ public class PessoaDetalhe extends InternalFrame {
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Reservista"));
         jPanel8.setLayout(new java.awt.GridBagLayout());
 
-        lblReservistaNum.setLabel("Reservista Numero:");
+        lblReservistaNum.setText("Reservista Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
@@ -773,6 +797,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl20.setAttributeName("reservistaNumero");
         textControl20.setEnabled(false);
+        textControl20.setLinkLabel(lblReservistaNum);
         textControl20.setMaxCharacters(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
@@ -792,6 +817,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         numericControl21.setAttributeName("reservistaCategoria");
         numericControl21.setEnabled(false);
+        numericControl21.setLinkLabel(lblReservistaNum);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 9;
@@ -805,22 +831,25 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.weightx = 1.0;
         formPessoaFisica.add(jPanel8, gridBagConstraints);
 
-        comboBoxControl14.setAttributeName("tipoSangue");
-        comboBoxControl14.setDomainId("tipoSangue");
-        comboBoxControl14.setEnabled(false);
+        cbControlTipoSangue.setAttributeName("tipoSangue");
+        cbControlTipoSangue.setDomainId("tipoSangue");
+        cbControlTipoSangue.setEnabled(false);
+        cbControlTipoSangue.setLinkLabel(lblTipoSangue);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        formPessoaFisica.add(comboBoxControl14, gridBagConstraints);
+        formPessoaFisica.add(cbControlTipoSangue, gridBagConstraints);
 
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("CNH"));
         jPanel9.setLayout(new java.awt.GridBagLayout());
 
-        lblCnhNumero.setLabel("Cnh Numero:");
+        lblCnhNumero.setText("CNH Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -830,6 +859,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl14.setAttributeName("cnhNumero");
         textControl14.setEnabled(false);
+        textControl14.setLinkLabel(lblCnhNumero);
         textControl14.setMaxCharacters(20);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -841,6 +871,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl15.setAttributeName("cnhCategoria");
         textControl15.setEnabled(false);
+        textControl15.setLinkLabel(lblCnhCategoria);
         textControl15.setMaxCharacters(2);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -849,7 +880,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel9.add(textControl15, gridBagConstraints);
 
-        lblCnhCategoria.setLabel("Cnh Categoria:");
+        lblCnhCategoria.setText("CNH Categoria:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -857,16 +888,17 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel9.add(lblCnhCategoria, gridBagConstraints);
 
-        dateControl16.setAttributeName("cnhVencimento");
-        dateControl16.setEnabled(false);
+        dateControlCNHVenc.setAttributeName("cnhVencimento");
+        dateControlCNHVenc.setEnabled(false);
+        dateControlCNHVenc.setLinkLabel(lblCnhVencimento);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(dateControl16, gridBagConstraints);
+        jPanel9.add(dateControlCNHVenc, gridBagConstraints);
 
-        lblCnhVencimento.setLabel("Cnh Vencimento:");
+        lblCnhVencimento.setText("CNH Vencimento:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 4;
@@ -881,16 +913,16 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         formPessoaFisica.add(jPanel9, gridBagConstraints);
 
-        jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder("Titulo Eleitoral"));
-        jPanel12.setLayout(new java.awt.GridBagLayout());
+        jPanelTitEleitoral.setBorder(javax.swing.BorderFactory.createTitledBorder("Título Eleitoral"));
+        jPanelTitEleitoral.setLayout(new java.awt.GridBagLayout());
 
-        lblTitEleitoralNum.setLabel("Titulo Eleitoral Numero:");
+        lblTitEleitoralNum.setText("Titulo Eleitoral Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel12.add(lblTitEleitoralNum, gridBagConstraints);
+        jPanelTitEleitoral.add(lblTitEleitoralNum, gridBagConstraints);
 
         textControl17.setAttributeName("tituloEleitoralNumero");
         textControl17.setEnabled(false);
@@ -900,7 +932,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel12.add(textControl17, gridBagConstraints);
+        jPanelTitEleitoral.add(textControl17, gridBagConstraints);
 
         lblTitEleitZona.setLabel("Titulo Eleitoral Zona:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -908,7 +940,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel12.add(lblTitEleitZona, gridBagConstraints);
+        jPanelTitEleitoral.add(lblTitEleitZona, gridBagConstraints);
 
         numericControl18.setAttributeName("tituloEleitoralZona");
         numericControl18.setEnabled(false);
@@ -917,15 +949,15 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel12.add(numericControl18, gridBagConstraints);
+        jPanelTitEleitoral.add(numericControl18, gridBagConstraints);
 
-        lblTitEleitoralSecao.setLabel("Titulo Eleitoral Secao:");
+        lblTitEleitoralSecao.setText("Titulo Eleitoral Seção:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel12.add(lblTitEleitoralSecao, gridBagConstraints);
+        jPanelTitEleitoral.add(lblTitEleitoralSecao, gridBagConstraints);
 
         numericControl19.setAttributeName("tituloEleitoralSecao");
         numericControl19.setEnabled(false);
@@ -934,16 +966,17 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel12.add(numericControl19, gridBagConstraints);
+        jPanelTitEleitoral.add(numericControl19, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        formPessoaFisica.add(jPanel12, gridBagConstraints);
+        formPessoaFisica.add(jPanelTitEleitoral, gridBagConstraints);
 
         formattedTextControlCpf.setAttributeName("cpf");
+        formattedTextControlCpf.setLinkLabel(lblCpf);
         formattedTextControlCpf.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -967,10 +1000,10 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel3.add(formPessoaFisica, gridBagConstraints);
+        jPanelPessTipoPessoa.add(formPessoaFisica, gridBagConstraints);
 
-        formPessoaJuridica.setBorder(javax.swing.BorderFactory.createTitledBorder("Pessoa Juridica"));
-        formPessoaJuridica.setVOClassName("com.t2tierp.cadastros.java.PessoaJuridicaVO");
+        formPessoaJuridica.setBorder(javax.swing.BorderFactory.createTitledBorder("PESSOA JURÍDICA"));
+        formPessoaJuridica.setVOClassName("com.bakeryfactory.cadastros.java.PessoaJuridicaVO");
         formPessoaJuridica.setFunctionId("pessoaJuridica");
         formPessoaJuridica.setLayout(new java.awt.GridBagLayout());
 
@@ -992,6 +1025,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl8.setAttributeName("fantasia");
         textControl8.setEnabled(false);
+        textControl8.setLinkLabel(lblFantasia);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -1011,6 +1045,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl9.setAttributeName("inscricaoMunicipal");
         textControl9.setEnabled(false);
+        textControl9.setLinkLabel(lblInscrMunicipal);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -1028,6 +1063,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl12.setAttributeName("inscricaoEstadual");
         textControl12.setEnabled(false);
+        textControl12.setLinkLabel(lblInscEstadual);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -1035,7 +1071,7 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         formPessoaJuridica.add(textControl12, gridBagConstraints);
 
-        lblDataConstituicao.setLabel("Data Constituicao:");
+        lblDataConstituicao.setText("Data Constituição:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -1045,6 +1081,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         dateControl9.setAttributeName("dataConstituicao");
         dateControl9.setEnabled(false);
+        dateControl9.setLinkLabel(lblDataConstituicao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -1063,6 +1100,7 @@ public class PessoaDetalhe extends InternalFrame {
         comboBoxControl15.setAttributeName("tipoRegime");
         comboBoxControl15.setDomainId("tipoRegimeEmpresa");
         comboBoxControl15.setEnabled(false);
+        comboBoxControl15.setLinkLabel(lblTipoRegime);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
@@ -1082,6 +1120,7 @@ public class PessoaDetalhe extends InternalFrame {
         comboBoxControl16.setAttributeName("crt");
         comboBoxControl16.setDomainId("crt");
         comboBoxControl16.setEnabled(false);
+        comboBoxControl16.setLinkLabel(lblCrt);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -1100,6 +1139,7 @@ public class PessoaDetalhe extends InternalFrame {
 
         textControl13.setAttributeName("suframa");
         textControl13.setEnabled(false);
+        textControl13.setLinkLabel(lblSuframa);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
@@ -1108,6 +1148,7 @@ public class PessoaDetalhe extends InternalFrame {
         formPessoaJuridica.add(textControl13, gridBagConstraints);
 
         formattedTextControlCnpj.setAttributeName("cnpj");
+        formattedTextControlCnpj.setLinkLabel(lblCnpj);
         formattedTextControlCnpj.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1131,22 +1172,39 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel3.add(formPessoaJuridica, gridBagConstraints);
+        jPanelPessTipoPessoa.add(formPessoaJuridica, gridBagConstraints);
 
-        jTabbedPane1.addTab("Informações do Tipo de Pessoa", jPanel3);
+        jTabbedPanePessoas.addTab("Informações do Tipo de Pessoa", jPanelPessTipoPessoa);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
-        jPanel10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel10.add(insertButton1);
-        jPanel10.add(editButton2);
-        jPanel10.add(deleteButton1);
-        jPanel10.add(saveButton2);
-        jPanel10.add(reloadButton2);
-        jPanel10.add(navigatorBar1);
+        jPanelPessoaContato.setLayout(new java.awt.GridBagLayout());
+
+        jPanelContatos.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
+        jPanelContatos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelContatos.add(insertButtonContato);
+        jPanelContatos.add(editButtonContato);
+        jPanelContatos.add(deleteButtonContato);
+        jPanelContatos.add(saveButtonContato);
+        jPanelContatos.add(reloadButtonContato);
+        jPanelContatos.add(navigatorBarContato);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanelPessoaContato.add(jPanelContatos, gridBagConstraints);
 
         gridControlContatos.setAutoLoadData(false);
+        gridControlContatos.setDeleteButton(deleteButtonContato);
+        gridControlContatos.setEditButton(editButtonContato);
         gridControlContatos.setFunctionId("contato");
-        gridControlContatos.setValueObjectClassName("com.t2tierp.cadastros.java.PessoaContatoVO");
+        gridControlContatos.setInsertButton(insertButtonContato);
+        gridControlContatos.setNavBar(navigatorBarContato);
+        gridControlContatos.setPreferredSize(new java.awt.Dimension(600, 78));
+        gridControlContatos.setReloadButton(reloadButtonContato);
+        gridControlContatos.setSaveButton(saveButtonContato);
+        gridControlContatos.setValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaContatoVO");
         gridControlContatos.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn4.setColumnName("nome");
@@ -1195,45 +1253,45 @@ public class PessoaDetalhe extends InternalFrame {
         textColumn8.setMaxCharacters(14);
         gridControlContatos.getColumnContainer().add(textColumn8);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1496, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gridControlContatos, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel4Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(gridControlContatos, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanelPessoaContato.add(gridControlContatos, gridBagConstraints);
 
-        jTabbedPane1.addTab("Contatos", jPanel4);
+        jTabbedPanePessoas.addTab("Contatos", jPanelPessoaContato);
 
-        jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereco"));
-        jPanel11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel11.add(insertButton2);
-        jPanel11.add(editButton3);
-        jPanel11.add(deleteButton2);
-        jPanel11.add(saveButton3);
-        jPanel11.add(reloadButton3);
-        jPanel11.add(navigatorBar2);
+        jPanelPessoaEndereco.setLayout(new java.awt.GridBagLayout());
+
+        jPanelEnderecos.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        jPanelEnderecos.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelEnderecos.add(insertButtonEndereco);
+        jPanelEnderecos.add(editButtonEndereco);
+        jPanelEnderecos.add(deleteButtonEndereco);
+        jPanelEnderecos.add(saveButtonEndereco);
+        jPanelEnderecos.add(reloadButtonEndereco);
+        jPanelEnderecos.add(navigatorBarEndereco);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanelPessoaEndereco.add(jPanelEnderecos, gridBagConstraints);
 
         gridControlEndereco.setAutoLoadData(false);
+        gridControlEndereco.setDeleteButton(deleteButtonEndereco);
+        gridControlEndereco.setEditButton(editButtonEndereco);
         gridControlEndereco.setFunctionId("endereco");
-        gridControlEndereco.setValueObjectClassName("com.t2tierp.cadastros.java.PessoaEnderecoVO");
+        gridControlEndereco.setInsertButton(insertButtonEndereco);
+        gridControlEndereco.setNavBar(navigatorBarEndereco);
+        gridControlEndereco.setReloadButton(reloadButtonEndereco);
+        gridControlEndereco.setSaveButton(saveButtonEndereco);
+        gridControlEndereco.setValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaEnderecoVO");
         gridControlEndereco.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn9.setColumnName("logradouro");
@@ -1248,7 +1306,7 @@ public class PessoaDetalhe extends InternalFrame {
         textColumn10.setColumnName("numero");
         textColumn10.setEditableOnEdit(true);
         textColumn10.setEditableOnInsert(true);
-        textColumn10.setHeaderColumnName("Numero");
+        textColumn10.setHeaderColumnName("Número");
         textColumn10.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn10.setMaxCharacters(10);
         gridControlEndereco.getColumnContainer().add(textColumn10);
@@ -1289,14 +1347,15 @@ public class PessoaDetalhe extends InternalFrame {
 
         integerColumn10.setColumnName("municipioIbge");
         integerColumn10.setColumnRequired(false);
-        integerColumn10.setHeaderColumnName("Municipio Ibge");
+        integerColumn10.setEditableOnInsert(true);
+        integerColumn10.setHeaderColumnName("Município IBGE");
         integerColumn10.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControlEndereco.getColumnContainer().add(integerColumn10);
 
         textColumn15.setColumnName("uf");
         textColumn15.setEditableOnEdit(true);
         textColumn15.setEditableOnInsert(true);
-        textColumn15.setHeaderColumnName("Uf");
+        textColumn15.setHeaderColumnName("UF");
         textColumn15.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn15.setMaxCharacters(2);
         gridControlEndereco.getColumnContainer().add(textColumn15);
@@ -1310,93 +1369,93 @@ public class PessoaDetalhe extends InternalFrame {
         textColumn16.setMaxCharacters(14);
         gridControlEndereco.getColumnContainer().add(textColumn16);
 
-        comboColumn14.setColumnName("principal");
-        comboColumn14.setDomainId("naosim");
-        comboColumn14.setEditableOnEdit(true);
-        comboColumn14.setEditableOnInsert(true);
-        comboColumn14.setHeaderColumnName("Principal");
-        comboColumn14.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControlEndereco.getColumnContainer().add(comboColumn14);
+        comboColumnPrincipal.setColumnName("principal");
+        comboColumnPrincipal.setColumnRequired(false);
+        comboColumnPrincipal.setDomainId("naosim");
+        comboColumnPrincipal.setEditableOnEdit(true);
+        comboColumnPrincipal.setEditableOnInsert(true);
+        comboColumnPrincipal.setHeaderColumnName("Principal");
+        comboColumnPrincipal.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControlEndereco.getColumnContainer().add(comboColumnPrincipal);
 
-        comboColumn15.setColumnName("entrega");
-        comboColumn15.setDomainId("naosim");
-        comboColumn15.setEditableOnEdit(true);
-        comboColumn15.setEditableOnInsert(true);
-        comboColumn15.setHeaderColumnName("Entrega");
-        comboColumn15.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControlEndereco.getColumnContainer().add(comboColumn15);
+        comboColumnEntrega.setColumnName("entrega");
+        comboColumnEntrega.setDomainId("naosim");
+        comboColumnEntrega.setEditableOnEdit(true);
+        comboColumnEntrega.setEditableOnInsert(true);
+        comboColumnEntrega.setHeaderColumnName("Entrega");
+        comboColumnEntrega.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControlEndereco.getColumnContainer().add(comboColumnEntrega);
 
-        comboColumn16.setColumnName("cobranca");
-        comboColumn16.setDomainId("naosim");
-        comboColumn16.setEditableOnEdit(true);
-        comboColumn16.setEditableOnInsert(true);
-        comboColumn16.setHeaderColumnName("Cobranca");
-        comboColumn16.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControlEndereco.getColumnContainer().add(comboColumn16);
+        comboColumnCobranca.setColumnName("cobranca");
+        comboColumnCobranca.setDomainId("naosim");
+        comboColumnCobranca.setEditableOnEdit(true);
+        comboColumnCobranca.setEditableOnInsert(true);
+        comboColumnCobranca.setHeaderColumnName("Cobrança");
+        comboColumnCobranca.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControlEndereco.getColumnContainer().add(comboColumnCobranca);
 
-        comboColumn17.setColumnName("correspondencia");
-        comboColumn17.setDomainId("naosim");
-        comboColumn17.setEditableOnEdit(true);
-        comboColumn17.setEditableOnInsert(true);
-        comboColumn17.setHeaderColumnName("Correspondencia");
-        comboColumn17.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControlEndereco.getColumnContainer().add(comboColumn17);
+        comboColumnCorrespondencia.setColumnName("correspondencia");
+        comboColumnCorrespondencia.setDomainId("naosim");
+        comboColumnCorrespondencia.setEditableOnEdit(true);
+        comboColumnCorrespondencia.setEditableOnInsert(true);
+        comboColumnCorrespondencia.setHeaderColumnName("Correspondência");
+        comboColumnCorrespondencia.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControlEndereco.getColumnContainer().add(comboColumnCorrespondencia);
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1496, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gridControlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel5Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(gridControlEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanelPessoaEndereco.add(gridControlEndereco, gridBagConstraints);
 
-        jTabbedPane1.addTab("Endereços", jPanel5);
+        jTabbedPanePessoas.addTab("Endereços", jPanelPessoaEndereco);
 
-        jPanel13.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereco"));
-        jPanel13.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
-        jPanel13.add(insertButton3);
-        jPanel13.add(editButton4);
-        jPanel13.add(deleteButton3);
-        jPanel13.add(saveButton4);
-        jPanel13.add(reloadButton4);
-        jPanel13.add(navigatorBar3);
+        jPanelPessoaTel.setLayout(new java.awt.GridBagLayout());
+
+        jPanelTelefone.setBorder(javax.swing.BorderFactory.createTitledBorder("Telefone"));
+        jPanelTelefone.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanelTelefone.add(insertButtonTel);
+        jPanelTelefone.add(editButtonTel);
+        jPanelTelefone.add(deleteButtonTel);
+        jPanelTelefone.add(saveButtonTel);
+        jPanelTelefone.add(reloadButtonTel);
+        jPanelTelefone.add(navigatorBarTel);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        jPanelPessoaTel.add(jPanelTelefone, gridBagConstraints);
 
         gridControlTelefone.setAutoLoadData(false);
+        gridControlTelefone.setDeleteButton(deleteButtonTel);
+        gridControlTelefone.setEditButton(editButtonTel);
         gridControlTelefone.setFunctionId("telefone");
-        gridControlTelefone.setValueObjectClassName("com.t2tierp.cadastros.java.PessoaTelefoneVO");
+        gridControlTelefone.setInsertButton(insertButtonTel);
+        gridControlTelefone.setNavBar(navigatorBarTel);
+        gridControlTelefone.setReloadButton(reloadButtonTel);
+        gridControlTelefone.setSaveButton(saveButtonTel);
+        gridControlTelefone.setValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaTelefoneVO");
         gridControlTelefone.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        comboColumn1.setColumnName("tipo");
-        comboColumn1.setDomainId("tipoTelefone");
-        comboColumn1.setEditableOnEdit(true);
-        comboColumn1.setEditableOnInsert(true);
-        comboColumn1.setHeaderColumnName("Tipo");
-        comboColumn1.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        comboColumn1.setPreferredWidth(150);
-        gridControlTelefone.getColumnContainer().add(comboColumn1);
+        comboColumnTipo.setColumnName("tipo");
+        comboColumnTipo.setDomainId("tipoTelefone");
+        comboColumnTipo.setEditableOnEdit(true);
+        comboColumnTipo.setEditableOnInsert(true);
+        comboColumnTipo.setHeaderColumnName("Tipo");
+        comboColumnTipo.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        comboColumnTipo.setPreferredWidth(150);
+        gridControlTelefone.getColumnContainer().add(comboColumnTipo);
 
         textColumn19.setColumnName("numero");
         textColumn19.setColumnRequired(false);
         textColumn19.setEditableOnEdit(true);
         textColumn19.setEditableOnInsert(true);
-        textColumn19.setHeaderColumnName("Numero");
+        textColumn19.setHeaderColumnName("Número");
         textColumn19.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn19.setMaxCharacters(14);
         gridControlTelefone.getColumnContainer().add(textColumn19);
@@ -1405,38 +1464,22 @@ public class PessoaDetalhe extends InternalFrame {
         textColumn18.setColumnRequired(false);
         textColumn18.setEditableOnEdit(true);
         textColumn18.setEditableOnInsert(true);
-        textColumn18.setHeaderColumnName("Observacao");
+        textColumn18.setHeaderColumnName("Observação");
         textColumn18.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn18.setMaxCharacters(1000);
         textColumn18.setPreferredWidth(400);
         gridControlTelefone.getColumnContainer().add(textColumn18);
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1496, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(gridControlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 1496, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, 0)
-                    .addComponent(gridControlTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
-        );
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        jPanelPessoaTel.add(gridControlTelefone, gridBagConstraints);
 
-        jTabbedPane1.addTab("Telefones", jPanel6);
+        jTabbedPanePessoas.addTab("Telefones", jPanelPessoaTel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1444,41 +1487,41 @@ public class PessoaDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        getContentPane().add(jTabbedPane1, gridBagConstraints);
-        jTabbedPane1.getAccessibleContext().setAccessibleName("Informações do Tipo de Pessoa");
+        getContentPane().add(jTabbedPanePessoas, gridBagConstraints);
+        jTabbedPanePessoas.getAccessibleContext().setAccessibleName("Informações do Tipo de Pessoa");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.client.ComboBoxControl cbControlCliente;
+    private org.openswing.swing.client.ComboBoxControl cbControlColaborador;
+    private org.openswing.swing.client.ComboBoxControl cbControlFornecedor;
+    private org.openswing.swing.client.ComboBoxControl cbControlRaca;
+    private org.openswing.swing.client.ComboBoxControl cbControlSexo;
+    private org.openswing.swing.client.ComboBoxControl cbControlTipoSangue;
+    private org.openswing.swing.client.ComboBoxControl cbControlTransportadora;
     private org.openswing.swing.client.CodLookupControl codLookupEstadoCivil;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl12;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl13;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl14;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl15;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl16;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl2;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl3;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl4;
-    private org.openswing.swing.client.ComboBoxControl comboBoxControl5;
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn1;
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn14;
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn15;
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn16;
-    private org.openswing.swing.table.columns.client.ComboColumn comboColumn17;
-    private org.openswing.swing.client.DateControl dateControl16;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumnCobranca;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumnCorrespondencia;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumnEntrega;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumnPrincipal;
+    private org.openswing.swing.table.columns.client.ComboColumn comboColumnTipo;
     private org.openswing.swing.client.DateControl dateControl7;
-    private org.openswing.swing.client.DateControl dateControl8;
     private org.openswing.swing.client.DateControl dateControl9;
-    private org.openswing.swing.client.DeleteButton deleteButton1;
-    private org.openswing.swing.client.DeleteButton deleteButton2;
-    private org.openswing.swing.client.DeleteButton deleteButton3;
-    private org.openswing.swing.client.EditButton editButton1;
-    private org.openswing.swing.client.EditButton editButton2;
-    private org.openswing.swing.client.EditButton editButton3;
-    private org.openswing.swing.client.EditButton editButton4;
+    private org.openswing.swing.client.DateControl dateControlCNHVenc;
+    private org.openswing.swing.client.DateControl dateControlDataNasc;
+    private org.openswing.swing.client.DeleteButton deleteButtonContato;
+    private org.openswing.swing.client.DeleteButton deleteButtonEndereco;
+    private org.openswing.swing.client.DeleteButton deleteButtonTel;
+    private org.openswing.swing.client.EditButton editButtonContato;
+    private org.openswing.swing.client.EditButton editButtonEndereco;
+    private org.openswing.swing.client.EditButton editButtonPessoa;
+    private org.openswing.swing.client.EditButton editButtonTel;
     private org.openswing.swing.form.client.Form form1;
     private org.openswing.swing.form.client.Form formPessoaFisica;
     private org.openswing.swing.form.client.Form formPessoaJuridica;
@@ -1487,26 +1530,26 @@ public class PessoaDetalhe extends InternalFrame {
     private org.openswing.swing.client.GridControl gridControlContatos;
     private org.openswing.swing.client.GridControl gridControlEndereco;
     private org.openswing.swing.client.GridControl gridControlTelefone;
-    private org.openswing.swing.client.InsertButton insertButton1;
-    private org.openswing.swing.client.InsertButton insertButton2;
-    private org.openswing.swing.client.InsertButton insertButton3;
+    private org.openswing.swing.client.InsertButton insertButtonContato;
+    private org.openswing.swing.client.InsertButton insertButtonEndereco;
+    private org.openswing.swing.client.InsertButton insertButtonTel;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn10;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelContatos;
+    private javax.swing.JPanel jPanelEnderecos;
+    private javax.swing.JPanel jPanelPessTipoPessoa;
+    private javax.swing.JPanel jPanelPessoaContato;
+    private javax.swing.JPanel jPanelPessoaDet;
+    private javax.swing.JPanel jPanelPessoaEndereco;
+    private javax.swing.JPanel jPanelPessoaTel;
+    private javax.swing.JPanel jPanelTelefone;
+    private javax.swing.JPanel jPanelTitEleitoral;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPanePessoas;
     private org.openswing.swing.client.LabelControl lblCliente;
     private org.openswing.swing.client.LabelControl lblCnhCategoria;
     private org.openswing.swing.client.LabelControl lblCnhNumero;
@@ -1544,20 +1587,20 @@ public class PessoaDetalhe extends InternalFrame {
     private org.openswing.swing.client.LabelControl lblTitEleitoralNum;
     private org.openswing.swing.client.LabelControl lblTitEleitoralSecao;
     private org.openswing.swing.client.LabelControl lblTransportadora;
-    private org.openswing.swing.client.NavigatorBar navigatorBar1;
-    private org.openswing.swing.client.NavigatorBar navigatorBar2;
-    private org.openswing.swing.client.NavigatorBar navigatorBar3;
+    private org.openswing.swing.client.NavigatorBar navigatorBarContato;
+    private org.openswing.swing.client.NavigatorBar navigatorBarEndereco;
+    private org.openswing.swing.client.NavigatorBar navigatorBarTel;
     private org.openswing.swing.client.NumericControl numericControl18;
     private org.openswing.swing.client.NumericControl numericControl19;
     private org.openswing.swing.client.NumericControl numericControl21;
-    private org.openswing.swing.client.ReloadButton reloadButton1;
-    private org.openswing.swing.client.ReloadButton reloadButton2;
-    private org.openswing.swing.client.ReloadButton reloadButton3;
-    private org.openswing.swing.client.ReloadButton reloadButton4;
-    private org.openswing.swing.client.SaveButton saveButton1;
-    private org.openswing.swing.client.SaveButton saveButton2;
-    private org.openswing.swing.client.SaveButton saveButton3;
-    private org.openswing.swing.client.SaveButton saveButton4;
+    private org.openswing.swing.client.ReloadButton reloadButtonContato;
+    private org.openswing.swing.client.ReloadButton reloadButtonEndereco;
+    private org.openswing.swing.client.ReloadButton reloadButtonPessoa;
+    private org.openswing.swing.client.ReloadButton reloadButtonTel;
+    private org.openswing.swing.client.SaveButton saveButtonContato;
+    private org.openswing.swing.client.SaveButton saveButtonEndereco;
+    private org.openswing.swing.client.SaveButton saveButtonPessoa;
+    private org.openswing.swing.client.SaveButton saveButtonTel;
     private org.openswing.swing.table.columns.client.TextColumn textColumn10;
     private org.openswing.swing.table.columns.client.TextColumn textColumn11;
     private org.openswing.swing.table.columns.client.TextColumn textColumn12;

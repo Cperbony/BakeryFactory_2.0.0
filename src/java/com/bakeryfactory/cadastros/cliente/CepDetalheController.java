@@ -23,9 +23,7 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
 import com.bakeryfactory.padrao.java.Constantes;
-import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;

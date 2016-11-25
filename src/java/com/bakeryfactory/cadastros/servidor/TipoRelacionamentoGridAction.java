@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.servidor;
+package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.java.ClienteVO;
+import com.bakeryfactory.cadastros.java.TipoRelacionamentoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.util.ArrayList;
@@ -45,14 +45,14 @@ import org.openswing.swing.util.server.HibernateUtils;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  * @date 07/10/2016
  */
-public class TempGridAction implements Action {
+public class TipoRelacionamentoGridAction implements Action {
 
-    public TempGridAction() {
+    public TipoRelacionamentoGridAction() {
     }
 
     @Override
     public String getRequestName() {
-        return "temp_GridAction";
+        return "tipoRelacionamentoGridAction";
     }
 
     @Override
@@ -80,7 +80,7 @@ public class TempGridAction implements Action {
     private Response load(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         GridParams pars = (GridParams) inputPar;
-        String baseSQL = "select CLIENTE from com.bakeryfactory.cadastros.java.ClienteVO as CLIENTE";
+        String baseSQL = "select TIPO_RELACIONAMENTO from com.bakeryfactory.cadastros.java.TipoRelacionamentoVO as TIPO_RELACIONAMENTO";
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Response res = HibernateUtils.getBlockFromQuery(
@@ -90,11 +90,11 @@ public class TempGridAction implements Action {
                     pars.getFilteredColumns(),
                     pars.getCurrentSortedColumns(),
                     pars.getCurrentSortedVersusColumns(),
-                    com.bakeryfactory.vendas.java.NotaFiscalModeloVO.class,
+                    com.bakeryfactory.cadastros.java.TipoRelacionamentoVO.class,
                     baseSQL,
                     new Object[0],
                     new Type[0],
-                    "CLIENTE",
+                    "TIPO_RELACIONAMENTO",
                     HibernateUtil.getSessionFactory(),
                     session
             );
@@ -125,13 +125,13 @@ public class TempGridAction implements Action {
             GridParams pars = (GridParams) inputPar;
             ArrayList persistentObjects = (ArrayList) pars.getOtherGridParams().get("persistentObjects");
 
-            ClienteVO vo = null;
+            TipoRelacionamentoVO vo = null;
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
             for (int i = 0; i < persistentObjects.size(); i++) {
-                vo = (ClienteVO) persistentObjects.get(i);
+                vo = (TipoRelacionamentoVO) persistentObjects.get(i);
                 session.delete(vo);
                 session.flush();
             }
@@ -148,7 +148,7 @@ public class TempGridAction implements Action {
                 if (session != null) {
                     session.close();
                 }
-            } catch (Exception ex1) {
+            } catch (Exception e    ) {
             }
         }
     }

@@ -25,8 +25,6 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.CepVO;
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;

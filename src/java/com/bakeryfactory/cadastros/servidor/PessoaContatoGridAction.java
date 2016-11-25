@@ -81,7 +81,7 @@ public class PessoaContatoGridAction implements Action {
         Session session = null;
         GridParams pars = (GridParams) inputPar;
         String pk = (String) pars.getOtherGridParams().get("idPessoa");
-        String baseSQL = "select PESSOA_CONTATO from com.bakeryfactory.cadastros.java.ContatoVO as PESSOA_CONTATO where PESSOA_CONTATO.pessoa.id = " + pk;
+        String baseSQL = "select CONTATO from com.bakeryfactory.cadastros.java.PessoaContatoVO as CONTATO where CONTATO.pessoa.id = " + pk;
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Response res = HibernateUtils.getBlockFromQuery(
@@ -95,7 +95,7 @@ public class PessoaContatoGridAction implements Action {
                     baseSQL,
                     new Object[0],
                     new Type[0],
-                    "PESSOA_CONTATO",
+                    "CONTATO",
                     HibernateUtil.getSessionFactory(),
                     session
             );

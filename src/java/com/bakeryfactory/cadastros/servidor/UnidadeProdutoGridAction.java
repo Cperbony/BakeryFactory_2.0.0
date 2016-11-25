@@ -23,8 +23,6 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
-import temp.com.bakeryfactory.servidor.*;
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.cadastros.java.UnidadeProdutoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;

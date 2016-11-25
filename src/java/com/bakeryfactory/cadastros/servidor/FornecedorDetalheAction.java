@@ -83,9 +83,9 @@ public class FornecedorDetalheAction implements Action {
             Criteria criteria = session.createCriteria(FornecedorVO.class);
             criteria.add(Restrictions.eq("id", Integer.valueOf(pk)));
 
-            FornecedorVO cargo = (FornecedorVO) criteria.uniqueResult();
+            FornecedorVO fornecedor = (FornecedorVO) criteria.uniqueResult();
 
-            return new VOResponse(cargo);
+            return new VOResponse(fornecedor);
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -114,9 +114,10 @@ public class FornecedorDetalheAction implements Action {
                 throw new Exception("Já Existe um Fornecedor Vinculado à Pessoa Selecionada!");
             }
 
-            /**
-             * à Implementar if(fornecedor.getContabilConta().getId() == null) { fornecedor.setContabilConta(null); }
-             */
+            if (fornecedor.getContabilConta().getId() == null) {
+                fornecedor.setContabilConta(null);
+            }
+
             fornecedor.setDataCadastro(new Date());
 
             session.save(fornecedor);
@@ -155,10 +156,9 @@ public class FornecedorDetalheAction implements Action {
                 throw new Exception("Já Existe um Fornecedor Vinculado à Pessoa Selecionada!");
             }
 
-            /**
-             * à Implementar if(fornecedor.getContabilConta().getId() == null) { fornecedor.setContabilConta(null); }
-             */
-            fornecedor.setDataCadastro(new Date());
+            if (fornecedor.getContabilConta().getId() == null) {
+                fornecedor.setContabilConta(null);
+            }
 
             session.update(fornecedor);
             session.getTransaction().commit();

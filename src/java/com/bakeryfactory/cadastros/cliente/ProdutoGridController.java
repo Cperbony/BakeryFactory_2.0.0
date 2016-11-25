@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.cadastros.java.ProdutoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
@@ -46,7 +45,7 @@ import org.openswing.swing.util.client.ClientUtils;
 public class ProdutoGridController extends GridController implements GridDataLocator {
 
     private ProdutoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public ProdutoGridController() {
         grid = new ProdutoGrid(this);

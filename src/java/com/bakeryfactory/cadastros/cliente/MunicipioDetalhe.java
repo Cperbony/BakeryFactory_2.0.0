@@ -33,6 +33,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
     /**
      * Creates new form MunicipioDetalhe
+     * @param controller
      */
     public MunicipioDetalhe(MunicipioDetalheController controller) {
         initComponents();
@@ -59,6 +60,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
+        saveButton1 = new org.openswing.swing.client.SaveButton();
         form1 = new org.openswing.swing.form.client.Form();
         lblUf = new org.openswing.swing.client.LabelControl();
         textControl2 = new org.openswing.swing.client.TextControl();
@@ -76,9 +78,10 @@ public class MunicipioDetalhe extends InternalFrame {
         setTitle("Bakery Factory - Município Detalhe");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastros Municipio"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastros Município"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(reloadButton1);
+        jPanel1.add(saveButton1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -88,8 +91,10 @@ public class MunicipioDetalhe extends InternalFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.MunicipioVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.MunicipioVO");
         form1.setFunctionId("municipio");
+        form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblUf.setLabel("UF:");
@@ -102,6 +107,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         textControl2.setAttributeName("uf.nome");
         textControl2.setEnabled(false);
+        textControl2.setLinkLabel(lblUf);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -119,6 +125,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         textControl3.setAttributeName("nome");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblNome);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -128,7 +135,7 @@ public class MunicipioDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl3, gridBagConstraints);
 
-        lblCodIbge.setLabel("Codigo Ibge:");
+        lblCodIbge.setText("Código Ibge:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -138,6 +145,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         numericControl4.setAttributeName("codigoIbge");
         numericControl4.setEnabled(false);
+        numericControl4.setLinkLabel(lblCodIbge);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -145,7 +153,7 @@ public class MunicipioDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(numericControl4, gridBagConstraints);
 
-        lblCodReceitaFederal.setLabel("Codigo Receita Federal:");
+        lblCodReceitaFederal.setText("Código Receita Federal:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -155,6 +163,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         numericControl5.setAttributeName("codigoReceitaFederal");
         numericControl5.setEnabled(false);
+        numericControl5.setLinkLabel(lblCodReceitaFederal);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -162,7 +171,7 @@ public class MunicipioDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(numericControl5, gridBagConstraints);
 
-        lblCodEstadual.setLabel("Codigo Estadual:");
+        lblCodEstadual.setText("Código Estadual:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 2;
@@ -172,6 +181,7 @@ public class MunicipioDetalhe extends InternalFrame {
 
         numericControl6.setAttributeName("codigoEstadual");
         numericControl6.setEnabled(false);
+        numericControl6.setLinkLabel(lblCodEstadual);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -213,6 +223,7 @@ public class MunicipioDetalhe extends InternalFrame {
     private org.openswing.swing.client.NumericControl numericControl5;
     private org.openswing.swing.client.NumericControl numericControl6;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.TextControl textControl2;
     private org.openswing.swing.client.TextControl textControl3;
     // End of variables declaration//GEN-END:variables

@@ -23,15 +23,9 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.TipoAdmissaoLookup;
-import com.bakeryfactory.cadastros.lookups.CargoLookup;
-import com.bakeryfactory.cadastros.lookups.ContaContabilLookup;
-import com.bakeryfactory.cadastros.lookups.NivelFormacaoLookup;
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
-import com.bakeryfactory.cadastros.lookups.SetorLookup;
-import com.bakeryfactory.cadastros.lookups.SindicatoLookup;
-import com.bakeryfactory.cadastros.lookups.SituacaoColaboradorLookup;
-import com.bakeryfactory.cadastros.lookups.TipoColaboradorLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -40,59 +34,195 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class ColaboradorDetalhe extends InternalFrame {
 
-    private final PessoaLookup pessoaLookup;
-    private final TipoColaboradorLookup tipoColaboraborLookup;
-    private final SituacaoColaboradorLookup situacaoColaboradorLookup;
-    private final TipoAdmissaoLookup tipoAdmissaoLookup;
-    private final NivelFormacaoLookup nivelFormacaoLookup;
-    private final CargoLookup cargoLookup;
-    private final ContaContabilLookup contaContabilLookup;
-    private final SindicatoLookup sindicatoLookup;
-    private final SetorLookup setorLookup;
+    private LookupController pessoaLookup;
+    private LookupController tipoColaboraborLookup;
+    private LookupController situacaoColaboradorLookup;
+    private LookupController tipoAdmissaoLookup;
+    private LookupController nivelFormacaoLookup;
+    private LookupController cargoLookup;
+    private LookupController contaContabilLookup;
+    private LookupController sindicatoLookup;
+    private LookupController setorLookup;
 
     /**
      * Creates new form ColaboradorDetalhe
+     *
      * @param controller
      */
     public ColaboradorDetalhe(ColaboradorDetalheController controller) {
+        this.pessoaLookup = new LookupController();
+        this.contaContabilLookup = new LookupController();
+        this.cargoLookup = new LookupController();
+        this.nivelFormacaoLookup = new LookupController();
+        this.tipoAdmissaoLookup = new LookupController();
+        this.situacaoColaboradorLookup = new LookupController();
+        this.tipoColaboraborLookup = new LookupController();
+        this.sindicatoLookup = new LookupController();
+        this.setorLookup = new LookupController();
         initComponents();
 
-        form1.setFormController(controller);
+        formColaborador.setFormController(controller);
 
-        //Configuração Lookup Pessoa
-        pessoaLookup = new PessoaLookup();
+        /*
+        * Configuração do Lookup para a Pessoa relacionada
+         */
+        pessoaLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
+        pessoaLookup.addLookup2ParentLink("id", "pessoa.id");
+        pessoaLookup.addLookup2ParentLink("nome", "pessoa.nome");
+        pessoaLookup.setHeaderColumnName("id", "ID");
+        pessoaLookup.setHeaderColumnName("nome", "Nome");
+        pessoaLookup.setFrameTitle("Importa Pessoa");
+
+        pessoaLookup.setVisibleStatusPanel(true);
+        pessoaLookup.setVisibleColumn("id", true);
+        pessoaLookup.setVisibleColumn("nome", true);
+        pessoaLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        pessoaLookup.setLookupDataLocator(new LookupDataLocatorGenerico(pessoaLookup.getLookupValueObjectClassName()));
         codLookupControlPessoa.setLookupController(pessoaLookup);
 
-        //Configuração Lookup Tipo Colaborador
-        tipoColaboraborLookup = new TipoColaboradorLookup();
+        /*
+        * Configuração do Lookup para o Tipo do Colaborador
+         */
+        tipoColaboraborLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.TipoColaboradorVO");
+        tipoColaboraborLookup.addLookup2ParentLink("id", "tipoColaborador.id");
+        tipoColaboraborLookup.addLookup2ParentLink("nome", "tipoColaborador.nome");
+        tipoColaboraborLookup.setHeaderColumnName("id", "ID");
+        tipoColaboraborLookup.setHeaderColumnName("nome", "Nome");
+        tipoColaboraborLookup.setFrameTitle("Importa Tipo Colaborador");
+
+        tipoColaboraborLookup.setVisibleStatusPanel(true);
+        tipoColaboraborLookup.setVisibleColumn("id", true);
+        tipoColaboraborLookup.setVisibleColumn("nome", true);
+        tipoColaboraborLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        tipoColaboraborLookup.setLookupDataLocator(new LookupDataLocatorGenerico(tipoColaboraborLookup.getLookupValueObjectClassName()));
         codLookupControlTipo.setLookupController(tipoColaboraborLookup);
 
-        //Configuração Lookup Tipo Situação Colaborador
-        situacaoColaboradorLookup = new SituacaoColaboradorLookup();
+        /*
+        * Configuração do Lookup para o Tipo Situação Colaborador
+         */
+        situacaoColaboradorLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.SituacaoColaboradorVO");
+        situacaoColaboradorLookup.addLookup2ParentLink("id", "situacaoColaborador.id");
+        situacaoColaboradorLookup.addLookup2ParentLink("nome", "situacaoColaborador.nome");
+        situacaoColaboradorLookup.setHeaderColumnName("id", "ID");
+        situacaoColaboradorLookup.setHeaderColumnName("nome", "Nome");
+        situacaoColaboradorLookup.setFrameTitle("Importa Situacao Colaborador");
+
+        situacaoColaboradorLookup.setVisibleStatusPanel(true);
+        situacaoColaboradorLookup.setVisibleColumn("id", true);
+        situacaoColaboradorLookup.setVisibleColumn("nome", true);
+        situacaoColaboradorLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        situacaoColaboradorLookup.setLookupDataLocator(new LookupDataLocatorGenerico(situacaoColaboradorLookup.getLookupValueObjectClassName()));
         codLookupControlSituacao.setLookupController(situacaoColaboradorLookup);
 
-        //Configuração Lookup Tipo Admissão
-        tipoAdmissaoLookup = new TipoAdmissaoLookup();
+        /*
+        * Configuração do Lookup para o Tipo Admissão do Colaborador
+         */
+        tipoAdmissaoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.TipoAdmissaoVO");
+        tipoAdmissaoLookup.addLookup2ParentLink("id", "tipoAdmissao.id");
+        tipoAdmissaoLookup.addLookup2ParentLink("nome", "tipoAdmissao.nome");
+        tipoAdmissaoLookup.setHeaderColumnName("id", "ID");
+        tipoAdmissaoLookup.setHeaderColumnName("nome", "Nome");
+        tipoAdmissaoLookup.setFrameTitle("Importa Tipo Admissao");
+
+        tipoAdmissaoLookup.setVisibleStatusPanel(true);
+        tipoAdmissaoLookup.setVisibleColumn("id", true);
+        tipoAdmissaoLookup.setVisibleColumn("nome", true);
+        tipoAdmissaoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        tipoAdmissaoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(tipoAdmissaoLookup.getLookupValueObjectClassName()));
         codLookupControlTipoAdmissao.setLookupController(tipoAdmissaoLookup);
 
-        //Configuração Lookup Nivel Formação
-        nivelFormacaoLookup = new NivelFormacaoLookup();
+        /*
+        * Configuração do Lookup para o Nível Formação
+         */
+        nivelFormacaoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.NivelFormacaoVO");
+        nivelFormacaoLookup.addLookup2ParentLink("id", "nivelFormacao.id");
+        nivelFormacaoLookup.addLookup2ParentLink("nome", "nivelFormacao.nome");
+        nivelFormacaoLookup.setHeaderColumnName("id", "ID");
+        nivelFormacaoLookup.setHeaderColumnName("nome", "Nome");
+        nivelFormacaoLookup.setFrameTitle("Importa Nivel Formacao");
+
+        nivelFormacaoLookup.setVisibleStatusPanel(true);
+        nivelFormacaoLookup.setVisibleColumn("id", true);
+        nivelFormacaoLookup.setVisibleColumn("nome", true);
+        nivelFormacaoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        nivelFormacaoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(nivelFormacaoLookup.getLookupValueObjectClassName()));
         codLookupControlNivelFormacao.setLookupController(nivelFormacaoLookup);
 
-        //Configuração Lookup Nivel Cargo
-        cargoLookup = new CargoLookup();
+        /*
+        * Configuração do Lookup para o Cargo
+         */
+        cargoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.CargoVO");
+        cargoLookup.addLookup2ParentLink("id", "cargo.id");
+        cargoLookup.addLookup2ParentLink("nome", "cargo.nome");
+        cargoLookup.setHeaderColumnName("id", "ID");
+        cargoLookup.setHeaderColumnName("nome", "Nome");
+        cargoLookup.setFrameTitle("Importa Cargo");
+
+        cargoLookup.setVisibleStatusPanel(true);
+        cargoLookup.setVisibleColumn("id", true);
+        cargoLookup.setVisibleColumn("nome", true);
+        cargoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        cargoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(cargoLookup.getLookupValueObjectClassName()));
         codLookupControlCargo.setLookupController(cargoLookup);
 
-        //Configuração Lookup Nivel Conta Contábil
-        contaContabilLookup = new ContaContabilLookup();
-        codLookupControlCargo.setLookupController(contaContabilLookup);
+        /*
+        * Configuração do Lookup para o Conta Contábil
+         */
+        contaContabilLookup.setLookupValueObjectClassName("com.bakeryfactory.contabilidade.java.ContabilContaVO");
+        contaContabilLookup.addLookup2ParentLink("id", "contabilConta.id");
+        contaContabilLookup.addLookup2ParentLink("descricao", "contabilConta.descricao");
+        contaContabilLookup.setHeaderColumnName("id", "ID");
+        contaContabilLookup.setHeaderColumnName("descricao", "Descrição");
+        contaContabilLookup.setFrameTitle("Importa Conta Contábil");
 
-        //Configuração Lookup Nivel Setor
-        setorLookup = new SetorLookup();
+        contaContabilLookup.setVisibleStatusPanel(true);
+        contaContabilLookup.setVisibleColumn("id", true);
+        contaContabilLookup.setVisibleColumn("descricao", true);
+        contaContabilLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        contaContabilLookup.setLookupDataLocator(new LookupDataLocatorGenerico(contaContabilLookup.getLookupValueObjectClassName()));
+        codLookupControlContabilConta.setLookupController(contaContabilLookup);
+
+        /*
+        * Configuração do Lookup para o Setor
+         */
+        setorLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.SetorVO");
+        setorLookup.addLookup2ParentLink("id", "setor.id");
+        setorLookup.addLookup2ParentLink("nome", "setor.nome");
+        setorLookup.setHeaderColumnName("id", "ID");
+        setorLookup.setHeaderColumnName("nome", "Nome");
+        setorLookup.setFrameTitle("Importa Setor");
+
+        setorLookup.setVisibleStatusPanel(true);
+        setorLookup.setVisibleColumn("id", true);
+        setorLookup.setVisibleColumn("nome", true);
+        setorLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        setorLookup.setLookupDataLocator(new LookupDataLocatorGenerico(setorLookup.getLookupValueObjectClassName()));
         codLookupControlSetor.setLookupController(setorLookup);
 
-        //Configuração Lookup Nivel Sindicato
-        sindicatoLookup = new SindicatoLookup();
+        /*
+        * Configuração do Lookup para o Tipo Sindicato
+         */
+        sindicatoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.SindicatoVO");
+        sindicatoLookup.addLookup2ParentLink("id", "sindicato.id");
+        sindicatoLookup.addLookup2ParentLink("nome", "sindicato.nome");
+        sindicatoLookup.setHeaderColumnName("id", "ID");
+        sindicatoLookup.setHeaderColumnName("nome", "Nome");
+        sindicatoLookup.setFrameTitle("Importa Sindicato");
+
+        sindicatoLookup.setVisibleStatusPanel(true);
+        sindicatoLookup.setVisibleColumn("id", true);
+        sindicatoLookup.setVisibleColumn("nome", true);
+        sindicatoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        sindicatoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(sindicatoLookup.getLookupValueObjectClassName()));
         codLookupControlSindicato.setLookupController(sindicatoLookup);
     }
 
@@ -101,7 +231,7 @@ public class ColaboradorDetalhe extends InternalFrame {
      * @return FORM
      */
     public org.openswing.swing.form.client.Form getForm1() {
-        return form1;
+        return formColaborador;
     }
 
     /**
@@ -116,9 +246,9 @@ public class ColaboradorDetalhe extends InternalFrame {
         editButton1 = new org.openswing.swing.client.EditButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         saveButton1 = new org.openswing.swing.client.SaveButton();
-        form1 = new org.openswing.swing.form.client.Form();
+        formColaborador = new org.openswing.swing.form.client.Form();
         jTabbedPaneDados = new javax.swing.JTabbedPane();
-        jPanel2 = new javax.swing.JPanel();
+        jPanelDadosPrincipais = new javax.swing.JPanel();
         lblPessoa = new org.openswing.swing.client.LabelControl();
         codLookupControlPessoa = new org.openswing.swing.client.CodLookupControl();
         textControl6 = new org.openswing.swing.client.TextControl();
@@ -165,32 +295,32 @@ public class ColaboradorDetalhe extends InternalFrame {
         lblObservacao = new org.openswing.swing.client.LabelControl();
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
         jSeparator1 = new javax.swing.JSeparator();
-        jPanel3 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
+        jPanelOutrasInf = new javax.swing.JPanel();
+        jPanelExameMedico = new javax.swing.JPanel();
         lblExameMedicoUltimo = new org.openswing.swing.client.LabelControl();
         dateControl26 = new org.openswing.swing.client.DateControl();
         dateControl27 = new org.openswing.swing.client.DateControl();
         lblExameMedicoVenc = new org.openswing.swing.client.LabelControl();
-        jPanel5 = new javax.swing.JPanel();
+        jPanelSefip = new javax.swing.JPanel();
         lblOcorrenciaSefip = new org.openswing.swing.client.LabelControl();
         numericControl41 = new org.openswing.swing.client.NumericControl();
         lblCategSefip = new org.openswing.swing.client.LabelControl();
         textControl39 = new org.openswing.swing.client.TextControl();
         lblCodDemissaoSefip = new org.openswing.swing.client.LabelControl();
         numericControl44 = new org.openswing.swing.client.NumericControl();
-        jPanel6 = new javax.swing.JPanel();
+        jPanelCaged = new javax.swing.JPanel();
         lblCodAdCaged = new org.openswing.swing.client.LabelControl();
         numericControl42 = new org.openswing.swing.client.NumericControl();
         lblCodDemCaged = new org.openswing.swing.client.LabelControl();
         numericControl43 = new org.openswing.swing.client.NumericControl();
-        jPanel7 = new javax.swing.JPanel();
+        jPanelFgts = new javax.swing.JPanel();
         lblFgtsOptante = new org.openswing.swing.client.LabelControl();
         comboBoxControl17 = new org.openswing.swing.client.ComboBoxControl();
         dateControl18 = new org.openswing.swing.client.DateControl();
         lblFgtsDataOpcao = new org.openswing.swing.client.LabelControl();
         numericControl19 = new org.openswing.swing.client.NumericControl();
         lblFgtsConta = new org.openswing.swing.client.LabelControl();
-        jPanel8 = new javax.swing.JPanel();
+        jPanelCarteiraProf = new javax.swing.JPanel();
         lblCtpsNumero = new org.openswing.swing.client.LabelControl();
         textControl33 = new org.openswing.swing.client.TextControl();
         lblCtpsSerie = new org.openswing.swing.client.LabelControl();
@@ -199,7 +329,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         dateControl35 = new org.openswing.swing.client.DateControl();
         lblCtpsUf = new org.openswing.swing.client.LabelControl();
         textControl36 = new org.openswing.swing.client.TextControl();
-        jPanel9 = new javax.swing.JPanel();
+        jPanelpagamento = new javax.swing.JPanel();
         labelControl28 = new org.openswing.swing.client.LabelControl();
         comboBoxControl20 = new org.openswing.swing.client.ComboBoxControl();
         lblBanco = new org.openswing.swing.client.LabelControl();
@@ -212,7 +342,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         lblDV2 = new org.openswing.swing.client.LabelControl();
         textControl25 = new org.openswing.swing.client.TextControl();
         textControl26 = new org.openswing.swing.client.TextControl();
-        jPanel10 = new javax.swing.JPanel();
+        jPanelPis = new javax.swing.JPanel();
         lblPisDataCadastro = new org.openswing.swing.client.LabelControl();
         dateControl28 = new org.openswing.swing.client.DateControl();
         lblPisNumero = new org.openswing.swing.client.LabelControl();
@@ -242,11 +372,14 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.ColaboradorVO");
-        form1.setFunctionId("colaborador");
-        form1.setLayout(new java.awt.CardLayout());
+        formColaborador.setVOClassName("com.bakeryfactory.cadastros.java.ColaboradorVO");
+        formColaborador.setEditButton(editButton1);
+        formColaborador.setFunctionId("colaborador");
+        formColaborador.setReloadButton(reloadButton1);
+        formColaborador.setSaveButton(saveButton1);
+        formColaborador.setLayout(new java.awt.CardLayout());
 
-        jPanel2.setLayout(new java.awt.GridBagLayout());
+        jPanelDadosPrincipais.setLayout(new java.awt.GridBagLayout());
 
         lblPessoa.setLabel("Pessoa:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -254,11 +387,12 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblPessoa, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblPessoa, gridBagConstraints);
 
         codLookupControlPessoa.setAllowOnlyNumbers(true);
         codLookupControlPessoa.setAttributeName("pessoa.id");
         codLookupControlPessoa.setEnabled(false);
+        codLookupControlPessoa.setLinkLabel(lblPessoa);
         codLookupControlPessoa.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -266,7 +400,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = -70;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlPessoa, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlPessoa, gridBagConstraints);
 
         textControl6.setAttributeName("pessoa.nome");
         textControl6.setEnabled(false);
@@ -278,7 +412,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl6, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl6, gridBagConstraints);
 
         lblTipo.setLabel("Tipo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -286,11 +420,12 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblTipo, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblTipo, gridBagConstraints);
 
         codLookupControlTipo.setAllowOnlyNumbers(true);
         codLookupControlTipo.setAttributeName("tipoColaborador.id");
         codLookupControlTipo.setEnabled(false);
+        codLookupControlTipo.setLinkLabel(lblTipo);
         codLookupControlTipo.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -298,7 +433,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = -70;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlTipo, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlTipo, gridBagConstraints);
 
         textControl7.setAttributeName("tipoColaborador.nome");
         textControl7.setEnabled(false);
@@ -310,7 +445,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl7, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl7, gridBagConstraints);
 
         lblSituacao.setText("Situação:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -318,18 +453,19 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblSituacao, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblSituacao, gridBagConstraints);
 
         codLookupControlSituacao.setAllowOnlyNumbers(true);
         codLookupControlSituacao.setAttributeName("situacaoColaborador.id");
         codLookupControlSituacao.setEnabled(false);
+        codLookupControlSituacao.setLinkLabel(lblSituacao);
         codLookupControlSituacao.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlSituacao, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlSituacao, gridBagConstraints);
 
         textControl5.setAttributeName("situacaoColaborador.nome");
         textControl5.setEnabled(false);
@@ -341,7 +477,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl5, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl5, gridBagConstraints);
 
         lblTipoAdmissao.setText("Tipo Admissão:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -349,16 +485,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblTipoAdmissao, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblTipoAdmissao, gridBagConstraints);
 
         codLookupControlTipoAdmissao.setAttributeName("idtipoadmissao.id");
         codLookupControlTipoAdmissao.setEnabled(false);
+        codLookupControlTipoAdmissao.setLinkLabel(lblTipoAdmissao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlTipoAdmissao, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlTipoAdmissao, gridBagConstraints);
 
         textControl4.setAttributeName("tipoAdmissao.nome");
         textControl4.setEnabled(false);
@@ -370,7 +507,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl4, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl4, gridBagConstraints);
 
         lblNivelFormacao.setText("Nivel Formação:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -378,18 +515,19 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblNivelFormacao, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblNivelFormacao, gridBagConstraints);
 
         codLookupControlNivelFormacao.setAllowOnlyNumbers(true);
         codLookupControlNivelFormacao.setAttributeName("nivelFormacao.id");
         codLookupControlNivelFormacao.setEnabled(false);
+        codLookupControlNivelFormacao.setLinkLabel(lblNivelFormacao);
         codLookupControlNivelFormacao.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlNivelFormacao, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlNivelFormacao, gridBagConstraints);
 
         textControl8.setAttributeName("nivelFormacao.nome");
         textControl8.setEnabled(false);
@@ -401,7 +539,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl8, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl8, gridBagConstraints);
 
         lblCargo.setLabel("Cargo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -409,18 +547,19 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblCargo, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblCargo, gridBagConstraints);
 
         codLookupControlCargo.setAllowOnlyNumbers(true);
         codLookupControlCargo.setAttributeName("cargo.id");
         codLookupControlCargo.setEnabled(false);
+        codLookupControlCargo.setLinkLabel(lblCargo);
         codLookupControlCargo.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlCargo, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlCargo, gridBagConstraints);
 
         textControl9.setAttributeName("cargo.nome");
         textControl9.setEnabled(false);
@@ -432,7 +571,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl9, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl9, gridBagConstraints);
 
         lblSetor.setLabel("Setor:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -440,18 +579,19 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblSetor, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblSetor, gridBagConstraints);
 
         codLookupControlSetor.setAllowOnlyNumbers(true);
         codLookupControlSetor.setAttributeName("setor.id");
         codLookupControlSetor.setEnabled(false);
+        codLookupControlSetor.setLinkLabel(lblSetor);
         codLookupControlSetor.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlSetor, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlSetor, gridBagConstraints);
 
         textControl10.setAttributeName("setor.nome");
         textControl10.setEnabled(false);
@@ -463,7 +603,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl10, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl10, gridBagConstraints);
 
         lblContabilConta.setText("Contábil Conta:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -471,17 +611,18 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblContabilConta, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblContabilConta, gridBagConstraints);
 
         codLookupControlContabilConta.setAllowOnlyNumbers(true);
         codLookupControlContabilConta.setAttributeName("contabilConta.id");
         codLookupControlContabilConta.setEnabled(false);
+        codLookupControlContabilConta.setLinkLabel(lblContabilConta);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlContabilConta, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlContabilConta, gridBagConstraints);
 
         textControl2.setAttributeName("contabilConta.descricao");
         textControl2.setEnabled(false);
@@ -493,7 +634,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl2, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl2, gridBagConstraints);
 
         lblSindicato.setLabel("Sindicato:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -501,17 +642,18 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblSindicato, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblSindicato, gridBagConstraints);
 
         codLookupControlSindicato.setAllowOnlyNumbers(true);
         codLookupControlSindicato.setAttributeName("sindicato.id");
         codLookupControlSindicato.setEnabled(false);
+        codLookupControlSindicato.setLinkLabel(lblSindicato);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(codLookupControlSindicato, gridBagConstraints);
+        jPanelDadosPrincipais.add(codLookupControlSindicato, gridBagConstraints);
 
         textControl3.setAttributeName("sindicato.nome");
         textControl3.setEnabled(false);
@@ -523,7 +665,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl3, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl3, gridBagConstraints);
 
         lblDataCadastro.setLabel("Data Cadastro:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -531,7 +673,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblDataCadastro, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblDataCadastro, gridBagConstraints);
 
         dateControl13.setAttributeName("dataCadastro");
         dateControl13.setEnabled(false);
@@ -540,7 +682,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(dateControl13, gridBagConstraints);
+        jPanelDadosPrincipais.add(dateControl13, gridBagConstraints);
 
         lblDataAdmissao.setText("Data Admissão:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -548,7 +690,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 8;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblDataAdmissao, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblDataAdmissao, gridBagConstraints);
 
         dateControl14.setAttributeName("dataAdmissao");
         dateControl14.setEnabled(false);
@@ -557,7 +699,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 9;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(dateControl14, gridBagConstraints);
+        jPanelDadosPrincipais.add(dateControl14, gridBagConstraints);
 
         labelControl23.setText("Vencimento Férias:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -565,7 +707,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(labelControl23, gridBagConstraints);
+        jPanelDadosPrincipais.add(labelControl23, gridBagConstraints);
 
         dateControl15.setAttributeName("vencimentoFerias");
         dateControl15.setEnabled(false);
@@ -574,7 +716,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(dateControl15, gridBagConstraints);
+        jPanelDadosPrincipais.add(dateControl15, gridBagConstraints);
 
         labelControl24.setText("Data Transferência:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -582,7 +724,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(labelControl24, gridBagConstraints);
+        jPanelDadosPrincipais.add(labelControl24, gridBagConstraints);
 
         dateControl16.setAttributeName("dataTransferencia");
         dateControl16.setEnabled(false);
@@ -591,7 +733,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(dateControl16, gridBagConstraints);
+        jPanelDadosPrincipais.add(dateControl16, gridBagConstraints);
 
         labelControl53.setText("Data Demissão:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -599,7 +741,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(labelControl53, gridBagConstraints);
+        jPanelDadosPrincipais.add(labelControl53, gridBagConstraints);
 
         dateControl45.setAttributeName("dataDemissao");
         dateControl45.setEnabled(false);
@@ -608,7 +750,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(dateControl45, gridBagConstraints);
+        jPanelDadosPrincipais.add(dateControl45, gridBagConstraints);
 
         lblDescontoPlanoSaúde.setText("Desconto Plano Saúde:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -616,7 +758,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblDescontoPlanoSaúde, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblDescontoPlanoSaúde, gridBagConstraints);
 
         comboBoxControl37.setAttributeName("descontoPlanoSaude");
         comboBoxControl37.setDomainId("simnao");
@@ -626,7 +768,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl37, gridBagConstraints);
+        jPanelDadosPrincipais.add(comboBoxControl37, gridBagConstraints);
 
         lblSaiNaRais.setLabel("Sai Na Rais:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -634,7 +776,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblSaiNaRais, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblSaiNaRais, gridBagConstraints);
 
         comboBoxControl38.setAttributeName("saiNaRais");
         comboBoxControl38.setDomainId("simnao");
@@ -644,7 +786,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(comboBoxControl38, gridBagConstraints);
+        jPanelDadosPrincipais.add(comboBoxControl38, gridBagConstraints);
 
         labelControl54.setText("Código Turma Ponto:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -652,7 +794,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 10;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(labelControl54, gridBagConstraints);
+        jPanelDadosPrincipais.add(labelControl54, gridBagConstraints);
 
         textControl46.setAttributeName("codigoTurmaPonto");
         textControl46.setEnabled(false);
@@ -662,7 +804,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textControl46, gridBagConstraints);
+        jPanelDadosPrincipais.add(textControl46, gridBagConstraints);
 
         lblObservacao.setText("Observação:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -670,7 +812,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 12;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblObservacao, gridBagConstraints);
+        jPanelDadosPrincipais.add(lblObservacao, gridBagConstraints);
 
         textAreaControl1.setAttributeName("observacao");
         textAreaControl1.setEnabled(false);
@@ -682,7 +824,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel2.add(textAreaControl1, gridBagConstraints);
+        jPanelDadosPrincipais.add(textAreaControl1, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 14;
@@ -690,14 +832,14 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel2.add(jSeparator1, gridBagConstraints);
+        jPanelDadosPrincipais.add(jSeparator1, gridBagConstraints);
 
-        jTabbedPaneDados.addTab("Dados Principais", jPanel2);
+        jTabbedPaneDados.addTab("Dados Principais", jPanelDadosPrincipais);
 
-        jPanel3.setLayout(new java.awt.GridBagLayout());
+        jPanelOutrasInf.setLayout(new java.awt.GridBagLayout());
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Exame Médico"));
-        jPanel4.setLayout(new java.awt.GridBagLayout());
+        jPanelExameMedico.setBorder(javax.swing.BorderFactory.createTitledBorder("Exame Médico"));
+        jPanelExameMedico.setLayout(new java.awt.GridBagLayout());
 
         lblExameMedicoUltimo.setText("Exame Médico Último:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -705,25 +847,27 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel4.add(lblExameMedicoUltimo, gridBagConstraints);
+        jPanelExameMedico.add(lblExameMedicoUltimo, gridBagConstraints);
 
         dateControl26.setAttributeName("exameMedicoUltimo");
         dateControl26.setEnabled(false);
+        dateControl26.setLinkLabel(lblExameMedicoUltimo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel4.add(dateControl26, gridBagConstraints);
+        jPanelExameMedico.add(dateControl26, gridBagConstraints);
 
         dateControl27.setAttributeName("exameMedicoVencimento");
         dateControl27.setEnabled(false);
+        dateControl27.setLinkLabel(lblExameMedicoVenc);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel4.add(dateControl27, gridBagConstraints);
+        jPanelExameMedico.add(dateControl27, gridBagConstraints);
 
         lblExameMedicoVenc.setText("Exame Médico Vencimento:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -731,17 +875,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel4.add(lblExameMedicoVenc, gridBagConstraints);
+        jPanelExameMedico.add(lblExameMedicoVenc, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel4, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelExameMedico, gridBagConstraints);
 
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Sefip"));
-        jPanel5.setLayout(new java.awt.GridBagLayout());
+        jPanelSefip.setBorder(javax.swing.BorderFactory.createTitledBorder("Sefip"));
+        jPanelSefip.setLayout(new java.awt.GridBagLayout());
 
         lblOcorrenciaSefip.setLabel("Ocorrencia Sefip:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -749,7 +893,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel5.add(lblOcorrenciaSefip, gridBagConstraints);
+        jPanelSefip.add(lblOcorrenciaSefip, gridBagConstraints);
 
         numericControl41.setAttributeName("ocorrenciaSefip");
         numericControl41.setEnabled(false);
@@ -759,7 +903,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel5.add(numericControl41, gridBagConstraints);
+        jPanelSefip.add(numericControl41, gridBagConstraints);
 
         lblCategSefip.setLabel("Categoria Sefip:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -767,7 +911,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel5.add(lblCategSefip, gridBagConstraints);
+        jPanelSefip.add(lblCategSefip, gridBagConstraints);
 
         textControl39.setAttributeName("categoriaSefip");
         textControl39.setEnabled(false);
@@ -778,7 +922,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel5.add(textControl39, gridBagConstraints);
+        jPanelSefip.add(textControl39, gridBagConstraints);
 
         lblCodDemissaoSefip.setText("Código Demissão Sefip:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -786,7 +930,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel5.add(lblCodDemissaoSefip, gridBagConstraints);
+        jPanelSefip.add(lblCodDemissaoSefip, gridBagConstraints);
 
         numericControl44.setAttributeName("codigoDemissaoSefip");
         numericControl44.setEnabled(false);
@@ -796,17 +940,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel5.add(numericControl44, gridBagConstraints);
+        jPanelSefip.add(numericControl44, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel5, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelSefip, gridBagConstraints);
 
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Caged"));
-        jPanel6.setLayout(new java.awt.GridBagLayout());
+        jPanelCaged.setBorder(javax.swing.BorderFactory.createTitledBorder("Caged"));
+        jPanelCaged.setLayout(new java.awt.GridBagLayout());
 
         lblCodAdCaged.setText("Código Admissão Caged:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -814,7 +958,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel6.add(lblCodAdCaged, gridBagConstraints);
+        jPanelCaged.add(lblCodAdCaged, gridBagConstraints);
 
         numericControl42.setAttributeName("codigoAdmissaoCaged");
         numericControl42.setEnabled(false);
@@ -823,7 +967,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel6.add(numericControl42, gridBagConstraints);
+        jPanelCaged.add(numericControl42, gridBagConstraints);
 
         lblCodDemCaged.setText("Código Demissão Caged:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -831,7 +975,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel6.add(lblCodDemCaged, gridBagConstraints);
+        jPanelCaged.add(lblCodDemCaged, gridBagConstraints);
 
         numericControl43.setAttributeName("codigoDemissaoCaged");
         numericControl43.setEnabled(false);
@@ -840,17 +984,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel6.add(numericControl43, gridBagConstraints);
+        jPanelCaged.add(numericControl43, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel6, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelCaged, gridBagConstraints);
 
-        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("FGTS"));
-        jPanel7.setLayout(new java.awt.GridBagLayout());
+        jPanelFgts.setBorder(javax.swing.BorderFactory.createTitledBorder("FGTS"));
+        jPanelFgts.setLayout(new java.awt.GridBagLayout());
 
         lblFgtsOptante.setLabel("Fgts Optante:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -858,7 +1002,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel7.add(lblFgtsOptante, gridBagConstraints);
+        jPanelFgts.add(lblFgtsOptante, gridBagConstraints);
 
         comboBoxControl17.setAttributeName("fgtsOptante");
         comboBoxControl17.setDomainId("simnao");
@@ -868,7 +1012,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel7.add(comboBoxControl17, gridBagConstraints);
+        jPanelFgts.add(comboBoxControl17, gridBagConstraints);
 
         dateControl18.setAttributeName("fgtsDataOpcao");
         dateControl18.setEnabled(false);
@@ -877,7 +1021,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel7.add(dateControl18, gridBagConstraints);
+        jPanelFgts.add(dateControl18, gridBagConstraints);
 
         lblFgtsDataOpcao.setText("Fgts Data Opção:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -885,7 +1029,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel7.add(lblFgtsDataOpcao, gridBagConstraints);
+        jPanelFgts.add(lblFgtsDataOpcao, gridBagConstraints);
 
         numericControl19.setAttributeName("fgtsConta");
         numericControl19.setEnabled(false);
@@ -895,7 +1039,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel7.add(numericControl19, gridBagConstraints);
+        jPanelFgts.add(numericControl19, gridBagConstraints);
 
         lblFgtsConta.setLabel("Fgts Conta:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -903,17 +1047,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel7.add(lblFgtsConta, gridBagConstraints);
+        jPanelFgts.add(lblFgtsConta, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel7, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelFgts, gridBagConstraints);
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Carteira Profissional"));
-        jPanel8.setLayout(new java.awt.GridBagLayout());
+        jPanelCarteiraProf.setBorder(javax.swing.BorderFactory.createTitledBorder("Carteira Profissional"));
+        jPanelCarteiraProf.setLayout(new java.awt.GridBagLayout());
 
         lblCtpsNumero.setText("Ctps Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -921,7 +1065,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel8.add(lblCtpsNumero, gridBagConstraints);
+        jPanelCarteiraProf.add(lblCtpsNumero, gridBagConstraints);
 
         textControl33.setAttributeName("ctpsNumero");
         textControl33.setEnabled(false);
@@ -932,7 +1076,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel8.add(textControl33, gridBagConstraints);
+        jPanelCarteiraProf.add(textControl33, gridBagConstraints);
 
         lblCtpsSerie.setText("Ctps Série:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -940,7 +1084,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel8.add(lblCtpsSerie, gridBagConstraints);
+        jPanelCarteiraProf.add(lblCtpsSerie, gridBagConstraints);
 
         textControl34.setAttributeName("ctpsSerie");
         textControl34.setEnabled(false);
@@ -951,7 +1095,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel8.add(textControl34, gridBagConstraints);
+        jPanelCarteiraProf.add(textControl34, gridBagConstraints);
 
         lblCtpsDatExp.setLabel("Ctps Data Expedicao:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -959,7 +1103,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel8.add(lblCtpsDatExp, gridBagConstraints);
+        jPanelCarteiraProf.add(lblCtpsDatExp, gridBagConstraints);
 
         dateControl35.setAttributeName("ctpsDataExpedicao");
         dateControl35.setEnabled(false);
@@ -968,7 +1112,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel8.add(dateControl35, gridBagConstraints);
+        jPanelCarteiraProf.add(dateControl35, gridBagConstraints);
 
         lblCtpsUf.setLabel("Ctps Uf:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -976,7 +1120,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel8.add(lblCtpsUf, gridBagConstraints);
+        jPanelCarteiraProf.add(lblCtpsUf, gridBagConstraints);
 
         textControl36.setAttributeName("ctpsUf");
         textControl36.setEnabled(false);
@@ -986,17 +1130,17 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel8.add(textControl36, gridBagConstraints);
+        jPanelCarteiraProf.add(textControl36, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel8, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelCarteiraProf, gridBagConstraints);
 
-        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
-        jPanel9.setLayout(new java.awt.GridBagLayout());
+        jPanelpagamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Pagamento"));
+        jPanelpagamento.setLayout(new java.awt.GridBagLayout());
 
         labelControl28.setLabel("Pagamento Forma:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1005,7 +1149,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(labelControl28, gridBagConstraints);
+        jPanelpagamento.add(labelControl28, gridBagConstraints);
 
         comboBoxControl20.setAttributeName("pagamentoForma");
         comboBoxControl20.setDomainId("colaboradorFormaPagamento");
@@ -1016,7 +1160,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(comboBoxControl20, gridBagConstraints);
+        jPanelpagamento.add(comboBoxControl20, gridBagConstraints);
 
         lblBanco.setLabel("Banco:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1024,7 +1168,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(lblBanco, gridBagConstraints);
+        jPanelpagamento.add(lblBanco, gridBagConstraints);
 
         textControl21.setAttributeName("pagamentoBanco");
         textControl21.setEnabled(false);
@@ -1034,7 +1178,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(textControl21, gridBagConstraints);
+        jPanelpagamento.add(textControl21, gridBagConstraints);
 
         lblAgencia.setText("Agência:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1042,7 +1186,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(lblAgencia, gridBagConstraints);
+        jPanelpagamento.add(lblAgencia, gridBagConstraints);
 
         textControl22.setAttributeName("pagamentoAgencia");
         textControl22.setEnabled(false);
@@ -1052,7 +1196,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(textControl22, gridBagConstraints);
+        jPanelpagamento.add(textControl22, gridBagConstraints);
 
         lblDV1.setLabel("DV:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1060,7 +1204,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(lblDV1, gridBagConstraints);
+        jPanelpagamento.add(lblDV1, gridBagConstraints);
 
         lblConta.setLabel("Conta:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1068,7 +1212,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(lblConta, gridBagConstraints);
+        jPanelpagamento.add(lblConta, gridBagConstraints);
 
         textControl24.setAttributeName("pagamentoConta");
         textControl24.setEnabled(false);
@@ -1078,7 +1222,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(textControl24, gridBagConstraints);
+        jPanelpagamento.add(textControl24, gridBagConstraints);
 
         lblDV2.setLabel("DV:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1086,7 +1230,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel9.add(lblDV2, gridBagConstraints);
+        jPanelpagamento.add(lblDV2, gridBagConstraints);
 
         textControl25.setAttributeName("pagamentoConta");
         textControl25.setEnabled(false);
@@ -1096,7 +1240,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(textControl25, gridBagConstraints);
+        jPanelpagamento.add(textControl25, gridBagConstraints);
 
         textControl26.setAttributeName("pagamentoConta");
         textControl26.setEnabled(false);
@@ -1106,7 +1250,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel9.add(textControl26, gridBagConstraints);
+        jPanelpagamento.add(textControl26, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1114,10 +1258,10 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridwidth = 3;
         gridBagConstraints.gridheight = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel9, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelpagamento, gridBagConstraints);
 
-        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder("PIS"));
-        jPanel10.setLayout(new java.awt.GridBagLayout());
+        jPanelPis.setBorder(javax.swing.BorderFactory.createTitledBorder("PIS"));
+        jPanelPis.setLayout(new java.awt.GridBagLayout());
 
         lblPisDataCadastro.setLabel("Pis Data Cadastro:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1125,7 +1269,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel10.add(lblPisDataCadastro, gridBagConstraints);
+        jPanelPis.add(lblPisDataCadastro, gridBagConstraints);
 
         dateControl28.setAttributeName("pisDataCadastro");
         dateControl28.setEnabled(false);
@@ -1134,7 +1278,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel10.add(dateControl28, gridBagConstraints);
+        jPanelPis.add(dateControl28, gridBagConstraints);
 
         lblPisNumero.setText("Pis Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1142,7 +1286,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel10.add(lblPisNumero, gridBagConstraints);
+        jPanelPis.add(lblPisNumero, gridBagConstraints);
 
         textControl29.setAttributeName("pisNumero");
         textControl29.setEnabled(false);
@@ -1153,7 +1297,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel10.add(textControl29, gridBagConstraints);
+        jPanelPis.add(textControl29, gridBagConstraints);
 
         textControl30.setAttributeName("pisBanco");
         textControl30.setEnabled(false);
@@ -1164,7 +1308,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel10.add(textControl30, gridBagConstraints);
+        jPanelPis.add(textControl30, gridBagConstraints);
 
         lblPisBanco.setLabel("Pis Banco:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1172,7 +1316,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel10.add(lblPisBanco, gridBagConstraints);
+        jPanelPis.add(lblPisBanco, gridBagConstraints);
 
         lblPisAgencia.setText("Pis Agência:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1180,7 +1324,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel10.add(lblPisAgencia, gridBagConstraints);
+        jPanelPis.add(lblPisAgencia, gridBagConstraints);
 
         textControl31.setAttributeName("pisAgencia");
         textControl31.setEnabled(false);
@@ -1191,7 +1335,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel10.add(textControl31, gridBagConstraints);
+        jPanelPis.add(textControl31, gridBagConstraints);
 
         lblPisAgenciaDigito.setText("Pis Agência Dígito:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1199,7 +1343,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel10.add(lblPisAgenciaDigito, gridBagConstraints);
+        jPanelPis.add(lblPisAgenciaDigito, gridBagConstraints);
 
         textControl32.setAttributeName("pisAgencia");
         textControl32.setEnabled(false);
@@ -1209,14 +1353,14 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel10.add(textControl32, gridBagConstraints);
+        jPanelPis.add(textControl32, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.gridwidth = 4;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        jPanel3.add(jPanel10, gridBagConstraints);
+        jPanelOutrasInf.add(jPanelPis, gridBagConstraints);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -1224,11 +1368,11 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        jPanel3.add(jSeparator2, gridBagConstraints);
+        jPanelOutrasInf.add(jSeparator2, gridBagConstraints);
 
-        jTabbedPaneDados.addTab("Outras Informações", jPanel3);
+        jTabbedPaneDados.addTab("Outras Informações", jPanelOutrasInf);
 
-        form1.add(jTabbedPaneDados, "card2");
+        formColaborador.add(jTabbedPaneDados, "card2");
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1236,7 +1380,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        getContentPane().add(form1, gridBagConstraints);
+        getContentPane().add(formColaborador, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1267,17 +1411,17 @@ public class ColaboradorDetalhe extends InternalFrame {
     private org.openswing.swing.client.DateControl dateControl35;
     private org.openswing.swing.client.DateControl dateControl45;
     private org.openswing.swing.client.EditButton editButton1;
-    private org.openswing.swing.form.client.Form form1;
+    private org.openswing.swing.form.client.Form formColaborador;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
+    private javax.swing.JPanel jPanelCaged;
+    private javax.swing.JPanel jPanelCarteiraProf;
+    private javax.swing.JPanel jPanelDadosPrincipais;
+    private javax.swing.JPanel jPanelExameMedico;
+    private javax.swing.JPanel jPanelFgts;
+    private javax.swing.JPanel jPanelOutrasInf;
+    private javax.swing.JPanel jPanelPis;
+    private javax.swing.JPanel jPanelSefip;
+    private javax.swing.JPanel jPanelpagamento;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPaneDados;

@@ -23,11 +23,9 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.AlmoxarifadoLookup;
-import com.bakeryfactory.cadastros.lookups.NcmLookup;
-import com.bakeryfactory.cadastros.lookups.ProdutoMarcaLookup;
-import com.bakeryfactory.cadastros.lookups.ProdutoSubGrupoLookup;
-import com.bakeryfactory.cadastros.lookups.UnidadeLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -36,43 +34,159 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class ProdutoDetalhe extends InternalFrame {
 
-    private ProdutoSubGrupoLookup produtoSubGrupoLookup;
-    private ProdutoMarcaLookup produtoMarcaLookup;
-    private UnidadeLookup unidadeLookup;
-    private NcmLookup ncmLookup;
-    private AlmoxarifadoLookup almoxarifadoLookup;
+    private LookupController produtoSubGrupoLookup;
+    private LookupController produtoMarcaLookup;
+    private LookupController unidadeLookup;
+    private LookupController ncmController;
+    private LookupController almoxarifadoLookup;
+    private LookupController grupoTributarioController;
+    private LookupController icmsCustomizadoController;
+
     /**
      * Creates new form ProdutoDetalhe
+     * @param controller
      */
     public ProdutoDetalhe(ProdutoDetalheController controller) {
+        this.grupoTributarioController = new LookupController();
+        this.icmsCustomizadoController = new LookupController();
+        this.almoxarifadoLookup = new LookupController();
+        this.ncmController = new LookupController();
+        this.unidadeLookup = new LookupController();
+        this.produtoMarcaLookup = new LookupController();
+        this.produtoSubGrupoLookup = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
 
-        //Lookup do SugGrupo de Produtos
-        produtoSubGrupoLookup = new ProdutoSubGrupoLookup();
+        /*
+         * Configurações do lookup do sub grupo
+         */
+        produtoSubGrupoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO");
+        produtoSubGrupoLookup.addLookup2ParentLink("id", "produtoSubGrupo.id");
+        produtoSubGrupoLookup.addLookup2ParentLink("nome", "produtoSubGrupo.nome");
+        produtoSubGrupoLookup.addLookup2ParentLink("descricao", "produtoSubGrupo.descricao");
+        produtoSubGrupoLookup.setHeaderColumnName("id", "ID");
+        produtoSubGrupoLookup.setHeaderColumnName("nome", "Nome");
+        produtoSubGrupoLookup.setHeaderColumnName("descricao", "Descrição");
+        produtoSubGrupoLookup.setFrameTitle("Importa Agrupamento");
+
+        produtoSubGrupoLookup.setVisibleStatusPanel(true);
+        produtoSubGrupoLookup.setVisibleColumn("id", true);
+        produtoSubGrupoLookup.setVisibleColumn("nome", true);
+        produtoSubGrupoLookup.setVisibleColumn("descricao", true);
+        produtoSubGrupoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        produtoSubGrupoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(produtoSubGrupoLookup.getLookupValueObjectClassName()));
         codLookupControlSubGrupo.setLookupController(produtoSubGrupoLookup);
 
-        //Lookup das Unidades
-        unidadeLookup = new UnidadeLookup();
-        codLookupControlUnidade.setLookupController(unidadeLookup);
-        
-        //Lookup das Marcas
-        produtoMarcaLookup = new ProdutoMarcaLookup();
-        codLookupControlMarca.setLookupController(unidadeLookup);
-        
-        //Lookup do NCM
-        ncmLookup = new NcmLookup();
-        codLookupControlNcm.setLookupController(ncmLookup);
-        
-        //Lookup Almoxarifado
-        almoxarifadoLookup = new AlmoxarifadoLookup();
-        codLookupControlAlmoxarifado.setLookupController(almoxarifadoLookup);
-        
-        
-        
-        
+        /*
+         * Configurações do lookup da unidade
+         */
+        unidadeLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.UnidadeProdutoVO");
+        unidadeLookup.addLookup2ParentLink("id", "unidadeProduto.id");
+        unidadeLookup.addLookup2ParentLink("sigla", "unidadeProduto.sigla");
+        unidadeLookup.setHeaderColumnName("id", "ID");
+        unidadeLookup.setHeaderColumnName("sigla", "Sigla");
+        unidadeLookup.setFrameTitle("Importa Unidade Produto");
 
+        unidadeLookup.setVisibleStatusPanel(true);
+        unidadeLookup.setVisibleColumn("id", true);
+        unidadeLookup.setVisibleColumn("sigla", true);
+        unidadeLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        unidadeLookup.setLookupDataLocator(new LookupDataLocatorGenerico(unidadeLookup.getLookupValueObjectClassName()));
+        codLookupControlUnidade.setLookupController(unidadeLookup);
+
+
+        /*
+         * Configurações do lookup da marca
+         */
+        produtoMarcaLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoMarcaVO");
+        produtoMarcaLookup.addLookup2ParentLink("id", "produtoMarca.id");
+        produtoMarcaLookup.addLookup2ParentLink("nome", "produtoMarca.nome");
+        produtoMarcaLookup.setHeaderColumnName("id", "ID");
+        produtoMarcaLookup.setHeaderColumnName("nome", "Nome");
+        produtoMarcaLookup.setFrameTitle("Importa Marca Produto");
+
+        produtoMarcaLookup.setVisibleStatusPanel(true);
+        produtoMarcaLookup.setVisibleColumn("id", true);
+        produtoMarcaLookup.setVisibleColumn("nome", true);
+        produtoMarcaLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        produtoMarcaLookup.setLookupDataLocator(new LookupDataLocatorGenerico(produtoMarcaLookup.getLookupValueObjectClassName()));
+        codLookupControlMarca.setLookupController(produtoMarcaLookup);
+
+        /*
+         * Configurações do lookup do almoxarifado
+         */
+        almoxarifadoLookup.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.AlmoxarifadoVO");
+        almoxarifadoLookup.addLookup2ParentLink("id", "almoxarifado.id");
+        almoxarifadoLookup.addLookup2ParentLink("nome", "almoxarifado.nome");
+        almoxarifadoLookup.setHeaderColumnName("id", "ID");
+        almoxarifadoLookup.setHeaderColumnName("nome", "Nome");
+        almoxarifadoLookup.setFrameTitle("Importa Almoxarifado");
+
+        almoxarifadoLookup.setVisibleStatusPanel(true);
+        almoxarifadoLookup.setVisibleColumn("id", true);
+        almoxarifadoLookup.setVisibleColumn("nome", true);
+        almoxarifadoLookup.setFramePreferedSize(new Dimension(600, 500));
+
+        almoxarifadoLookup.setLookupDataLocator(new LookupDataLocatorGenerico(almoxarifadoLookup.getLookupValueObjectClassName()));
+        codLookupControlAlmoxarifado.setLookupController(almoxarifadoLookup);
+
+
+        /*
+         * Configurações do lookup do grupo tributario
+         */
+        grupoTributarioController.setLookupValueObjectClassName("com.bakeryfactory.tributacao.java.TributGrupoTributarioVO");
+        grupoTributarioController.addLookup2ParentLink("id", "tributGrupoTributario.id");
+        grupoTributarioController.addLookup2ParentLink("descricao", "tributGrupoTributario.descricao");
+        grupoTributarioController.setHeaderColumnName("id", "ID");
+        grupoTributarioController.setHeaderColumnName("descricao", "Nome");
+        grupoTributarioController.setFrameTitle("Importa Grupo Tributário");
+
+        grupoTributarioController.setVisibleStatusPanel(true);
+        grupoTributarioController.setVisibleColumn("id", true);
+        grupoTributarioController.setVisibleColumn("descricao", true);
+        grupoTributarioController.setFramePreferedSize(new Dimension(600, 500));
+
+        grupoTributarioController.setLookupDataLocator(new LookupDataLocatorGenerico(grupoTributarioController.getLookupValueObjectClassName()));
+        codLookupControlGrupoTributario.setLookupController(grupoTributarioController);
+
+        /*
+         * Configurações do lookup do icms customizado
+         */
+        icmsCustomizadoController.setLookupValueObjectClassName("com.bakeryfactory.tributacao.java.TributIcmsCustomCabVO");
+        icmsCustomizadoController.addLookup2ParentLink("id", "tributIcmsCustomCab.id");
+        icmsCustomizadoController.addLookup2ParentLink("descricao", "tributIcmsCustomCab.descricao");
+        icmsCustomizadoController.setHeaderColumnName("id", "ID");
+        icmsCustomizadoController.setHeaderColumnName("descricao", "Descrição");
+        icmsCustomizadoController.setFrameTitle("Importa Icms Customizado");
+
+        icmsCustomizadoController.setVisibleStatusPanel(true);
+        icmsCustomizadoController.setVisibleColumn("id", true);
+        icmsCustomizadoController.setVisibleColumn("descricao", true);
+        icmsCustomizadoController.setFramePreferedSize(new Dimension(600, 500));
+
+        icmsCustomizadoController.setLookupDataLocator(new LookupDataLocatorGenerico(icmsCustomizadoController.getLookupValueObjectClassName()));
+        codLookupControlIcmsCustomizado.setLookupController(icmsCustomizadoController);
+
+        /*
+         * Configurações do lookup do ncm
+         */
+        ncmController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.NcmVO");
+        ncmController.addLookup2ParentLink("codigo", "ncm");
+        ncmController.setHeaderColumnName("codigo", "Código");
+        ncmController.setHeaderColumnName("descricao", "Descrição");
+        ncmController.setFrameTitle("Importa NCM");
+
+        ncmController.setVisibleStatusPanel(true);
+        ncmController.setVisibleColumn("codigo", true);
+        ncmController.setVisibleColumn("descricao", true);
+        ncmController.setFramePreferedSize(new Dimension(600, 500));
+
+        ncmController.setLookupDataLocator(new LookupDataLocatorGenerico(ncmController.getLookupValueObjectClassName()));
+        codLookupControlNcm.setLookupController(ncmController);
 
     }
 
@@ -99,7 +213,7 @@ public class ProdutoDetalhe extends InternalFrame {
         form1 = new org.openswing.swing.form.client.Form();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
-        lblICMS = new org.openswing.swing.client.LabelControl();
+        lblICMSCustom = new org.openswing.swing.client.LabelControl();
         codLookupControlIcmsCustomizado = new org.openswing.swing.client.CodLookupControl();
         lblGrupoTibutario = new org.openswing.swing.client.LabelControl();
         codLookupControlGrupoTributario = new org.openswing.swing.client.CodLookupControl();
@@ -180,7 +294,7 @@ public class ProdutoDetalhe extends InternalFrame {
         textControl44 = new org.openswing.swing.client.TextControl();
         lblCodBalanca = new org.openswing.swing.client.LabelControl();
         numericControl45 = new org.openswing.swing.client.NumericControl();
-        imageControl1 = new org.openswing.swing.client.ImageControl();
+        imageCtrFotoProduto = new org.openswing.swing.client.ImageControl();
         lblPeso = new org.openswing.swing.client.LabelControl();
         numericControl38 = new org.openswing.swing.client.NumericControl();
         lblPorcentoComissao = new org.openswing.swing.client.LabelControl();
@@ -223,17 +337,18 @@ public class ProdutoDetalhe extends InternalFrame {
 
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        lblICMS.setText("ICMS Customizado:");
+        lblICMSCustom.setText("ICMS Customizado:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        jPanel2.add(lblICMS, gridBagConstraints);
+        jPanel2.add(lblICMSCustom, gridBagConstraints);
 
         codLookupControlIcmsCustomizado.setAllowOnlyNumbers(true);
         codLookupControlIcmsCustomizado.setAttributeName("tributIcmsCustomCab.id");
         codLookupControlIcmsCustomizado.setEnabled(false);
+        codLookupControlIcmsCustomizado.setLinkLabel(lblICMSCustom);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -252,6 +367,7 @@ public class ProdutoDetalhe extends InternalFrame {
         codLookupControlGrupoTributario.setAllowOnlyNumbers(true);
         codLookupControlGrupoTributario.setAttributeName("tributGrupoTributario.id");
         codLookupControlGrupoTributario.setEnabled(false);
+        codLookupControlGrupoTributario.setLinkLabel(lblGrupoTibutario);
         codLookupControlGrupoTributario.setMaxCharacters(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -293,12 +409,13 @@ public class ProdutoDetalhe extends InternalFrame {
         codLookupControlUnidade.setAllowOnlyNumbers(true);
         codLookupControlUnidade.setAttributeName("unidadeProduto.id");
         codLookupControlUnidade.setEnabled(false);
+        codLookupControlUnidade.setLinkLabel(lblUnidade);
         codLookupControlUnidade.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel2.add(codLookupControlUnidade, gridBagConstraints);
 
         lblMarca.setText("Marca:");
@@ -312,11 +429,12 @@ public class ProdutoDetalhe extends InternalFrame {
         codLookupControlMarca.setAllowOnlyNumbers(true);
         codLookupControlMarca.setAttributeName("produtoMarca.id");
         codLookupControlMarca.setEnabled(false);
+        codLookupControlMarca.setLinkLabel(lblMarca);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel2.add(codLookupControlMarca, gridBagConstraints);
 
         textControl6.setAttributeName("produtoMarca.nome");
@@ -354,6 +472,7 @@ public class ProdutoDetalhe extends InternalFrame {
         codLookupControlAlmoxarifado.setAllowOnlyNumbers(true);
         codLookupControlAlmoxarifado.setAttributeName("almoxarifado.id");
         codLookupControlAlmoxarifado.setEnabled(false);
+        codLookupControlAlmoxarifado.setLinkLabel(lblAlmoxarifado);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -372,12 +491,13 @@ public class ProdutoDetalhe extends InternalFrame {
         codLookupControlSubGrupo.setAllowOnlyNumbers(true);
         codLookupControlSubGrupo.setAttributeName("produtoSubGrupo.id");
         codLookupControlSubGrupo.setEnabled(false);
+        codLookupControlSubGrupo.setLinkLabel(lblUnidade);
         codLookupControlSubGrupo.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel2.add(codLookupControlSubGrupo, gridBagConstraints);
 
         textControl4.setAttributeName("almoxarifado.nome");
@@ -401,7 +521,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 0);
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 5, 5);
         jPanel2.add(textControl7, gridBagConstraints);
 
         textControl8.setAttributeName("produtoSubGrupo.descricao");
@@ -525,6 +645,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl29.setAttributeName("inativo");
         comboBoxControl29.setDomainId("naosim");
         comboBoxControl29.setEnabled(false);
+        comboBoxControl29.setLinkLabel(lblInativo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -544,6 +665,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl34.setAttributeName("classeAbc");
         comboBoxControl34.setDomainId("produtoClasse");
         comboBoxControl34.setEnabled(false);
+        comboBoxControl34.setLinkLabel(lblClasseAbc);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
@@ -914,6 +1036,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl35.setAttributeName("iat");
         comboBoxControl35.setDomainId("produtoIat");
         comboBoxControl35.setEnabled(false);
+        comboBoxControl35.setLinkLabel(lblIat);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -932,6 +1055,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl36.setAttributeName("ippt");
         comboBoxControl36.setDomainId("produtoIppt");
         comboBoxControl36.setEnabled(false);
+        comboBoxControl36.setLinkLabel(lblIppt);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -981,7 +1105,8 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel5.add(numericControl45, gridBagConstraints);
 
-        imageControl1.setAttributeName("imagem");
+        imageCtrFotoProduto.setAttributeName("imagem");
+        imageCtrFotoProduto.setLinkLabel(lblFotoProduto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -990,7 +1115,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.ipadx = 270;
         gridBagConstraints.ipady = 250;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
-        jPanel5.add(imageControl1, gridBagConstraints);
+        jPanel5.add(imageCtrFotoProduto, gridBagConstraints);
 
         lblPeso.setLabel("Peso:");
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -1113,6 +1238,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl1.setAttributeName("tipoItemSped");
         comboBoxControl1.setDomainId("produtoTipoItemSped");
         comboBoxControl1.setEnabled(false);
+        comboBoxControl1.setLinkLabel(lblTipoItemSped);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -1132,6 +1258,7 @@ public class ProdutoDetalhe extends InternalFrame {
         comboBoxControl47.setAttributeName("tipo");
         comboBoxControl47.setDomainId("produtoTipo");
         comboBoxControl47.setEnabled(false);
+        comboBoxControl47.setLinkLabel(lblTipo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
@@ -1176,7 +1303,7 @@ public class ProdutoDetalhe extends InternalFrame {
     private org.openswing.swing.client.ComboBoxControl comboBoxControl47;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.form.client.Form form1;
-    private org.openswing.swing.client.ImageControl imageControl1;
+    private org.openswing.swing.client.ImageControl imageCtrFotoProduto;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -1203,7 +1330,7 @@ public class ProdutoDetalhe extends InternalFrame {
     private org.openswing.swing.client.LabelControl lblFotoProduto;
     private org.openswing.swing.client.LabelControl lblGrupoTibutario;
     private org.openswing.swing.client.LabelControl lblGtin;
-    private org.openswing.swing.client.LabelControl lblICMS;
+    private org.openswing.swing.client.LabelControl lblICMSCustom;
     private org.openswing.swing.client.LabelControl lblIat;
     private org.openswing.swing.client.LabelControl lblInativo;
     private org.openswing.swing.client.LabelControl lblIppt;

@@ -25,9 +25,7 @@ package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.cadastros.java.PessoaVO;
 import org.openswing.swing.form.client.FormController;
-import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.receive.java.VOResponse;
 import org.openswing.swing.message.receive.java.ValueObject;
 
@@ -48,25 +46,8 @@ class PessoaJuridicaDetalheController extends FormController {
      * @param valueObjectClass value object class
      * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
      */
+    @Override
     public Response loadData(Class valueObjectClass) {
-        /*
-try {
-      // create an empty value object...
-      Object vo = valueObjectClass.newInstance();
-      // set demo data in the value object just created...
-      for (int i = 0; i < valueObjectClass.getMethods().length; i++) {
-        if (valueObjectClass.getMethods()[i].getName().startsWith("set")) {
-          valueObjectClass.getMethod(valueObjectClass.getMethods()[i].getName(),valueObjectClass.getMethods()[i].getParameterTypes()).invoke(vo,new Object[]{getObject(valueObjectClass.getMethods()[i].getParameterTypes()[0])});
-        }
-      }
-      VOResponse r = new VOResponse(vo);
-      return r;
-    }
-    catch (Exception ex) {
-      return new ErrorResponse("Error on creating the demo value object:\n"+ex.toString());
-    }
-  }
-         */
         return new VOResponse(pessoa.getPessoaJuridica());
     }
 
@@ -76,6 +57,7 @@ try {
      * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return new VOResponse(newPersistentObject);
     }
@@ -87,6 +69,7 @@ try {
      * @param persistentObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      */
+    @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         return new VOResponse(persistentObject);
     }

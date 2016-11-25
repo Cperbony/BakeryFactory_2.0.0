@@ -21,33 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package temp.com.bakeryfactory.cliente;
+package temp.com.bakeryfactory.cadastros.cliente;
 
-import org.openswing.swing.client.GridControl;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
  *
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  */
-public class TempGrid extends InternalFrame {
+public class TempDetalhe extends InternalFrame {
+
+
 
     /**
-     * Creates new form TempGrid
+     * Creates new form ColaboradorDetalhe
+     *
      * @param controller
      */
-    public TempGrid(TempGridController controller) {
+    public TempDetalhe(TempDetalheController controller) {
         initComponents();
-        gridControl1.setController(controller);
-        gridControl1.setGridDataLocator(controller);
+
+        form1.setFormController(controller);
+
     }
-    
-      /**
+
+    /**
      *
-     * @return GRID associada a cada tela
+     * @return FORM
      */
-    public GridControl getGrid1() {
-        return gridControl1;
+    public org.openswing.swing.form.client.Form getForm1() {
+        return form1;
     }
 
     /**
@@ -58,27 +61,28 @@ public class TempGrid extends InternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        gridControl1 = new org.openswing.swing.client.GridControl();
+        form1 = new org.openswing.swing.form.client.Form();
 
-        setTitle("Bakery Factory - Vendas");
+        setTitle("Bakery Factory - Cadastros Detalhes");
+        setPreferredSize(new java.awt.Dimension(700, 400));
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        gridControl1.setFunctionId("produto");
-        gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.FornecedorVO");
+        form1.setFunctionId("fornecedor");
+        form1.setLayout(new java.awt.GridBagLayout());
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.ipadx = 1557;
-        gridBagConstraints.ipady = 220;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
-        gridBagConstraints.insets = new java.awt.Insets(17, 0, 18, 0);
-        getContentPane().add(gridControl1, gridBagConstraints);
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        getContentPane().add(form1, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.client.GridControl gridControl1;
+    private org.openswing.swing.form.client.Form form1;
     // End of variables declaration//GEN-END:variables
 }

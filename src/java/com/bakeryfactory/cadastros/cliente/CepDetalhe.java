@@ -60,6 +60,8 @@ public class CepDetalhe extends InternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        editButton1 = new org.openswing.swing.client.EditButton();
+        saveButton1 = new org.openswing.swing.client.SaveButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         form1 = new org.openswing.swing.form.client.Form();
         lblCep = new org.openswing.swing.client.LabelControl();
@@ -84,6 +86,8 @@ public class CepDetalhe extends InternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("CEP"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.add(editButton1);
+        jPanel1.add(saveButton1);
         jPanel1.add(reloadButton1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -94,8 +98,10 @@ public class CepDetalhe extends InternalFrame {
         getContentPane().add(jPanel1, gridBagConstraints);
 
         form1.setVOClassName("com.bakeryfactory.cadastros.java.CepVO");
+        form1.setEditButton(editButton1);
         form1.setFunctionId("cep");
         form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblCep.setLabel("Cep:");
@@ -244,6 +250,7 @@ public class CepDetalhe extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.form.client.Form form1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
@@ -256,6 +263,7 @@ public class CepDetalhe extends InternalFrame {
     private org.openswing.swing.client.LabelControl lblUf;
     private org.openswing.swing.client.NumericControl numericControl8;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.TextControl textControl2;
     private org.openswing.swing.client.TextControl textControl3;
     private org.openswing.swing.client.TextControl textControl4;

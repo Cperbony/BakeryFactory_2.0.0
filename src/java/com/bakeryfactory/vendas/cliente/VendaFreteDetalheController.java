@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;

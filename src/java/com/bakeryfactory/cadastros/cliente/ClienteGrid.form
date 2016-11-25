@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="title" type="java.lang.String" value="Bakery Factory - Cadastros"/>
+  </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
   </SyntheticProperties>
@@ -23,7 +26,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Cadastros Clientes"/>
+            <TitledBorder title="Clientes"/>
           </Border>
         </Property>
       </Properties>
@@ -103,12 +106,11 @@
         </Component>
         <Component class="org.openswing.swing.table.columns.client.TextColumn" name="textColumn6">
           <Properties>
-            <Property name="columnFilterable" type="boolean" value="true"/>
             <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="&quot;situacaoForCli.nome&quot;" type="code"/>
             </Property>
             <Property name="columnSortable" type="boolean" value="true"/>
-            <Property name="headerColumnName" type="java.lang.String" value="Situacao"/>
+            <Property name="headerColumnName" type="java.lang.String" value="Situa&#xe7;&#xe3;o"/>
             <Property name="headerFont" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Arial" size="11" style="1"/>
             </Property>

@@ -64,9 +64,10 @@ public class CargoGrid extends InternalFrame {
         textColumn6 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn7 = new org.openswing.swing.table.columns.client.TextColumn();
 
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastros de Cargos"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro de Cargos"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
@@ -96,9 +97,9 @@ public class CargoGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn3);
 
         decimalColumn5.setColumnName("salario");
-        decimalColumn5.setHeaderColumnName("Salario");
-        decimalColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         decimalColumn5.setDecimals(2);
+        decimalColumn5.setHeaderColumnName("Salário");
+        decimalColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(decimalColumn5);
 
         textColumn6.setColumnName("cbo1994");

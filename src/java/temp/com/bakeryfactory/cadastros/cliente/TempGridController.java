@@ -22,9 +22,9 @@
  * THE SOFTWARE.
  */
 
-package temp.com.bakeryfactory.cliente;
+package temp.com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
+import com.bakeryfactory.cadastros.java.FornecedorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,7 +45,7 @@ import org.openswing.swing.util.client.ClientUtils;
  */
 public class TempGridController extends GridController implements GridDataLocator{
     
-    private TempGrid grid;
+    private final TempGrid grid;
     private final String acaoServidor;
 
     public TempGridController() {
@@ -88,8 +88,8 @@ public class TempGridController extends GridController implements GridDataLocato
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        ColaboradorVO colaborador = (ColaboradorVO) persistentObject;
-        new TempDetalheController(grid, colaborador.getId().toString());
+        FornecedorVO fornecedor = (FornecedorVO) persistentObject;
+        new TempDetalheController(grid, fornecedor.getId().toString());
     }
 
     /**

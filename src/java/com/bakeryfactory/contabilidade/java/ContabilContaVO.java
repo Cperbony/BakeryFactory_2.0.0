@@ -60,12 +60,15 @@ public class ContabilContaVO extends ValueObjectImpl implements Serializable {
     private String codigoReduzido;
     @Column(name = "CODIGO_EFD")
     private String codigoEfd;
+    
     @JoinColumn(name = "ID_PLANO_CONTA_REF_SPED", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PlanoContaRefSpedVO planoContaRefSped;
+    
     @JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
     @ManyToOne
     private ContabilContaVO contabilConta;
+    
     @JoinColumn(name = "ID_PLANO_CONTA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private PlanoContaVO planoConta;

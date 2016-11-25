@@ -38,8 +38,8 @@ public class TransportadoraGrid extends InternalFrame {
      */
     public TransportadoraGrid(TransportadoraGridController controller) {
         initComponents();
-        gridControl1.setController(controller);
-        gridControl1.setGridDataLocator(controller);
+        gridControlTransp.setController(controller);
+        gridControlTransp.setGridDataLocator(controller);
     }
     
       /**
@@ -47,7 +47,7 @@ public class TransportadoraGrid extends InternalFrame {
      * @return GRID associada a cada tela
      */
     public GridControl getGrid1() {
-        return gridControl1;
+        return gridControlTransp;
     }
 
     /**
@@ -63,7 +63,7 @@ public class TransportadoraGrid extends InternalFrame {
         deleteButton1 = new org.openswing.swing.client.DeleteButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
-        gridControl1 = new org.openswing.swing.client.GridControl();
+        gridControlTransp = new org.openswing.swing.client.GridControl();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
         dateColumn4 = new org.openswing.swing.table.columns.client.DateColumn();
 
@@ -85,24 +85,24 @@ public class TransportadoraGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        gridControl1.setDeleteButton(deleteButton1);
-        gridControl1.setFunctionId("transportadora");
-        gridControl1.setInsertButton(insertButton1);
-        gridControl1.setNavBar(navigatorBar1);
-        gridControl1.setReloadButton(reloadButton1);
-        gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.TransportadoraVO");
-        gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        gridControlTransp.setDeleteButton(deleteButton1);
+        gridControlTransp.setFunctionId("transportadora");
+        gridControlTransp.setInsertButton(insertButton1);
+        gridControlTransp.setNavBar(navigatorBar1);
+        gridControlTransp.setReloadButton(reloadButton1);
+        gridControlTransp.setValueObjectClassName("com.bakeryfactory.cadastros.java.TransportadoraVO");
+        gridControlTransp.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn3.setColumnName("pessoa.nome");
         textColumn3.setHeaderColumnName("Nome");
         textColumn3.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn3.setPreferredWidth(300);
-        gridControl1.getColumnContainer().add(textColumn3);
+        gridControlTransp.getColumnContainer().add(textColumn3);
 
         dateColumn4.setColumnName("dataCadastro");
         dateColumn4.setHeaderColumnName("Data Cadastro");
         dateColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControl1.getColumnContainer().add(dateColumn4);
+        gridControlTransp.getColumnContainer().add(dateColumn4);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -110,7 +110,7 @@ public class TransportadoraGrid extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
-        getContentPane().add(gridControl1, gridBagConstraints);
+        getContentPane().add(gridControlTransp, gridBagConstraints);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -119,7 +119,7 @@ public class TransportadoraGrid extends InternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.openswing.swing.table.columns.client.DateColumn dateColumn4;
     private org.openswing.swing.client.DeleteButton deleteButton1;
-    private org.openswing.swing.client.GridControl gridControl1;
+    private org.openswing.swing.client.GridControl gridControlTransp;
     private org.openswing.swing.client.InsertButton insertButton1;
     private javax.swing.JPanel jPanel1;
     private org.openswing.swing.client.NavigatorBar navigatorBar1;

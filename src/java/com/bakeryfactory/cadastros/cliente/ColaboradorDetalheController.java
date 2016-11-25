@@ -42,7 +42,7 @@ public class ColaboradorDetalheController extends FormController {
     private ColaboradorDetalhe colaboradorDetalhe = null;
     private String pk = null;
     private ColaboradorGrid colaboradorGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public ColaboradorDetalheController(ColaboradorGrid colaboradorGrid, String pk) {
         this.colaboradorGrid = colaboradorGrid;
@@ -81,7 +81,6 @@ public class ColaboradorDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

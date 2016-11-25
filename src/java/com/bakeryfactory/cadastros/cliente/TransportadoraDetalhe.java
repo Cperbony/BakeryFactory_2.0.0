@@ -23,8 +23,8 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.ContaContabilLookup;
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
 import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
@@ -33,10 +33,9 @@ import org.openswing.swing.mdi.client.InternalFrame;
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  */
 public class TransportadoraDetalhe extends InternalFrame {
-    
-    private PessoaLookup pessoaLookupController;
-    private ContaContabilLookup contaContabilLookupController;
 
+    private final LookupController pessoaLookupController;
+    private final LookupController contaContabilLookupController;
 
     /**
      * Creates new form ColaboradorDetalhe
@@ -44,19 +43,48 @@ public class TransportadoraDetalhe extends InternalFrame {
      * @param controller
      */
     public TransportadoraDetalhe(TransportadoraDetalheController controller) {
+        this.pessoaLookupController = new LookupController();
+        this.contaContabilLookupController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
-        
-        //Lookup Pessoa
-        pessoaLookupController = new PessoaLookup();
+
+        /*
+         * Configurações do lookup da pessoa
+         */
+        pessoaLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
+        pessoaLookupController.addLookup2ParentLink("id", "pessoa.id");
+        pessoaLookupController.addLookup2ParentLink("nome", "pessoa.nome");
+        pessoaLookupController.setHeaderColumnName("id", "ID");
+        pessoaLookupController.setHeaderColumnName("nome", "Nome");
+        pessoaLookupController.setFrameTitle("Importa Pessoa");
+
+        pessoaLookupController.setVisibleStatusPanel(true);
+        pessoaLookupController.setVisibleColumn("id", true);
+        pessoaLookupController.setVisibleColumn("nome", true);
+        pessoaLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        pessoaLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(pessoaLookupController.getLookupValueObjectClassName()));
         codLookupControlPessoa.setLookupController(pessoaLookupController);
 
-        //Lookup Conta Contábil
-        contaContabilLookupController = new ContaContabilLookup();
-        codLookupControlContaContabil.setLookupController(pessoaLookupController);
+        /*
+         * Configurações do lookup da conta contabil
+         */
+        contaContabilLookupController.setLookupValueObjectClassName("com.bakeryfactory.contabilidade.java.ContabilContaVO");
+        contaContabilLookupController.addLookup2ParentLink("id", "contabilConta.id");
+        contaContabilLookupController.addLookup2ParentLink("descricao", "contabilConta.descricao");
+        contaContabilLookupController.setHeaderColumnName("id", "ID");
+        contaContabilLookupController.setHeaderColumnName("descricao", "Descrição");
+        contaContabilLookupController.setFrameTitle("Importa Conta Contábil");
+
+        contaContabilLookupController.setVisibleStatusPanel(true);
+        contaContabilLookupController.setVisibleColumn("id", true);
+        contaContabilLookupController.setVisibleColumn("descricao", true);
+        contaContabilLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        contaContabilLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(contaContabilLookupController.getLookupValueObjectClassName()));
+        codLookupControlContaContabil.setLookupController(contaContabilLookupController);
     }
-    
 
     /**
      *
@@ -126,6 +154,7 @@ public class TransportadoraDetalhe extends InternalFrame {
         codLookupControlContaContabil.setAllowOnlyNumbers(true);
         codLookupControlContaContabil.setAttributeName("contabilConta.id");
         codLookupControlContaContabil.setEnabled(false);
+        codLookupControlContaContabil.setLinkLabel(lblContaContabil);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -157,6 +186,7 @@ public class TransportadoraDetalhe extends InternalFrame {
         codLookupControlPessoa.setAllowOnlyNumbers(true);
         codLookupControlPessoa.setAttributeName("pessoa.id");
         codLookupControlPessoa.setEnabled(false);
+        codLookupControlPessoa.setLinkLabel(lblPessoa);
         codLookupControlPessoa.setMaxCharacters(10);
         codLookupControlPessoa.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -192,6 +222,7 @@ public class TransportadoraDetalhe extends InternalFrame {
         dateControl4.setEnabled(false);
         dateControl4.setEnabledOnEdit(false);
         dateControl4.setEnabledOnInsert(false);
+        dateControl4.setLinkLabel(lblDataCadastro);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;

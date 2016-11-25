@@ -54,9 +54,13 @@ public class MarcaVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DESCRICAO")
     private String descricao;
     
-    @JoinColumn(name = "ID_IGREDIENTE", referencedColumnName = "ID")
+    /*
+    
+    
+    @JoinColumn(name = "ID_INGREDIENTE", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private IngredienteVO ingrediente;
+*/
 
     public MarcaVO() {
     }
@@ -88,7 +92,9 @@ public class MarcaVO extends ValueObjectImpl implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
-
+/*
+    
+    
     public IngredienteVO getIngrediente() {
         return ingrediente;
     }
@@ -96,7 +102,7 @@ public class MarcaVO extends ValueObjectImpl implements Serializable {
     public void setIngrediente(IngredienteVO ingrediente) {
         this.ingrediente = ingrediente;
     }
-
+*/
     @Override
     public int hashCode() {
         int hash = 0;

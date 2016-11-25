@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.cadastros.java.ProdutoVO;
 import com.bakeryfactory.padrao.java.Biblioteca;
 import com.bakeryfactory.padrao.java.Constantes;
@@ -210,11 +209,15 @@ public class ProdutoDetalheAction implements Action {
     }
 
     public void checaGrupoTributario(ProdutoVO produto) {
-        //if(produto.getTributoGrupoTributario().getId() == null) { produto.setTributGrupoTributario(null); }
+        if(produto.getTributGrupoTributario().getId() == null) {
+            produto.setTributGrupoTributario(null);
+        }
     }
 
     public void checaIcms(ProdutoVO produto) {
-        // if(produto.getTributIcmsCustomCab().getId() == null) { produto.setTributIcmsCustomCab(null); }
+        if(produto.getTributIcmsCustomCab().getId() == null) {
+            produto.setTributIcmsCustomCab(null);
+        }
     }
 
     public void checaProdutoMarca(ProdutoVO produto) {

@@ -51,10 +51,19 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="org.openswing.swing.form.client.Form" name="form1">
+    <Container class="org.openswing.swing.form.client.Form" name="formColaborador">
       <Properties>
-        <Property name="VOClassName" type="java.lang.String" value="com.t2tierp.cadastros.java.ColaboradorVO"/>
+        <Property name="VOClassName" type="java.lang.String" value="com.bakeryfactory.cadastros.java.ColaboradorVO"/>
+        <Property name="editButton" type="org.openswing.swing.client.EditButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="editButton1"/>
+        </Property>
         <Property name="functionId" type="java.lang.String" value="colaborador"/>
+        <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="reloadButton1"/>
+        </Property>
+        <Property name="saveButton" type="org.openswing.swing.client.SaveButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="saveButton1"/>
+        </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -73,7 +82,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jPanel2">
+            <Container class="javax.swing.JPanel" name="jPanelDadosPrincipais">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Dados Principais">
@@ -101,6 +110,9 @@
                       <Connection code="&quot;pessoa.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblPessoa"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -141,6 +153,9 @@
                       <Connection code="&quot;tipoColaborador.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblTipo"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -181,6 +196,9 @@
                       <Connection code="&quot;situacaoColaborador.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblSituacao"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -220,6 +238,9 @@
                       <Connection code="&quot;idtipoadmissao.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblTipoAdmissao"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -259,6 +280,9 @@
                       <Connection code="&quot;nivelFormacao.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblNivelFormacao"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -299,6 +323,9 @@
                       <Connection code="&quot;cargo.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblCargo"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -339,6 +366,9 @@
                       <Connection code="&quot;setor.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblSetor"/>
+                    </Property>
                     <Property name="required" type="boolean" value="true"/>
                   </Properties>
                   <Constraints>
@@ -379,6 +409,9 @@
                       <Connection code="&quot;contabilConta.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblContabilConta"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -418,6 +451,9 @@
                       <Connection code="&quot;sindicato.id&quot;" type="code"/>
                     </Property>
                     <Property name="enabled" type="boolean" value="false"/>
+                    <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                      <ComponentRef name="lblSindicato"/>
+                    </Property>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -660,7 +696,7 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jPanel3">
+            <Container class="javax.swing.JPanel" name="jPanelOutrasInf">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
                   <JTabbedPaneConstraints tabName="Outras Informa&#xe7;&#xf5;es">
@@ -671,7 +707,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jPanel4">
+                <Container class="javax.swing.JPanel" name="jPanelExameMedico">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -703,6 +739,9 @@
                           <Connection code="&quot;exameMedicoUltimo&quot;" type="code"/>
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="lblExameMedicoUltimo"/>
+                        </Property>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -716,6 +755,9 @@
                           <Connection code="&quot;exameMedicoVencimento&quot;" type="code"/>
                         </Property>
                         <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                          <ComponentRef name="lblExameMedicoVenc"/>
+                        </Property>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -735,7 +777,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel5">
+                <Container class="javax.swing.JPanel" name="jPanelSefip">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -823,7 +865,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel6">
+                <Container class="javax.swing.JPanel" name="jPanelCaged">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -887,7 +929,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel7">
+                <Container class="javax.swing.JPanel" name="jPanelFgts">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -975,7 +1017,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel8">
+                <Container class="javax.swing.JPanel" name="jPanelCarteiraProf">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1088,7 +1130,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel9">
+                <Container class="javax.swing.JPanel" name="jPanelpagamento">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -1250,7 +1292,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jPanel10">
+                <Container class="javax.swing.JPanel" name="jPanelPis">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">

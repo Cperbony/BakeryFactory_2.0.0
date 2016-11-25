@@ -33,20 +33,20 @@ import org.openswing.swing.lookup.client.LookupController;
  */
 public class ContaContabilLookup extends LookupController {
 
-    private LookupController contaContabilController;
+    private final LookupController contaContabilController;
 
     public ContaContabilLookup() {
         contaContabilController = new LookupController();
-        contaContabilController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ContabilContaVO");
+        contaContabilController.setLookupValueObjectClassName("com.bakeryfactory.contabilidade.java.ContabilContaVO");
         contaContabilController.addLookup2ParentLink("id", "contaContabil.id");
-        contaContabilController.addLookup2ParentLink("nome", "contaContabil.nome");
+        contaContabilController.addLookup2ParentLink("descricao", "contaContabil.descricao");
         contaContabilController.setHeaderColumnName("id", "ID");
-        contaContabilController.setHeaderColumnName("nome", "Nome");
+        contaContabilController.setHeaderColumnName("descricao", "Descrição");
         contaContabilController.setFrameTitle("Importa o Tipo de Conta Contábil");
 
         contaContabilController.setVisibleStatusPanel(true);
         contaContabilController.setVisibleColumn("id", true);
-        contaContabilController.setVisibleColumn("nome", true);
+        contaContabilController.setVisibleColumn("descricao", true);
         contaContabilController.setFramePreferedSize(new Dimension(600, 500));
 
         contaContabilController.setLookupDataLocator(new LookupDataLocatorGenerico(contaContabilController.getLookupValueObjectClassName()));

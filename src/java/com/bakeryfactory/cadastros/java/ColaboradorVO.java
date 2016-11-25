@@ -23,15 +23,10 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.compras.java.CompraRequisicaoVO;
-import com.bakeryfactory.compras.java.CompraRequisicaoInternaDetalheVO;
-import com.bakeryfactory.vendas.java.VendaRomaneioEntregaVO;
-import com.bakeryfactory.pcp.java.PcpServicoColaboradorVO;
+import com.bakeryfactory.contabilidade.java.ContabilContaVO;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,12 +34,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -146,9 +138,9 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     private String classificacaoContabilConta;
     @Column(name = "CODIGO_TURMA_PONTO")
     private String codigoTurmaPonto;
-    @Column(name = "ATA_DEMISSAO")
+    @Column(name = "DATA_DEMISSAO")
     @Temporal(TemporalType.DATE)
-    private Date ataDemissao;
+    private Date dataDemissao;
 
     @JoinColumn(name = "ID_CARGO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -165,7 +157,30 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     @JoinColumn(name = "ID_TIPO_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private TipoColaboradorVO tipoColaborador;
+    
+    @JoinColumn(name = "ID_NIVEL_FORMACAO", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private NivelFormacaoVO nivelFormacao;
+    
+    @JoinColumn(name = "ID_SITUACAO_COLABORADOR", referencedColumnName = "ID")
+    @ManyToOne(optional = false)
+    private SituacaoColaboradorVO situacaoColaborador;
+    
+    @JoinColumn(name = "ID_TIPO_ADMISSAO", referencedColumnName = "ID")
+    @ManyToOne
+    private TipoAdmissaoVO tipoAdmissao;
+    
+    @JoinColumn(name = "ID_SINDICATO", referencedColumnName = "ID")
+    @ManyToOne
+    private SindicatoVO sindicato;
+    
+    @JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
+    private ContabilContaVO contabilConta;
 
+    /*
+    
+ 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendaRomaneioEntregaVO> listaVendaRomaneioEntrega;
@@ -173,15 +188,7 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<UsuarioVO> ListaUsuario;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<CompraRequisicaoVO> listaCompraRequisicao;
-
+    
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<VendedorVO> listaVendedor;
@@ -189,6 +196,7 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "colaborador")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpServicoColaboradorVO> ListaPcpServicoColaborador;
+   */
 
     public ColaboradorVO() {
     }
@@ -509,52 +517,12 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.codigoTurmaPonto = codigoTurmaPonto;
     }
 
-    public Date getAtaDemissao() {
-        return ataDemissao;
+    public Date getDataDemissao() {
+        return dataDemissao;
     }
 
-    public void setAtaDemissao(Date ataDemissao) {
-        this.ataDemissao = ataDemissao;
-    }
-
-    public List<VendaRomaneioEntregaVO> getListaVendaRomaneioEntrega() {
-        return listaVendaRomaneioEntrega;
-    }
-
-    public void setListaVendaRomaneioEntrega(List<VendaRomaneioEntregaVO> listaVendaRomaneioEntrega) {
-        this.listaVendaRomaneioEntrega = listaVendaRomaneioEntrega;
-    }
-
-    public List<UsuarioVO> getListaUsuario() {
-        return ListaUsuario;
-    }
-
-    public void setListaUsuario(List<UsuarioVO> ListaUsuario) {
-        this.ListaUsuario = ListaUsuario;
-    }
-
-    public List<CompraRequisicaoInternaDetalheVO> getListaRequisicaoInternaDetalhe() {
-        return listaRequisicaoInternaDetalhe;
-    }
-
-    public void setListaRequisicaoInternaDetalhe(List<CompraRequisicaoInternaDetalheVO> listaRequisicaoInternaDetalhe) {
-        this.listaRequisicaoInternaDetalhe = listaRequisicaoInternaDetalhe;
-    }
-
-    public List<CompraRequisicaoVO> getListaCompraRequisicao() {
-        return listaCompraRequisicao;
-    }
-
-    public void setListaCompraRequisicao(List<CompraRequisicaoVO> listaCompraRequisicao) {
-        this.listaCompraRequisicao = listaCompraRequisicao;
-    }
-
-    public List<VendedorVO> getListaVendedor() {
-        return listaVendedor;
-    }
-
-    public void setListaVendedor(List<VendedorVO> listaVendedor) {
-        this.listaVendedor = listaVendedor;
+    public void setDataDemissao(Date dataDemissao) {
+        this.dataDemissao = dataDemissao;
     }
 
     public CargoVO getCargo() {
@@ -589,12 +557,44 @@ public class ColaboradorVO extends ValueObjectImpl implements Serializable {
         this.tipoColaborador = tipoColaborador;
     }
 
-    public List<PcpServicoColaboradorVO> getListaPcpServicoColaborador() {
-        return ListaPcpServicoColaborador;
+    public NivelFormacaoVO getNivelFormacao() {
+        return nivelFormacao;
     }
 
-    public void setListaPcpServicoColaborador(List<PcpServicoColaboradorVO> ListaPcpServicoColaborador) {
-        this.ListaPcpServicoColaborador = ListaPcpServicoColaborador;
+    public void setNivelFormacao(NivelFormacaoVO nivelFormacao) {
+        this.nivelFormacao = nivelFormacao;
+    }
+
+    public SituacaoColaboradorVO getSituacaoColaborador() {
+        return situacaoColaborador;
+    }
+
+    public void setSituacaoColaborador(SituacaoColaboradorVO situacaoColaborador) {
+        this.situacaoColaborador = situacaoColaborador;
+    }
+
+    public TipoAdmissaoVO getTipoAdmissao() {
+        return tipoAdmissao;
+    }
+
+    public void setTipoAdmissao(TipoAdmissaoVO tipoAdmissao) {
+        this.tipoAdmissao = tipoAdmissao;
+    }
+
+    public SindicatoVO getSindicato() {
+        return sindicato;
+    }
+
+    public void setSindicato(SindicatoVO sindicato) {
+        this.sindicato = sindicato;
+    }
+
+    public ContabilContaVO getContabilConta() {
+        return contabilConta;
+    }
+
+    public void setContabilConta(ContabilContaVO contabilConta) {
+        this.contabilConta = contabilConta;
     }
 
     @Override

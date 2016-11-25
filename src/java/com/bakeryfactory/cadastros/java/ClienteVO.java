@@ -23,14 +23,12 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.vendas.java.VendaCabecalhoVO;
-import com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO;
+import com.bakeryfactory.contabilidade.java.ContabilContaVO;
+import com.bakeryfactory.tributacao.java.TributOperacaoFiscalVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,12 +36,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -73,20 +68,16 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     @Column(name = "CONTA_TOMADOR")
     private String contaTomador;
     @Column(name = "INDICADOR_PRECO")
-    private Character indicadorPreco;
+    private String indicadorPreco;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "PORCENTO_DESCONTO")
     private BigDecimal porcentoDesconto;
     @Column(name = "FORMA_DESCONTO")
-    private Character formaDesconto;
+    private String formaDesconto;
     @Column(name = "LIMITE_CREDITO")
     private BigDecimal limiteCredito;
     @Column(name = "TIPO_FRETE")
-    private Character tipoFrete;
-
-    @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
-    @Column(name = "CLASSIFICACAO_CONTABIL_CONTA")
-    private String classificacaoContabilConta;
+    private String tipoFrete;
 
     @JoinColumn(name = "ID_ATIVIDADE_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -99,14 +90,15 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     @JoinColumn(name = "ID_SITUACAO_FOR_CLI", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SituacaoForCliVO situacaoForCli;
+    
+    @JoinColumn(name = "ID_OPERACAO_FISCAL", referencedColumnName = "ID")
+    @ManyToOne
+    private TributOperacaoFiscalVO tributOperacaoFiscal;
+    
+    @JoinColumn(name = "ID_CONTABIL_CONTA", referencedColumnName = "ID")
+    @ManyToOne
+    private ContabilContaVO contabilConta;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaCabecalhoVO> ListaVendaCabecalho;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cliente")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho;
 
     public ClienteVO() {
     }
@@ -163,11 +155,11 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
         this.contaTomador = contaTomador;
     }
 
-    public Character getIndicadorPreco() {
+    public String getIndicadorPreco() {
         return indicadorPreco;
     }
 
-    public void setIndicadorPreco(Character indicadorPreco) {
+    public void setIndicadorPreco(String indicadorPreco) {
         this.indicadorPreco = indicadorPreco;
     }
 
@@ -179,11 +171,11 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
         this.porcentoDesconto = porcentoDesconto;
     }
 
-    public Character getFormaDesconto() {
+    public String getFormaDesconto() {
         return formaDesconto;
     }
 
-    public void setFormaDesconto(Character formaDesconto) {
+    public void setFormaDesconto(String formaDesconto) {
         this.formaDesconto = formaDesconto;
     }
 
@@ -195,36 +187,12 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
         this.limiteCredito = limiteCredito;
     }
 
-    public Character getTipoFrete() {
+    public String getTipoFrete() {
         return tipoFrete;
     }
 
-    public void setTipoFrete(Character tipoFrete) {
+    public void setTipoFrete(String tipoFrete) {
         this.tipoFrete = tipoFrete;
-    }
-
-    public String getClassificacaoContabilConta() {
-        return classificacaoContabilConta;
-    }
-
-    public void setClassificacaoContabilConta(String classificacaoContabilConta) {
-        this.classificacaoContabilConta = classificacaoContabilConta;
-    }
-
-    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
-        return ListaVendaCabecalho;
-    }
-
-    public void setListaVendaCabecalho(List<VendaCabecalhoVO> ListaVendaCabecalho) {
-        this.ListaVendaCabecalho = ListaVendaCabecalho;
-    }
-
-    public List<VendaOrcamentoCabecalhoVO> getListaVendaOrcamentoCabecalho() {
-        return ListaVendaOrcamentoCabecalho;
-    }
-
-    public void setListaVendaOrcamentoCabecalho(List<VendaOrcamentoCabecalhoVO> ListaVendaOrcamentoCabecalho) {
-        this.ListaVendaOrcamentoCabecalho = ListaVendaOrcamentoCabecalho;
     }
 
     public AtividadeForCliVO getAtividadeForCli() {
@@ -250,6 +218,24 @@ public class ClienteVO extends ValueObjectImpl implements Serializable {
     public void setSituacaoForCli(SituacaoForCliVO situacaoForCli) {
         this.situacaoForCli = situacaoForCli;
     }
+
+    public TributOperacaoFiscalVO getTributOperacaoFiscal() {
+        return tributOperacaoFiscal;
+    }
+
+    public void setTributOperacaoFiscal(TributOperacaoFiscalVO tributOperacaoFiscal) {
+        this.tributOperacaoFiscal = tributOperacaoFiscal;
+    }
+
+    public ContabilContaVO getContabilConta() {
+        return contabilConta;
+    }
+
+    public void setContabilConta(ContabilContaVO contabilConta) {
+        this.contabilConta = contabilConta;
+    }
+    
+    
 
     @Override
     public String toString() {

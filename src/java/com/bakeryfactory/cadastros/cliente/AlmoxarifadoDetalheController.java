@@ -26,9 +26,7 @@ package com.bakeryfactory.cadastros.cliente;
 import com.bakeryfactory.cadastros.java.AlmoxarifadoVO;
 import com.bakeryfactory.cadastros.java.EmpresaVO;
 import com.bakeryfactory.padrao.cliente.Container;
-import temp.com.bakeryfactory.cliente.*;
 import com.bakeryfactory.padrao.java.Constantes;
-import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -80,7 +78,6 @@ public class AlmoxarifadoDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

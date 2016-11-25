@@ -41,7 +41,7 @@ public class EstadoCivilDetalheController extends FormController {
     private EstadoCivilDetalhe estadoCivilDetalhe = null;
     private String pk = null;
     private EstadoCivilGrid estadoCivilGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public EstadoCivilDetalheController(EstadoCivilGrid estadoCivilGrid, String pk) {
         this.estadoCivilGrid = estadoCivilGrid;
@@ -66,6 +66,7 @@ public class EstadoCivilDetalheController extends FormController {
      * @param valueObjectClass value object class
      * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
      */
+    @Override
     public Response loadData(Class valueObjectClass) {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
@@ -73,9 +74,11 @@ public class EstadoCivilDetalheController extends FormController {
     /**
      * Method called by the Form panel to insert new data.
      *
-     * @param newValueObject value object to save
+     * @param newPersistentObject
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
@@ -83,6 +86,7 @@ public class EstadoCivilDetalheController extends FormController {
     /**
      * Callback method called after saving SUCCESSFULLY data in INSERT mode.
      */
+    @Override
     public void afterInsertData() {
          estadoCivilGrid.getGrid1().reloadData();
         JOptionPane.showMessageDialog(estadoCivilGrid, "Dados Salvos Com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
@@ -94,7 +98,9 @@ public class EstadoCivilDetalheController extends FormController {
      * @param oldPersistentObject original value object, previous to the changes
      * @param persistentObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
+     * @throws java.lang.Exception
      */
+    @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
     }
@@ -102,9 +108,10 @@ public class EstadoCivilDetalheController extends FormController {
     /**
      * Callback method called after saving SUCCESSFULLY data in EDIT mode.
      */
+    @Override
     public void afterEditData() {
         estadoCivilGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(estadoCivilGrid, "Dados Alterados Com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(estadoCivilDetalhe, "Dados Alterados Com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
 }

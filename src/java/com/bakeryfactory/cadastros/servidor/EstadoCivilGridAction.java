@@ -148,7 +148,7 @@ public class EstadoCivilGridAction implements Action {
                 if (session != null) {
                     session.close();
                 }
-            } catch (Exception e    ) {
+            } catch (Exception e) {
             }
         }
     }

@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -62,6 +61,7 @@ public class NivelFormacaoDetalhe extends InternalFrame {
 
         jPanel1 = new javax.swing.JPanel();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
+        saveButton1 = new org.openswing.swing.client.SaveButton();
         form1 = new org.openswing.swing.form.client.Form();
         lblNome = new org.openswing.swing.client.LabelControl();
         textControl2 = new org.openswing.swing.client.TextControl();
@@ -82,6 +82,7 @@ public class NivelFormacaoDetalhe extends InternalFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Nível Formação"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(reloadButton1);
+        jPanel1.add(saveButton1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -93,6 +94,7 @@ public class NivelFormacaoDetalhe extends InternalFrame {
         form1.setVOClassName("com.bakeryfactory.cadastros.java.NivelFormacaoVO");
         form1.setFunctionId("nivelFormacao");
         form1.setReloadButton(reloadButton1);
+        form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblNome.setLabel("Nome:");
@@ -219,6 +221,7 @@ public class NivelFormacaoDetalhe extends InternalFrame {
     private org.openswing.swing.client.NumericControl numericControl5;
     private org.openswing.swing.client.NumericControl numericControl6;
     private org.openswing.swing.client.ReloadButton reloadButton1;
+    private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.TextAreaControl textAreaControl1;
     private org.openswing.swing.client.TextControl textControl2;
     // End of variables declaration//GEN-END:variables

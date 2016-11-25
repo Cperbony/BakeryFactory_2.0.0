@@ -34,6 +34,7 @@ public class ColaboradorGrid extends InternalFrame {
 
     /**
      * Creates new form ColaboradorGrid
+     * @param controller
      */
     public ColaboradorGrid(ColaboradorGridController controller) {
         initComponents();
@@ -68,10 +69,10 @@ public class ColaboradorGrid extends InternalFrame {
         dateColumnDataAdmissao = new org.openswing.swing.table.columns.client.DateColumn();
         dateColumnDataDemissao = new org.openswing.swing.table.columns.client.DateColumn();
 
-        setTitle("Bakery Factory - Cadastro Colaboradores");
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Colaboradores"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Colaboradores"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
         jPanel1.add(insertButton1);
         jPanel1.add(deleteButton1);
@@ -105,7 +106,7 @@ public class ColaboradorGrid extends InternalFrame {
         textColumnSituacao.setColumnFilterable(true);
         textColumnSituacao.setColumnName("situacaoColaborador.nome");
         textColumnSituacao.setColumnSortable(true);
-        textColumnSituacao.setHeaderColumnName("Situacao");
+        textColumnSituacao.setHeaderColumnName("Situação");
         textColumnSituacao.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumnSituacao);
 
@@ -142,14 +143,14 @@ public class ColaboradorGrid extends InternalFrame {
         dateColumnDataAdmissao.setColumnFilterable(true);
         dateColumnDataAdmissao.setColumnName("dataAdmissao");
         dateColumnDataAdmissao.setColumnSortable(true);
-        dateColumnDataAdmissao.setHeaderColumnName("Data Admissao");
+        dateColumnDataAdmissao.setHeaderColumnName("Data Admissão");
         dateColumnDataAdmissao.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(dateColumnDataAdmissao);
 
         dateColumnDataDemissao.setColumnFilterable(true);
         dateColumnDataDemissao.setColumnName("dataDemissao");
         dateColumnDataDemissao.setColumnSortable(true);
-        dateColumnDataDemissao.setHeaderColumnName("Data Demissao");
+        dateColumnDataDemissao.setHeaderColumnName("Data Demissão");
         dateColumnDataDemissao.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(dateColumnDataDemissao);
 

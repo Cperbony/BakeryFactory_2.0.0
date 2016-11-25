@@ -23,11 +23,6 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.AtividadeLookup;
-import com.bakeryfactory.cadastros.lookups.ContaContabilLookup;
-import com.bakeryfactory.cadastros.lookups.OperacaoFiscalLookup;
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
-import com.bakeryfactory.cadastros.lookups.SituacaoLookup;
 import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
 import java.awt.Dimension;
 import org.openswing.swing.lookup.client.LookupController;
@@ -39,46 +34,136 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class ClienteDetalhe extends InternalFrame {
 
-    private PessoaLookup pessoaController;
-    private SituacaoLookup situacaoController;
-    private AtividadeLookup atividadeController;
-    private ContaContabilLookup contaContabilController;
-    private OperacaoFiscalLookup operacaoFiscalController;
+    private final LookupController pessoaController;
+    private final LookupController atividadeController;
+    private final LookupController situacaoController;
+    private final LookupController contaContabilController;
+    private final LookupController operacaoFiscalController;
 
     /**
      * Creates new form ClienteDetalhe
+     *
+     * @param controller
      */
     public ClienteDetalhe(ClienteDetalheController controller) {
+        this.operacaoFiscalController = new LookupController();
+        this.contaContabilController = new LookupController();
+        this.situacaoController = new LookupController();
+        this.atividadeController = new LookupController();
+        this.pessoaController = new LookupController();
+        
         initComponents();
-
         form1.setFormController(controller);
 
-        //Configurações do Lookup da Pessoa
-        pessoaController = new PessoaLookup();
+        /*
+              //Configurações do Lookup da Pessoa
         codLookupControlPessoa.setLookupController(pessoaController);
 
         //Configuração do Lookup da Situação
-        situacaoController = new SituacaoLookup();
         codLookupControlSituacao.setLookupController(situacaoController);
 
         //Configurações do lookup da Atividade
-        atividadeController = new AtividadeLookup();
         codLookupControlAtividade.setLookupController(atividadeController);
-
-        /**
-         * TODO quando extender para Módulo Contábil Configurações do Lookup da Conta Contábil
-         */
+        
+        //TODO quando extender para Módulo Contábil Configurações do Lookup da Conta Contábil
+       
         //Configurações do lookup da Conta Fiscal
-        contaContabilController = new ContaContabilLookup();
         codLookupControlContaContabil.setLookupController(contaContabilController);
 
-        /**
-         * TODO quando extender para Módulo Operação Fiscal Configurações do lookup da Operação Fiscal
-         */
         //Configurações do lookup da Operação Fiscal
-        operacaoFiscalController = new OperacaoFiscalLookup();
         codLookupOpFiscal.setLookupController(operacaoFiscalController);
+        */
+ 
+        /*
+         * Configurações do lookup da pessoa
+         */
+        pessoaController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.PessoaVO");
+        pessoaController.addLookup2ParentLink("id", "pessoa.id");
+        pessoaController.addLookup2ParentLink("nome", "pessoa.nome");
+        pessoaController.setHeaderColumnName("id", "ID");
+        pessoaController.setHeaderColumnName("nome", "Nome");
+        pessoaController.setFrameTitle("Importa Pessoa");
 
+        pessoaController.setVisibleStatusPanel(true);
+        pessoaController.setVisibleColumn("id", true);
+        pessoaController.setVisibleColumn("nome", true);
+        pessoaController.setFramePreferedSize(new Dimension(600, 500));
+
+        pessoaController.setLookupDataLocator(new LookupDataLocatorGenerico(pessoaController.getLookupValueObjectClassName()));
+        codLookupControlPessoa.setLookupController(pessoaController);
+
+        /*
+         * Configurações do lookup da situacao
+         */
+        situacaoController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.SituacaoForCliVO");
+        situacaoController.addLookup2ParentLink("id", "situacaoForCli.id");
+        situacaoController.addLookup2ParentLink("nome", "situacaoForCli.nome");
+        situacaoController.setHeaderColumnName("id", "ID");
+        situacaoController.setHeaderColumnName("nome", "Nome");
+        situacaoController.setFrameTitle("Importa Situação");
+
+        situacaoController.setVisibleStatusPanel(true);
+        situacaoController.setVisibleColumn("id", true);
+        situacaoController.setVisibleColumn("nome", true);
+        situacaoController.setFramePreferedSize(new Dimension(600, 500));
+
+        situacaoController.setLookupDataLocator(new LookupDataLocatorGenerico(situacaoController.getLookupValueObjectClassName()));
+        codLookupControlSituacao.setLookupController(situacaoController);
+
+        /*
+         * Configurações do lookup da atividade
+         */
+        atividadeController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.AtividadeForCliVO");
+        atividadeController.addLookup2ParentLink("id", "atividadeForCli.id");
+        atividadeController.addLookup2ParentLink("nome", "atividadeForCli.nome");
+        atividadeController.setHeaderColumnName("id", "ID");
+        atividadeController.setHeaderColumnName("nome", "Nome");
+        atividadeController.setFrameTitle("Importa Atividade");
+
+        atividadeController.setVisibleStatusPanel(true);
+        atividadeController.setVisibleColumn("id", true);
+        atividadeController.setVisibleColumn("nome", true);
+        atividadeController.setFramePreferedSize(new Dimension(600, 500));
+
+        atividadeController.setLookupDataLocator(new LookupDataLocatorGenerico(atividadeController.getLookupValueObjectClassName()));
+        codLookupControlAtividade.setLookupController(atividadeController);
+
+        /*
+         * Configurações do lookup da conta contabil
+         */
+        contaContabilController.setLookupValueObjectClassName("com.bakeryfactory.contabilidade.java.ContabilContaVO");
+        contaContabilController.addLookup2ParentLink("id", "contabilConta.id");
+        contaContabilController.addLookup2ParentLink("descricao", "contabilConta.descricao");
+        contaContabilController.setHeaderColumnName("id", "ID");
+        contaContabilController.setHeaderColumnName("descricao", "Descrição");
+        contaContabilController.setFrameTitle("Importa Conta Contábil");
+
+        contaContabilController.setVisibleStatusPanel(true);
+        contaContabilController.setVisibleColumn("id", true);
+        contaContabilController.setVisibleColumn("descricao", true);
+        contaContabilController.setFramePreferedSize(new Dimension(600, 500));
+
+        contaContabilController.setLookupDataLocator(new LookupDataLocatorGenerico(contaContabilController.getLookupValueObjectClassName()));
+        codLookupControlContaContabil.setLookupController(contaContabilController);
+
+        /*
+         * Configurações do lookup da operacao fiscal
+         */
+        operacaoFiscalController.setLookupValueObjectClassName("com.bakeryfactory.tributacao.java.TributOperacaoFiscalVO");
+        operacaoFiscalController.addLookup2ParentLink("id", "tributOperacaoFiscal.id");
+        operacaoFiscalController.addLookup2ParentLink("descricao", "tributOperacaoFiscal.descricao");
+        operacaoFiscalController.setHeaderColumnName("id", "ID");
+        operacaoFiscalController.setHeaderColumnName("descricao", "Descrição");
+        operacaoFiscalController.setFrameTitle("Importa Operação Fiscal");
+
+        operacaoFiscalController.setVisibleStatusPanel(true);
+        operacaoFiscalController.setVisibleColumn("id", true);
+        operacaoFiscalController.setVisibleColumn("descricao", true);
+        operacaoFiscalController.setFramePreferedSize(new Dimension(600, 500));
+
+        operacaoFiscalController.setLookupDataLocator(new LookupDataLocatorGenerico(operacaoFiscalController.getLookupValueObjectClassName()));
+        codLookupOpFiscal.setLookupController(operacaoFiscalController);
+        
     }
 
     /**
@@ -139,7 +224,7 @@ public class ClienteDetalhe extends InternalFrame {
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
         jSeparator1 = new javax.swing.JSeparator();
 
-        setTitle("Bakery Factory - Cadastro de Clientes");
+        setTitle("Bakery Factory - Cadastros");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente Detalhes"));
@@ -174,6 +259,7 @@ public class ClienteDetalhe extends InternalFrame {
         codLookupControlContaContabil.setAllowOnlyNumbers(true);
         codLookupControlContaContabil.setAttributeName("contabilConta.id");
         codLookupControlContaContabil.setEnabled(false);
+        codLookupControlContaContabil.setLinkLabel(lblContaContabil);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -206,6 +292,7 @@ public class ClienteDetalhe extends InternalFrame {
         codLookupOpFiscal.setAllowOnlyNumbers(true);
         codLookupOpFiscal.setAttributeName("tributOperacaoFiscal.id");
         codLookupOpFiscal.setEnabled(false);
+        codLookupOpFiscal.setLinkLabel(lblOperacaoFiscal);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -272,6 +359,7 @@ public class ClienteDetalhe extends InternalFrame {
         codLookupControlAtividade.setAllowOnlyNumbers(true);
         codLookupControlAtividade.setAttributeName("atividadeForCli.id");
         codLookupControlAtividade.setEnabled(false);
+        codLookupControlAtividade.setLinkLabel(lblAtividade);
         codLookupControlAtividade.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
@@ -338,6 +426,7 @@ public class ClienteDetalhe extends InternalFrame {
 
         dateControl7.setAttributeName("desde");
         dateControl7.setEnabled(false);
+        dateControl7.setLinkLabel(lblDesde);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -357,6 +446,7 @@ public class ClienteDetalhe extends InternalFrame {
         dateControl8.setEnabled(false);
         dateControl8.setEnabledOnEdit(false);
         dateControl8.setEnabledOnInsert(false);
+        dateControl8.setLinkLabel(lblDataCadastro);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 9;
@@ -383,6 +473,7 @@ public class ClienteDetalhe extends InternalFrame {
 
         textControl10.setAttributeName("contaTomador");
         textControl10.setEnabled(false);
+        textControl10.setLinkLabel(lblContaTomador);
         textControl10.setMaxCharacters(30);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -402,6 +493,7 @@ public class ClienteDetalhe extends InternalFrame {
         comboBoxControlGeraFinanceiro.setAttributeName("geraFinanceiro");
         comboBoxControlGeraFinanceiro.setDomainId("naosim");
         comboBoxControlGeraFinanceiro.setEnabled(false);
+        comboBoxControlGeraFinanceiro.setLinkLabel(lblGeraFinanceiro);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -420,6 +512,7 @@ public class ClienteDetalhe extends InternalFrame {
         comboBoxControlIndPreco.setAttributeName("indicadorPreco");
         comboBoxControlIndPreco.setDomainId("clienteIndicadorPreco");
         comboBoxControlIndPreco.setEnabled(false);
+        comboBoxControlIndPreco.setLinkLabel(lblIndicadorPreco);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
@@ -438,6 +531,7 @@ public class ClienteDetalhe extends InternalFrame {
         numericControl13.setAttributeName("porcentoDesconto");
         numericControl13.setDecimals(2);
         numericControl13.setEnabled(false);
+        numericControl13.setLinkLabel(lblPorcentoDesconto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -456,6 +550,7 @@ public class ClienteDetalhe extends InternalFrame {
         comboBoxControlFormaDesconto.setAttributeName("formaDesconto");
         comboBoxControlFormaDesconto.setDomainId("clienteFormaDesconto");
         comboBoxControlFormaDesconto.setEnabled(false);
+        comboBoxControlFormaDesconto.setLinkLabel(lblFormaDesconto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
@@ -474,6 +569,7 @@ public class ClienteDetalhe extends InternalFrame {
         numericControl15.setAttributeName("limiteCredito");
         numericControl15.setDecimals(2);
         numericControl15.setEnabled(false);
+        numericControl15.setLinkLabel(lblLimiteCredito);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 9;
@@ -492,6 +588,7 @@ public class ClienteDetalhe extends InternalFrame {
         comboBoxControlTipoFrete.setAttributeName("tipoFrete");
         comboBoxControlTipoFrete.setDomainId("clienteTipoFrete");
         comboBoxControlTipoFrete.setEnabled(false);
+        comboBoxControlTipoFrete.setLinkLabel(lblFrete);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 7;
@@ -501,6 +598,7 @@ public class ClienteDetalhe extends InternalFrame {
 
         textAreaControl1.setAttributeName("observacao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblObservacao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 11;

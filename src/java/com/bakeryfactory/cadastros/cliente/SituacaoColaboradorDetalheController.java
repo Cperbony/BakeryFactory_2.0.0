@@ -38,12 +38,14 @@ import org.openswing.swing.util.java.Consts;
  */
 public class SituacaoColaboradorDetalheController extends FormController {
 
-    private SituacaoColaboradorDetalhe situacaoColaboradorDetalhe = null;
+    private SituacaoColaboradorDetalhe situacaoColaboradorDetalhe;
     private String pk = null;
-    private SituacaoColaboradorGrid situacaoColaboradorGrid = null;
+    private SituacaoColaboradorGrid situacaoColaboradorGrid;
     private final String acaoServidor;
 
     public SituacaoColaboradorDetalheController(SituacaoColaboradorGrid situacaoColaboradorGrid, String pk) {
+        this.situacaoColaboradorDetalhe = null;
+        this.situacaoColaboradorGrid = null;
         this.situacaoColaboradorGrid = situacaoColaboradorGrid;
         this.pk = pk;
         this.acaoServidor = "situacaoColaboradorDetalheAction";
@@ -75,7 +77,6 @@ public class SituacaoColaboradorDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

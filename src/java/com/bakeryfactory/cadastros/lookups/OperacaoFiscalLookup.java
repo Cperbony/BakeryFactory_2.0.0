@@ -33,20 +33,20 @@ import org.openswing.swing.lookup.client.LookupController;
  */
 public class OperacaoFiscalLookup extends LookupController {
 
-    private LookupController operacaoFiscalController;
+    private final LookupController operacaoFiscalController;
 
     public OperacaoFiscalLookup() {
         operacaoFiscalController = new LookupController();
-        operacaoFiscalController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.OperacaoFiscalVO");
-        operacaoFiscalController.addLookup2ParentLink("id", "operacaoFiscal.id");
-        operacaoFiscalController.addLookup2ParentLink("nome", "operacaoFiscal.nome");
+        operacaoFiscalController.setLookupValueObjectClassName("com.bakeryfactory.tributacao.java.TributOperacaoFiscalVO");
+        operacaoFiscalController.addLookup2ParentLink("id", "tributOperacaoFiscal.id");
+        operacaoFiscalController.addLookup2ParentLink("descricao", "tributOperacaoFiscal.descricao");
         operacaoFiscalController.setHeaderColumnName("id", "ID");
-        operacaoFiscalController.setHeaderColumnName("nome", "Nome");
+        operacaoFiscalController.setHeaderColumnName("descricao", "Descricao");
         operacaoFiscalController.setFrameTitle("Importa o Tipo da Operação Fiscal");
 
         operacaoFiscalController.setVisibleStatusPanel(true);
         operacaoFiscalController.setVisibleColumn("id", true);
-        operacaoFiscalController.setVisibleColumn("nome", true);
+        operacaoFiscalController.setVisibleColumn("descricao", true);
         operacaoFiscalController.setFramePreferedSize(new Dimension(600, 500));
 
         operacaoFiscalController.setLookupDataLocator(new LookupDataLocatorGenerico(operacaoFiscalController.getLookupValueObjectClassName()));

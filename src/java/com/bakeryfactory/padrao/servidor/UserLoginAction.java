@@ -63,13 +63,14 @@ public class UserLoginAction extends LoginAction {
             String password = ((String[]) inputPar)[1];
             session = HibernateUtil.getSessionFactory().openSession();
 
-            String baseSql = "from USUARIO in class com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login='" + username + "'and USUARIO.senha='" + password + "'";
+            String baseSql = "from USUARIO in class com.bakeryfactory.cadastros.java.UsuarioVO where USUARIO.login='" + username + "' and USUARIO.senha='" + password + "'";
             UsuarioVO vo = (UsuarioVO) session.createQuery(baseSql).uniqueResult();
 
-            String languageID = null;
+            String languageId = null;
             if (vo != null) {
-                languageID = "PT-BR"; //vo.getIdioma;
-                TextResponse tr = new TextResponse(languageID);
+
+                languageId = "PT_BR";//vo.getIdioma();
+                TextResponse tr = new TextResponse(languageId);
                 SessionIdGenerator gen = (SessionIdGenerator) context.getAttribute(Controller.SESSION_ID_GENERATOR);
                 tr.setSessionId(gen.getSessionId(request, response, userSession, context));
 
@@ -83,26 +84,22 @@ public class UserLoginAction extends LoginAction {
                 userSessionPars.setSessionId(tr.getSessionId());
                 userSessionPars.setUsername(username);
                 userSessions.put(tr.getSessionId(), userSessionPars);
-                userSessionPars.setLanguageId(languageID);
+                userSessionPars.setLanguageId(languageId);
 
                 authenticatedIds.add(tr.getSessionId());
 
                 return tr;
             } else {
-                return new ErrorResponse("Usuário Inválido");
+                return new ErrorResponse("Usuário inválido.");
             }
-
         } catch (Exception ex1) {
             ex1.printStackTrace();
             return new ErrorResponse(ex1.getMessage());
         } finally {
             try {
                 session.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return new ErrorResponse(e.getMessage());
+            } catch (Exception ex) {
             }
         }
     }
-
 }

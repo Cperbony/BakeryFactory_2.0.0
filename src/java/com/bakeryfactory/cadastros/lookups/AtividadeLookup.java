@@ -33,7 +33,7 @@ import org.openswing.swing.lookup.client.LookupController;
  */
 public class AtividadeLookup extends LookupController {
 
-    private LookupController atividadeController;
+    private final LookupController atividadeController;
 
     public AtividadeLookup() {
 

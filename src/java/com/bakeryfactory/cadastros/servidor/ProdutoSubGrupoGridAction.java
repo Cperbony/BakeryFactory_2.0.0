@@ -23,7 +23,7 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
-import com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO;
+import com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.util.ArrayList;
@@ -83,14 +83,13 @@ public class ProdutoSubGrupoGridAction implements Action {
         String baseSQL = "select PRODUTO_SUB_GRUPO from com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO as PRODUTO_SUB_GRUPO";
         try {
             session = HibernateUtil.getSessionFactory().openSession();
-            Response res = HibernateUtils.getBlockFromQuery(
-                    pars.getAction(),
+            Response res = HibernateUtils.getBlockFromQuery(pars.getAction(),
                     pars.getStartPos(),
                     Constantes.TAMANHO_BLOCO,
                     pars.getFilteredColumns(),
                     pars.getCurrentSortedColumns(),
                     pars.getCurrentSortedVersusColumns(),
-                    com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO.class,
+                    com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO.class,
                     baseSQL,
                     new Object[0],
                     new Type[0],
@@ -125,13 +124,13 @@ public class ProdutoSubGrupoGridAction implements Action {
             GridParams pars = (GridParams) inputPar;
             ArrayList persistentObjects = (ArrayList) pars.getOtherGridParams().get("persistentObjects");
 
-            ProdutoSubgrupoVO vo = null;
+            ProdutoSubGrupoVO vo = null;
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
             for (int i = 0; i < persistentObjects.size(); i++) {
-                vo = (ProdutoSubgrupoVO) persistentObjects.get(i);
+                vo = (ProdutoSubGrupoVO) persistentObjects.get(i);
                 session.delete(vo);
                 session.flush();
             }

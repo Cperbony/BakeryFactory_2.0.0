@@ -44,6 +44,9 @@ import org.openswing.swing.server.*;
  */
 public class BakeryFactoryButtonAuthorizationsAction implements Action {
 
+    public BakeryFactoryButtonAuthorizationsAction() {
+    }
+
     /**
      *
      * @return Request Name
@@ -73,20 +76,18 @@ public class BakeryFactoryButtonAuthorizationsAction implements Action {
             criteria.add(Restrictions.eq("papel", usuario.getPapel()));
 
             List<PapelFuncaoVO> listaPapelFuncao = criteria.list();
-            ButtonsAuthorizations buttonsAuthorization = new ButtonsAuthorizations();
+            ButtonsAuthorizations ba = new ButtonsAuthorizations();
 
             if (!usuario.getPapel().getAcessoCompleto().equals("S")) {
                 for (int i = 0; i < listaPapelFuncao.size(); i++) {
-                    buttonsAuthorization.addButtonAuthorization(listaPapelFuncao.get(i).getFuncao().getNome(),
+                    ba.addButtonAuthorization(listaPapelFuncao.get(i).getFuncao().getNome(),
                             listaPapelFuncao.get(i).getPodeInserir().equals("S"),
                             listaPapelFuncao.get(i).getPodeAlterar().equals("S"),
-                            listaPapelFuncao.get(i).getPodeExcluir().equals("S")
-                    );
+                            listaPapelFuncao.get(i).getPodeExcluir().equals("S"));
                 }
             }
 
-            return new VOResponse(buttonsAuthorization);
-
+            return new VOResponse(ba);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -97,5 +98,4 @@ public class BakeryFactoryButtonAuthorizationsAction implements Action {
             }
         }
     }
-
 }

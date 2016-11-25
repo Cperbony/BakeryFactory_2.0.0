@@ -26,6 +26,7 @@ package com.bakeryfactory.cadastros.servidor;
 import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
+import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,13 +114,17 @@ public class ClienteDetalheAction implements Action {
             if (criteria.uniqueResult() != null) {
                 throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
             }
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
+
+            if (cliente.getContabilConta().getId() == null) {
+                cliente.setContabilConta(null);
+            }
+
+            if (cliente.getTributOperacaoFiscal().getId() == null) {
+                cliente.setTributOperacaoFiscal(null);
+            }
+
+            cliente.setDataCadastro(new Date());
+
             session.save(cliente);
 
             session.getTransaction().commit();
@@ -160,13 +165,14 @@ public class ClienteDetalheAction implements Action {
                 throw new Exception("Já existe um Cliente vinculado à pessoa selecionada.");
             }
 
-            /**
-             * //Conta Contábil if (colaborador.getContabilConta().getId() == null) { colaborador.setContabilConta(null); }
-             *
-             * * //Conta Sindicato if (colaborador.getSindicato().getId() == null) { colaborador.setSindicato()(null); }
-             *
-             * * //Conta Admissao if (colaborador.getTipoAdmissao().getId() == null) { colaborador.setTipoAdmissao(null); }
-             */
+            if (cliente.getContabilConta().getId() == null) {
+                cliente.setContabilConta(null);
+            }
+
+            if (cliente.getTributOperacaoFiscal().getId() == null) {
+                cliente.setTributOperacaoFiscal(null);
+            }
+
             session.update(cliente);
 
             session.getTransaction().commit();

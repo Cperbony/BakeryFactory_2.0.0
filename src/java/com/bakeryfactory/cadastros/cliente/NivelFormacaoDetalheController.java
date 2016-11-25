@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
-import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -42,7 +41,7 @@ public class NivelFormacaoDetalheController extends FormController {
     private NivelFormacaoDetalhe nivelFormacaoDetalhe = null;
     private String pk = null;
     private NivelFormacaoGrid nivelFormacaoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public NivelFormacaoDetalheController(NivelFormacaoGrid tempGrid, String pk) {
         this.nivelFormacaoGrid = tempGrid;
@@ -76,7 +75,6 @@ public class NivelFormacaoDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

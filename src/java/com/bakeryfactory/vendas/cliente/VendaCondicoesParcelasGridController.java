@@ -23,17 +23,12 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import org.openswing.swing.client.GridControl;
-import org.openswing.swing.mdi.client.MDIFrame;
 import org.openswing.swing.message.receive.java.Response;
 import org.openswing.swing.message.receive.java.VOListResponse;
-import org.openswing.swing.message.receive.java.ValueObject;
 import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.table.client.GridController;
 import org.openswing.swing.table.java.GridDataLocator;

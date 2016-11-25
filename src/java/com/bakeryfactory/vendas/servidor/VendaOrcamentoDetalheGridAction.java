@@ -23,11 +23,8 @@
  */
 package com.bakeryfactory.vendas.servidor;
 
-import temp.com.bakeryfactory.servidor.*;
-import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
-import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,7 +33,6 @@ import org.hibernate.Session;
 import org.hibernate.type.Type;
 import org.openswing.swing.message.receive.java.ErrorResponse;
 import org.openswing.swing.message.receive.java.Response;
-import org.openswing.swing.message.receive.java.VOListResponse;
 import org.openswing.swing.message.send.java.GridParams;
 import org.openswing.swing.server.Action;
 import org.openswing.swing.server.UserSessionParameters;

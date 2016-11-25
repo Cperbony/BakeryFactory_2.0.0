@@ -62,6 +62,8 @@ import com.bakeryfactory.cadastros.servidor.ProdutoSubGrupoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.ProdutoSubGrupoGridAction;
 import com.bakeryfactory.cadastros.servidor.SetorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.SetorGridAction;
+import com.bakeryfactory.cadastros.servidor.SindicatoDetalheAction;
+import com.bakeryfactory.cadastros.servidor.SindicatoGridAction;
 import com.bakeryfactory.cadastros.servidor.SituacaoColaboradorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.SituacaoColaboradorGridAction;
 import com.bakeryfactory.cadastros.servidor.SituacaoForCliDetalheAction;
@@ -70,6 +72,8 @@ import com.bakeryfactory.cadastros.servidor.TipoAdmissaoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.TipoAdmissaoGridAction;
 import com.bakeryfactory.cadastros.servidor.TipoColaboradorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.TipoColaboradorGridAction;
+import com.bakeryfactory.cadastros.servidor.TipoRelacionamentoDetalheAction;
+import com.bakeryfactory.cadastros.servidor.TipoRelacionamentoGridAction;
 import com.bakeryfactory.cadastros.servidor.TransportadoraDetalheAction;
 import com.bakeryfactory.cadastros.servidor.TransportadoraGridAction;
 import com.bakeryfactory.cadastros.servidor.UfDetalheAction;
@@ -228,10 +232,26 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
         a = new ColaboradorDetalheAction();
         put(a.getRequestName(), a);
 
+        a = new TipoColaboradorGridAction();
+        put(a.getRequestName(), a);
+
+        a = new TipoColaboradorDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new TipoRelacionamentoGridAction();
+        put(a.getRequestName(), a);
+
+        a = new TipoRelacionamentoDetalheAction();
+        put(a.getRequestName(), a);
+
         /*Actions do Módulo */
-        //SINDICATO
-        //a = new SindicatoGridAction(); put(a.getRequestName(), a);
-        //a = new SindicatoDetalheAction(); put(a.getRequestName(), a);
+        //OUTROS
+        a = new SindicatoGridAction();
+        put(a.getRequestName(), a);
+
+        a = new SindicatoDetalheAction();
+        put(a.getRequestName(), a);
+
         /*Actions do Módulo */
         //DIVERSOS
         a = new SetorGridAction();
@@ -307,7 +327,28 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
         a = new NcmGridAction();
         put(a.getRequestName(), a);
 
-        /*Actions do Módulo */
+        /*
+        a = new IngredienteGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new IngredienteDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new ReceitaGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new ReceitaDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new ModoPreparoGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new ModoPreparoDetalheAction();
+        put(a.getRequestName(), a);
+        
+         */
+
+ /*Actions do Módulo */
         //PCP
         a = new PcpInstrucaoGridAction();
         put(a.getRequestName(), a);

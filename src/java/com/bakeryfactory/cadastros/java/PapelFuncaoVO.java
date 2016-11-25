@@ -50,15 +50,15 @@ public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "ID")
     private Integer id;
     @Column(name = "PODE_CONSULTAR")
-    private Character podeConsultar;
+    private String podeConsultar;
     @Column(name = "PODE_INSERIR")
-    private Character podeInserir;
+    private String podeInserir;
     @Column(name = "PODE_ALTERAR")
-    private Character podeAlterar;
+    private String podeAlterar;
     @Column(name = "PODE_EXCLUIR")
-    private Character podeExcluir;
+    private String podeExcluir;
     @Column(name = "HABILITADO")
-    private Character habilitado;
+    private String habilitado;
     
     @JoinColumn(name = "ID_FUNCAO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -83,43 +83,43 @@ public class PapelFuncaoVO extends ValueObjectImpl implements Serializable {
         this.id = id;
     }
 
-    public Character getPodeConsultar() {
+    public String getPodeConsultar() {
         return podeConsultar;
     }
 
-    public void setPodeConsultar(Character podeConsultar) {
+    public void setPodeConsultar(String podeConsultar) {
         this.podeConsultar = podeConsultar;
     }
 
-    public Character getPodeInserir() {
+    public String getPodeInserir() {
         return podeInserir;
     }
 
-    public void setPodeInserir(Character podeInserir) {
+    public void setPodeInserir(String podeInserir) {
         this.podeInserir = podeInserir;
     }
 
-    public Character getPodeAlterar() {
+    public String getPodeAlterar() {
         return podeAlterar;
     }
 
-    public void setPodeAlterar(Character podeAlterar) {
+    public void setPodeAlterar(String podeAlterar) {
         this.podeAlterar = podeAlterar;
     }
 
-    public Character getPodeExcluir() {
+    public String getPodeExcluir() {
         return podeExcluir;
     }
 
-    public void setPodeExcluir(Character podeExcluir) {
+    public void setPodeExcluir(String podeExcluir) {
         this.podeExcluir = podeExcluir;
     }
 
-    public Character getHabilitado() {
+    public String getHabilitado() {
         return habilitado;
     }
 
-    public void setHabilitado(Character habilitado) {
+    public void setHabilitado(String habilitado) {
         this.habilitado = habilitado;
     }
 

@@ -68,13 +68,13 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "UF")
     private String uf;
     @Column(name = "PRINCIPAL")
-    private Character principal;
+    private String principal;
     @Column(name = "ENTREGA")
     private String entrega;
     @Column(name = "COBRANCA")
-    private Character cobranca;
+    private String cobranca;
     @Column(name = "CORRESPONDENCIA")
-    private Character correspondencia;
+    private String correspondencia;
     
     @JoinColumn(name = "ID_PESSOA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -167,11 +167,11 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
         this.uf = uf;
     }
 
-    public Character getPrincipal() {
+    public String getPrincipal() {
         return principal;
     }
 
-    public void setPrincipal(Character principal) {
+    public void setPrincipal(String principal) {
         this.principal = principal;
     }
 
@@ -183,19 +183,19 @@ public class PessoaEnderecoVO extends ValueObjectImpl implements Serializable {
         this.entrega = entrega;
     }
 
-    public Character getCobranca() {
+    public String getCobranca() {
         return cobranca;
     }
 
-    public void setCobranca(Character cobranca) {
+    public void setCobranca(String cobranca) {
         this.cobranca = cobranca;
     }
 
-    public Character getCorrespondencia() {
+    public String getCorrespondencia() {
         return correspondencia;
     }
 
-    public void setCorrespondencia(Character correspondencia) {
+    public void setCorrespondencia(String correspondencia) {
         this.correspondencia = correspondencia;
     }
 

@@ -24,8 +24,6 @@
 
 package com.bakeryfactory.vendas.cliente;
 
-import temp.com.bakeryfactory.cliente.*;
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO;
 import java.util.ArrayList;

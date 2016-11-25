@@ -24,7 +24,6 @@
 package com.bakeryfactory.padrao.servidor;
 
 import javax.servlet.ServletContext;
-import org.hibernate.Session;
 import org.openswing.swing.server.ControllerCallbacks;
 
 /**
@@ -49,6 +48,7 @@ public class BakeryFactoryControllerCallbacks extends ControllerCallbacks {
      * Cria a conexão e executa alguma lógica no banco de dados
      */
     private void createConnection(ServletContext context) {
+        /*
         try {
             Session session = HibernateUtil.getSessionFactory().getCurrentSession();
             session.beginTransaction();
@@ -67,6 +67,6 @@ public class BakeryFactoryControllerCallbacks extends ControllerCallbacks {
         }catch (Exception ex){
             ex.printStackTrace();
         }
+*/
     }
-
 }

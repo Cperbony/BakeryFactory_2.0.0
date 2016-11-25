@@ -59,8 +59,11 @@ public class CepGrid extends InternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
+        insertButton1 = new org.openswing.swing.client.InsertButton();
+        editButton1 = new org.openswing.swing.client.EditButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
+        deleteButton1 = new org.openswing.swing.client.DeleteButton();
         gridControl1 = new org.openswing.swing.client.GridControl();
         textColumn2 = new org.openswing.swing.table.columns.client.TextColumn();
         textColumn3 = new org.openswing.swing.table.columns.client.TextColumn();
@@ -75,8 +78,11 @@ public class CepGrid extends InternalFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("CEP"));
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
+        jPanel1.add(insertButton1);
+        jPanel1.add(editButton1);
         jPanel1.add(reloadButton1);
         jPanel1.add(navigatorBar1);
+        jPanel1.add(deleteButton1);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -86,7 +92,10 @@ public class CepGrid extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
+        gridControl1.setDeleteButton(deleteButton1);
+        gridControl1.setEditButton(editButton1);
         gridControl1.setFunctionId("cep");
+        gridControl1.setInsertButton(insertButton1);
         gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.cadastros.java.CepVO");
@@ -118,12 +127,12 @@ public class CepGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn6);
 
         textColumn7.setColumnName("uf");
-        textColumn7.setHeaderColumnName("Uf");
+        textColumn7.setHeaderColumnName("UF");
         textColumn7.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn7);
 
         integerColumn8.setColumnName("codigoIbgeMunicipio");
-        integerColumn8.setHeaderColumnName("Codigo Ibge Município");
+        integerColumn8.setHeaderColumnName("Código Ibge Município");
         integerColumn8.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         integerColumn8.setPreferredWidth(150);
         gridControl1.getColumnContainer().add(integerColumn8);
@@ -141,7 +150,10 @@ public class CepGrid extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private org.openswing.swing.client.DeleteButton deleteButton1;
+    private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.GridControl gridControl1;
+    private org.openswing.swing.client.InsertButton insertButton1;
     private org.openswing.swing.table.columns.client.IntegerColumn integerColumn8;
     private javax.swing.JPanel jPanel1;
     private org.openswing.swing.client.NavigatorBar navigatorBar1;

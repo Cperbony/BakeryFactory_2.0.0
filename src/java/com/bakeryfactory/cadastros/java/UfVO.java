@@ -65,10 +65,11 @@ public class UfVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private PaisVO pais;
     
+    /*
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "uf")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MunicipioVO> listaMunicipio;
-
+  */
     public UfVO() {
     }
 
@@ -114,14 +115,6 @@ public class UfVO extends ValueObjectImpl implements Serializable {
 
     public void setPais(PaisVO pais) {
         this.pais = pais;
-    }
-
-    public List<MunicipioVO> getListaMunicipio() {
-        return listaMunicipio;
-    }
-
-    public void setListaMunicipio(List<MunicipioVO> listaMunicipio) {
-        this.listaMunicipio = listaMunicipio;
     }
 
     @Override

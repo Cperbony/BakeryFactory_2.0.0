@@ -24,6 +24,7 @@
 package com.bakeryfactory.cadastros.servidor;
 
 import com.bakeryfactory.cadastros.java.CargoVO;
+import com.bakeryfactory.cadastros.java.ClienteVO;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import javax.servlet.ServletContext;
@@ -105,6 +106,10 @@ public class CargoDetalheAction implements Action {
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
+            
+            Criteria criteria = session.createCriteria(CargoVO.class);
+            criteria.add(Restrictions.eq("empresa", cargo.getEmpresa()));
+
             session.save(cargo);
             session.getTransaction().commit();
 
@@ -135,6 +140,11 @@ public class CargoDetalheAction implements Action {
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
+            
+            Criteria criteria = session.createCriteria(ClienteVO.class);
+            criteria.add(Restrictions.eq("empresa", cargo.getEmpresa()));
+            criteria.add(Restrictions.ne("id", cargo.getId()));
+            
             session.update(cargo);
             session.getTransaction().commit();
 
