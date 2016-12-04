@@ -159,26 +159,26 @@ public class VendaDetalheController extends FormController {
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         String situacao = ((VendaCabecalhoVO) persistentObject).getSituacao();
-        
+
         if (!situacao.equals("D")) {
             String mensagem = "Este Registro Não Pode Ser Alterado.\n";
-            
+
             if (situacao.equals("P")) {
                 mensagem += "Situação: EM PRODUÇÃO";
             }
-            
+
             if (situacao.equals("X")) {
                 mensagem += "Situação: EM EXPEDIÇÃO";
             }
-            
+
             if (situacao.equals("F")) {
                 mensagem += "Situação: FATURADO";
             }
-            
+
             if (situacao.equals("E")) {
                 mensagem += "Situação: ENTREGUE";
             }
-            
+
             return new ErrorResponse(mensagem);
         }
         List<VendaDetalheVO> itensVenda = vendaDetalhe.getGrid1().getVOListTableModel().getDataVector();
@@ -215,7 +215,7 @@ public class VendaDetalheController extends FormController {
     }
 
     public void atualizaTotais() {
-       VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) vendaDetalhe.getForm1().getVOModel().getValueObject();
+        VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) vendaDetalhe.getForm1().getVOModel().getValueObject();
         if (vendaCabecalho.getValorSubtotal() != null) {
             if (vendaCabecalho.getTaxaDesconto() != null) {
                 vendaCabecalho.setValorDesconto(vendaCabecalho.getValorSubtotal().multiply(vendaCabecalho.getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
@@ -230,7 +230,6 @@ public class VendaDetalheController extends FormController {
         }
         vendaDetalhe.getForm1().pull();
     }
-
 
     private void carregaItensOrcamento(String idOrcamento) {
         try {
@@ -249,7 +248,6 @@ public class VendaDetalheController extends FormController {
             List<VendaOrcamentoDetalheVO> orcamentoDetalhe = ((VOListResponse) res).getRows();
             VendaDetalheVO itemVenda;
             vendaDetalhe.getGrid1().clearData();
-
             for (int i = 0; i < orcamentoDetalhe.size(); i++) {
                 itemVenda = new VendaDetalheVO();
                 itemVenda.setProduto(orcamentoDetalhe.get(i).getProduto());
@@ -263,11 +261,9 @@ public class VendaDetalheController extends FormController {
                 vendaDetalhe.getGrid1().getVOListTableModel().addObject(itemVenda);
             }
             vendaDetalhe.getItensController().calculaTotais();
-
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(vendaDetalhe, "Erro ao Carregar os Itens do Orçamento\n" + e.getMessage(), "Erro do Sistema", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(vendaDetalhe, "Ocorreu um erro ao carregar os itens do orçamento\n" + e.getMessage(), "Erro do Sistema", JOptionPane.ERROR_MESSAGE);
         }
-
     }
 
 }

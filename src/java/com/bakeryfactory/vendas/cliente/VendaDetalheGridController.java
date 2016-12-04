@@ -176,11 +176,9 @@ public class VendaDetalheGridController extends GridController implements GridDa
         VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) vendaDetalhe.getForm1().getVOModel().getValueObject();
         BigDecimal subTotal = BigDecimal.ZERO;
         BigDecimal totalDesconto = BigDecimal.ZERO;
-        
         for (int i = 0; i < itensVenda.size(); i++) {
             itensVenda.get(i).setValorSubtotal(itensVenda.get(i).getQuantidade().multiply(itensVenda.get(i).getValorUnitario()));
             subTotal = subTotal.add(itensVenda.get(i).getValorSubtotal());
-            
             if (itensVenda.get(i).getTaxaDesconto() != null) {
                 itensVenda.get(i).setValorDesconto(itensVenda.get(i).getValorSubtotal().multiply(itensVenda.get(i).getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
             }
@@ -191,27 +189,23 @@ public class VendaDetalheGridController extends GridController implements GridDa
                 itensVenda.get(i).setValorTotal(itensVenda.get(i).getValorSubtotal());
             }
         }
-        
         vendaCabecalho.setValorSubtotal(subTotal);
-        
         if (totalDesconto.compareTo(BigDecimal.ZERO) != 0) {
             vendaCabecalho.setValorDesconto(totalDesconto);
             vendaCabecalho.setTaxaDesconto(totalDesconto.divide(subTotal, RoundingMode.HALF_DOWN).multiply(BigDecimal.valueOf(100)));
         }
 
         vendaCabecalho.setValorTotal(subTotal);
-        if (vendaCabecalho.getValorFrete() != null) {
+        if (vendaCabecalho.getValorFrete() != null){
             vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().add(vendaCabecalho.getValorFrete()));
         }
-        
-        if (vendaCabecalho.getValorDesconto() != null) {
+        if (vendaCabecalho.getValorDesconto() != null){
             vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().subtract(vendaCabecalho.getValorDesconto()));
         }
 
         if (vendaCabecalho.getTaxaComissao() != null) {
             vendaCabecalho.setValorComissao(subTotal.subtract(totalDesconto).multiply(vendaCabecalho.getTaxaComissao().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
         }
-        
         vendaDetalhe.getFormController().atualizaTotais();
     }
 }

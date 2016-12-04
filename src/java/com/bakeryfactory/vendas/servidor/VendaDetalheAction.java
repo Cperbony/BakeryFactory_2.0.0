@@ -186,7 +186,16 @@ public class VendaDetalheAction implements Action {
 
             session.update(vendaCabecalho);
 
-            queryExcluir(orcamentoDetalhe, vendaCabecalho, session);
+            String sqlExcluir = "delete from VENDA_DETALHE where ID not in (0";
+            for (int i = 0; i < orcamentoDetalhe.size(); i++) {
+                orcamentoDetalhe.get(i).setVendaCabecalho(vendaCabecalho);
+                session.saveOrUpdate(orcamentoDetalhe.get(i));
+                sqlExcluir += "," + orcamentoDetalhe.get(i).getId();
+            }
+            sqlExcluir += ") and ID_VENDA_CABECALHO = :id";
+            Query query = session.createSQLQuery(sqlExcluir);
+            query.setInteger("id", vendaCabecalho.getId());
+            query.executeUpdate();
 
             Criteria criteria = session.createCriteria(VendaComissaoVO.class);
             criteria.add(Restrictions.eq("vendaCabecalho", vendaCabecalho));
@@ -208,12 +217,11 @@ public class VendaDetalheAction implements Action {
             session.getTransaction().commit();
 
             return new VOResponse(vendaCabecalho);
-
         } catch (Exception ex) {
+            ex.printStackTrace();
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {
@@ -224,19 +232,6 @@ public class VendaDetalheAction implements Action {
                 ex1.printStackTrace();
             }
         }
-    }
-
-    public void queryExcluir(List<VendaDetalheVO> orcamentoDetalhe, VendaCabecalhoVO vendaCabecalho, Session session) throws HibernateException {
-        String sqlExcluir = "delete from VENDA_DETALHE where ID not in (0";
-        for (int i = 0; i < orcamentoDetalhe.size(); i++) {
-            orcamentoDetalhe.get(i).setVendaCabecalho(vendaCabecalho);
-            session.saveOrUpdate(orcamentoDetalhe.get(i));
-            sqlExcluir += "," + orcamentoDetalhe.get(i).getId();
-        }
-        sqlExcluir += ") and ID_VENDA_CABECALHO = :id";
-        Query query = session.createSQLQuery(sqlExcluir);
-        query.setInteger("id", vendaCabecalho.getId());
-        query.executeUpdate();
     }
 
     private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {

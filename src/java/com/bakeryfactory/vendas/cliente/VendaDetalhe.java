@@ -42,7 +42,7 @@ public final class VendaDetalhe extends InternalFrame {
     private VendaDetalheGridController itensController;
 
     private LookupController vendedorController;
-    private LookupController clienteController;
+    private final LookupController clienteController;
     private LookupController transportadoraController;
     private LookupController condicaoPagamentoController;
     private LookupController produtoController;
@@ -55,6 +55,7 @@ public final class VendaDetalhe extends InternalFrame {
      * @param controller
      */
     public VendaDetalhe(VendaDetalheController controller) {
+        initComponents();
         this.produtoController = new LookupController();
         this.condicaoPagamentoController = new LookupController();
         this.tipoNotaFiscalController = new LookupController();
@@ -62,7 +63,6 @@ public final class VendaDetalhe extends InternalFrame {
         this.clienteController = new LookupController();
         this.transportadoraController = new LookupController();
         this.vendedorController = new LookupController();
-        initComponents();
 
         this.controller = controller;
 
