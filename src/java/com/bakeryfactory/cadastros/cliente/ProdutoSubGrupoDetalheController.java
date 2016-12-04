@@ -51,7 +51,7 @@ public class ProdutoSubGrupoDetalheController extends FormController {
         produtoSubGrupoDetalhe.setParentFrame(this.produtoSubGrupoGrid);
         this.produtoSubGrupoGrid.pushFrame(produtoSubGrupoDetalhe);
         MDIFrame.add(produtoSubGrupoDetalhe);
-        
+
         if (pk != null) {
             produtoSubGrupoDetalhe.getForm1().setMode(Consts.READONLY);
             produtoSubGrupoDetalhe.getForm1().reload();
@@ -60,14 +60,14 @@ public class ProdutoSubGrupoDetalheController extends FormController {
         }
     }
 
-/**
- * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
- *
- * @param valueObjectClass value object class
- * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
- */
-@Override
-        public Response loadData(Class valueObjectClass) {
+    /**
+     * This method must be overridden by the subclass to retrieve data and return the valorized value object. If the method is not overridden, the current version will return a "demo" value object.
+     *
+     * @param valueObjectClass value object class
+     * @return a VOResponse object if data loading is successfully completed, or an ErrorResponse object if an error occours
+     */
+    @Override
+    public Response loadData(Class valueObjectClass) {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
 
@@ -79,7 +79,7 @@ public class ProdutoSubGrupoDetalheController extends FormController {
      * @throws java.lang.Exception
      */
     @Override
-        public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+    public Response insertRecord(ValueObject newPersistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
 
@@ -87,7 +87,7 @@ public class ProdutoSubGrupoDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in INSERT mode.
      */
     @Override
-        public void afterInsertData() {
+    public void afterInsertData() {
         produtoSubGrupoGrid.getGrid1().reloadData();
         JOptionPane.showMessageDialog(produtoSubGrupoDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -101,7 +101,7 @@ public class ProdutoSubGrupoDetalheController extends FormController {
      * @throws java.lang.Exception
      */
     @Override
-        public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
+    public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
     }
 
@@ -109,10 +109,8 @@ public class ProdutoSubGrupoDetalheController extends FormController {
      * Callback method called after saving SUCCESSFULLY data in EDIT mode.
      */
     @Override
-        public void afterEditData() {
+    public void afterEditData() {
         produtoSubGrupoGrid.getGrid1().reloadData();
         JOptionPane.showMessageDialog(produtoSubGrupoDetalhe, "Dados Alterados Com Sucesso", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
-    } 
-    
-
+    }
 }

@@ -49,7 +49,7 @@ public class VendaOrcamentoDetalheController extends FormController {
     private VendaOrcamentoDetalhe vendaOrcamentoDetalhe = null;
     private String pk = null;
     private VendaOrcamentoGrid vendaOrcamentoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public VendaOrcamentoDetalheController(VendaOrcamentoGrid vendaOrcamentoGrid, String pk) {
         this.vendaOrcamentoGrid = vendaOrcamentoGrid;
@@ -120,7 +120,7 @@ public class VendaOrcamentoDetalheController extends FormController {
         List<VendaOrcamentoDetalheVO> orcamentoDetalhe = vendaOrcamentoDetalhe.getGridControl1().getVOListTableModel().getDataVector();
 
         if (orcamentoDetalhe.isEmpty()) {
-            return new ErrorResponse("Não há produtos no Orçamento.");
+            return new ErrorResponse("Não Constam Produtos no Orçamento.");
         }
         ((VendaOrcamentoCabecalhoVO) newPersistentObject).setSituacao("D");
 
@@ -160,31 +160,27 @@ public class VendaOrcamentoDetalheController extends FormController {
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         String situacao = ((VendaOrcamentoCabecalhoVO) persistentObject).getSituacao();
         if (!situacao.equals("D")) {
-            String mensagem = "Este Registro não Pode Ser Alterado.\n";
-
+            String mensagem = "Este registro não pode ser alterado.\n";
             if (situacao.equals("P")) {
-                mensagem += "Situação: EM PRODUÇÃO";
+                mensagem += "Situação: Em Produção";
             }
-
             if (situacao.equals("X")) {
-                mensagem += "Situação: EM EXPEDIÇÃO";
+                mensagem += "Situação: Em Expedição";
             }
-
             if (situacao.equals("F")) {
-                mensagem += "Situação: EM FATUTADO";
+                mensagem += "Situação: Faturado";
             }
-
             if (situacao.equals("E")) {
-                mensagem += "Situação: ENTREGUE";
+                mensagem += "Situação: Entregue";
             }
-
             return new ErrorResponse(mensagem);
         }
-        List<VendaOrcamentoCabecalhoVO> orcamentoDetalhe = vendaOrcamentoDetalhe.getGridControl1().getVOListTableModel().getDataVector();
+        List<VendaOrcamentoDetalheVO> orcamentoDetalhe = vendaOrcamentoDetalhe.getGridControl1().getVOListTableModel().getDataVector();
 
         if (orcamentoDetalhe.isEmpty()) {
-            return new ErrorResponse("Não produtos no Orçamento");
+            return new ErrorResponse("Não há produtos no orçamento.");
         }
+
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject, orcamentoDetalhe});
     }
 
@@ -199,10 +195,9 @@ public class VendaOrcamentoDetalheController extends FormController {
 
     public void atualizaTotais() {
         VendaOrcamentoCabecalhoVO orcamentoCabecalho = (VendaOrcamentoCabecalhoVO) vendaOrcamentoDetalhe.getForm1().getVOModel().getValueObject();
-        BigDecimal valorDesconto = orcamentoCabecalho.getValorSubtotal().multiply(orcamentoCabecalho.getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN));
         if (orcamentoCabecalho.getValorSubtotal() != null) {
             if (orcamentoCabecalho.getTaxaDesconto() != null) {
-                orcamentoCabecalho.setValorDesconto(valorDesconto);
+                orcamentoCabecalho.setValorDesconto(orcamentoCabecalho.getValorSubtotal().multiply(orcamentoCabecalho.getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
                 orcamentoCabecalho.setValorTotal(orcamentoCabecalho.getValorSubtotal().subtract(orcamentoCabecalho.getValorDesconto()));
             }
             if (orcamentoCabecalho.getValorFrete() != null) {

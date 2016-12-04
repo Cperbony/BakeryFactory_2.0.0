@@ -23,7 +23,10 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
+import com.bakeryfactory.cadastros.java.EmpresaVO;
+import com.bakeryfactory.padrao.cliente.Container;
 import com.bakeryfactory.padrao.java.Constantes;
+import com.bakeryfactory.vendas.java.NotaFiscalTipoVO;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -50,7 +53,7 @@ public class NotaFiscalTipoDetalheController extends FormController {
         notaFiscalTipoDetalhe = new NotaFiscalTipoDetalhe(this);
         notaFiscalTipoDetalhe.setParentFrame(this.notaFiscalTipoGrid);
         this.notaFiscalTipoGrid.pushFrame(notaFiscalTipoDetalhe);
-        MDIFrame.add(notaFiscalTipoDetalhe);
+        MDIFrame.add(notaFiscalTipoDetalhe, true);
 
         if (pk != null) {
             notaFiscalTipoDetalhe.getForm1().setMode(Consts.READONLY);
@@ -80,6 +83,9 @@ public class NotaFiscalTipoDetalheController extends FormController {
      */
     @Override
     public Response insertRecord(ValueObject newPersistentObject) throws Exception {
+        EmpresaVO empresa = (EmpresaVO) Container.getContainer().get("empresa");
+        ((NotaFiscalTipoVO) newPersistentObject).setEmpresa(empresa);
+        
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
     }
 

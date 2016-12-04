@@ -220,8 +220,6 @@ public class TransportadoraDetalhe extends InternalFrame {
 
         dateControl4.setAttributeName("dataCadastro");
         dateControl4.setEnabled(false);
-        dateControl4.setEnabledOnEdit(false);
-        dateControl4.setEnabledOnInsert(false);
         dateControl4.setLinkLabel(lblDataCadastro);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;

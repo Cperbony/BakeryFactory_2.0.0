@@ -42,6 +42,7 @@ import com.bakeryfactory.cadastros.cliente.ProdutoGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoGrupoGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoMarcaGridController;
 import com.bakeryfactory.cadastros.cliente.ProdutoSubGrupoGridController;
+import com.bakeryfactory.cadastros.cliente.ReceitaGridController;
 import com.bakeryfactory.cadastros.cliente.SetorGridController;
 import com.bakeryfactory.cadastros.cliente.SituacaoColaboradorGridController;
 import com.bakeryfactory.cadastros.cliente.SituacaoForCliGridController;
@@ -192,11 +193,11 @@ public class Fachada implements ClientFacade {
     }
 
     public void getReceita() {
-        // new ReceitaGridController();
+        new ReceitaGridController();
     }
 
     public void getModoPreparo() {
-        // new ModoPreparoGridController();
+       // new ModoPreparoGridController();
     }
 
     public void getPcpInstrucao() {
@@ -206,7 +207,7 @@ public class Fachada implements ClientFacade {
     public void getPcpOrdemProducao() {
         new PcpOpCabecalhoGridController();
     }
-
+    
     //VENDAS
     public void getTipoNotaFiscal() {
         new NotaFiscalTipoGridController();
@@ -215,7 +216,7 @@ public class Fachada implements ClientFacade {
     public void getVendaCondicoesPagamento() {
         new VendaCondicoesPagamentoGridController();
     }
-
+        
     public void getVendaOrcamento() {
         new VendaOrcamentoGridController();
     }

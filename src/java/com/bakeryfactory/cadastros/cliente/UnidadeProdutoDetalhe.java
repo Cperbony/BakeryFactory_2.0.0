@@ -89,7 +89,7 @@ public class UnidadeProdutoDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        form1.setVOClassName("com.t2tierp.cadastros.java.UnidadeProdutoVO");
+        form1.setVOClassName("com.bakeryfactory.cadastros.java.UnidadeProdutoVO");
         form1.setFunctionId("unidadeProduto");
         form1.setLayout(new java.awt.GridBagLayout());
 
@@ -103,6 +103,7 @@ public class UnidadeProdutoDetalhe extends InternalFrame {
 
         textControl2.setAttributeName("sigla");
         textControl2.setEnabled(false);
+        textControl2.setLinkLabel(lblSigla);
         textControl2.setMaxCharacters(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -130,6 +131,7 @@ public class UnidadeProdutoDetalhe extends InternalFrame {
         comboBoxControlPodeFracionar.setAttributeName("podeFracionar");
         comboBoxControlPodeFracionar.setDomainId("naosim");
         comboBoxControlPodeFracionar.setEnabled(false);
+        comboBoxControlPodeFracionar.setLinkLabel(lblPodeFracionar);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -141,6 +143,7 @@ public class UnidadeProdutoDetalhe extends InternalFrame {
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

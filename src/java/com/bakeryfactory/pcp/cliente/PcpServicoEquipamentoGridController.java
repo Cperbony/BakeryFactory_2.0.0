@@ -23,6 +23,7 @@
  */
 package com.bakeryfactory.pcp.cliente;
 
+import com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO;
 import com.bakeryfactory.pcp.java.PcpServicoVO;
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,8 +39,11 @@ import org.openswing.swing.table.java.GridDataLocator;
 public class PcpServicoEquipamentoGridController extends GridController implements GridDataLocator {
 
     private PcpServicoVO servico;
+    private PcpServicoEquipamentoVO servicoEquipamento;
+
 
     public PcpServicoEquipamentoGridController() {
+        this.servicoEquipamento = new PcpServicoEquipamentoVO();
     }
 
     @Override
@@ -63,6 +67,13 @@ public class PcpServicoEquipamentoGridController extends GridController implemen
      */
     @Override
     public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
+        if (servico != null) {
+            if (servico.getListaPcpServicoEquipamento() != null) {
+                for (int i = 0; i < newValueObjects.size(); i++) {
+                    servico.getListaPcpServicoEquipamento().add((PcpServicoEquipamentoVO) (newValueObjects.get(i)));
+                }
+            }
+        }
         return new VOListResponse(newValueObjects, false, newValueObjects.size());
     }
 
@@ -77,11 +88,28 @@ public class PcpServicoEquipamentoGridController extends GridController implemen
      */
     @Override
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
+        if (servico != null) {
+            if (servico.getListaPcpServicoEquipamento()!= null) {
+                for (int i = 0; i < oldPersistentObjects.size(); i++) {
+                    servico.getListaPcpServicoEquipamento().remove((PcpServicoEquipamentoVO) oldPersistentObjects.get(i));
+                }
+                for (int i = 0; i < persistentObjects.size(); i++) {
+                    servico.getListaPcpServicoEquipamento().add((PcpServicoEquipamentoVO) persistentObjects.get(i));
+                }
+            }
+        }
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
     }
 
     @Override
     public Response deleteRecords(ArrayList persistentObjects) throws Exception {
+         if (servico != null) {
+            if (servico.getListaPcpServicoEquipamento() != null) {
+                for (int i = 0; i < persistentObjects.size(); i++) {
+                    servico.getListaPcpServicoEquipamento().remove((PcpServicoEquipamentoVO) persistentObjects.get(i));
+                }
+            }
+        }
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
     }
 

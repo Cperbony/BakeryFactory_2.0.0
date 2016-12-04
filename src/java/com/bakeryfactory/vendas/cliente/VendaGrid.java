@@ -58,6 +58,7 @@ public class VendaGrid extends InternalFrame {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        vendaCabecalhoVO1 = new com.bakeryfactory.vendas.java.VendaCabecalhoVO();
         jPanel1 = new javax.swing.JPanel();
         insertButton1 = new org.openswing.swing.client.InsertButton();
         deleteButton1 = new org.openswing.swing.client.DeleteButton();
@@ -119,7 +120,7 @@ public class VendaGrid extends InternalFrame {
         textColumn5.setPreferredWidth(200);
         gridControl1.getColumnContainer().add(textColumn5);
 
-        textColumn4.setColumnName("condicoesPagamento.nome");
+        textColumn4.setColumnName("vendaCondicoesPagamento.nome");
         textColumn4.setHeaderColumnName("Condição Pagamento");
         textColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn4.setPreferredWidth(150);
@@ -235,5 +236,6 @@ public class VendaGrid extends InternalFrame {
     private org.openswing.swing.table.columns.client.TextColumn textColumn5;
     private org.openswing.swing.table.columns.client.TextColumn textColumn7;
     private org.openswing.swing.table.columns.client.TextColumn textColumn8;
+    private com.bakeryfactory.vendas.java.VendaCabecalhoVO vendaCabecalhoVO1;
     // End of variables declaration//GEN-END:variables
 }

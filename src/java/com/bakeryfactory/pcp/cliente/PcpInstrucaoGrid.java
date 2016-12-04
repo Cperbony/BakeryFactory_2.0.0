@@ -90,7 +90,8 @@ public class PcpInstrucaoGrid extends InternalFrame {
         gridControl1.setInsertButton(insertButton1);
         gridControl1.setNavBar(navigatorBar1);
         gridControl1.setReloadButton(reloadButton1);
-        gridControl1.setValueObjectClassName("com.bakeryfactory.pcp.java.InstrucaoVO");
+        gridControl1.setSingleExpandableRow(true);
+        gridControl1.setValueObjectClassName("com.bakeryfactory.pcp.java.PcpInstrucaoVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         textColumn2.setColumnName("codigo");

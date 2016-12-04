@@ -23,7 +23,9 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import com.bakeryfactory.vendas.lookups.ModeloNFLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -32,7 +34,7 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class NotaFiscalTipoDetalhe extends InternalFrame {
 
-    private final ModeloNFLookup modeloNFLookupController;
+    private final LookupController modeloNFController;
 
     /**
      * Creates new form ColaboradorDetalhe
@@ -40,13 +42,31 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
      * @param controller
      */
     public NotaFiscalTipoDetalhe(NotaFiscalTipoDetalheController controller) {
+        this.modeloNFController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
 
-        //Configuração Lookup Modelo Nota Fiscal
-        modeloNFLookupController = new ModeloNFLookup();
-        codLookupControlModelo.setLookupController(modeloNFLookupController);
+        /*
+         * Configurações do lookup do modelo NF
+         */
+        modeloNFController.setLookupValueObjectClassName("com.bakeryfactory.vendas.java.NotaFiscalModeloVO");
+        modeloNFController.addLookup2ParentLink("id", "notaFiscalModelo.id");
+        modeloNFController.addLookup2ParentLink("modelo", "notaFiscalModelo.modelo");
+        modeloNFController.addLookup2ParentLink("descricao", "notaFiscalModelo.descricao");
+        modeloNFController.setHeaderColumnName("id", "ID");
+        modeloNFController.setHeaderColumnName("modelo", "Modelo");
+        modeloNFController.setHeaderColumnName("descricao", "Descrição");
+        modeloNFController.setFrameTitle("Importa Modelo NF");
+
+        modeloNFController.setVisibleStatusPanel(true);
+        modeloNFController.setVisibleColumn("id", true);
+        modeloNFController.setVisibleColumn("modelo", true);
+        modeloNFController.setVisibleColumn("descricao", true);
+        modeloNFController.setFramePreferedSize(new Dimension(600, 500));
+
+        modeloNFController.setLookupDataLocator(new LookupDataLocatorGenerico(modeloNFController.getLookupValueObjectClassName()));
+        codLookupControlModelo.setLookupController(modeloNFController);
 
     }
 
@@ -67,7 +87,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         java.awt.GridBagConstraints gridBagConstraints;
 
         form1 = new org.openswing.swing.form.client.Form();
-        lblModelo = new org.openswing.swing.client.LabelControl();
+        lblNFModelo = new org.openswing.swing.client.LabelControl();
         codLookupControlModelo = new org.openswing.swing.client.CodLookupControl();
         textControl2 = new org.openswing.swing.client.TextControl();
         lblNome = new org.openswing.swing.client.LabelControl();
@@ -81,6 +101,9 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         numericControl8 = new org.openswing.swing.client.NumericControl();
         jSeparator1 = new javax.swing.JSeparator();
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
+        textControl3 = new org.openswing.swing.client.TextControl();
+        lblNFDescricao = new org.openswing.swing.client.LabelControl();
+        lblNFID = new org.openswing.swing.client.LabelControl();
         jPanel1 = new javax.swing.JPanel();
         editButton1 = new org.openswing.swing.client.EditButton();
         reloadButton1 = new org.openswing.swing.client.ReloadButton();
@@ -97,17 +120,18 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         form1.setSaveButton(saveButton1);
         form1.setLayout(new java.awt.GridBagLayout());
 
-        lblModelo.setLabel("Modelo:");
+        lblNFModelo.setText("Nota Fiscal Modelo:");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(lblModelo, gridBagConstraints);
+        form1.add(lblNFModelo, gridBagConstraints);
 
         codLookupControlModelo.setAllowOnlyNumbers(true);
         codLookupControlModelo.setAttributeName("notaFiscalModelo.id");
         codLookupControlModelo.setEnabled(false);
+        codLookupControlModelo.setLinkLabel(lblNFModelo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -119,10 +143,11 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         textControl2.setEnabled(false);
         textControl2.setEnabledOnEdit(false);
         textControl2.setEnabledOnInsert(false);
+        textControl2.setLinkLabel(lblNFDescricao);
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
-        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.gridwidth = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
@@ -138,6 +163,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
 
         textControl4.setAttributeName("nome");
         textControl4.setEnabled(false);
+        textControl4.setLinkLabel(lblNome);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -164,6 +190,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
 
         textControl6.setAttributeName("serie");
         textControl6.setEnabled(false);
+        textControl6.setLinkLabel(lblSerie);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -171,7 +198,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl6, gridBagConstraints);
 
-        lblSerieScan.setLabel("Serie Scan:");
+        lblSerieScan.setText("Série Scan:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
@@ -181,6 +208,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
 
         textControl7.setAttributeName("serieScan");
         textControl7.setEnabled(false);
+        textControl7.setLinkLabel(lblSerieScan);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -199,6 +227,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
 
         numericControl8.setAttributeName("ultimoNumero");
         numericControl8.setEnabled(false);
+        numericControl8.setLinkLabel(lblUltimoNumero);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -215,6 +244,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -224,6 +254,36 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
         gridBagConstraints.ipady = 50;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textAreaControl1, gridBagConstraints);
+
+        textControl3.setAttributeName("notaFiscalModelo.modelo");
+        textControl3.setEnabled(false);
+        textControl3.setEnabledOnEdit(false);
+        textControl3.setEnabledOnInsert(false);
+        textControl3.setLinkLabel(lblNFModelo);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.gridwidth = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
+        form1.add(textControl3, gridBagConstraints);
+
+        lblNFDescricao.setText("Nota Fiscal Descrição:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 3;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        form1.add(lblNFDescricao, gridBagConstraints);
+
+        lblNFID.setText("Nota Fiscal ID:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
+        form1.add(lblNFID, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -257,7 +317,9 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
     private org.openswing.swing.client.LabelControl lblDescricao;
-    private org.openswing.swing.client.LabelControl lblModelo;
+    private org.openswing.swing.client.LabelControl lblNFDescricao;
+    private org.openswing.swing.client.LabelControl lblNFID;
+    private org.openswing.swing.client.LabelControl lblNFModelo;
     private org.openswing.swing.client.LabelControl lblNome;
     private org.openswing.swing.client.LabelControl lblSerie;
     private org.openswing.swing.client.LabelControl lblSerieScan;
@@ -267,6 +329,7 @@ public class NotaFiscalTipoDetalhe extends InternalFrame {
     private org.openswing.swing.client.SaveButton saveButton1;
     private org.openswing.swing.client.TextAreaControl textAreaControl1;
     private org.openswing.swing.client.TextControl textControl2;
+    private org.openswing.swing.client.TextControl textControl3;
     private org.openswing.swing.client.TextControl textControl4;
     private org.openswing.swing.client.TextControl textControl6;
     private org.openswing.swing.client.TextControl textControl7;

@@ -101,6 +101,7 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         lblPrazoMedio = new org.openswing.swing.client.LabelControl();
         numericControl10 = new org.openswing.swing.client.NumericControl();
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
+        jSeparator1 = new javax.swing.JSeparator();
         jPanelVendaCondPagamento = new javax.swing.JPanel();
         editButtonCondPagto = new org.openswing.swing.client.EditButton();
         reloadButtonCondPagto = new org.openswing.swing.client.ReloadButton();
@@ -130,9 +131,15 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         jPanel2.add(jPanelVendaCondParcelas, gridBagConstraints);
 
         gridControlVendaParcelas.setAutoLoadData(false);
+        gridControlVendaParcelas.setDeleteButton(deleteButtonCondParcela);
+        gridControlVendaParcelas.setEditButton(editButtonCondParcela);
         gridControlVendaParcelas.setFunctionId("vendaCondicoesParcelas");
+        gridControlVendaParcelas.setInsertButton(insertButtonCondParcela);
         gridControlVendaParcelas.setInsertRowsOnTop(false);
-        gridControlVendaParcelas.setValueObjectClassName("com.bakeryfactory.vendas.java.VendaCondicoesParcelasVO");
+        gridControlVendaParcelas.setNavBar(navigatorBarCondParcela);
+        gridControlVendaParcelas.setReloadButton(reloadButtonCondParcela);
+        gridControlVendaParcelas.setSaveButton(saveButtonCondParcela);
+        gridControlVendaParcelas.setValueObjectClassName("com.bakeryfactory.vendas.java.VendaCondicoesParcelaVO");
         gridControlVendaParcelas.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         integerColumn3.setColumnName("parcela");
@@ -175,7 +182,10 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         getContentPane().add(jPanel2, gridBagConstraints);
 
         form1.setVOClassName("com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO");
+        form1.setEditButton(editButtonCondPagto);
         form1.setFunctionId("vendaCondicoesPagamento");
+        form1.setReloadButton(reloadButtonCondPagto);
+        form1.setSaveButton(saveButtonCondPagto);
         form1.setLayout(new java.awt.GridBagLayout());
 
         lblNome.setLabel("Nome:");
@@ -188,6 +198,7 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
 
         textControl3.setAttributeName("nome");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblNome);
         textControl3.setMaxCharacters(50);
         textControl3.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -217,12 +228,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         numericControl5.setAttributeName("faturamentoMinimo");
         numericControl5.setDecimals(2);
         numericControl5.setEnabled(false);
+        numericControl5.setLinkLabel(lblFaturamentoMin);
         numericControl5.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl5, gridBagConstraints);
 
         lblFaturamentoMax.setText("Faturamento Máximo:");
@@ -236,12 +248,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         numericControl6.setAttributeName("faturamentoMaximo");
         numericControl6.setDecimals(2);
         numericControl6.setEnabled(false);
+        numericControl6.setLinkLabel(lblFaturamentoMax);
         numericControl6.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl6, gridBagConstraints);
 
         lblIndiceCorrecao.setText("Índice Correção:");
@@ -255,12 +268,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         numericControl7.setAttributeName("indiceCorrecao");
         numericControl7.setDecimals(2);
         numericControl7.setEnabled(false);
+        numericControl7.setLinkLabel(lblIndiceCorrecao);
         numericControl7.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl7, gridBagConstraints);
 
         lblDiasTolerancia.setText("Dias Tolerância:");
@@ -273,12 +287,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
 
         numericControl8.setAttributeName("diasTolerancia");
         numericControl8.setEnabled(false);
+        numericControl8.setLinkLabel(lblDiasTolerancia);
         numericControl8.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl8, gridBagConstraints);
 
         lblValorTolerancia.setText("Valor Tolerância:");
@@ -292,12 +307,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         numericControl9.setAttributeName("valorTolerancia");
         numericControl9.setDecimals(2);
         numericControl9.setEnabled(false);
+        numericControl9.setLinkLabel(lblValorTolerancia);
         numericControl9.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl9, gridBagConstraints);
 
         lblPrazoMedio.setText("Prazo Médio:");
@@ -312,16 +328,18 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         numericControl10.setEnabled(false);
         numericControl10.setEnabledOnEdit(false);
         numericControl10.setEnabledOnInsert(false);
+        numericControl10.setLinkLabel(lblPrazoMedio);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
         gridBagConstraints.fill = java.awt.GridBagConstraints.VERTICAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
-        gridBagConstraints.insets = new java.awt.Insets(5, 5, 30, 10);
+        gridBagConstraints.insets = new java.awt.Insets(5, 5, 10, 10);
         form1.add(numericControl10, gridBagConstraints);
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -332,6 +350,13 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textAreaControl1, gridBagConstraints);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 6;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(20, 0, 20, 0);
+        form1.add(jSeparator1, gridBagConstraints);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -370,6 +395,7 @@ public class VendaCondicoesPagamentoDetalhe extends InternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelVendaCondPagamento;
     private javax.swing.JPanel jPanelVendaCondParcelas;
+    private javax.swing.JSeparator jSeparator1;
     private org.openswing.swing.client.LabelControl lblDescricao;
     private org.openswing.swing.client.LabelControl lblDiasTolerancia;
     private org.openswing.swing.client.LabelControl lblFaturamentoMax;

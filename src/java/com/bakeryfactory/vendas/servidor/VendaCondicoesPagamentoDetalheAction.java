@@ -114,7 +114,7 @@ public class VendaCondicoesPagamentoDetalheAction implements Action {
             session.beginTransaction();
 
             session.save(vendaCondicoesPagamento);
-            
+
             for (int i = 0; i < parcelas.size(); i++) {
                 parcelas.get(i).setVendaCondicoesPagamento(vendaCondicoesPagamento);
                 session.save(parcelas.get(i));
@@ -160,10 +160,10 @@ public class VendaCondicoesPagamentoDetalheAction implements Action {
             return new VOResponse(vendaCondicoesPagamento);
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {

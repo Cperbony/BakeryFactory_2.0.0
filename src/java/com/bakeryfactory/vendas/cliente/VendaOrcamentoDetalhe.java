@@ -23,11 +23,9 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import com.bakeryfactory.vendas.lookups.ClienteLookup;
-import com.bakeryfactory.vendas.lookups.CondicoesPagamentoLookup;
-import com.bakeryfactory.vendas.lookups.ProdutoLookup;
-import com.bakeryfactory.vendas.lookups.TransportadoraLookup;
-import com.bakeryfactory.vendas.lookups.VendedorLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -39,11 +37,11 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
     private VendaOrcamentoDetalheGridController gridController;
     private VendaOrcamentoDetalheController controller;
 
-    private final VendedorLookup vendedorLookupController;
-    private final ClienteLookup clienteLookupController;
-    private final TransportadoraLookup transportadoraLookupController;
-    private final CondicoesPagamentoLookup condicoesPgtoLookupController;
-    private final ProdutoLookup produtoLookupController;
+    private LookupController vendedorController;
+    private LookupController clienteController;
+    private LookupController transportadoraController;
+    private LookupController condicoesPagamentoController;
+    private LookupController produtoController;
 
     /**
      * Creates new form ColaboradorDetalhe
@@ -51,6 +49,11 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
      * @param controller
      */
     public VendaOrcamentoDetalhe(VendaOrcamentoDetalheController controller) {
+        this.produtoController = new LookupController();
+        this.condicoesPagamentoController = new LookupController();
+        this.transportadoraController = new LookupController();
+        this.clienteController = new LookupController();
+        this.vendedorController = new LookupController();
         initComponents();
 
         this.controller = controller;
@@ -61,21 +64,101 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         gridControl1.setController(gridController);
         gridControl1.setGridDataLocator(gridController);
 
-        //Configuração Lookups
-        vendedorLookupController = new VendedorLookup();
-        codLookupControlVendedor.setLookupController(vendedorLookupController);
+/*
+         * Configurações do lookup do vendedor
+         */
+        vendedorController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.VendedorVO");
+        vendedorController.addLookup2ParentLink("id", "vendedor.id");
+        vendedorController.addLookup2ParentLink("colaborador.pessoa.nome", "vendedor.colaborador.pessoa.nome");
+        vendedorController.addLookup2ParentLink("comissao", "taxaComissao");
+        vendedorController.setHeaderColumnName("id", "ID");
+        vendedorController.setHeaderColumnName("colaborador.pessoa.nome", "Nome");
+        vendedorController.setHeaderColumnName("comissao", "Comissão");
+        vendedorController.setFrameTitle("Importa Vendedor");
 
-        clienteLookupController = new ClienteLookup();
-        codLookupControlCliente.setLookupController(clienteLookupController);
+        vendedorController.setVisibleStatusPanel(true);
+        vendedorController.setVisibleColumn("id", true);
+        vendedorController.setVisibleColumn("colaborador.pessoa.nome", true);
+        vendedorController.setVisibleColumn("comissao", true);
+        vendedorController.setFramePreferedSize(new Dimension(600, 500));
 
-        transportadoraLookupController = new TransportadoraLookup();
-        codLookupControlTransportadora.setLookupController(transportadoraLookupController);
+        vendedorController.setLookupDataLocator(new LookupDataLocatorGenerico(vendedorController.getLookupValueObjectClassName()));
+        codLookupControlVendedor.setLookupController(vendedorController);
 
-        condicoesPgtoLookupController = new CondicoesPagamentoLookup();
-        codLookupControlCondicaoPgto.setLookupController(condicoesPgtoLookupController);
+        /*
+         * Configurações do lookup do cliente
+         */
+        clienteController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ClienteVO");
+        clienteController.addLookup2ParentLink("id", "cliente.id");
+        clienteController.addLookup2ParentLink("pessoa.nome", "cliente.pessoa.nome");
+        clienteController.setHeaderColumnName("id", "ID");
+        clienteController.setHeaderColumnName("cliente.pessoa.nome", "Nome");
+        clienteController.setFrameTitle("Importa Dados Cliente");
 
-        produtoLookupController = new ProdutoLookup();
-        codLookupColumnProduto.setLookupController(produtoLookupController);
+        clienteController.setVisibleStatusPanel(true);
+        clienteController.setVisibleColumn("id", true);
+        clienteController.setVisibleColumn("nome", true);
+        clienteController.setFramePreferedSize(new Dimension(600, 500));
+
+        clienteController.setLookupDataLocator(new LookupDataLocatorGenerico(clienteController.getLookupValueObjectClassName()));
+        codLookupControlCliente.setLookupController(clienteController);
+
+        /*
+         * Configurações do lookup da transportadora
+         */
+        transportadoraController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.TransportadoraVO");
+        transportadoraController.addLookup2ParentLink("id", "transportadora.id");
+        transportadoraController.addLookup2ParentLink("pessoa.nome", "transportadora.pessoa.nome");
+        transportadoraController.setHeaderColumnName("id", "ID");
+        transportadoraController.setHeaderColumnName("pessoa.nome", "Nome");
+        transportadoraController.setFrameTitle("Importa Transportadora");
+
+        transportadoraController.setVisibleStatusPanel(true);
+        transportadoraController.setVisibleColumn("id", true);
+        transportadoraController.setVisibleColumn("pessoa.nome", true);
+        transportadoraController.setFramePreferedSize(new Dimension(600, 500));
+
+        transportadoraController.setLookupDataLocator(new LookupDataLocatorGenerico(transportadoraController.getLookupValueObjectClassName()));
+        codLookupControlTransportadora.setLookupController(transportadoraController);
+
+        /*
+         * Configurações do lookup da condicao de pagamento
+         */
+        condicoesPagamentoController.setLookupValueObjectClassName("com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO");
+        condicoesPagamentoController.addLookup2ParentLink("id", "vendaCondicoesPagamento.id");
+        condicoesPagamentoController.addLookup2ParentLink("nome", "vendaCondicoesPagamento.nome");
+        condicoesPagamentoController.setHeaderColumnName("id", "ID");
+        condicoesPagamentoController.setHeaderColumnName("nome", "Nome");
+        condicoesPagamentoController.setFrameTitle("Importa Condições de Pagamento");
+
+        condicoesPagamentoController.setVisibleStatusPanel(true);
+        condicoesPagamentoController.setVisibleColumn("id", true);
+        condicoesPagamentoController.setVisibleColumn("nome", true);
+        condicoesPagamentoController.setFramePreferedSize(new Dimension(600, 500));
+
+        condicoesPagamentoController.setLookupDataLocator(new LookupDataLocatorGenerico(condicoesPagamentoController.getLookupValueObjectClassName()));
+        codLookupControlCondicaoPgto.setLookupController(condicoesPagamentoController);
+
+        /*
+         * Configurações do lookup do produto
+         */
+        produtoController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoVO");
+        produtoController.addLookup2ParentLink("id", "produto.id");
+        produtoController.addLookup2ParentLink("nome", "produto.nome");
+        produtoController.addLookup2ParentLink("valorVenda", "valorUnitario");
+        produtoController.setHeaderColumnName("id", "ID");
+        produtoController.setHeaderColumnName("nome", "Nome");
+        produtoController.setHeaderColumnName("valorVenda", "Valor");
+        produtoController.setFrameTitle("Importa Produto");
+
+        produtoController.setVisibleStatusPanel(true);
+        produtoController.setVisibleColumn("id", true);
+        produtoController.setVisibleColumn("nome", true);
+        produtoController.setVisibleColumn("valorVenda", true);
+        produtoController.setFramePreferedSize(new Dimension(600, 500));
+
+        produtoController.setLookupDataLocator(new LookupDataLocatorGenerico(produtoController.getLookupValueObjectClassName()));
+        codLookupColumnProduto.setLookupController(produtoController);
 
     }
 
@@ -140,9 +223,9 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlValorSubTotal = new org.openswing.swing.client.NumericControl();
         lblValorFrete = new org.openswing.swing.client.LabelControl();
         numControlValorFrete = new org.openswing.swing.client.NumericControl();
-        labelControl17 = new org.openswing.swing.client.LabelControl();
+        lblTaxaComissao = new org.openswing.swing.client.LabelControl();
         numControlTaxaComissao = new org.openswing.swing.client.NumericControl();
-        labelControl18 = new org.openswing.swing.client.LabelControl();
+        lblValorComissao = new org.openswing.swing.client.LabelControl();
         numControlValorComissao = new org.openswing.swing.client.NumericControl();
         lblTaxaDesconto = new org.openswing.swing.client.LabelControl();
         numControlTaxaDesconto = new org.openswing.swing.client.NumericControl();
@@ -205,8 +288,9 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         form1.add(lblCondPagto, gridBagConstraints);
 
         codLookupControlCondicaoPgto.setAllowOnlyNumbers(true);
-        codLookupControlCondicaoPgto.setAttributeName("condicoesPagamento.id");
+        codLookupControlCondicaoPgto.setAttributeName("vendaCondicoesPagamento.id");
         codLookupControlCondicaoPgto.setEnabled(false);
+        codLookupControlCondicaoPgto.setLinkLabel(lblCondPagto);
         codLookupControlCondicaoPgto.setMaxCharacters(10);
         codLookupControlCondicaoPgto.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -217,7 +301,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(codLookupControlCondicaoPgto, gridBagConstraints);
 
-        textControlCondPgto.setAttributeName("condicoesPagamento.nome");
+        textControlCondPgto.setAttributeName("vendaCondicoesPagamento.nome");
         textControlCondPgto.setEnabled(false);
         textControlCondPgto.setEnabledOnEdit(false);
         textControlCondPgto.setEnabledOnInsert(false);
@@ -240,6 +324,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         codLookupControlVendedor.setAllowOnlyNumbers(true);
         codLookupControlVendedor.setAttributeName("vendedor.id");
         codLookupControlVendedor.setEnabled(false);
+        codLookupControlVendedor.setLinkLabel(lblVendedor);
         codLookupControlVendedor.setMaxCharacters(10);
         codLookupControlVendedor.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -273,6 +358,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         codLookupControlTransportadora.setAllowOnlyNumbers(true);
         codLookupControlTransportadora.setAttributeName("transportadora.id");
         codLookupControlTransportadora.setEnabled(false);
+        codLookupControlTransportadora.setLinkLabel(lblTransportadora);
         codLookupControlTransportadora.setMaxCharacters(10);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -305,6 +391,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         codLookupControlCliente.setAllowOnlyNumbers(true);
         codLookupControlCliente.setAttributeName("cliente.id");
         codLookupControlCliente.setEnabled(false);
+        codLookupControlCliente.setLinkLabel(lblCliente);
         codLookupControlCliente.setMaxCharacters(10);
         codLookupControlCliente.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -338,6 +425,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         comboBoxControl6.setAttributeName("tipo");
         comboBoxControl6.setDomainId("vendaOrcamentoTipo");
         comboBoxControl6.setEnabled(false);
+        comboBoxControl6.setLinkLabel(lblTipo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;
@@ -355,6 +443,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
 
         textControl7.setAttributeName("codigo");
         textControl7.setEnabled(false);
+        textControl7.setLinkLabel(lblCodigo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 5;
@@ -372,6 +461,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
 
         dateControl8.setAttributeName("dataCadastro");
         dateControl8.setEnabled(false);
+        dateControl8.setLinkLabel(lblDataCadastro);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 5;
@@ -389,6 +479,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
 
         dateControl9.setAttributeName("dataEntrega");
         dateControl9.setEnabled(false);
+        dateControl9.setLinkLabel(lblDataEntrega);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 5;
@@ -406,6 +497,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
 
         dateControl10.setAttributeName("validade");
         dateControl10.setEnabled(false);
+        dateControl10.setLinkLabel(lblValidade);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 5;
@@ -425,6 +517,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         comboBoxControl11.setAttributeName("tipoFrete");
         comboBoxControl11.setDomainId("compraTipoFrete");
         comboBoxControl11.setEnabled(false);
+        comboBoxControl11.setLinkLabel(lblTipoFrete);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
@@ -445,6 +538,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlValorSubTotal.setEnabled(false);
         numControlValorSubTotal.setEnabledOnEdit(false);
         numControlValorSubTotal.setEnabledOnInsert(false);
+        numControlValorSubTotal.setLinkLabel(lblValorSubTotal);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -463,6 +557,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlValorFrete.setAttributeName("valorFrete");
         numControlValorFrete.setDecimals(2);
         numControlValorFrete.setEnabled(false);
+        numControlValorFrete.setLinkLabel(lblValorFrete);
         numControlValorFrete.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 numControlValorFreteFocusLost(evt);
@@ -475,19 +570,20 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(numControlValorFrete, gridBagConstraints);
 
-        labelControl17.setText("Taxa Comissão:");
+        lblTaxaComissao.setText("Taxa Comissão:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(labelControl17, gridBagConstraints);
+        form1.add(lblTaxaComissao, gridBagConstraints);
 
         numControlTaxaComissao.setAttributeName("taxaComissao");
         numControlTaxaComissao.setDecimals(2);
         numControlTaxaComissao.setEnabled(false);
         numControlTaxaComissao.setEnabledOnEdit(false);
         numControlTaxaComissao.setEnabledOnInsert(false);
+        numControlTaxaComissao.setLinkLabel(lblTaxaComissao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 7;
@@ -495,19 +591,20 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(numControlTaxaComissao, gridBagConstraints);
 
-        labelControl18.setText("Valor Comissão:");
+        lblValorComissao.setText("Valor Comissão:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 6;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(labelControl18, gridBagConstraints);
+        form1.add(lblValorComissao, gridBagConstraints);
 
         numControlValorComissao.setAttributeName("valorComissao");
         numControlValorComissao.setDecimals(2);
         numControlValorComissao.setEnabled(false);
         numControlValorComissao.setEnabledOnEdit(false);
         numControlValorComissao.setEnabledOnInsert(false);
+        numControlValorComissao.setLinkLabel(lblValorComissao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 7;
@@ -526,6 +623,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlTaxaDesconto.setAttributeName("taxaDesconto");
         numControlTaxaDesconto.setDecimals(2);
         numControlTaxaDesconto.setEnabled(false);
+        numControlTaxaDesconto.setLinkLabel(lblTaxaComissao);
         numControlTaxaDesconto.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 numControlTaxaDescontoFocusLost(evt);
@@ -551,6 +649,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlValorDesconto.setEnabled(false);
         numControlValorDesconto.setEnabledOnEdit(false);
         numControlValorDesconto.setEnabledOnInsert(false);
+        numControlValorDesconto.setLinkLabel(lblValorDesconto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 7;
@@ -570,6 +669,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         numControlValorTotal.setAttributeName("valorTotal");
         numControlValorTotal.setDecimals(2);
         numControlValorTotal.setEnabled(false);
+        numControlValorTotal.setLinkLabel(lblValorTotal);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 7;
@@ -596,8 +696,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
         cbControlSituacao.setAttributeName("situacao");
         cbControlSituacao.setDomainId("vendaOrcamentoSituacao");
         cbControlSituacao.setEnabled(false);
-        cbControlSituacao.setEnabledOnEdit(false);
-        cbControlSituacao.setEnabledOnInsert(false);
+        cbControlSituacao.setLinkLabel(lblSituacao);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 5;
@@ -607,6 +706,7 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
 
         textAreaControlObserv.setAttributeName("observacao");
         textAreaControlObserv.setEnabled(false);
+        textAreaControlObserv.setLinkLabel(lblObservacao);
         textAreaControlObserv.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -763,8 +863,6 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanelVendaOrcamentoCab;
     private javax.swing.JPanel jPanelVendaOrcamentoDet;
-    private org.openswing.swing.client.LabelControl labelControl17;
-    private org.openswing.swing.client.LabelControl labelControl18;
     private org.openswing.swing.client.LabelControl lblCliente;
     private org.openswing.swing.client.LabelControl lblCodigo;
     private org.openswing.swing.client.LabelControl lblCondPagto;
@@ -772,11 +870,13 @@ public class VendaOrcamentoDetalhe extends InternalFrame {
     private org.openswing.swing.client.LabelControl lblDataEntrega;
     private org.openswing.swing.client.LabelControl lblObservacao;
     private org.openswing.swing.client.LabelControl lblSituacao;
+    private org.openswing.swing.client.LabelControl lblTaxaComissao;
     private org.openswing.swing.client.LabelControl lblTaxaDesconto;
     private org.openswing.swing.client.LabelControl lblTipo;
     private org.openswing.swing.client.LabelControl lblTipoFrete;
     private org.openswing.swing.client.LabelControl lblTransportadora;
     private org.openswing.swing.client.LabelControl lblValidade;
+    private org.openswing.swing.client.LabelControl lblValorComissao;
     private org.openswing.swing.client.LabelControl lblValorDesconto;
     private org.openswing.swing.client.LabelControl lblValorFrete;
     private org.openswing.swing.client.LabelControl lblValorSubTotal;

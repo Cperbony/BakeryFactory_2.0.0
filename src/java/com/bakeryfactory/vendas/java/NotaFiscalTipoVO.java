@@ -71,9 +71,6 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
     @JoinColumn(name = "ID_NOTA_FISCAL_MODELO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private NotaFiscalModeloVO notaFiscalModelo;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalTipo")
-    private List<VendaCabecalhoVO> listaVendaCabecalhoVO;
 
     public NotaFiscalTipoVO() {
     }
@@ -128,14 +125,6 @@ public class NotaFiscalTipoVO extends ValueObjectImpl implements Serializable {
 
     public void setUltimoNumero(Integer ultimoNumero) {
         this.ultimoNumero = ultimoNumero;
-    }
-
-    public List<VendaCabecalhoVO> getListaVendaCabecalhoVO() {
-        return listaVendaCabecalhoVO;
-    }
-
-    public void setListaVendaCabecalhoVO(List<VendaCabecalhoVO> listaVendaCabecalhoVO) {
-        this.listaVendaCabecalhoVO = listaVendaCabecalhoVO;
     }
 
     public EmpresaVO getEmpresa() {

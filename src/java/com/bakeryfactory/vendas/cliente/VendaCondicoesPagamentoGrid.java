@@ -33,7 +33,7 @@ import org.openswing.swing.mdi.client.InternalFrame;
 public class VendaCondicoesPagamentoGrid extends InternalFrame {
 
     /**
-     * Creates new form TempGrid
+     * Creates new form VendaCondicoesPagamentoGrid
      * @param controller
      */
     public VendaCondicoesPagamentoGrid(VendaCondicoesPagamentoGridController controller) {

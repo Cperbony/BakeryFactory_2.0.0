@@ -114,7 +114,7 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
     private NotaFiscalTipoVO notaFiscalTipo;
 
     @JoinColumn(name = "ID_TRANSPORTADORA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private TransportadoraVO transportadora;
 
     @JoinColumn(name = "ID_VENDA_CONDICOES_PAGAMENTO", referencedColumnName = "ID")
@@ -122,7 +122,7 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
     private VendaCondicoesPagamentoVO vendaCondicoesPagamento;
 
     @JoinColumn(name = "ID_VENDA_ROMANEIO_ENTREGA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private VendaRomaneioEntregaVO vendaRomaneioEntrega;
 
     @JoinColumn(name = "ID_VENDEDOR", referencedColumnName = "ID")

@@ -47,13 +47,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
       <SubComponents>
-        <Component class="org.openswing.swing.client.LabelControl" name="lblModelo">
+        <Component class="org.openswing.swing.client.LabelControl" name="lblNFModelo">
           <Properties>
-            <Property name="label" type="java.lang.String" value="Modelo:"/>
+            <Property name="text" type="java.lang.String" value="Nota Fiscal Modelo:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+              <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -64,6 +64,9 @@
               <Connection code="&quot;notaFiscalModelo.id&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblNFModelo"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -79,10 +82,13 @@
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="enabledOnEdit" type="boolean" value="false"/>
             <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblNFDescricao"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="1" gridY="1" gridWidth="4" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="1.0" weightY="0.0"/>
+              <GridBagConstraints gridX="3" gridY="1" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="1.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -102,6 +108,9 @@
               <Connection code="&quot;nome&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblNome"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -135,6 +144,9 @@
               <Connection code="&quot;serie&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblSerie"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -144,7 +156,7 @@
         </Component>
         <Component class="org.openswing.swing.client.LabelControl" name="lblSerieScan">
           <Properties>
-            <Property name="label" type="java.lang.String" value="Serie Scan:"/>
+            <Property name="text" type="java.lang.String" value="S&#xe9;rie Scan:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -158,6 +170,9 @@
               <Connection code="&quot;serieScan&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblSerieScan"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -181,6 +196,9 @@
               <Connection code="&quot;ultimoNumero&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblUltimoNumero"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -201,11 +219,52 @@
               <Connection code="&quot;descricao&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblDescricao"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="1000"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="0" gridY="7" gridWidth="5" gridHeight="1" fill="1" ipadX="0" ipadY="50" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.TextControl" name="textControl3">
+          <Properties>
+            <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;notaFiscalModelo.modelo&quot;" type="code"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="enabledOnEdit" type="boolean" value="false"/>
+            <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblNFModelo"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="1" gridY="1" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="1.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.LabelControl" name="lblNFDescricao">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nota Fiscal Descri&#xe7;&#xe3;o:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="3" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.LabelControl" name="lblNFID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nota Fiscal ID:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>

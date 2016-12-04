@@ -37,8 +37,13 @@ import com.bakeryfactory.cadastros.servidor.ColaboradorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.ColaboradorGridAction;
 import com.bakeryfactory.cadastros.servidor.EstadoCivilDetalheAction;
 import com.bakeryfactory.cadastros.servidor.EstadoCivilGridAction;
+import com.bakeryfactory.cadastros.servidor.FichaTecnicaGridAction;
 import com.bakeryfactory.cadastros.servidor.FornecedorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.FornecedorGridAction;
+import com.bakeryfactory.cadastros.servidor.IngredienteDetalheAction;
+import com.bakeryfactory.cadastros.servidor.IngredienteGridAction;
+import com.bakeryfactory.cadastros.servidor.ModoPreparoDetalheAction;
+import com.bakeryfactory.cadastros.servidor.ModoPreparoGridAction;
 import com.bakeryfactory.cadastros.servidor.MunicipioDetalheAction;
 import com.bakeryfactory.cadastros.servidor.MunicipioGridAction;
 import com.bakeryfactory.cadastros.servidor.NcmGridAction;
@@ -60,6 +65,8 @@ import com.bakeryfactory.cadastros.servidor.ProdutoMarcaDetalheAction;
 import com.bakeryfactory.cadastros.servidor.ProdutoMarcaGridAction;
 import com.bakeryfactory.cadastros.servidor.ProdutoSubGrupoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.ProdutoSubGrupoGridAction;
+import com.bakeryfactory.cadastros.servidor.ReceitaDetalheAction;
+import com.bakeryfactory.cadastros.servidor.ReceitaGridAction;
 import com.bakeryfactory.cadastros.servidor.SetorDetalheAction;
 import com.bakeryfactory.cadastros.servidor.SetorGridAction;
 import com.bakeryfactory.cadastros.servidor.SindicatoDetalheAction;
@@ -88,6 +95,7 @@ import com.bakeryfactory.pcp.servidor.PcpOpCabecalhoGridAction;
 import com.bakeryfactory.pcp.servidor.PcpOpDetalheGridAction;
 import com.bakeryfactory.vendas.servidor.NotaFiscalTipoDetalheAction;
 import com.bakeryfactory.vendas.servidor.NotaFiscalTipoGridAction;
+import com.bakeryfactory.vendas.servidor.ValidaVendaOrcamentoAction;
 import com.bakeryfactory.vendas.servidor.VendaCondicoesPagamentoDetalheAction;
 import com.bakeryfactory.vendas.servidor.VendaCondicoesPagamentoGridAction;
 import com.bakeryfactory.vendas.servidor.VendaCondicoesParcelasGridAction;
@@ -323,11 +331,14 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
 
         a = new ProdutoDetalheAction();
         put(a.getRequestName(), a);
+        
+        a = new FichaTecnicaGridAction();
+        put(a.getRequestName(), a);
 
         a = new NcmGridAction();
         put(a.getRequestName(), a);
 
-        /*
+
         a = new IngredienteGridAction();
         put(a.getRequestName(), a);
         
@@ -346,7 +357,6 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
         a = new ModoPreparoDetalheAction();
         put(a.getRequestName(), a);
         
-         */
 
  /*Actions do Módulo */
         //PCP
@@ -443,6 +453,9 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
         put(a.getRequestName(), a);
 
         a = new VendaRomaneioEntregaDetalheGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new ValidaVendaOrcamentoAction();
         put(a.getRequestName(), a);
     }
 }

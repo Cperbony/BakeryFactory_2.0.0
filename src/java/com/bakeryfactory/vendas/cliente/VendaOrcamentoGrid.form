@@ -24,7 +24,19 @@
   <SubComponents>
     <Container class="org.openswing.swing.client.GridControl" name="gridControl1">
       <Properties>
+        <Property name="deleteButton" type="org.openswing.swing.client.DeleteButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="deleteButton1"/>
+        </Property>
         <Property name="functionId" type="java.lang.String" value="vendaOrcamentoCabecalho"/>
+        <Property name="insertButton" type="org.openswing.swing.client.InsertButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="insertButton1"/>
+        </Property>
+        <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="navigatorBar1"/>
+        </Property>
+        <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="reloadButton1"/>
+        </Property>
         <Property name="valueObjectClassName" type="java.lang.String" value="com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO"/>
       </Properties>
       <Constraints>

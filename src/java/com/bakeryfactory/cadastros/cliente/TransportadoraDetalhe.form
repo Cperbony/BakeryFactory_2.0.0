@@ -175,8 +175,6 @@
               <Connection code="&quot;dataCadastro&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
-            <Property name="enabledOnEdit" type="boolean" value="false"/>
-            <Property name="enabledOnInsert" type="boolean" value="false"/>
             <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
               <ComponentRef name="lblDataCadastro"/>
             </Property>

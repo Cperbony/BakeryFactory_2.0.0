@@ -23,12 +23,15 @@
  */
 package com.bakeryfactory.cadastros.servidor;
 
+import com.bakeryfactory.cadastros.java.FichaTecnicaVO;
 import com.bakeryfactory.cadastros.java.ProdutoVO;
 import com.bakeryfactory.padrao.java.Biblioteca;
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.padrao.servidor.HibernateUtil;
 import java.io.File;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -86,7 +89,13 @@ public class ProdutoDetalheAction implements Action {
             criteria.add(Restrictions.eq("id", Integer.valueOf(pk)));
 
             ProdutoVO produto = (ProdutoVO) criteria.uniqueResult();
-            checaFotoProduto(produto);
+
+            if (produto.getFotoProduto() != null) {
+                File imagem = new File(produto.getFotoProduto());
+                if (imagem.exists()) {
+                    produto.setImagemProduto(Biblioteca.getBytesFromFile(imagem));
+                }
+            }
 
             return new VOResponse(produto);
 
@@ -106,7 +115,7 @@ public class ProdutoDetalheAction implements Action {
         if (produto.getFotoProduto() != null) {
             File imagem = new File(produto.getFotoProduto());
             if (imagem.exists()) {
-                produto.setImagem(Biblioteca.getBytesFromFile(imagem));
+                produto.setImagemProduto(Biblioteca.getBytesFromFile(imagem));
             }
         }
     }
@@ -116,6 +125,7 @@ public class ProdutoDetalheAction implements Action {
         try {
             Object[] pars = (Object[]) inputPar;
             ProdutoVO produto = (ProdutoVO) pars[1];
+            List<FichaTecnicaVO> fichaTecnica = (Vector) pars[2];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -127,14 +137,28 @@ public class ProdutoDetalheAction implements Action {
                 throw new Exception("Já existe um GTIN vinculado por outro produto.");
             }
 
-            produtoAlmoxarifado(produto);
+            checaProdutoAlmoxarifado(produto);
             checaProdutoMarca(produto);
             checaIcms(produto);
             checaGrupoTributario(produto);
-            salvarFotoProduto(produto, context);
+
+            if (produto.getImagemProduto() != null) {
+                String caminhoArquivo = context.getRealPath("/imagens")
+                        + System.getProperty("file.separator")
+                        + "produtos"
+                        + System.getProperty("file.separator")
+                        + produto.getGtin() + ".jpg";
+                produto.setFotoProduto(caminhoArquivo);
+                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
+            }
 
             produto.setDataCadastro(new Date());
             session.save(produto);
+
+            for (FichaTecnicaVO f : fichaTecnica) {
+                f.setProduto(produto);
+                session.save(f);
+            }
 
             session.getTransaction().commit();
 
@@ -162,6 +186,7 @@ public class ProdutoDetalheAction implements Action {
         try {
             Object[] pars = (Object[]) inputPar;
             ProdutoVO produto = (ProdutoVO) pars[2];
+            List<FichaTecnicaVO> fichaTecnica = (Vector) pars[3];
 
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
@@ -172,16 +197,30 @@ public class ProdutoDetalheAction implements Action {
 
             if (criteria.uniqueResult() != null) {
                 throw new Exception("Já existe um GTIN vinculado por outro produto.");
-            }
+            }           
 
-            produtoAlmoxarifado(produto);
+            checaProdutoAlmoxarifado(produto);
             checaProdutoMarca(produto);
             checaIcms(produto);
             checaGrupoTributario(produto);
-            salvarFotoProduto(produto, context);
 
-            produto.setDataCadastro(new Date());
+            if (produto.getImagemProduto() != null) {
+                String caminhoArquivo = context.getRealPath("/imagens")
+                        + System.getProperty("file.separator")
+                        + "produtos"
+                        + System.getProperty("file.separator")
+                        + produto.getGtin() + ".jpg";
+                produto.setFotoProduto(caminhoArquivo);
+                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
+            }
+
+            produto.setDataAlteracao(new Date());
             session.update(produto);
+
+            for (FichaTecnicaVO f : fichaTecnica) {
+                f.setProduto(produto);
+                session.saveOrUpdate(f);
+            }
 
             session.getTransaction().commit();
 
@@ -209,13 +248,13 @@ public class ProdutoDetalheAction implements Action {
     }
 
     public void checaGrupoTributario(ProdutoVO produto) {
-        if(produto.getTributGrupoTributario().getId() == null) {
+        if (produto.getTributGrupoTributario().getId() == null) {
             produto.setTributGrupoTributario(null);
         }
     }
 
     public void checaIcms(ProdutoVO produto) {
-        if(produto.getTributIcmsCustomCab().getId() == null) {
+        if (produto.getTributIcmsCustomCab().getId() == null) {
             produto.setTributIcmsCustomCab(null);
         }
     }
@@ -226,21 +265,21 @@ public class ProdutoDetalheAction implements Action {
         }
     }
 
-    public void produtoAlmoxarifado(ProdutoVO produto) {
+    public void checaProdutoAlmoxarifado(ProdutoVO produto) {
         if (produto.getAlmoxarifado().getId() == null) {
             produto.setAlmoxarifado(null);
         }
     }
 
     public void salvarFotoProduto(ProdutoVO produto, ServletContext context) throws Exception {
-        if (produto.getImagem() != null) {
+        if (produto.getImagemProduto() != null) {
             String caminhoArquivo = context.getRealPath("/imagens")
                     + System.getProperty("file.separator")
                     + "produtos"
                     + System.getProperty("file.separator")
                     + produto.getGtin() + ".jpg";
             produto.setFotoProduto(caminhoArquivo);
-            Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagem());
+            Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
         }
     }
 }

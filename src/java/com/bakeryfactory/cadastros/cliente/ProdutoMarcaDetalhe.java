@@ -104,6 +104,7 @@ public class ProdutoMarcaDetalhe extends InternalFrame {
 
         textControl2.setAttributeName("nome");
         textControl2.setEnabled(false);
+        textControl2.setLinkLabel(lblNome);
         textControl2.setMaxCharacters(50);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -129,6 +130,7 @@ public class ProdutoMarcaDetalhe extends InternalFrame {
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -63,6 +63,9 @@
         <Property name="navBar" type="org.openswing.swing.client.NavigatorBar" editor="org.netbeans.modules.form.ComponentChooserEditor">
           <ComponentRef name="navigatorBar1"/>
         </Property>
+        <Property name="reloadButton" type="org.openswing.swing.client.ReloadButton" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="reloadButton1"/>
+        </Property>
         <Property name="valueObjectClassName" type="java.lang.String" value="com.bakeryfactory.vendas.java.NotaFiscalTipoVO"/>
       </Properties>
       <Constraints>

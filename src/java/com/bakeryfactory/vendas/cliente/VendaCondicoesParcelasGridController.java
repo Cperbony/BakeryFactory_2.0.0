@@ -55,21 +55,12 @@ public class VendaCondicoesParcelasGridController extends GridController impleme
         //Define os Parâmetros da Grid
         otherGridParams.put("acao", Constantes.LOAD);
         otherGridParams.put("idVendaCondicaoPagamento", pk);
-        
+
         return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
 
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        return setFormMode();
-    }
-
-    @Override
-    public boolean beforeEditGrid(GridControl grid) {
-        return setFormMode();
-    }
-
-    public boolean setFormMode() {
         if (vendaCondicoesPagamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
             vendaCondicoesPagamentoDetalhe.getForm1().setMode(Consts.EDIT);
         }
@@ -90,8 +81,24 @@ public class VendaCondicoesParcelasGridController extends GridController impleme
     }
 
     @Override
+    public boolean beforeEditGrid(GridControl grid) {
+        if (vendaCondicoesPagamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaCondicoesPagamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+    }
+
+    @Override
     public Response updateRecords(int[] rowNumbers, ArrayList oldPersistentObjects, ArrayList persistentObjects) throws Exception {
         return new VOListResponse(persistentObjects, false, persistentObjects.size());
+    }
+
+    @Override
+    public boolean beforeDeleteGrid(GridControl grid) {
+        if (vendaCondicoesPagamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaCondicoesPagamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
     }
 
     /**
@@ -110,4 +117,14 @@ public class VendaCondicoesParcelasGridController extends GridController impleme
         this.pk = pk;
     }
 
+    /*
+    
+   
+    public boolean setFormMode() {
+        if (vendaCondicoesPagamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaCondicoesPagamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
+        return true;
+     }
+     */
 }

@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-
 package com.bakeryfactory.vendas.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
@@ -41,10 +40,10 @@ import org.openswing.swing.util.client.ClientUtils;
 
 /**
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
- * @date   13/10/2016
+ * @date 13/10/2016
  */
-public class VendaCondicoesPagamentoGridController extends GridController implements GridDataLocator{
-    
+public class VendaCondicoesPagamentoGridController extends GridController implements GridDataLocator {
+
     private VendaCondicoesPagamentoGrid grid;
     private final String acaoServidor;
 
@@ -53,14 +52,14 @@ public class VendaCondicoesPagamentoGridController extends GridController implem
         acaoServidor = "vendaCondicoesPagamentoGridAction";
         MDIFrame.add(grid);
     }
-    
-     @Override
+
+    @Override
     public Response loadData(int action, int startIndex, Map filteredColumns, ArrayList currentSortedColumns, ArrayList currentSortedVersusColumns, Class valueObjectType, Map otherGridParams) {
         //Define os Parâmetros da Grid
         otherGridParams.put("acao", Constantes.LOAD);
         return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
-    
+
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
         new VendaCondicoesPagamentoDetalheController(this.grid, null);
@@ -108,8 +107,7 @@ public class VendaCondicoesPagamentoGridController extends GridController implem
 
         //Seta os Parâmetros da Grid
         GridParams pars = new GridParams(0, 0, null, null, null, otherGridParams);
-        
+
         return ClientUtils.getData(acaoServidor, pars);
     }
-
 }

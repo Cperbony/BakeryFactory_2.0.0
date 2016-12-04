@@ -25,15 +25,12 @@ package com.bakeryfactory.pcp.java;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -76,9 +73,6 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
     @Column(name = "CHAVE_NFE")
     private String chaveNfe;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "patrimonioBem")
-    private List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento;
-
     public PatrimonioBemVO() {
     }
 
@@ -164,14 +158,6 @@ public class PatrimonioBemVO extends ValueObjectImpl implements Serializable {
 
     public void setChaveNfe(String chaveNfe) {
         this.chaveNfe = chaveNfe;
-    }
-
-    public List<PcpServicoEquipamentoVO> getListaPcpServicoEquipamento() {
-        return listaPcpServicoEquipamento;
-    }
-
-    public void setListaPcpServicoEquipamento(List<PcpServicoEquipamentoVO> listaPcpServicoEquipamento) {
-        this.listaPcpServicoEquipamento = listaPcpServicoEquipamento;
     }
 
     @Override

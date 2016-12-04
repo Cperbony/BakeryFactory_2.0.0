@@ -25,7 +25,6 @@ package com.bakeryfactory.vendas.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.vendas.java.VendaCabecalhoVO;
-import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
@@ -45,7 +44,7 @@ public class VendaRomaneioEntregaDetalheController extends FormController {
     private VendaRomaneioEntregaDetalhe vendaRomaneioEntregaDetalhe = null;
     private String pk = null;
     private VendaRomaneioEntregaGrid vendaRomaneioEntregaGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public VendaRomaneioEntregaDetalheController(VendaRomaneioEntregaGrid vendaRomaneioEntregaGrid, String pk) {
         this.vendaRomaneioEntregaGrid = vendaRomaneioEntregaGrid;
@@ -55,11 +54,6 @@ public class VendaRomaneioEntregaDetalheController extends FormController {
         vendaRomaneioEntregaDetalhe.setParentFrame(this.vendaRomaneioEntregaGrid);
         this.vendaRomaneioEntregaGrid.pushFrame(vendaRomaneioEntregaDetalhe);
         MDIFrame.add(vendaRomaneioEntregaDetalhe, true);
-
-        try {
-            vendaRomaneioEntregaDetalhe.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-        }
 
         if (pk != null) {
             vendaRomaneioEntregaDetalhe.getForm1().setMode(Consts.READONLY);
@@ -96,7 +90,6 @@ public class VendaRomaneioEntregaDetalheController extends FormController {
      * Method called by the Form panel to insert new data.
      *
      * @param newPersistentObject
-     * @param newValueObject value object to save
      * @return an ErrorResponse value object in case of errors, VOResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */

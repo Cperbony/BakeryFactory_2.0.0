@@ -131,7 +131,7 @@ public class VendaFreteGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn6);
 
         textColumn7.setColumnName("ufPlaca");
-        textColumn7.setHeaderColumnName("Uf Placa");
+        textColumn7.setHeaderColumnName("UF Placa");
         textColumn7.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         gridControl1.getColumnContainer().add(textColumn7);
 

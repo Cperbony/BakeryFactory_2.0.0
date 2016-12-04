@@ -23,8 +23,10 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
+import com.bakeryfactory.cadastros.java.FichaTecnicaVO;
 import com.bakeryfactory.cadastros.java.ProdutoVO;
 import com.bakeryfactory.padrao.java.Constantes;
+import java.util.List;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -53,13 +55,14 @@ public class ProdutoDetalheController extends FormController {
         produtoDetalhe = new ProdutoDetalhe(this);
         produtoDetalhe.setParentFrame(this.produtoGrid);
         this.produtoGrid.pushFrame(produtoDetalhe);
-        MDIFrame.add(produtoDetalhe);
+        MDIFrame.add(produtoDetalhe, true);
 
         if (pk != null) {
             produtoDetalhe.getForm1().setMode(Consts.READONLY);
             produtoDetalhe.getForm1().reload();
         } else {
             produtoDetalhe.getForm1().setMode(Consts.INSERT);
+            produtoDetalhe.getGridControl1().reloadData();
         }
     }
 
@@ -67,7 +70,7 @@ public class ProdutoDetalheController extends FormController {
         chamadoOutroModulo = true;
         this.acaoServidor = "produtoDetalheAction";
         produtoDetalhe = new ProdutoDetalhe(this);
-        MDIFrame.add(produtoDetalhe);
+        MDIFrame.add(produtoDetalhe, true);
         produtoDetalhe.setModal(true);
         produtoDetalhe.getForm1().setMode(Consts.INSERT);
 
@@ -86,6 +89,13 @@ public class ProdutoDetalheController extends FormController {
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.LOAD, pk});
     }
 
+    @Override
+    public void loadDataCompleted(boolean error) {
+        ProdutoVO produto = (ProdutoVO) produtoDetalhe.getForm1().getVOModel().getValueObject();
+        produtoDetalhe.getFichaTecnicaController().setIdProduto(String.valueOf(produto.getId()));
+        produtoDetalhe.getGridControl1().reloadData();
+    }
+
     /**
      * Method called by the Form panel to insert new data.
      *
@@ -99,7 +109,9 @@ public class ProdutoDetalheController extends FormController {
         if (produto.getTributGrupoTributario().getId() == null && produto.getTributIcmsCustomCab().getId() == null) {
             return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
         }
-        return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject});
+        List<FichaTecnicaVO> fichaTecnica = produtoDetalhe.getGridControl1().getVOListTableModel().getDataVector();
+
+        return ClientUtils.getData(acaoServidor, new Object[]{Constantes.INSERT, newPersistentObject, fichaTecnica});
     }
 
     /**
@@ -126,10 +138,13 @@ public class ProdutoDetalheController extends FormController {
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
         ProdutoVO produto = (ProdutoVO) persistentObject;
-        if(produto.getTributGrupoTributario().getId() == null && produto.getTributIcmsCustomCab().getId() == null) {
-        return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
+        if (produto.getTributGrupoTributario().getId() == null && produto.getTributIcmsCustomCab().getId() == null) {
+            return new ErrorResponse("É necesário informar o Grupo Tributário ou o ICMS Customizado.");
         }
-        return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject});
+
+        List<FichaTecnicaVO> fichaTecnica = produtoDetalhe.getGridControl1().getVOListTableModel().getDataVector();
+
+        return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject, fichaTecnica});
     }
 
     /**
@@ -149,7 +164,6 @@ public class ProdutoDetalheController extends FormController {
      * @param newValue new input control value (just edited)
      * @return <code>true</code> if input control value is valid, <code>false</code> otherwise
      */
-    
     // TODO grupo tributário
     @Override
     public boolean validateControl(String attributeName, Object oldValue, Object newValue) {

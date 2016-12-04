@@ -80,7 +80,7 @@ public class ProdutoSubGrupoGridAction implements Action {
     private Response load(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
         Session session = null;
         GridParams pars = (GridParams) inputPar;
-        String baseSQL = "select PRODUTO_SUB_GRUPO from com.bakeryfactory.cadastros.java.ProdutoSubgrupoVO as PRODUTO_SUB_GRUPO";
+        String baseSQL = "select PRODUTO_SUB_GRUPO from com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO as PRODUTO_SUB_GRUPO";
         try {
             session = HibernateUtil.getSessionFactory().openSession();
             Response res = HibernateUtils.getBlockFromQuery(pars.getAction(),

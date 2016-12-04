@@ -25,20 +25,13 @@ package com.bakeryfactory.cadastros.java;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -66,18 +59,6 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
     private String descricao;
     @Column(name = "INGREDIENTE_MASSA")
     private String ingredienteMassa;
-
-    @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private ProdutoVO produto;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receita")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<IngredientesReceitasVO> listaIngredientesReceitas;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "receita")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<ModoPreparoVO> listaModoPreparo;
 
     public ReceitaVO() {
     }
@@ -132,30 +113,6 @@ public class ReceitaVO extends ValueObjectImpl implements Serializable {
 
     public void setIngredienteMassa(String ingredienteMassa) {
         this.ingredienteMassa = ingredienteMassa;
-    }
-
-    public List<IngredientesReceitasVO> getListaIngredientesReceitas() {
-        return listaIngredientesReceitas;
-    }
-
-    public void setListaIngredientesReceitas(List<IngredientesReceitasVO> listaIngredientesReceitas) {
-        this.listaIngredientesReceitas = listaIngredientesReceitas;
-    }
-
-    public ProdutoVO getProduto() {
-        return produto;
-    }
-
-    public void setProduto(ProdutoVO produto) {
-        this.produto = produto;
-    }
-
-    public List<ModoPreparoVO> getListaModoPreparo() {
-        return listaModoPreparo;
-    }
-
-    public void setListaModoPreparo(List<ModoPreparoVO> listaModoPreparo) {
-        this.listaModoPreparo = listaModoPreparo;
     }
 
     @Override

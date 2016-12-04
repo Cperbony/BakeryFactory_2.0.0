@@ -23,8 +23,9 @@
  */
 package com.bakeryfactory.pcp.cliente;
 
-import com.bakeryfactory.pcp.lookups.InstrucaoLookup;
-import com.bakeryfactory.pcp.lookups.ProdutoLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -35,8 +36,8 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
 
     private PcpOpDetalheGridController detalheController;
     private PcpInstrucaoOpGridController instrucaoOpController;
-    private ProdutoLookup produtoLookupController;
-    private InstrucaoLookup instrucaoLookupController;
+    private LookupController produtoController;
+    private LookupController instrucaoController;
 
     /**
      * Creates new form TempGrid
@@ -44,6 +45,8 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
      * @param controller
      */
     public PcpOpCabecalhoDetalhe(PcpOpCabecalhoDetalheController controller) {
+        this.produtoController = new LookupController();
+        this.instrucaoController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
@@ -56,13 +59,42 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridControlInstrucoes.setController(instrucaoOpController);
         gridControlInstrucoes.setGridDataLocator(instrucaoOpController);
 
-        //Configurações do Lookup de Produtos
-        produtoLookupController = new ProdutoLookup();
-        codLookupProduto.setLookupController(produtoLookupController);
+        /*
+         * Configurações do lookup do produto
+         */
+        produtoController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoVO");
+        produtoController.addLookup2ParentLink("id", "produto.id");
+        produtoController.addLookup2ParentLink("nome", "produto.nome");
+        produtoController.setHeaderColumnName("id", "ID");
+        produtoController.setHeaderColumnName("nome", "Nome");
+        produtoController.setFrameTitle("Importa Produto");
 
-        //Configurações do Lookup de Instruções
-        instrucaoLookupController = new InstrucaoLookup();
-        codLookupInstrucao.setLookupController(instrucaoLookupController);
+        produtoController.setVisibleStatusPanel(true);
+        produtoController.setVisibleColumn("id", true);
+        produtoController.setVisibleColumn("nome", true);
+        produtoController.setFramePreferedSize(new Dimension(600, 500));
+
+        produtoController.setLookupDataLocator(new LookupDataLocatorGenerico(produtoController.getLookupValueObjectClassName()));
+        codLookupProduto.setLookupController(produtoController);
+
+        /*
+         * Configurações do lookup da instrucao
+         */
+        instrucaoController.setLookupValueObjectClassName("com.bakeryfactory.pcp.java.PcpInstrucaoVO");
+        instrucaoController.addLookup2ParentLink("id", "pcpInstrucao.id");
+        instrucaoController.addLookup2ParentLink("codigo", "pcpInstrucao.codigo");
+        instrucaoController.addLookup2ParentLink("descricao", "pcpInstrucao.descricao");
+        instrucaoController.setHeaderColumnName("codigo", "Codigo");
+        instrucaoController.setHeaderColumnName("descricao", "Nome");
+        instrucaoController.setFrameTitle("Importa Instrucao");
+
+        instrucaoController.setVisibleStatusPanel(true);
+        instrucaoController.setVisibleColumn("codigo", true);
+        instrucaoController.setVisibleColumn("descricao", true);
+        instrucaoController.setFramePreferedSize(new Dimension(600, 500));
+
+        instrucaoController.setLookupDataLocator(new LookupDataLocatorGenerico(instrucaoController.getLookupValueObjectClassName()));
+        codLookupInstrucao.setLookupController(instrucaoController);
     }
 
     /**
@@ -186,6 +218,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
 
         dateControl3.setAttributeName("inicio");
         dateControl3.setEnabled(false);
+        dateControl3.setLinkLabel(lblInicio);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -204,6 +237,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
 
         dateControl4.setAttributeName("previsaoEntrega");
         dateControl4.setEnabled(false);
+        dateControl4.setLinkLabel(lblPrevisaoEntrega);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -222,6 +256,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
 
         dateControl5.setAttributeName("termino");
         dateControl5.setEnabled(false);
+        dateControl5.setLinkLabel(lblTermino);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 1;
@@ -241,6 +276,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         numericControl6.setAttributeName("custoTotalPrevisto");
         numericControl6.setDecimals(2);
         numericControl6.setEnabled(false);
+        numericControl6.setLinkLabel(lblCustoTotalPrevisto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 1;
@@ -260,6 +296,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         numericControl7.setAttributeName("custoTotalRealizado");
         numericControl7.setDecimals(2);
         numericControl7.setEnabled(false);
+        numericControl7.setLinkLabel(lblCustoTotalRealizado);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 1;
@@ -279,6 +316,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         numericControl8.setAttributeName("porcentoVenda");
         numericControl8.setDecimals(2);
         numericControl8.setEnabled(false);
+        numericControl8.setLinkLabel(lblPercentualVenda);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 1;
@@ -298,6 +336,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         numericControl9.setAttributeName("porcentoEstoque");
         numericControl9.setDecimals(2);
         numericControl9.setEnabled(false);
+        numericControl9.setLinkLabel(lblPercentualEstoque);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 1;
@@ -359,6 +398,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridControlProdutos.getColumnContainer().add(decimalColumn4);
 
         decimalColumn5.setColumnName("quantidadeProduzida");
+        decimalColumn5.setColumnRequired(false);
         decimalColumn5.setDecimals(2);
         decimalColumn5.setEditableOnEdit(true);
         decimalColumn5.setEditableOnInsert(true);
@@ -367,6 +407,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridControlProdutos.getColumnContainer().add(decimalColumn5);
 
         decimalColumn6.setColumnName("quantidadeEntregue");
+        decimalColumn6.setColumnRequired(false);
         decimalColumn6.setDecimals(2);
         decimalColumn6.setEditableOnEdit(true);
         decimalColumn6.setEditableOnInsert(true);
@@ -375,6 +416,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridControlProdutos.getColumnContainer().add(decimalColumn6);
 
         decimalColumn7.setColumnName("custoPrevisto");
+        decimalColumn7.setColumnRequired(false);
         decimalColumn7.setDecimals(2);
         decimalColumn7.setEditableOnEdit(true);
         decimalColumn7.setEditableOnInsert(true);
@@ -383,6 +425,7 @@ public class PcpOpCabecalhoDetalhe extends InternalFrame {
         gridControlProdutos.getColumnContainer().add(decimalColumn7);
 
         decimalColumn8.setColumnName("custoRealizado");
+        decimalColumn8.setColumnRequired(false);
         decimalColumn8.setDecimals(2);
         decimalColumn8.setEditableOnEdit(true);
         decimalColumn8.setEditableOnInsert(true);

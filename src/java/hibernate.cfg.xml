@@ -74,6 +74,10 @@
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoSubGrupoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoTabelaPrecoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ProdutoVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.IngredienteVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.IngredientesReceitasVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ReceitaVO"/>
+        <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVO"/>
         
 
         <mapping class="com.bakeryfactory.cadastros.java.SetorVO"/>
@@ -96,18 +100,17 @@
         
          <mapping class="com.bakeryfactory.cadastros.java.AuditoriaVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ClasseProdutoGrupoVO"/>
-         <mapping class="com.bakeryfactory.cadastros.java.IngredienteVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.IngredientesReceitasVO"/>
-              <mapping class="com.bakeryfactory.cadastros.java.ReceitaVO"/>
   <mapping class="com.bakeryfactory.cadastros.java.ReceituarioControleCustoVO"/>
         <mapping class="com.bakeryfactory.cadastros.java.ReceituarioPadraoVO"/>
-        <mapping class="com.bakeryfactory.cadastros.java.ModoPreparoVO"/>
+ 
         -->
 
         <!-- classes mapeadas Módulo VENDAS-->
         <mapping class="com.bakeryfactory.vendas.java.VendaCabecalhoVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaComissaoVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO"/>
+        <mapping class="com.bakeryfactory.vendas.java.VendaCondicoesParcelaVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaDetalheVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaFreteVO"/>
         <mapping class="com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO"/>

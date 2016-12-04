@@ -53,7 +53,7 @@ public class VendaRomaneioEntregaDetalheGridAction implements Action {
 
     @Override
     public String getRequestName() {
-        return "vendaRomaneioEntregaGridAction";
+        return "vendaRomaneioEntregaDetalheGridAction";
     }
 
     @Override
@@ -83,7 +83,7 @@ public class VendaRomaneioEntregaDetalheGridAction implements Action {
         GridParams pars = (GridParams) inputPar;
         String pk = (String) pars.getOtherGridParams().get("idRomaneioEntrega");
         if (pk == null) {
-            List<VendaCabecalhoVO> vendas = new ArrayList<>();
+            List<VendaCabecalhoVO> vendas = new ArrayList<VendaCabecalhoVO>();
             return new VOListResponse(vendas, false, 0);
         }
 

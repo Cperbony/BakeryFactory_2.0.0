@@ -23,8 +23,6 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.compras.java.CompraCotacaoDetalheVO;
-import com.bakeryfactory.compras.java.CompraPedidoDetalheVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -68,25 +66,6 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
     @Column(name = "VALOR_TOTAL")
     private BigDecimal valorTotal;
 
-    @JoinColumn(name = "ID_RECEITUARIO_CONTROLE_CUSTO", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private ReceituarioControleCustoVO receituarioControleCusto;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
-    private List<IngredientesReceitasVO> listaIngredientesReceitas;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
-    private List<MarcaVO> listaMarca;
-
-    /*
-    
-   
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
-    private List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ingrediente")
-    private List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe;
-     */
     public IngredienteVO() {
     }
 
@@ -148,47 +127,6 @@ public class IngredienteVO extends ValueObjectImpl implements Serializable {
 
     public void setValorTotal(BigDecimal valorTotal) {
         this.valorTotal = valorTotal;
-    }
-
-    public List<IngredientesReceitasVO> getListaIngredientesReceitas() {
-        return listaIngredientesReceitas;
-    }
-
-    public void setListaIngredientesReceitas(List<IngredientesReceitasVO> listaIngredientesReceitas) {
-        this.listaIngredientesReceitas = listaIngredientesReceitas;
-    }
-
-    public List<MarcaVO> getListaMarca() {
-        return listaMarca;
-    }
-
-    public void setListaMarca(List<MarcaVO> listaMarca) {
-        this.listaMarca = listaMarca;
-    }
-
-    /*
-    public List<CompraCotacaoDetalheVO> getListaCompraCotacaoDetalhe() {
-        return listaCompraCotacaoDetalhe;
-    }
-
-    public void setListaCompraCotacaoDetalhe(List<CompraCotacaoDetalheVO> listaCompraCotacaoDetalhe) {
-        this.listaCompraCotacaoDetalhe = listaCompraCotacaoDetalhe;
-    }
-    
-    public List<CompraPedidoDetalheVO> getListaCompraPedidoDetalhe() {
-        return listaCompraPedidoDetalhe;
-    }
-
-    public void setListaCompraPedidoDetalhe(List<CompraPedidoDetalheVO> listaCompraPedidoDetalhe) {
-        this.listaCompraPedidoDetalhe = listaCompraPedidoDetalhe;
-    }
-     */
-    public ReceituarioControleCustoVO getReceituarioControleCusto() {
-        return receituarioControleCusto;
-    }
-
-    public void setReceituarioControleCusto(ReceituarioControleCustoVO receituarioControleCusto) {
-        this.receituarioControleCusto = receituarioControleCusto;
     }
 
     @Override

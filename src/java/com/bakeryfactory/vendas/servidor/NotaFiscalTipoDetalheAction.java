@@ -146,10 +146,10 @@ public class NotaFiscalTipoDetalheAction implements Action {
             return new VOResponse(notaFiscalTipo);
 
         } catch (Exception ex) {
+            ex.printStackTrace();
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {

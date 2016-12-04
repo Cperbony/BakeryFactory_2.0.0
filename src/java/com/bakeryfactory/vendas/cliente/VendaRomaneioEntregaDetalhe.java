@@ -23,8 +23,9 @@
  */
 package com.bakeryfactory.vendas.cliente;
 
-import com.bakeryfactory.pcp.lookups.ColaboradorLookup;
-import com.bakeryfactory.vendas.lookups.SetorVendasLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -33,8 +34,8 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class VendaRomaneioEntregaDetalhe extends InternalFrame {
 
-    private final ColaboradorLookup colaboradorLookupController;
-    private final SetorVendasLookup setorVendasLookupController;
+    private LookupController colaboradorController;
+    private LookupController setorController;
     private VendaRomaneioEntregaDetalheGridController vendasController;
 
     /**
@@ -43,6 +44,8 @@ public class VendaRomaneioEntregaDetalhe extends InternalFrame {
      * @param controller
      */
     public VendaRomaneioEntregaDetalhe(VendaRomaneioEntregaDetalheController controller) {
+        this.setorController = new LookupController();
+        this.colaboradorController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
@@ -51,12 +54,70 @@ public class VendaRomaneioEntregaDetalhe extends InternalFrame {
         gridControl1.setController(vendasController);
         gridControl1.setGridDataLocator(vendasController);
 
-        //Configuração Lookups
-        colaboradorLookupController = new ColaboradorLookup();
-        codLookupControlEntregador.setLookupController(colaboradorLookupController);
+        /*
+         * Configurações do lookup do colaborador
+         */
+        colaboradorController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ColaboradorVO");
+        colaboradorController.addLookup2ParentLink("id", "colaborador.id");
+        colaboradorController.addLookup2ParentLink("pessoa.nome", "colaborador.pessoa.nome");
+        colaboradorController.setHeaderColumnName("id", "ID");
+        colaboradorController.setHeaderColumnName("pessoa.nome", "Nome");
+        colaboradorController.setFrameTitle("Importa Colaborador");
 
-        setorVendasLookupController = new SetorVendasLookup();
-        codLookupColumnNumFatura.setLookupController(setorVendasLookupController);
+        colaboradorController.setVisibleStatusPanel(true);
+        colaboradorController.setVisibleColumn("id", true);
+        colaboradorController.setVisibleColumn("pessoa.nome", true);
+        colaboradorController.setFramePreferedSize(new Dimension(600, 500));
+
+        colaboradorController.setLookupDataLocator(new LookupDataLocatorGenerico(colaboradorController.getLookupValueObjectClassName()));
+        codLookupControlEntregador.setLookupController(colaboradorController);
+
+        /*
+         * Configurações do lookup da venda
+         */
+        setorController.setLookupValueObjectClassName("com.bakeryfactory.vendas.java.VendaCabecalhoVO");
+        setorController.addLookup2ParentLink("vendaOrcamentoCabecalho", "vendaOrcamentoCabecalho");
+        setorController.addLookup2ParentLink("vendaCondicoesPagamento", "vendaCondicoesPagamento");
+        setorController.addLookup2ParentLink("cliente", "cliente");
+        setorController.addLookup2ParentLink("vendedor", "vendedor");
+        setorController.addLookup2ParentLink("notaFiscalTipo", "notaFiscalTipo");
+        setorController.addLookup2ParentLink("transportadora", "transportadora");
+        setorController.addLookup2ParentLink("vendaRomaneioEntrega", "vendaRomaneioEntrega");
+        setorController.addLookup2ParentLink("id", "id");
+        setorController.addLookup2ParentLink("dataVenda", "dataVenda");
+        setorController.addLookup2ParentLink("dataSaida", "dataSaida");
+        setorController.addLookup2ParentLink("horaSaida", "horaSaida");
+        setorController.addLookup2ParentLink("numeroFatura", "numeroFatura");
+        setorController.addLookup2ParentLink("localEntrega", "localEntrega");
+        setorController.addLookup2ParentLink("localCobranca", "localCobranca");
+        setorController.addLookup2ParentLink("valorSubtotal", "valorSubtotal");
+        setorController.addLookup2ParentLink("taxaComissao", "taxaComissao");
+        setorController.addLookup2ParentLink("valorComissao", "valorComissao");
+        setorController.addLookup2ParentLink("taxaDesconto", "taxaDesconto");
+        setorController.addLookup2ParentLink("valorDesconto", "valorDesconto");
+        setorController.addLookup2ParentLink("valorTotal", "valorTotal");
+        setorController.addLookup2ParentLink("tipoFrete", "tipoFrete");
+        setorController.addLookup2ParentLink("formaPagamento", "formaPagamento");
+        setorController.addLookup2ParentLink("valorFrete", "valorFrete");
+        setorController.addLookup2ParentLink("valorSeguro", "valorSeguro");
+        setorController.addLookup2ParentLink("observacao", "observacao");
+        setorController.addLookup2ParentLink("situacao", "situacao");
+
+        setorController.setHeaderColumnName("numeroFatura", "Número Fatura");
+        setorController.setHeaderColumnName("cliente.pessoa.nome", "Cliente");
+        setorController.setHeaderColumnName("dataVenda", "Data Venda");
+        setorController.setHeaderColumnName("valorTotal", "Valor Total");
+        setorController.setFrameTitle("Importa Venda");
+
+        setorController.setVisibleStatusPanel(true);
+        setorController.setVisibleColumn("numeroFatura", true);
+        setorController.setVisibleColumn("cliente.pessoa.nome", true);
+        setorController.setVisibleColumn("dataVenda", true);
+        setorController.setVisibleColumn("valorTotal", true);
+        setorController.setFramePreferedSize(new Dimension(600, 500));
+
+        setorController.setLookupDataLocator(new LookupDataLocatorGenerico(setorController.getLookupValueObjectClassName()));
+        codLookupColumnNumFatura.setLookupController(setorController);
 
     }
 

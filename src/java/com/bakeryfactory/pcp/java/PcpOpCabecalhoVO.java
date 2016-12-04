@@ -81,12 +81,6 @@ public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private EmpresaVO empresa;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalho")
-    private List<PcpInstrucaoOpVO> pcpInstrucaoOpList;
-    
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "pcpOpCabecalho")
-    private List<PcpOpDetalheVO> listaPcpOpDetalhe;
 
     public PcpOpCabecalhoVO() {
     }
@@ -157,22 +151,6 @@ public class PcpOpCabecalhoVO extends ValueObjectImpl implements Serializable {
 
     public void setPorcentoEstoque(BigDecimal porcentoEstoque) {
         this.porcentoEstoque = porcentoEstoque;
-    }
-
-    public List<PcpInstrucaoOpVO> getPcpInstrucaoOpList() {
-        return pcpInstrucaoOpList;
-    }
-
-    public void setPcpInstrucaoOpList(List<PcpInstrucaoOpVO> pcpInstrucaoOpList) {
-        this.pcpInstrucaoOpList = pcpInstrucaoOpList;
-    }
-
-    public List<PcpOpDetalheVO> getListaPcpOpDetalhe() {
-        return listaPcpOpDetalhe;
-    }
-
-    public void setListaPcpOpDetalhe(List<PcpOpDetalheVO> listaPcpOpDetalhe) {
-        this.listaPcpOpDetalhe = listaPcpOpDetalhe;
     }
 
     public EmpresaVO getEmpresa() {

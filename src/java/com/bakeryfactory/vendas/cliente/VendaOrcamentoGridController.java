@@ -24,8 +24,8 @@
 
 package com.bakeryfactory.vendas.cliente;
 
-import com.bakeryfactory.cadastros.java.ColaboradorVO;
 import com.bakeryfactory.padrao.java.Constantes;
+import com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,7 +50,7 @@ public class VendaOrcamentoGridController extends GridController implements Grid
 
     public VendaOrcamentoGridController() {
         grid = new VendaOrcamentoGrid(this);
-        acaoServidor = "tempGridAction";
+        acaoServidor = "vendaOrcamentoGridAction";
         MDIFrame.add(grid);
     }
     
@@ -88,8 +88,8 @@ public class VendaOrcamentoGridController extends GridController implements Grid
      */
     @Override
     public void doubleClick(int rowNumber, ValueObject persistentObject) {
-        ColaboradorVO colaborador = (ColaboradorVO) persistentObject;
-        new VendaOrcamentoDetalheController(grid, colaborador.getId().toString());
+        VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho = (VendaOrcamentoCabecalhoVO) persistentObject;
+        new VendaOrcamentoDetalheController(grid, vendaOrcamentoCabecalho.getId().toString());
     }
 
     /**

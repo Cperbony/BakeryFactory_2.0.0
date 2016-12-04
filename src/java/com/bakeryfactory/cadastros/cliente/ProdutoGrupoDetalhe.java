@@ -23,7 +23,6 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.PessoaLookup;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**

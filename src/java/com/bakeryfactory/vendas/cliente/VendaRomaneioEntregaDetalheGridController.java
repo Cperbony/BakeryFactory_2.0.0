@@ -55,12 +55,15 @@ public class VendaRomaneioEntregaDetalheGridController extends GridController im
         //Define os Parâmetros da Grid
         otherGridParams.put("acao", Constantes.LOAD);
         otherGridParams.put("idRomaneioEntrega", pk);
+        
         return ClientUtils.getData(acaoServidor, new GridParams(action, startIndex, filteredColumns, currentSortedColumns, currentSortedVersusColumns, otherGridParams));
     }
 
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        formMode();
+        if (vendaRomaneioEntregaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaRomaneioEntregaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 
@@ -85,7 +88,9 @@ public class VendaRomaneioEntregaDetalheGridController extends GridController im
      */
     @Override
     public boolean beforeEditGrid(GridControl grid) {
-        formMode();
+        if (vendaRomaneioEntregaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaRomaneioEntregaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 
@@ -111,7 +116,9 @@ public class VendaRomaneioEntregaDetalheGridController extends GridController im
      */
     @Override
     public boolean beforeDeleteGrid(GridControl grid) {
-        formMode();
+        if (vendaRomaneioEntregaDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaRomaneioEntregaDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 

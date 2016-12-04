@@ -42,7 +42,7 @@ public class VendaFreteDetalheController extends FormController {
     private VendaFreteDetalhe vendaFreteDetalhe = null;
     private String pk = null;
     private VendaFreteGrid vendaFreteGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public VendaFreteDetalheController(VendaFreteGrid vendaFreteGrid, String pk) {
         this.vendaFreteGrid = vendaFreteGrid;

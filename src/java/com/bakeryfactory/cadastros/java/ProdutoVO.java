@@ -23,9 +23,6 @@
  */
 package com.bakeryfactory.cadastros.java;
 
-import com.bakeryfactory.vendas.java.VendaOrcamentoDetalheVO;
-import com.bakeryfactory.vendas.java.VendaDetalheVO;
-import com.bakeryfactory.pcp.java.PcpOpDetalheVO;
 import com.bakeryfactory.tributacao.java.TributGrupoTributarioVO;
 import com.bakeryfactory.tributacao.java.TributIcmsCustomCabVO;
 import java.io.Serializable;
@@ -154,7 +151,7 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     private String servico;
 
     @Transient
-    private byte[] imagem;
+    private byte[] imagemProduto;
 
     @Transient
     private BigDecimal encargosVenda;
@@ -607,12 +604,12 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.listaFichaTecnica = listaFichaTecnica;
     }
 
-    public byte[] getImagem() {
-        return imagem;
+    public byte[] getImagemProduto() {
+        return imagemProduto;
     }
 
-    public void setImagem(byte[] imagem) {
-        this.imagem = imagem;
+    public void setImagemProduto(byte[] imagemProduto) {
+        this.imagemProduto = imagemProduto;
     }
 
     @Override

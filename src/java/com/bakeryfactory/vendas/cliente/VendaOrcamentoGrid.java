@@ -86,7 +86,11 @@ public class VendaOrcamentoGrid extends InternalFrame {
         setTitle("Bakery Factory - Vendas e Faturamento");
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
+        gridControl1.setDeleteButton(deleteButton1);
         gridControl1.setFunctionId("vendaOrcamentoCabecalho");
+        gridControl1.setInsertButton(insertButton1);
+        gridControl1.setNavBar(navigatorBar1);
+        gridControl1.setReloadButton(reloadButton1);
         gridControl1.setValueObjectClassName("com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO");
         gridControl1.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 

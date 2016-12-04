@@ -29,7 +29,6 @@ import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.vendas.java.VendaCondicoesPagamentoVO;
 import com.bakeryfactory.vendas.java.VendaCondicoesParcelaVO;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
@@ -49,7 +48,7 @@ public class VendaCondicoesPagamentoDetalheController extends FormController {
     private VendaCondicoesPagamentoDetalhe vendaCondicoesPagamentoDetalhe = null;
     private String pk = null;
     private VendaCondicoesPagamentoGrid vendaCondicoesPagamentoGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public VendaCondicoesPagamentoDetalheController(VendaCondicoesPagamentoGrid vendaCondicoesPagamentoGrid, String pk) {
         this.vendaCondicoesPagamentoGrid = vendaCondicoesPagamentoGrid;
@@ -65,6 +64,7 @@ public class VendaCondicoesPagamentoDetalheController extends FormController {
             vendaCondicoesPagamentoDetalhe.getForm1().reload();
         } else {
             vendaCondicoesPagamentoDetalhe.getForm1().setMode(Consts.INSERT);
+            vendaCondicoesPagamentoDetalhe.getGridControlVendaParcelas().reloadData();
         }
     }
 
@@ -102,8 +102,7 @@ public class VendaCondicoesPagamentoDetalheController extends FormController {
         EmpresaVO empresa = (EmpresaVO) Container.getContainer().get("empresa");
         ((VendaCondicoesPagamentoVO) newPersistentObject).setEmpresa(empresa);
 
-        List<VendaCondicoesParcelaVO> condicoesParcela = new ArrayList<>();
-        condicoesParcela = vendaCondicoesPagamentoDetalhe.getGridControlVendaParcelas().getVOListTableModel().getDataVector();
+        List<VendaCondicoesParcelaVO> condicoesParcela = vendaCondicoesPagamentoDetalhe.getGridControlVendaParcelas().getVOListTableModel().getDataVector();
 
         try {
             verificaParcelas(condicoesParcela, (VendaCondicoesPagamentoVO) newPersistentObject);
@@ -133,8 +132,7 @@ public class VendaCondicoesPagamentoDetalheController extends FormController {
      */
     @Override
     public Response updateRecord(ValueObject oldPersistentObject, ValueObject persistentObject) throws Exception {
-        List<VendaCondicoesParcelaVO> condicoesParcela = new ArrayList<>();
-        condicoesParcela = vendaCondicoesPagamentoDetalhe.getGridControlVendaParcelas().getVOListTableModel().getDataVector();
+        List<VendaCondicoesParcelaVO> condicoesParcela = vendaCondicoesPagamentoDetalhe.getGridControlVendaParcelas().getVOListTableModel().getDataVector();
 
         try {
             verificaParcelas(condicoesParcela, (VendaCondicoesPagamentoVO) persistentObject);
@@ -170,5 +168,4 @@ public class VendaCondicoesPagamentoDetalheController extends FormController {
         prazoMedio = prazoMedio / condicoesParcela.size();
         condicoesPagamento.setPrazoMedio((int) prazoMedio);
     }
-
 }

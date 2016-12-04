@@ -23,9 +23,10 @@
  */
 package com.bakeryfactory.pcp.cliente;
 
-import com.bakeryfactory.pcp.lookups.ColaboradorLookup;
-import com.bakeryfactory.pcp.lookups.EquipamentoServicoLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
 import org.openswing.swing.client.GridControl;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -36,8 +37,8 @@ public class PcpServicoGrid extends InternalFrame {
 
     private PcpServicoColaboradorGridController colaboradorGridController;
     private PcpServicoEquipamentoGridController equipamentoGridController;
-    private ColaboradorLookup colaboradorLookupController;
-    private EquipamentoServicoLookup equipamentoLookupController;
+    private LookupController colaboradorLookupController;
+    private LookupController equipamentoLookupController;
 
     /**
      * Creates new form TempGrid
@@ -45,6 +46,8 @@ public class PcpServicoGrid extends InternalFrame {
      * @param controller
      */
     public PcpServicoGrid(PcpServicoGridController controller) {
+        this.colaboradorLookupController = new LookupController();
+        this.equipamentoLookupController = new LookupController();
         initComponents();
         gridControlServicos.setController(controller);
         gridControlServicos.setGridDataLocator(controller);
@@ -60,13 +63,41 @@ public class PcpServicoGrid extends InternalFrame {
         setModal(true);
         setSize(800, 600);
 
-        //Configurações do Lookup dos Colaboradores
-        colaboradorLookupController = new ColaboradorLookup();
+        /*
+         * Configurações do lookup do colaborador
+         */
+        colaboradorLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ColaboradorVO");
+        colaboradorLookupController.addLookup2ParentLink("id", "colaborador.id");
+        colaboradorLookupController.addLookup2ParentLink("pessoa.nome", "colaborador.pessoa.nome");
+        colaboradorLookupController.setHeaderColumnName("id", "ID");
+        colaboradorLookupController.setHeaderColumnName("nome", "Nome");
+        colaboradorLookupController.setFrameTitle("Importa Colaborador");
+
+        colaboradorLookupController.setVisibleStatusPanel(true);
+        colaboradorLookupController.setVisibleColumn("id", true);
+        colaboradorLookupController.setVisibleColumn("nome", true);
+        colaboradorLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        colaboradorLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(colaboradorLookupController.getLookupValueObjectClassName()));
         codLookupColaboradores.setLookupController(colaboradorLookupController);
 
-        //Configurações do Lookup dos Equipamentos de Serviços
-        equipamentoLookupController = new EquipamentoServicoLookup();
-        codLookupEquipamentos.setLookupController(equipamentoLookupController);
+        /*
+         * Configurações do lookup do equipamento
+         */
+        equipamentoLookupController.setLookupValueObjectClassName("com.bakeryfactory.pcp.java.PatrimonioBemVO");
+        equipamentoLookupController.addLookup2ParentLink("id", "patrimonioBem.id");
+        equipamentoLookupController.addLookup2ParentLink("nome", "patrimonioBem.nome");
+        equipamentoLookupController.setHeaderColumnName("id", "ID");
+        equipamentoLookupController.setHeaderColumnName("nome", "Nome");
+        equipamentoLookupController.setFrameTitle("Importa Equipamento");
+
+        equipamentoLookupController.setVisibleStatusPanel(true);
+        equipamentoLookupController.setVisibleColumn("id", true);
+        equipamentoLookupController.setVisibleColumn("nome", true);
+        equipamentoLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        equipamentoLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(equipamentoLookupController.getLookupValueObjectClassName()));
+        codLookupEquipamentos.setLookupController(equipamentoLookupController);    
     }
 
     /**
@@ -190,6 +221,7 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlServicos.getColumnContainer().add(dateColumn3);
 
         integerColumn5.setColumnName("horasRealizado");
+        integerColumn5.setColumnRequired(false);
         integerColumn5.setEditableOnEdit(true);
         integerColumn5.setEditableOnInsert(true);
         integerColumn5.setHeaderColumnName("Horas Realizado");
@@ -205,6 +237,7 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlServicos.getColumnContainer().add(dateColumn10);
 
         dateColumn4.setColumnName("terminoRealizado");
+        dateColumn4.setColumnRequired(false);
         dateColumn4.setEditableOnEdit(true);
         dateColumn4.setEditableOnInsert(true);
         dateColumn4.setHeaderColumnName("Término Realizado");
@@ -221,6 +254,7 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlServicos.getColumnContainer().add(decimalColumn14);
 
         decimalColumn8.setColumnName("custoRealizado");
+        decimalColumn8.setColumnRequired(false);
         decimalColumn8.setDecimals(2);
         decimalColumn8.setEditableOnEdit(true);
         decimalColumn8.setEditableOnInsert(true);
@@ -317,7 +351,7 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlEquipamentos.setValueObjectClassName("com.bakeryfactory.pcp.java.PcpServicoEquipamentoVO");
         gridControlEquipamentos.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        codLookupEquipamentos.setColumnName("patrimBem.nome");
+        codLookupEquipamentos.setColumnName("patrimonioBem.nome");
         codLookupEquipamentos.setEditableOnEdit(true);
         codLookupEquipamentos.setEditableOnInsert(true);
         codLookupEquipamentos.setHeaderColumnName("Equipamento");

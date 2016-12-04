@@ -27,7 +27,6 @@ import com.bakeryfactory.padrao.java.Constantes;
 import com.bakeryfactory.vendas.java.VendaCabecalhoVO;
 import com.bakeryfactory.vendas.java.VendaDetalheVO;
 import com.bakeryfactory.vendas.java.VendaOrcamentoDetalheVO;
-import java.beans.PropertyVetoException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashMap;
@@ -54,7 +53,7 @@ public class VendaDetalheController extends FormController {
     private VendaDetalhe vendaDetalhe = null;
     private String pk = null;
     private VendaGrid vendaGrid = null;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public VendaDetalheController(VendaGrid vendaGrid, String pk) {
         this.vendaGrid = vendaGrid;
@@ -64,11 +63,6 @@ public class VendaDetalheController extends FormController {
         vendaDetalhe.setParentFrame(this.vendaGrid);
         this.vendaGrid.pushFrame(vendaDetalhe);
         MDIFrame.add(vendaDetalhe, true);
-
-        try {
-            vendaDetalhe.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-        }
 
         if (pk != null) {
             vendaDetalhe.getForm1().setMode(Consts.READONLY);
@@ -170,7 +164,7 @@ public class VendaDetalheController extends FormController {
             String mensagem = "Este Registro Não Pode Ser Alterado.\n";
             
             if (situacao.equals("P")) {
-                mensagem += "Situação: EM PRODUÇÂO";
+                mensagem += "Situação: EM PRODUÇÃO";
             }
             
             if (situacao.equals("X")) {
@@ -190,7 +184,7 @@ public class VendaDetalheController extends FormController {
         List<VendaDetalheVO> itensVenda = vendaDetalhe.getGrid1().getVOListTableModel().getDataVector();
 
         if (itensVenda.isEmpty()) {
-            return new ErrorResponse("Não Produtos no Orçamento.");
+            return new ErrorResponse("Não Há Produtos no Orçamento.");
         }
         return ClientUtils.getData(acaoServidor, new Object[]{Constantes.UPDATE, oldPersistentObject, persistentObject, itensVenda});
     }
@@ -221,33 +215,22 @@ public class VendaDetalheController extends FormController {
     }
 
     public void atualizaTotais() {
-        VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) vendaDetalhe.getForm1().getVOModel().getValueObject();
+       VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) vendaDetalhe.getForm1().getVOModel().getValueObject();
         if (vendaCabecalho.getValorSubtotal() != null) {
             if (vendaCabecalho.getTaxaDesconto() != null) {
-                addValorDesconto(vendaCabecalho);
-                addValorTotal(vendaCabecalho);
+                vendaCabecalho.setValorDesconto(vendaCabecalho.getValorSubtotal().multiply(vendaCabecalho.getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
+                vendaCabecalho.setValorTotal(vendaCabecalho.getValorSubtotal().subtract(vendaCabecalho.getValorDesconto()));
             }
             if (vendaCabecalho.getValorFrete() != null) {
                 if (vendaCabecalho.getValorTotal() == null) {
                     vendaCabecalho.setValorTotal(vendaCabecalho.getValorSubtotal());
                 }
-                addValorFrete(vendaCabecalho);
+                vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().add(vendaCabecalho.getValorFrete()));
             }
         }
         vendaDetalhe.getForm1().pull();
     }
 
-    public void addValorFrete(VendaCabecalhoVO vendaCabecalho) {
-        vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().add(vendaCabecalho.getValorFrete()));
-    }
-
-    public void addValorTotal(VendaCabecalhoVO vendaCabecalho) {
-        vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().subtract(vendaCabecalho.getValorDesconto()));
-    }
-
-    public void addValorDesconto(VendaCabecalhoVO vendaCabecalho) {
-        vendaCabecalho.setValorDesconto(vendaCabecalho.getValorSubtotal().multiply(vendaCabecalho.getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
-    }
 
     private void carregaItensOrcamento(String idOrcamento) {
         try {

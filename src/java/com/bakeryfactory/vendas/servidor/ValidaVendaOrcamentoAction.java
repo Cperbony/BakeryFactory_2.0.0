@@ -58,7 +58,7 @@ public class ValidaVendaOrcamentoAction implements Action {
         try {
             String id = ((LookupValidationParams) inputPar).getCode();
             GridParams pars = new GridParams();
-            String baseSQL = "select ORCAMENTO_CABECALHO from com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO as ORCAMENTO_CABECALHO where ORCAMENTO_CABECALHO.situacao = 'D' and ORCAMENTO_CABECALHO.id = " + id;
+            String baseSQL = "select ORCAMENTO_CABECALHO from com.bakeryfactory.vendas.java.VendaOrcamentoCabecalhoVO as ORCAMENTO_CABECALHO where VENDA_ORCAMENTO_CABECALHO.situacao = 'D' and VENDA_ORCAMENTO_CABECALHO.id = " + id;
 
             session = HibernateUtil.getSessionFactory().openSession();
             Response res = HibernateUtils.getAllFromQuery(
@@ -69,7 +69,7 @@ public class ValidaVendaOrcamentoAction implements Action {
                     baseSQL,
                     new Object[0],
                     new Type[0],
-                    "ORCAMENTO_CABECALHO",
+                    "VENDA_ORCAMENTO_CABECALHO",
                     HibernateUtil.getSessionFactory(),
                     session);
             return res;

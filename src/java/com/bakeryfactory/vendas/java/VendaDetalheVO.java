@@ -70,10 +70,6 @@ public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
     @Column(name = "VALOR_COMISSAO")
     private BigDecimal valorComissao;
     
-    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private EmpresaVO empresa;
-    
     @JoinColumn(name = "ID_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoVO produto;
@@ -159,14 +155,6 @@ public class VendaDetalheVO extends ValueObjectImpl implements Serializable {
 
     public void setValorComissao(BigDecimal valorComissao) {
         this.valorComissao = valorComissao;
-    }
-
-    public EmpresaVO getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(EmpresaVO empresa) {
-        this.empresa = empresa;
     }
 
     public ProdutoVO getProduto() {

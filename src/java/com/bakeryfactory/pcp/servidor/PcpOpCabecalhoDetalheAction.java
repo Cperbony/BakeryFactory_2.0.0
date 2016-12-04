@@ -115,7 +115,7 @@ public class PcpOpCabecalhoDetalheAction implements Action {
             session.beginTransaction();
             session.save(pcpOpCabecalho);
 
-            savePcpDetalhes(detalhe, pcpOpCabecalho, session);
+            savePcpDetalhe(detalhe, pcpOpCabecalho, session);
 
             savePcpInstrucao(pcpInstrucao, pcpOpCabecalho, session);
 
@@ -152,9 +152,9 @@ public class PcpOpCabecalhoDetalheAction implements Action {
             session.beginTransaction();
             session.update(pcpOpCabecalho);
 
-            savePcpDetalhes(detalhe, pcpOpCabecalho, session);
+            saveOrUpdatePcpDetalhe(detalhe, pcpOpCabecalho, session);
 
-            savePcpInstrucao(pcpInstrucao, pcpOpCabecalho, session);
+            saveOrUpdatePcpInstrucao(pcpInstrucao, pcpOpCabecalho, session);
 
             session.getTransaction().commit();
 
@@ -184,11 +184,25 @@ public class PcpOpCabecalhoDetalheAction implements Action {
     public void savePcpInstrucao(List<PcpInstrucaoOpVO> pcpInstrucao, PcpOpCabecalhoVO pcpOpCabecalho, Session session) throws HibernateException {
         for (PcpInstrucaoOpVO d : pcpInstrucao) {
             d.setPcpOpCabecalho(pcpOpCabecalho);
+            session.save(d);
+        }
+    }
+
+    public void savePcpDetalhe(List<PcpOpDetalheVO> detalhe, PcpOpCabecalhoVO pcpOpCabecalho, Session session) throws HibernateException {
+        for (PcpOpDetalheVO d : detalhe) {
+            d.setPcpOpCabecalho(pcpOpCabecalho);
+            session.save(d);
+        }
+    }
+    
+        public void saveOrUpdatePcpInstrucao(List<PcpInstrucaoOpVO> pcpInstrucao, PcpOpCabecalhoVO pcpOpCabecalho, Session session) throws HibernateException {
+        for (PcpInstrucaoOpVO d : pcpInstrucao) {
+            d.setPcpOpCabecalho(pcpOpCabecalho);
             session.saveOrUpdate(d);
         }
     }
 
-    public void savePcpDetalhes(List<PcpOpDetalheVO> detalhe, PcpOpCabecalhoVO pcpOpCabecalho, Session session) throws HibernateException {
+    public void saveOrUpdatePcpDetalhe(List<PcpOpDetalheVO> detalhe, PcpOpCabecalhoVO pcpOpCabecalho, Session session) throws HibernateException {
         for (PcpOpDetalheVO d : detalhe) {
             d.setPcpOpCabecalho(pcpOpCabecalho);
             session.saveOrUpdate(d);

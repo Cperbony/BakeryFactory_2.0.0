@@ -86,9 +86,9 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         ApplicationFunction n132 = new ApplicationFunction(factory.getResources(langId).getResource("Pessoa"), "pessoa", null, "getPessoa");
 
         ApplicationFunction n14 = new ApplicationFunction(factory.getResources(langId).getResource("Cliente | Fornecedor | Transportadora"), null);
-        ApplicationFunction n141 = new ApplicationFunction(factory.getResources(langId).getResource("Atividade"), "atividadeForCli", null, "getAtividadeForCli");
-        ApplicationFunction n142 = new ApplicationFunction(factory.getResources(langId).getResource("Situação"), "situacaoForCli", null, "getSituacaoForCli");
-        ApplicationFunction n143 = new ApplicationFunction(factory.getResources(langId).getResource("Cliente"), "cliente", null, "getCliente");
+        ApplicationFunction n141 = new ApplicationFunction(factory.getResources(langId).getResource("Cliente"), "cliente", null, "getCliente");
+        ApplicationFunction n142 = new ApplicationFunction(factory.getResources(langId).getResource("Atividade Cliente"), "atividadeForCli", null, "getAtividadeForCli");
+        ApplicationFunction n143 = new ApplicationFunction(factory.getResources(langId).getResource("Situação Cliente"), "situacaoForCli", null, "getSituacaoForCli");
         ApplicationFunction n144 = new ApplicationFunction(factory.getResources(langId).getResource("Fornecedor"), "fornecedor", null, "getFornecedor");
         ApplicationFunction n145 = new ApplicationFunction(factory.getResources(langId).getResource("Transportadora"), "transportadora", null, "getTransportadora");
 
@@ -123,7 +123,7 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         ApplicationFunction n116 = new ApplicationFunction(factory.getResources(langId).getResource("Unidade"), "unidadeProduto", null, "getUnidadeProduto");
         ApplicationFunction n117 = new ApplicationFunction(factory.getResources(langId).getResource("Ingrediente"), "ingrediente", null, "getIngrediente");
         ApplicationFunction n118 = new ApplicationFunction(factory.getResources(langId).getResource("Receita"), "receita", null, "getReceita");
-        ApplicationFunction n119 = new ApplicationFunction(factory.getResources(langId).getResource("Modo de Preparo"), "modoPreparo", null, "getModoPreparo");
+
 
         //Pessoal
         n1.add(nPessoal);
@@ -139,7 +139,6 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         n11.add(n115);
         n11.add(n117);
         n11.add(n118);
-        n11.add(n119);
 
         //Pessoal
         nPessoal.add(n13);
@@ -179,15 +178,14 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         n18.add(n183);
         n18.add(n184);
 
-        //PCP
-        ApplicationFunction n2 = new ApplicationFunction(factory.getResources(langId).getResource("PCP"), null);
-
-        ApplicationFunction n21 = new ApplicationFunction(factory.getResources(langId).getResource("Produto"), "produto", null, "getProduto");
-        ApplicationFunction n22 = new ApplicationFunction(factory.getResources(langId).getResource("Grupo"), "produtoGrupo", null, "getProdutoGrupo");
-        ApplicationFunction n23 = new ApplicationFunction(factory.getResources(langId).getResource("SubGrupo"), "produtoSubGrupo", null, "getProdutoSubGrupo");
-        ApplicationFunction n24 = new ApplicationFunction(factory.getResources(langId).getResource("Unidade"), "unidadeProduto", null, "getUnidadeProduto");
-        ApplicationFunction n25 = new ApplicationFunction(factory.getResources(langId).getResource("Instrução"), "pcpInstrucao", null, "getPcpInstrucao");
-        ApplicationFunction n26 = new ApplicationFunction(factory.getResources(langId).getResource("Ordem de Produção"), "pcpOrdemProducao", null, "getPcpOrdemProducao");
+        //VENDAS
+        ApplicationFunction n2 = new ApplicationFunction(factory.getResources(langId).getResource("Vendas"), null);
+        ApplicationFunction n21 = new ApplicationFunction(factory.getResources(langId).getResource("Tipo Nota Fiscal"), "tipoNotaFiscal", null, "getTipoNotaFiscal");
+        ApplicationFunction n22 = new ApplicationFunction(factory.getResources(langId).getResource("Condições de Pagamento"), "vendaCondicoesPagamento", null, "getVendaCondicoesPagamento");
+        ApplicationFunction n23 = new ApplicationFunction(factory.getResources(langId).getResource("Orçamento"), "vendaOrcamento", null, "getVendaOrcamento");
+        ApplicationFunction n24 = new ApplicationFunction(factory.getResources(langId).getResource("Venda"), "venda", null, "getVenda");
+        ApplicationFunction n25 = new ApplicationFunction(factory.getResources(langId).getResource("Frete"), "vendaFrete", null, "getVendaFrete");
+        ApplicationFunction n26 = new ApplicationFunction(factory.getResources(langId).getResource("Romaneio Entrega"), "vendaRomaneioEntrega", null, "getVendaRomaneioEntrega");
 
         n2.add(n21);
         n2.add(n22);
@@ -196,15 +194,15 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         n2.add(n25);
         n2.add(n26);
 
-        //VENDAS
-        ApplicationFunction n3 = new ApplicationFunction(factory.getResources(langId).getResource("Vendas"), null);
-        ApplicationFunction n31 = new ApplicationFunction(factory.getResources(langId).getResource("Orçamento"), "vendaOrcamento", null, "getVendaOrcamento");
-        ApplicationFunction n32 = new ApplicationFunction(factory.getResources(langId).getResource("Venda"), "venda", null, "getVenda");
-        ApplicationFunction n33 = new ApplicationFunction(factory.getResources(langId).getResource("Tipo Nota Fiscal"), "tipoNotaFiscal", null, "getTipoNotaFiscal");
-        ApplicationFunction n34 = new ApplicationFunction(factory.getResources(langId).getResource("Condições de Pagamento"), "vendaCondicoesPagamento", null, "getVendaCondicoesPagamento");
-        ApplicationFunction n35 = new ApplicationFunction(factory.getResources(langId).getResource("Frete"), "vendaFrete", null, "getVendaFrete");
-        ApplicationFunction n36 = new ApplicationFunction(factory.getResources(langId).getResource("Romaneio Entrega"), "vendaRomaneioEntrega", null, "getVendaRomaneioEntrega");
-
+        //PCP
+        ApplicationFunction n3 = new ApplicationFunction(factory.getResources(langId).getResource("PCP"), null);
+        ApplicationFunction n31 = new ApplicationFunction(factory.getResources(langId).getResource("Produto"), "produto", null, "getProduto");
+        ApplicationFunction n32 = new ApplicationFunction(factory.getResources(langId).getResource("Grupo"), "produtoGrupo", null, "getProdutoGrupo");
+        ApplicationFunction n33 = new ApplicationFunction(factory.getResources(langId).getResource("SubGrupo"), "produtoSubGrupo", null, "getProdutoSubGrupo");
+        ApplicationFunction n34 = new ApplicationFunction(factory.getResources(langId).getResource("Unidade"), "unidadeProduto", null, "getUnidadeProduto");
+        ApplicationFunction n35 = new ApplicationFunction(factory.getResources(langId).getResource("Instrução"), "pcpInstrucao", null, "getPcpInstrucao");
+        ApplicationFunction n36 = new ApplicationFunction(factory.getResources(langId).getResource("Ordem de Produção"), "pcpOrdemProducao", null, "getPcpOrdemProducao");
+        
         n3.add(n31);
         n3.add(n32);
         n3.add(n33);

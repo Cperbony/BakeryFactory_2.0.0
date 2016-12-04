@@ -46,11 +46,11 @@ import org.openswing.swing.util.client.ClientUtils;
 public class UnidadeProdutoGridController extends GridController implements GridDataLocator{
     
     private UnidadeProdutoGrid grid;
-    private String acaoServidor;
+    private final String acaoServidor;
 
     public UnidadeProdutoGridController() {
         grid = new UnidadeProdutoGrid(this);
-        acaoServidor = "unidadeGridAction";
+        acaoServidor = "unidadeProdutoGridAction";
         MDIFrame.add(grid);
     }
     

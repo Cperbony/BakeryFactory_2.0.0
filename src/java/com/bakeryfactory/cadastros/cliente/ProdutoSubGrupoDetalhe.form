@@ -106,6 +106,9 @@
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="enabledOnEdit" type="boolean" value="false"/>
             <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblGrupo"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -129,6 +132,9 @@
               <Connection code="&quot;nome&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblNome"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="100"/>
           </Properties>
           <Constraints>
@@ -153,6 +159,9 @@
               <Connection code="&quot;descricao&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblDescricao"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="1000"/>
           </Properties>
           <Constraints>

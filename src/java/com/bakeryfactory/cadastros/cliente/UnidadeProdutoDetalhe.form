@@ -20,7 +20,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,63,0,0,3,-25"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,1,42,0,0,3,-25"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
@@ -53,7 +53,7 @@
     </Container>
     <Container class="org.openswing.swing.form.client.Form" name="form1">
       <Properties>
-        <Property name="VOClassName" type="java.lang.String" value="com.t2tierp.cadastros.java.UnidadeProdutoVO"/>
+        <Property name="VOClassName" type="java.lang.String" value="com.bakeryfactory.cadastros.java.UnidadeProdutoVO"/>
         <Property name="functionId" type="java.lang.String" value="unidadeProduto"/>
       </Properties>
       <Constraints>
@@ -80,6 +80,9 @@
               <Connection code="&quot;sigla&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblSigla"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="10"/>
           </Properties>
           <Constraints>
@@ -115,6 +118,9 @@
             </Property>
             <Property name="domainId" type="java.lang.String" value="naosim"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPodeFracionar"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -128,6 +134,9 @@
               <Connection code="&quot;descricao&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblDescricao"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="1000"/>
           </Properties>
           <Constraints>

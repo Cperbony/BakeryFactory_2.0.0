@@ -23,7 +23,9 @@
  */
 package com.bakeryfactory.cadastros.cliente;
 
-import com.bakeryfactory.cadastros.lookups.ProdutoSubGrupoLookup;
+import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import java.awt.Dimension;
+import org.openswing.swing.lookup.client.LookupController;
 import org.openswing.swing.mdi.client.InternalFrame;
 
 /**
@@ -32,7 +34,7 @@ import org.openswing.swing.mdi.client.InternalFrame;
  */
 public class ProdutoSubGrupoDetalhe extends InternalFrame {
     
-    private ProdutoSubGrupoLookup produtoSubGrupoLookup;
+    private final LookupController grupoController;
 
     /**
      * Creates new form ColaboradorDetalhe
@@ -40,12 +42,28 @@ public class ProdutoSubGrupoDetalhe extends InternalFrame {
      * @param controller
      */
     public ProdutoSubGrupoDetalhe(ProdutoSubGrupoDetalheController controller) {
+        this.grupoController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
         
-        produtoSubGrupoLookup = new ProdutoSubGrupoLookup();
-        codLookupControlGrupo.setLookupController(produtoSubGrupoLookup);
+      /*
+         * Configurações do lookup do setor
+         */
+        grupoController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoGrupoVO");
+        grupoController.addLookup2ParentLink("id", "produtoGrupo.id");
+        grupoController.addLookup2ParentLink("nome", "produtoGrupo.nome");
+        grupoController.setHeaderColumnName("id", "ID");
+        grupoController.setHeaderColumnName("nome", "Nome");
+        grupoController.setFrameTitle("Importa Grupo Produto");
+
+        grupoController.setVisibleStatusPanel(true);
+        grupoController.setVisibleColumn("id", true);
+        grupoController.setVisibleColumn("nome", true);
+        grupoController.setFramePreferedSize(new Dimension(600, 500));
+
+        grupoController.setLookupDataLocator(new LookupDataLocatorGenerico(grupoController.getLookupValueObjectClassName()));
+        codLookupControlGrupo.setLookupController(grupoController);
 
     }
 
@@ -126,6 +144,7 @@ public class ProdutoSubGrupoDetalhe extends InternalFrame {
         textControl2.setEnabled(false);
         textControl2.setEnabledOnEdit(false);
         textControl2.setEnabledOnInsert(false);
+        textControl2.setLinkLabel(lblGrupo);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 1;
@@ -143,6 +162,7 @@ public class ProdutoSubGrupoDetalhe extends InternalFrame {
 
         textControl3.setAttributeName("nome");
         textControl3.setEnabled(false);
+        textControl3.setLinkLabel(lblNome);
         textControl3.setMaxCharacters(100);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -162,6 +182,7 @@ public class ProdutoSubGrupoDetalhe extends InternalFrame {
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
+        textAreaControl1.setLinkLabel(lblDescricao);
         textAreaControl1.setMaxCharacters(1000);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

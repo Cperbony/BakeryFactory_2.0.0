@@ -57,8 +57,6 @@ public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable 
     @Column(name = "MODELO")
     private String modelo;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "notaFiscalModelo")
-    private List<NotaFiscalTipoVO> listaNotaFiscalTipo;
 
     public NotaFiscalModeloVO() {
     }
@@ -97,14 +95,6 @@ public class NotaFiscalModeloVO extends ValueObjectImpl implements Serializable 
 
     public void setModelo(String modelo) {
         this.modelo = modelo;
-    }
-
-    public List<NotaFiscalTipoVO> getListaNotaFiscalTipo() {
-        return listaNotaFiscalTipo;
-    }
-
-    public void setListaNotaFiscalTipo(List<NotaFiscalTipoVO> listaNotaFiscalTipo) {
-        this.listaNotaFiscalTipo = listaNotaFiscalTipo;
     }
 
     @Override

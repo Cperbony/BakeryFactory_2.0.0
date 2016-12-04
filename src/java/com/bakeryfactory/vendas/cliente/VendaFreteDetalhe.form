@@ -47,13 +47,13 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout"/>
       <SubComponents>
-        <Component class="org.openswing.swing.client.LabelControl" name="lblTransportadora">
+        <Component class="org.openswing.swing.client.LabelControl" name="lblTransportadoraNome">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Transportadora:"/>
+            <Property name="text" type="java.lang.String" value="Transportadora Nome:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+              <GridBagConstraints gridX="1" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -64,6 +64,9 @@
               <Connection code="&quot;transportadora.id&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblTransportadora1"/>
+            </Property>
             <Property name="required" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -80,6 +83,9 @@
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="enabledOnEdit" type="boolean" value="false"/>
             <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblTransportadoraNome"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -93,7 +99,7 @@
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="0" gridY="2" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+              <GridBagConstraints gridX="1" gridY="2" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -104,6 +110,9 @@
               <Connection code="&quot;vendaCabecalho.id&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblVendaID"/>
+            </Property>
             <Property name="required" type="boolean" value="true"/>
           </Properties>
           <Constraints>
@@ -128,6 +137,9 @@
               <Connection code="&quot;conhecimento&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblConhecimento"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -152,6 +164,9 @@
             </Property>
             <Property name="domainId" type="java.lang.String" value="VendaResponsavelFrete"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblResponsavel"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -175,6 +190,9 @@
               <Connection code="&quot;placa&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPlaca"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="7"/>
           </Properties>
           <Constraints>
@@ -185,7 +203,7 @@
         </Component>
         <Component class="org.openswing.swing.client.LabelControl" name="lblUfPlaca">
           <Properties>
-            <Property name="label" type="java.lang.String" value="Uf Placa:"/>
+            <Property name="text" type="java.lang.String" value="UF Placa:"/>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -199,6 +217,9 @@
               <Connection code="&quot;ufPlaca&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPlaca"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="2"/>
           </Properties>
           <Constraints>
@@ -223,6 +244,9 @@
               <Connection code="&quot;seloFiscal&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblSeloFiscal"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -247,6 +271,9 @@
             </Property>
             <Property name="decimals" type="int" value="2"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblQuantVolume"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -270,6 +297,9 @@
               <Connection code="&quot;marcaVolume&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblMarcaVolume"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="50"/>
           </Properties>
           <Constraints>
@@ -294,6 +324,9 @@
               <Connection code="&quot;especieVolume&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblEspecieVolume"/>
+            </Property>
             <Property name="maxCharacters" type="int" value="20"/>
           </Properties>
           <Constraints>
@@ -319,6 +352,9 @@
             </Property>
             <Property name="decimals" type="int" value="2"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPesoBruto"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -343,6 +379,9 @@
             </Property>
             <Property name="decimals" type="int" value="2"/>
             <Property name="enabled" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblPesoLiquido"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -353,15 +392,18 @@
         <Component class="org.openswing.swing.client.NumericControl" name="numericControl1">
           <Properties>
             <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="&quot;vendaCabecalho.numeroFatura&quot;" type="code"/>
+              <Connection code="&quot;cliente.pessoa.nome&quot;" type="code"/>
             </Property>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="enabledOnEdit" type="boolean" value="false"/>
             <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblVendaCliente"/>
+            </Property>
           </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
-              <GridBagConstraints gridX="1" gridY="3" gridWidth="5" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+              <GridBagConstraints gridX="3" gridY="3" gridWidth="3" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>
@@ -369,6 +411,54 @@
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
               <GridBagConstraints gridX="0" gridY="8" gridWidth="6" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="0" insetsBottom="0" insetsRight="0" anchor="10" weightX="1.0" weightY="1.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.NumericControl" name="numericControl2">
+          <Properties>
+            <Property name="attributeName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+              <Connection code="&quot;vendaCabecalho.numeroFatura&quot;" type="code"/>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="enabledOnEdit" type="boolean" value="false"/>
+            <Property name="enabledOnInsert" type="boolean" value="false"/>
+            <Property name="linkLabel" type="org.openswing.swing.client.LabelControl" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="lblVendaNF"/>
+            </Property>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="1" gridY="3" gridWidth="2" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="0" insetsLeft="5" insetsBottom="5" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.LabelControl" name="lblVendaCliente">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Venda(Cliente):"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="3" gridY="2" gridWidth="3" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.LabelControl" name="lblVendaID">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Venda(ID):"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="0" gridY="2" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
+            </Constraint>
+          </Constraints>
+        </Component>
+        <Component class="org.openswing.swing.client.LabelControl" name="lblTransportadora1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Transportadora:"/>
+          </Properties>
+          <Constraints>
+            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
+              <GridBagConstraints gridX="0" gridY="0" gridWidth="1" gridHeight="1" fill="1" ipadX="0" ipadY="0" insetsTop="5" insetsLeft="5" insetsBottom="0" insetsRight="5" anchor="10" weightX="0.0" weightY="0.0"/>
             </Constraint>
           </Constraints>
         </Component>

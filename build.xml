@@ -101,7 +101,13 @@
         <signjar
             alias="${alias}" keystore="${keystore}"
             storepass="${storepass}"
-            tsaurl="https://timestamp.geotrust.com/tsa">
+            tsaurl="http://tsa.starfieldtech.com">
+                <!--
+                Problemas com o Timestamp do Geotrust, parece que encerrou os serviços
+                alias="${alias}" keystore="${keystore}"
+                storepass="${storepass}"
+                tsaurl="https://timestamp.geotrust.com/tsa">
+                -->
             <path>
                 <fileset dir="${build}/${signedlib}/" includes="*.jar" />
             </path>
