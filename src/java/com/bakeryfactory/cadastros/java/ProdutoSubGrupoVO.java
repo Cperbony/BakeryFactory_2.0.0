@@ -46,7 +46,7 @@ import org.openswing.swing.message.receive.java.ValueObjectImpl;
  */
 @Entity
 @Table(name = "PRODUTO_SUB_GRUPO")
-public class ProdutoSubgrupoVO extends ValueObjectImpl implements Serializable {
+public class ProdutoSubGrupoVO extends ValueObjectImpl implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
