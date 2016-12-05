@@ -1331,8 +1331,8 @@
             <Container class="javax.swing.JPanel" name="jPanelFichaTecnica">
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-                  <JTabbedPaneConstraints tabName="Ficha Tecnica">
-                    <Property name="tabTitle" type="java.lang.String" value="Ficha Tecnica"/>
+                  <JTabbedPaneConstraints tabName="Ficha T&#xe9;cnica">
+                    <Property name="tabTitle" type="java.lang.String" value="Ficha T&#xe9;cnica"/>
                   </JTabbedPaneConstraints>
                 </Constraint>
               </Constraints>
@@ -1405,7 +1405,7 @@
                     <Property name="alignment" type="int" value="0"/>
                   </Layout>
                   <SubComponents>
-                    <Component class="org.openswing.swing.table.columns.client.CodLookupColumn" name="codLookupColumn1">
+                    <Component class="org.openswing.swing.table.columns.client.CodLookupColumn" name="codLookupDescricao">
                       <Properties>
                         <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="&quot;descricao&quot;" type="code"/>
@@ -1419,7 +1419,7 @@
                         <Property name="preferredWidth" type="int" value="300"/>
                       </Properties>
                     </Component>
-                    <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumn6">
+                    <Component class="org.openswing.swing.table.columns.client.IntegerColumn" name="integerColumnSequencia">
                       <Properties>
                         <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="&quot;sequenciaProducao&quot;" type="code"/>
@@ -1433,7 +1433,7 @@
                         <Property name="preferredWidth" type="int" value="120"/>
                       </Properties>
                     </Component>
-                    <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumn5">
+                    <Component class="org.openswing.swing.table.columns.client.DecimalColumn" name="decimalColumnQuantidade">
                       <Properties>
                         <Property name="columnName" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                           <Connection code="&quot;quantidade&quot;" type="code"/>

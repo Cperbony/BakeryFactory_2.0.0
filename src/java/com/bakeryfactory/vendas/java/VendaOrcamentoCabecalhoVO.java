@@ -277,7 +277,7 @@ public class VendaOrcamentoCabecalhoVO extends ValueObjectImpl implements Serial
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.VendaOrcamentoCabecalhoVO[ id=" + id + " ]";
+        return "VendaOrcamentoCabecalhoVO[ id=" + id + " ]";
     }
     
 }

@@ -194,7 +194,7 @@ public class VendaFreteVO extends ValueObjectImpl implements Serializable {
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.VendaFreteVO[ id=" + id + " ]";
+        return "VendaFreteVO[ id=" + id + " ]";
     }
     
 }

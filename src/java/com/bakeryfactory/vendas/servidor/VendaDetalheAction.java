@@ -92,7 +92,6 @@ public class VendaDetalheAction implements Action {
             VendaCabecalhoVO vendaCabecalho = (VendaCabecalhoVO) criteria.uniqueResult();
 
             return new VOResponse(vendaCabecalho);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
@@ -102,7 +101,6 @@ public class VendaDetalheAction implements Action {
             } catch (Exception ex1) {
             }
         }
-
     }
 
     private Response insert(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
@@ -148,7 +146,6 @@ public class VendaDetalheAction implements Action {
             session.getTransaction().commit();
 
             return new VOResponse(vendaCabecalho);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             if (session != null) {

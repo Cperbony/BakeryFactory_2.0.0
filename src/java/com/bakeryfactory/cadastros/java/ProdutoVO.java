@@ -180,11 +180,6 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @ManyToOne
     private TributIcmsCustomCabVO tributIcmsCustomCab;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<FichaTecnicaVO> listaFichaTecnica;
-
-   
     public ProdutoVO() {
     }
 
@@ -594,14 +589,6 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
 
     public void setTributIcmsCustomCab(TributIcmsCustomCabVO tributIcmsCustomCab) {
         this.tributIcmsCustomCab = tributIcmsCustomCab;
-    }
-
-    public List<FichaTecnicaVO> getListaFichaTecnica() {
-        return listaFichaTecnica;
-    }
-
-    public void setListaFichaTecnica(List<FichaTecnicaVO> listaFichaTecnica) {
-        this.listaFichaTecnica = listaFichaTecnica;
     }
 
     public byte[] getImagemProduto() {

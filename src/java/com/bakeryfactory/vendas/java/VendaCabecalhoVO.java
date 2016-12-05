@@ -129,18 +129,6 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
     @ManyToOne(optional = false)
     private VendedorVO vendedor;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaCabecalho")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaComissaoVO> listaVendaComissao;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalho")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaFreteVO> listaVendaFrete;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "vendaCabecalho")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaDetalheVO> listaVendaDetalhe;
-
     public VendaCabecalhoVO() {
     }
 
@@ -348,30 +336,6 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
         this.vendedor = vendedor;
     }
 
-    public List<VendaComissaoVO> getListaVendaComissao() {
-        return listaVendaComissao;
-    }
-
-    public void setListaVendaComissao(List<VendaComissaoVO> listaVendaComissao) {
-        this.listaVendaComissao = listaVendaComissao;
-    }
-
-    public List<VendaFreteVO> getListaVendaFrete() {
-        return listaVendaFrete;
-    }
-
-    public void setListaVendaFrete(List<VendaFreteVO> listaVendaFrete) {
-        this.listaVendaFrete = listaVendaFrete;
-    }
-
-    public List<VendaDetalheVO> getListaVendaDetalhe() {
-        return listaVendaDetalhe;
-    }
-
-    public void setListaVendaDetalhe(List<VendaDetalheVO> listaVendaDetalhe) {
-        this.listaVendaDetalhe = listaVendaDetalhe;
-    }
-
     public VendaOrcamentoCabecalhoVO getVendaOrcamentoCabecalho() {
         return vendaOrcamentoCabecalho;
     }
@@ -379,12 +343,9 @@ public class VendaCabecalhoVO extends ValueObjectImpl implements Serializable {
     public void setVendaOrcamentoCabecalho(VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho) {
         this.vendaOrcamentoCabecalho = vendaOrcamentoCabecalho;
     }
-    
-    
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.VendaCabecalhoVO[ id=" + id + " ]";
-    }
-
+        return "VendaCabecalhoVO{" + "id=" + id + '}';
+    }   
 }

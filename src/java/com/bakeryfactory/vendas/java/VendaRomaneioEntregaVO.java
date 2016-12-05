@@ -70,16 +70,12 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
     @Temporal(TemporalType.DATE)
     private Date dataSaida;
     @Column(name = "SITUACAO")
-    private Character situacao;
+    private String situacao;
     @Column(name = "DATA_ENCERRAMENTO")
     @Temporal(TemporalType.DATE)
     private Date dataEncerramento;
     @Column(name = "OBSERVACAO")
     private String observacao;
-    
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "vendaRomaneioEntrega")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private List<VendaCabecalhoVO> listaVendaCabecalho;
     
     @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
@@ -132,11 +128,11 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
         this.dataSaida = dataSaida;
     }
 
-    public Character getSituacao() {
+    public String getSituacao() {
         return situacao;
     }
 
-    public void setSituacao(Character situacao) {
+    public void setSituacao(String situacao) {
         this.situacao = situacao;
     }
 
@@ -156,14 +152,6 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
         this.observacao = observacao;
     }
 
-    public List<VendaCabecalhoVO> getListaVendaCabecalho() {
-        return listaVendaCabecalho;
-    }
-
-    public void setListaVendaCabecalho(List<VendaCabecalhoVO> listaVendaCabecalho) {
-        this.listaVendaCabecalho = listaVendaCabecalho;
-    }
-
     public ColaboradorVO getColaborador() {
         return colaborador;
     }
@@ -174,7 +162,6 @@ public class VendaRomaneioEntregaVO extends ValueObjectImpl implements Serializa
 
     @Override
     public String toString() {
-        return "com.bakeryfactory.cadastros.java.VendaRomaneioEntregaVO[ id=" + id + " ]";
-    }
-    
+        return "VendaRomaneioEntregaVO{" + "id=" + id + ", descricao=" + descricao + '}';
+    } 
 }

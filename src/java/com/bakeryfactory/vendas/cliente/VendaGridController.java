@@ -110,5 +110,4 @@ public class VendaGridController extends GridController implements GridDataLocat
 
         return ClientUtils.getData(acaoServidor, pars);
     }
-
 }

@@ -41,6 +41,8 @@ public class ProdutoDetalhe extends InternalFrame {
     private LookupController almoxarifadoLookup;
     private LookupController grupoTributarioController;
     private LookupController icmsCustomizadoController;
+    private LookupController fichaLookupController;
+    
     private FichaTecnicaGridController fichaTecnicaController;
 
     /**
@@ -56,6 +58,7 @@ public class ProdutoDetalhe extends InternalFrame {
         this.unidadeLookup = new LookupController();
         this.produtoMarcaLookup = new LookupController();
         this.produtoSubGrupoLookup = new LookupController();
+        this.fichaLookupController = new LookupController();
         initComponents();
 
         form1.setFormController(controller);
@@ -193,6 +196,24 @@ public class ProdutoDetalhe extends InternalFrame {
 
         ncmController.setLookupDataLocator(new LookupDataLocatorGenerico(ncmController.getLookupValueObjectClassName()));
         codLookupControlNcm.setLookupController(ncmController);
+        
+        /*
+         * Configurações do lookup da ficha tecnica
+         */
+        fichaLookupController.setLookupValueObjectClassName("com.bakeryfactory.cadastros.java.ProdutoVO");
+        fichaLookupController.addLookup2ParentLink("id", "idProdutoFilho");
+        fichaLookupController.addLookup2ParentLink("descricao", "descricao");
+        fichaLookupController.setHeaderColumnName("id", "ID");
+        fichaLookupController.setHeaderColumnName("descricao", "Descrição");
+        fichaLookupController.setFrameTitle("Importa Produto");
+
+        fichaLookupController.setVisibleStatusPanel(true);
+        fichaLookupController.setVisibleColumn("id", true);
+        fichaLookupController.setVisibleColumn("descricao", true);
+        fichaLookupController.setFramePreferedSize(new Dimension(600, 500));
+
+        fichaLookupController.setLookupDataLocator(new LookupDataLocatorGenerico(fichaLookupController.getLookupValueObjectClassName()));
+        codLookupDescricao.setLookupController(fichaLookupController);
 
     }
 
@@ -334,9 +355,9 @@ public class ProdutoDetalhe extends InternalFrame {
         saveButton2 = new org.openswing.swing.client.SaveButton();
         navigatorBar1 = new org.openswing.swing.client.NavigatorBar();
         gridControlFichaTecnica = new org.openswing.swing.client.GridControl();
-        codLookupColumn1 = new org.openswing.swing.table.columns.client.CodLookupColumn();
-        integerColumn6 = new org.openswing.swing.table.columns.client.IntegerColumn();
-        decimalColumn5 = new org.openswing.swing.table.columns.client.DecimalColumn();
+        codLookupDescricao = new org.openswing.swing.table.columns.client.CodLookupColumn();
+        integerColumnSequencia = new org.openswing.swing.table.columns.client.IntegerColumn();
+        decimalColumnQuantidade = new org.openswing.swing.table.columns.client.DecimalColumn();
 
         setTitle("Bakery Factory - Produtos");
         getContentPane().setLayout(new java.awt.GridBagLayout());
@@ -1324,29 +1345,29 @@ public class ProdutoDetalhe extends InternalFrame {
         gridControlFichaTecnica.setValueObjectClassName("com.bakeryfactory.cadastros.java.FichaTecnicaVO");
         gridControlFichaTecnica.getColumnContainer().setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        codLookupColumn1.setColumnName("descricao");
-        codLookupColumn1.setEditableOnEdit(true);
-        codLookupColumn1.setEditableOnInsert(true);
-        codLookupColumn1.setHeaderColumnName("Descrição");
-        codLookupColumn1.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        codLookupColumn1.setPreferredWidth(300);
-        gridControlFichaTecnica.getColumnContainer().add(codLookupColumn1);
+        codLookupDescricao.setColumnName("descricao");
+        codLookupDescricao.setEditableOnEdit(true);
+        codLookupDescricao.setEditableOnInsert(true);
+        codLookupDescricao.setHeaderColumnName("Descrição");
+        codLookupDescricao.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        codLookupDescricao.setPreferredWidth(300);
+        gridControlFichaTecnica.getColumnContainer().add(codLookupDescricao);
 
-        integerColumn6.setColumnName("sequenciaProducao");
-        integerColumn6.setEditableOnEdit(true);
-        integerColumn6.setEditableOnInsert(true);
-        integerColumn6.setHeaderColumnName("Sequência Produção");
-        integerColumn6.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        integerColumn6.setPreferredWidth(120);
-        gridControlFichaTecnica.getColumnContainer().add(integerColumn6);
+        integerColumnSequencia.setColumnName("sequenciaProducao");
+        integerColumnSequencia.setEditableOnEdit(true);
+        integerColumnSequencia.setEditableOnInsert(true);
+        integerColumnSequencia.setHeaderColumnName("Sequência Produção");
+        integerColumnSequencia.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        integerColumnSequencia.setPreferredWidth(120);
+        gridControlFichaTecnica.getColumnContainer().add(integerColumnSequencia);
 
-        decimalColumn5.setColumnName("quantidade");
-        decimalColumn5.setDecimals(2);
-        decimalColumn5.setEditableOnEdit(true);
-        decimalColumn5.setEditableOnInsert(true);
-        decimalColumn5.setHeaderColumnName("Quantidade");
-        decimalColumn5.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        gridControlFichaTecnica.getColumnContainer().add(decimalColumn5);
+        decimalColumnQuantidade.setColumnName("quantidade");
+        decimalColumnQuantidade.setDecimals(2);
+        decimalColumnQuantidade.setEditableOnEdit(true);
+        decimalColumnQuantidade.setEditableOnInsert(true);
+        decimalColumnQuantidade.setHeaderColumnName("Quantidade");
+        decimalColumnQuantidade.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
+        gridControlFichaTecnica.getColumnContainer().add(decimalColumnQuantidade);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1356,7 +1377,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.weighty = 1.0;
         jPanelFichaTecnica.add(gridControlFichaTecnica, gridBagConstraints);
 
-        jTabbedPane1.addTab("Ficha Tecnica", jPanelFichaTecnica);
+        jTabbedPane1.addTab("Ficha Técnica", jPanelFichaTecnica);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
@@ -1378,7 +1399,6 @@ public class ProdutoDetalhe extends InternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private org.openswing.swing.table.columns.client.CodLookupColumn codLookupColumn1;
     private org.openswing.swing.client.CodLookupControl codLookupControlAlmoxarifado;
     private org.openswing.swing.client.CodLookupControl codLookupControlGrupoTributario;
     private org.openswing.swing.client.CodLookupControl codLookupControlIcmsCustomizado;
@@ -1386,13 +1406,14 @@ public class ProdutoDetalhe extends InternalFrame {
     private org.openswing.swing.client.CodLookupControl codLookupControlNcm;
     private org.openswing.swing.client.CodLookupControl codLookupControlSubGrupo;
     private org.openswing.swing.client.CodLookupControl codLookupControlUnidade;
+    private org.openswing.swing.table.columns.client.CodLookupColumn codLookupDescricao;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl1;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl29;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl34;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl35;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl36;
     private org.openswing.swing.client.ComboBoxControl comboBoxControl47;
-    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumn5;
+    private org.openswing.swing.table.columns.client.DecimalColumn decimalColumnQuantidade;
     private org.openswing.swing.client.DeleteButton deleteButton1;
     private org.openswing.swing.client.EditButton editButton1;
     private org.openswing.swing.client.EditButton editButton2;
@@ -1400,7 +1421,7 @@ public class ProdutoDetalhe extends InternalFrame {
     private org.openswing.swing.client.GridControl gridControlFichaTecnica;
     private org.openswing.swing.client.ImageControl imageCtrFotoProduto;
     private org.openswing.swing.client.InsertButton insertButton1;
-    private org.openswing.swing.table.columns.client.IntegerColumn integerColumn6;
+    private org.openswing.swing.table.columns.client.IntegerColumn integerColumnSequencia;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;

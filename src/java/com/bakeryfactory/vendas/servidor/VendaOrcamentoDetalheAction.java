@@ -34,7 +34,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
-import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
@@ -90,7 +89,6 @@ public class VendaOrcamentoDetalheAction implements Action {
             VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho = (VendaOrcamentoCabecalhoVO) criteria.uniqueResult();
 
             return new VOResponse(vendaOrcamentoCabecalho);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
@@ -100,7 +98,6 @@ public class VendaOrcamentoDetalheAction implements Action {
             } catch (Exception ex1) {
             }
         }
-
     }
 
     private Response insert(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {
@@ -113,13 +110,13 @@ public class VendaOrcamentoDetalheAction implements Action {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            if (vendaOrcamentoCabecalho.getTransportadora().getId() == null) {
+            if (vendaOrcamentoCabecalho.getTransportadora().getId() == null){
                 vendaOrcamentoCabecalho.setTransportadora(null);
             }
 
             session.save(vendaOrcamentoCabecalho);
 
-            for (int i = 0; i < orcamentoDetalhe.size(); i++) {
+            for (int i = 0; i < orcamentoDetalhe.size(); i++){
                 orcamentoDetalhe.get(i).setVendaOrcamentoCabecalho(vendaOrcamentoCabecalho);
                 session.save(orcamentoDetalhe.get(i));
             }
@@ -127,7 +124,6 @@ public class VendaOrcamentoDetalheAction implements Action {
             session.getTransaction().commit();
 
             return new VOResponse(vendaOrcamentoCabecalho);
-
         } catch (Exception ex) {
             ex.printStackTrace();
             if (session != null) {
@@ -155,23 +151,31 @@ public class VendaOrcamentoDetalheAction implements Action {
             session = HibernateUtil.getSessionFactory().openSession();
             session.beginTransaction();
 
-            if (vendaOrcamentoCabecalho.getTransportadora().getId() == null) {
+            if (vendaOrcamentoCabecalho.getTransportadora().getId() == null){
                 vendaOrcamentoCabecalho.setTransportadora(null);
             }
 
             session.update(vendaOrcamentoCabecalho);
 
-            queryExcluir(orcamentoDetalhe, vendaOrcamentoCabecalho, session);
+            String sqlExcluir = "delete from VENDA_ORCAMENTO_DETALHE where ID not in (0";
+            for (int i = 0; i < orcamentoDetalhe.size(); i++){
+                orcamentoDetalhe.get(i).setVendaOrcamentoCabecalho(vendaOrcamentoCabecalho);
+                session.saveOrUpdate(orcamentoDetalhe.get(i));
+                sqlExcluir += "," + orcamentoDetalhe.get(i).getId();
+            }
+            sqlExcluir += ") and ID_VENDA_ORCAMENTO_CABECALHO = :id";
+            Query query = session.createSQLQuery(sqlExcluir);
+            query.setInteger("id", vendaOrcamentoCabecalho.getId());
+            query.executeUpdate();
 
             session.getTransaction().commit();
 
             return new VOResponse(vendaOrcamentoCabecalho);
-
         } catch (Exception ex) {
+            ex.printStackTrace();
             if (session != null) {
                 session.getTransaction().rollback();
             }
-            ex.printStackTrace();
             return new ErrorResponse(ex.getMessage());
         } finally {
             try {
@@ -182,19 +186,6 @@ public class VendaOrcamentoDetalheAction implements Action {
                 ex1.printStackTrace();
             }
         }
-    }
-
-    public void queryExcluir(List<VendaOrcamentoDetalheVO> orcamentoDetalhe, VendaOrcamentoCabecalhoVO vendaOrcamentoCabecalho, Session session) throws HibernateException {
-        String sqlExcluir = "delete from VENDA_ORCAMENTO_DETALHE where ID not in (0";
-        for (int i = 0; i < orcamentoDetalhe.size(); i++) {
-            orcamentoDetalhe.get(i).setVendaOrcamentoCabecalho(vendaOrcamentoCabecalho);
-            session.saveOrUpdate(orcamentoDetalhe.get(i));
-            sqlExcluir += "," + orcamentoDetalhe.get(i).getId();
-        }
-        sqlExcluir += ") and ID_VENDA_ORCAMENTO_CABECALHO = :id";
-        Query query = session.createSQLQuery(sqlExcluir);
-        query.setInteger("id", vendaOrcamentoCabecalho.getId());
-        query.executeUpdate();
     }
 
     private Response delete(Object inputPar, UserSessionParameters userSessionPars, HttpServletRequest request, HttpServletResponse response, HttpSession userSession, ServletContext context) {

@@ -65,7 +65,9 @@ public class VendaOrcamentoDetalheGridController extends GridController implemen
 
     @Override
     public boolean beforeInsertGrid(GridControl grid) {
-        formMode();
+       if (vendaOrcamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaOrcamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 
@@ -100,7 +102,9 @@ public class VendaOrcamentoDetalheGridController extends GridController implemen
      */
     @Override
     public boolean beforeEditGrid(GridControl grid) {
-        formMode();
+          if (vendaOrcamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaOrcamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 
@@ -136,7 +140,9 @@ public class VendaOrcamentoDetalheGridController extends GridController implemen
      */
     @Override
     public boolean beforeDeleteGrid(GridControl grid) {
-        formMode();
+           if (vendaOrcamentoDetalhe.getForm1().getMode() == Consts.READONLY) {
+            vendaOrcamentoDetalhe.getForm1().setMode(Consts.EDIT);
+        }
         return true;
     }
 
@@ -172,11 +178,10 @@ public class VendaOrcamentoDetalheGridController extends GridController implemen
         for (int i = 0; i < orcamentoDetalhe.size(); i++) {
             orcamentoDetalhe.get(i).setValorSubtotal(orcamentoDetalhe.get(i).getQuantidade().multiply(orcamentoDetalhe.get(i).getValorUnitario()));
             subTotal = subTotal.add(orcamentoDetalhe.get(i).getValorSubtotal());
-
+            
             if (orcamentoDetalhe.get(i).getTaxaDesconto() != null) {
                 orcamentoDetalhe.get(i).setValorDesconto(orcamentoDetalhe.get(i).getValorSubtotal().multiply(orcamentoDetalhe.get(i).getTaxaDesconto().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
             }
-
             if (orcamentoDetalhe.get(i).getValorDesconto() != null) {
                 totalDesconto = totalDesconto.add(orcamentoDetalhe.get(i).getValorDesconto());
                 orcamentoDetalhe.get(i).setValorTotal(orcamentoDetalhe.get(i).getValorSubtotal().subtract(orcamentoDetalhe.get(i).getValorDesconto()));
@@ -185,11 +190,22 @@ public class VendaOrcamentoDetalheGridController extends GridController implemen
             }
         }
         orcamentoCabecalho.setValorSubtotal(subTotal);
-        setValorDesconto(totalDesconto, orcamentoCabecalho, subTotal);
+        if (totalDesconto.compareTo(BigDecimal.ZERO) != 0) {
+            orcamentoCabecalho.setValorDesconto(totalDesconto);
+            orcamentoCabecalho.setTaxaDesconto(totalDesconto.divide(subTotal, RoundingMode.HALF_DOWN).multiply(BigDecimal.valueOf(100)));
+        }
+
         orcamentoCabecalho.setValorTotal(subTotal);
-        addValorFrete(orcamentoCabecalho);
-        subtractDesconto(orcamentoCabecalho);
-        setValorComissao(orcamentoCabecalho, subTotal, totalDesconto);
+        if (orcamentoCabecalho.getValorFrete() != null){
+            orcamentoCabecalho.setValorTotal(orcamentoCabecalho.getValorTotal().add(orcamentoCabecalho.getValorFrete()));
+        }
+        if (orcamentoCabecalho.getValorDesconto() != null){
+            orcamentoCabecalho.setValorTotal(orcamentoCabecalho.getValorTotal().subtract(orcamentoCabecalho.getValorDesconto()));
+        }
+
+        if (orcamentoCabecalho.getTaxaComissao() != null) {
+            orcamentoCabecalho.setValorComissao(subTotal.subtract(totalDesconto).multiply(orcamentoCabecalho.getTaxaComissao().divide(BigDecimal.valueOf(100), RoundingMode.HALF_DOWN)));
+        }
         vendaOrcamentoDetalhe.getFormController().atualizaTotais();
     }
 

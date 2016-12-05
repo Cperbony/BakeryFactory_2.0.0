@@ -196,10 +196,10 @@ public class VendaDetalheGridController extends GridController implements GridDa
         }
 
         vendaCabecalho.setValorTotal(subTotal);
-        if (vendaCabecalho.getValorFrete() != null){
+        if (vendaCabecalho.getValorFrete() != null) {
             vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().add(vendaCabecalho.getValorFrete()));
         }
-        if (vendaCabecalho.getValorDesconto() != null){
+        if (vendaCabecalho.getValorDesconto() != null) {
             vendaCabecalho.setValorTotal(vendaCabecalho.getValorTotal().subtract(vendaCabecalho.getValorDesconto()));
         }
 
