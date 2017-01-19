@@ -89,7 +89,7 @@ public class AtividadeForCliDetalheController extends FormController {
     @Override
     public void afterInsertData() {
         atividadeForCliGrid.getGrid1().reloadData();
-        JOptionPane.showMessageDialog(atividadeForCliGrid, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(atividadeForCliDetalhe, "Dados Salvos com Sucesso!", "Informação do Sistema", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /**

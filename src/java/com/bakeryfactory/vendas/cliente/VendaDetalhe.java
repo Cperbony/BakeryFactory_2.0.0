@@ -36,7 +36,7 @@ import org.openswing.swing.mdi.client.InternalFrame;
  *
  * @author Claudinei Aparecido Perboni - contact:cperbony@gmail.com
  */
-public final class VendaDetalhe extends InternalFrame {
+public class VendaDetalhe extends InternalFrame {
 
     private VendaDetalheController controller;
     private VendaDetalheGridController itensController;

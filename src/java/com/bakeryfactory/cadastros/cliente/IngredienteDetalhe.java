@@ -175,7 +175,7 @@ public class IngredienteDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         form1.add(lblNome3, gridBagConstraints);
 
-        labelControl1.setText("Valor Tota:");
+        labelControl1.setText("Valor Total:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;

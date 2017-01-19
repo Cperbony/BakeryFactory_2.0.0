@@ -46,6 +46,7 @@ import com.bakeryfactory.cadastros.servidor.ModoPreparoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.ModoPreparoGridAction;
 import com.bakeryfactory.cadastros.servidor.MunicipioDetalheAction;
 import com.bakeryfactory.cadastros.servidor.MunicipioGridAction;
+import com.bakeryfactory.cadastros.servidor.NcmDetalheAction;
 import com.bakeryfactory.cadastros.servidor.NcmGridAction;
 import com.bakeryfactory.cadastros.servidor.NivelFormacaoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.NivelFormacaoGridAction;
@@ -87,6 +88,13 @@ import com.bakeryfactory.cadastros.servidor.UfDetalheAction;
 import com.bakeryfactory.cadastros.servidor.UfGridAction;
 import com.bakeryfactory.cadastros.servidor.UnidadeProdutoDetalheAction;
 import com.bakeryfactory.cadastros.servidor.UnidadeProdutoGridAction;
+import com.bakeryfactory.calendarioproducao.servidor.AgendaCategoriaCompromissoDetalheAction;
+import com.bakeryfactory.calendarioproducao.servidor.AgendaCategoriaCompromissoGridAction;
+import com.bakeryfactory.calendarioproducao.servidor.AgendaCompromissoDetalheAction;
+import com.bakeryfactory.calendarioproducao.servidor.AgendaCompromissoGridAction;
+import com.bakeryfactory.calendarioproducao.servidor.ProducaoSalaDetalheAction;
+import com.bakeryfactory.calendarioproducao.servidor.ProducaoSalaEventoDetalheAction;
+import com.bakeryfactory.calendarioproducao.servidor.ProducaoSalaGridAction;
 import com.bakeryfactory.pcp.servidor.PcpInstrucaoDetalheAction;
 import com.bakeryfactory.pcp.servidor.PcpInstrucaoGridAction;
 import com.bakeryfactory.pcp.servidor.PcpInstrucaoOpGridAction;
@@ -245,7 +253,7 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
 
         a = new TipoColaboradorDetalheAction();
         put(a.getRequestName(), a);
-        
+
         a = new TipoRelacionamentoGridAction();
         put(a.getRequestName(), a);
 
@@ -331,34 +339,36 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
 
         a = new ProdutoDetalheAction();
         put(a.getRequestName(), a);
-        
+
         a = new FichaTecnicaGridAction();
         put(a.getRequestName(), a);
 
         a = new NcmGridAction();
         put(a.getRequestName(), a);
 
+        a = new NcmDetalheAction();
+        put(a.getRequestName(), a);
 
         a = new IngredienteGridAction();
         put(a.getRequestName(), a);
-        
+
         a = new IngredienteDetalheAction();
         put(a.getRequestName(), a);
-        
+
         a = new ReceitaGridAction();
         put(a.getRequestName(), a);
-        
+
         a = new ReceitaDetalheAction();
         put(a.getRequestName(), a);
-        
+
         a = new ModoPreparoGridAction();
         put(a.getRequestName(), a);
-        
+
         a = new ModoPreparoDetalheAction();
         put(a.getRequestName(), a);
-        
 
- /*Actions do Módulo */
+
+        /*Actions do Módulo */
         //PCP
         a = new PcpInstrucaoGridAction();
         put(a.getRequestName(), a);
@@ -454,8 +464,31 @@ public class BakeryFactoryActionClasses extends ActionsCollection {
 
         a = new VendaRomaneioEntregaDetalheGridAction();
         put(a.getRequestName(), a);
-        
+
         a = new ValidaVendaOrcamentoAction();
+        put(a.getRequestName(), a);
+
+        /*Actions do Módulo */
+        //CALENDARIO PRODUCAO
+        a = new ProducaoSalaGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new ProducaoSalaDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new AgendaCategoriaCompromissoGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new AgendaCategoriaCompromissoDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new AgendaCompromissoGridAction();
+        put(a.getRequestName(), a);
+        
+        a = new AgendaCompromissoDetalheAction();
+        put(a.getRequestName(), a);
+        
+        a = new ProducaoSalaEventoDetalheAction();
         put(a.getRequestName(), a);
     }
 }

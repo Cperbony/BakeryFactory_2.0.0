@@ -156,6 +156,15 @@
         <mapping class="com.bakeryfactory.tributacao.java.TributIcmsCustomCabVO"/>
         <mapping class="com.bakeryfactory.tributacao.java.TributOperacaoFiscalVO"/>
         
+         <!-- classes mapeadas Módulo CALENDÁRIO PRODUÇÃO -->
+        <mapping class="com.bakeryfactory.calendarioproducao.java.AgendaCategoriaCompromissoVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.AgendaCompromissoConvidadoVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.AgendaCompromissoVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.AgendaNotificacaoVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.RecadoDestinatarioVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.RecadoRemetenteVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.ProducaoSalaEventoVO"/>
+        <mapping class="com.bakeryfactory.calendarioproducao.java.ProducaoSalaVO"/>
         
     
     </session-factory>

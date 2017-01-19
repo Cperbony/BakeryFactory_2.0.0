@@ -24,7 +24,6 @@
 package com.bakeryfactory.cadastros.cliente;
 
 import com.bakeryfactory.padrao.java.Constantes;
-import java.beans.PropertyVetoException;
 import javax.swing.JOptionPane;
 import org.openswing.swing.form.client.FormController;
 import org.openswing.swing.mdi.client.MDIFrame;
@@ -52,11 +51,6 @@ public class TipoRelacionamentoDetalheController extends FormController {
         tipoRelacionamentoDetalhe.setParentFrame(this.tipoRelacionamentoGrid);
         this.tipoRelacionamentoGrid.pushFrame(tipoRelacionamentoDetalhe);
         MDIFrame.add(tipoRelacionamentoDetalhe);
-
-        try {
-            tipoRelacionamentoDetalhe.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-        }
 
         if (pk != null) {
             tipoRelacionamentoDetalhe.getForm1().setMode(Consts.READONLY);

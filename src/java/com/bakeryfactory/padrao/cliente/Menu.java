@@ -172,8 +172,8 @@ public class Menu implements MDIController, LoginController {
         }
 
         nomeUsuario = nomeUsuario.toLowerCase();
-        password =  Biblioteca.MD5String(nomeUsuario + password);
-        
+        password = Biblioteca.md5String(nomeUsuario + password);
+
         loginInfo.put("username", nomeUsuario);
         loginInfo.put("password", password);
 
@@ -225,7 +225,6 @@ public class Menu implements MDIController, LoginController {
         return true;
     }
 
-
     public static void main(String[] argv) {
         new Menu();
     }
@@ -253,7 +252,7 @@ public class Menu implements MDIController, LoginController {
     public void loginSuccessful(Map loginInfo) {
         //Domain tipo de pessoa, que aperecerá nos combos da aplicação
         //PESSOA E CORRELATOS
-         Domain tipoPessoa = new Domain("tipoPessoa");
+        Domain tipoPessoa = new Domain("tipoPessoa");
         tipoPessoa.addDomainPair("F", "Física");
         tipoPessoa.addDomainPair("J", "Jurídica");
 
@@ -276,7 +275,7 @@ public class Menu implements MDIController, LoginController {
         dominioRacaCor.addDomainPair("N", "Negro");
         dominioRacaCor.addDomainPair("P", "Pardo");
         dominioRacaCor.addDomainPair("I", "Indio");
-        
+
         Domain dominioSimNao = new Domain("simnao");
         dominioSimNao.addDomainPair("S", "Sim");
         dominioSimNao.addDomainPair("N", "Não");
@@ -290,7 +289,7 @@ public class Menu implements MDIController, LoginController {
         dominioTipoTelefone.addDomainPair(1, "Comercial");
         dominioTipoTelefone.addDomainPair(2, "Celular");
         dominioTipoTelefone.addDomainPair(3, "Outro");
-        
+
         Domain dominioMes = new Domain("mes");
         dominioMes.addDomainPair("01", "Janeiro");
         dominioMes.addDomainPair("02", "Fevereiro");
@@ -750,7 +749,7 @@ public class Menu implements MDIController, LoginController {
         dominioProdutoTipoItemSped.addDomainPair("09", "Serviços");
         dominioProdutoTipoItemSped.addDomainPair("10", "Outros Insumos");
         dominioProdutoTipoItemSped.addDomainPair("99", "Outras");
-        
+
         Domain dominioClienteIndicadorPreco = new Domain("clienteIndicadorPreco");
         dominioClienteIndicadorPreco.addDomainPair("T", "Tabela");
         dominioClienteIndicadorPreco.addDomainPair("P", "Último Pedido");
@@ -768,16 +767,16 @@ public class Menu implements MDIController, LoginController {
         Domain dominioFornecedorLocalizacao = new Domain("fornecedorLocalizacao");
         dominioFornecedorLocalizacao.addDomainPair("N", "Nacional");
         dominioFornecedorLocalizacao.addDomainPair("E", "Exterior");
-        
+
         Domain dominioColaboradorFormaPagamento = new Domain("colaboradorFormaPagamento");
         dominioColaboradorFormaPagamento.addDomainPair("1", "Dinheiro");
         dominioColaboradorFormaPagamento.addDomainPair("2", "Cheque");
         dominioColaboradorFormaPagamento.addDomainPair("3", "Conta");
-        
+
         Domain dominioSindicatoTipo = new Domain("sindicatoTipo");
         dominioSindicatoTipo.addDomainPair("E", "Empregados");
         dominioSindicatoTipo.addDomainPair("P", "Patronal");
-        
+
         Domain dominioTalonarioChequeStatus = new Domain("talonarioChequeStatus");
         dominioTalonarioChequeStatus.addDomainPair("N", "Normal");
         dominioTalonarioChequeStatus.addDomainPair("C", "Cancelado");
@@ -790,7 +789,7 @@ public class Menu implements MDIController, LoginController {
         dominioChequeStatus.addDomainPair("U", "Utilizado");
         dominioChequeStatus.addDomainPair("C", "Compensado");
         dominioChequeStatus.addDomainPair("N", "Cancelado");
-        
+
         Domain dominioFeriadosAbrangencia = new Domain("feriadosAbrangencia");
         dominioFeriadosAbrangencia.addDomainPair("F", "Federal");
         dominioFeriadosAbrangencia.addDomainPair("E", "Estadual");
@@ -799,13 +798,13 @@ public class Menu implements MDIController, LoginController {
         Domain dominioFeriadosTipo = new Domain("feriadosTipo");
         dominioFeriadosTipo.addDomainPair("F", "Fixo");
         dominioFeriadosTipo.addDomainPair("M", "Móvel");
-        
+
         Domain dominioTransporteModalidadeFrete = new Domain("transporteModalidadeFrete");
         dominioTransporteModalidadeFrete.addDomainPair(0, "Conta Emitente");
         dominioTransporteModalidadeFrete.addDomainPair(1, "Conta Destinatário");
         dominioTransporteModalidadeFrete.addDomainPair(2, "Conta Terceiros");
         dominioTransporteModalidadeFrete.addDomainPair(9, "Sem Frete");
-        
+
         Domain dominioCodigoModeloNf = new Domain("CodigoModeloNf");
         dominioCodigoModeloNf.addDomainPair("55", "Nota Fiscal Eletrônica - NFe");
         //dominioCodigoModeloNf.addDomainPair("01", "Nota Fiscal 1/1A");
@@ -825,14 +824,14 @@ public class Menu implements MDIController, LoginController {
         dominioNfeConsumidorPresenca.addDomainPair(3, "Operação não Presencial - Teleatendimento");
         dominioNfeConsumidorPresenca.addDomainPair(9, "Operação não Presencial - Outros");
         dominioNfeConsumidorPresenca.addDomainPair(0, "Não se aplica");
-        
+
         Domain dominioContabilLivroFormaEscrituracao = new Domain("contabilLivroFormaEscrituracao");
         dominioContabilLivroFormaEscrituracao.addDomainPair("G", "Diário Geral");
         dominioContabilLivroFormaEscrituracao.addDomainPair("R", "Diário com Escrituração Resumida");
         dominioContabilLivroFormaEscrituracao.addDomainPair("A", "Diário Auxiliar");
         dominioContabilLivroFormaEscrituracao.addDomainPair("Z", "Razão Auxiliar");
         dominioContabilLivroFormaEscrituracao.addDomainPair("B", "Livro de Balancetes Diários e Balanços");
-        
+
         Domain dominioFiscalParametrosApuracao = new Domain("fiscalParametrosApuracao");
         dominioFiscalParametrosApuracao.addDomainPair("1", "Regime Competencia");
         dominioFiscalParametrosApuracao.addDomainPair("2", "Regime de Caixa");
@@ -858,16 +857,40 @@ public class Menu implements MDIController, LoginController {
         dominioFiscalParametrosFormaCalculoIss.addDomainPair("NO", "Normal");
         dominioFiscalParametrosFormaCalculoIss.addDomainPair("PH", "Profissional Habilitado");
         dominioFiscalParametrosFormaCalculoIss.addDomainPair("VF", "Valor Fixo");
-        
+
         Domain dominioEntraTotalNfe = new Domain("entraTotalNfe");
         dominioEntraTotalNfe.addDomainPair("0", "Sim");
         dominioEntraTotalNfe.addDomainPair("1", "Não");
-        
+
         Domain dominioRequisicaoInternaSituacao = new Domain("requisicaoInternaSituacao");
         dominioRequisicaoInternaSituacao.addDomainPair("A", "Aberta");
         dominioRequisicaoInternaSituacao.addDomainPair("D", "Deferida");
         dominioRequisicaoInternaSituacao.addDomainPair("I", "Indeferida");
-        
+
+        Domain dominioCategoriaCompromissoCor = new Domain("categoriaCompromissoCor");
+        dominioCategoriaCompromissoCor.addDomainPair("Amarelo", "Amarelo");
+        dominioCategoriaCompromissoCor.addDomainPair("Azul", "Azul");
+        dominioCategoriaCompromissoCor.addDomainPair("Branco", "Branco");
+        dominioCategoriaCompromissoCor.addDomainPair("Verde", "Verde");
+        dominioCategoriaCompromissoCor.addDomainPair("Vermelho", "Vermelho");
+        dominioCategoriaCompromissoCor.addDomainPair("Magenta", "Magenta");
+        dominioCategoriaCompromissoCor.addDomainPair("Cinza", "Cinza");
+
+        Domain dominioCompromissoTipo = new Domain("compromissoTipo");
+        dominioCompromissoTipo.addDomainPair(0, "Pessoal");
+        dominioCompromissoTipo.addDomainPair(1, "Gerencial");
+        dominioCompromissoTipo.addDomainPair(2, "Estoque");
+        dominioCompromissoTipo.addDomainPair(3, "Evento Externo");
+        dominioCompromissoTipo.addDomainPair(4, "Balcão");
+
+        Domain dominioCompromissoRecorrente = new Domain("compromissoRecorrente");
+        dominioCompromissoRecorrente.addDomainPair(0, "Não");
+        dominioCompromissoRecorrente.addDomainPair(1, "Sim");
+        dominioCompromissoRecorrente.addDomainPair(2, "Diário");
+        dominioCompromissoRecorrente.addDomainPair(3, "Semanal");
+        dominioCompromissoRecorrente.addDomainPair(4, "Mensal");
+        dominioCompromissoRecorrente.addDomainPair(5, "Anual");
+
         domains.clear();
         domains.put(tipoPessoa.getDomainId(), tipoPessoa);
         domains.put(tipoSangue.getDomainId(), tipoSangue);
@@ -987,6 +1010,9 @@ public class Menu implements MDIController, LoginController {
         domains.put(dominioFiscalParametrosFormaCalculoIss.getDomainId(), dominioFiscalParametrosFormaCalculoIss);
         domains.put(dominioEntraTotalNfe.getDomainId(), dominioEntraTotalNfe);
         domains.put(dominioRequisicaoInternaSituacao.getDomainId(), dominioRequisicaoInternaSituacao);
+        domains.put(dominioCategoriaCompromissoCor.getDomainId(), dominioCategoriaCompromissoCor);
+        domains.put(dominioCompromissoTipo.getDomainId(), dominioCompromissoTipo);
+        domains.put(dominioCompromissoRecorrente.getDomainId(), dominioCompromissoRecorrente);
 
         MDIFrame mdi = new MDIFrame(this);
 

@@ -24,6 +24,7 @@
 package com.bakeryfactory.pcp.cliente;
 
 import com.bakeryfactory.padrao.cliente.LookupDataLocatorGenerico;
+import com.bakeryfactory.pcp.java.PcpOpDetalheVO;
 import java.awt.Dimension;
 import org.openswing.swing.client.GridControl;
 import org.openswing.swing.lookup.client.LookupController;
@@ -37,6 +38,7 @@ public class PcpServicoGrid extends InternalFrame {
 
     private PcpServicoColaboradorGridController colaboradorGridController;
     private PcpServicoEquipamentoGridController equipamentoGridController;
+    private PcpOpDetalheVO opDetalhe;
     private LookupController colaboradorLookupController;
     private LookupController equipamentoLookupController;
 
@@ -52,7 +54,7 @@ public class PcpServicoGrid extends InternalFrame {
         gridControlServicos.setController(controller);
         gridControlServicos.setGridDataLocator(controller);
 
-        colaboradorGridController = new PcpServicoColaboradorGridController();
+        colaboradorGridController = new PcpServicoColaboradorGridController(opDetalhe);
         gridControlColaborador.setController(colaboradorGridController);
         gridControlColaborador.setGridDataLocator(colaboradorGridController);
 

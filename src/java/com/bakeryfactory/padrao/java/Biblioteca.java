@@ -189,7 +189,7 @@ public class Biblioteca {
         return null;
     }
 
-    public static String MD5String(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
+    public static String md5String(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
         MessageDigest md;
         md = MessageDigest.getInstance("MD5");
         byte[] md5hash = new byte[32];

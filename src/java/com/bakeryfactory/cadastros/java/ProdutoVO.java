@@ -28,9 +28,7 @@ import com.bakeryfactory.tributacao.java.TributIcmsCustomCabVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -38,13 +36,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 import org.openswing.swing.message.receive.java.ValueObjectImpl;
 
 /**
@@ -113,7 +108,7 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "DATA_CADASTRO")
     private Date dataCadastro;
     @Column(name = "FOTO_PRODUTO")
-    private String fotoProduto;
+    private String caminhoFotoProduto;
     @Column(name = "EX_TIPI")
     private String exTipi;
     @Column(name = "CODIGO_LST")
@@ -150,8 +145,8 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
     @Column(name = "SERVICO")
     private String servico;
 
-    @Transient
-    private byte[] imagemProduto;
+    @Column(name = "IMAGEM")
+    private byte[] imagem;
 
     @Transient
     private BigDecimal encargosVenda;
@@ -391,12 +386,12 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.dataCadastro = dataCadastro;
     }
 
-    public String getFotoProduto() {
-        return fotoProduto;
+    public String getCaminhoFotoProduto() {
+        return caminhoFotoProduto;
     }
 
-    public void setFotoProduto(String fotoProduto) {
-        this.fotoProduto = fotoProduto;
+    public void setCaminhoFotoProduto(String caminhoFotoProduto) {
+        this.caminhoFotoProduto = caminhoFotoProduto;
     }
 
     public String getExTipi() {
@@ -591,12 +586,12 @@ public class ProdutoVO extends ValueObjectImpl implements Serializable {
         this.tributIcmsCustomCab = tributIcmsCustomCab;
     }
 
-    public byte[] getImagemProduto() {
-        return imagemProduto;
+    public byte[] getImagem() {
+        return imagem;
     }
 
-    public void setImagemProduto(byte[] imagemProduto) {
-        this.imagemProduto = imagemProduto;
+    public void setImagem(byte[] imagem) {
+        this.imagem = imagem;
     }
 
     @Override

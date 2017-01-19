@@ -585,7 +585,7 @@ public class ProdutoDetalhe extends InternalFrame {
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        lblGtin.setLabel("Gtin:");
+        lblGtin.setText("GTIN:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -624,7 +624,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel3.add(textControl10, gridBagConstraints);
 
-        lblNcm.setLabel("Ncm:");
+        lblNcm.setText("NCM:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -661,7 +661,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanel3.add(lblDescricao, gridBagConstraints);
 
-        lblDescricaoPdv.setText("Descrição Pdv:");
+        lblDescricaoPdv.setText("Descrição PDV:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 2;
@@ -701,7 +701,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanel3.add(comboBoxControl29, gridBagConstraints);
 
-        lblClasseAbc.setLabel("Classe Abc:");
+        lblClasseAbc.setText("Classe ABC:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 0;
@@ -747,7 +747,6 @@ public class ProdutoDetalhe extends InternalFrame {
         numericControl14.setAttributeName("valorCompra");
         numericControl14.setDecimals(2);
         numericControl14.setEnabled(false);
-        numericControl14.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -911,7 +910,6 @@ public class ProdutoDetalhe extends InternalFrame {
         numericControl23.setAttributeName("quantidadeEstoque");
         numericControl23.setDecimals(2);
         numericControl23.setEnabled(false);
-        numericControl23.setRequired(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 3;
@@ -1030,7 +1028,7 @@ public class ProdutoDetalhe extends InternalFrame {
 
         jPanelDados.setLayout(new java.awt.GridBagLayout());
 
-        lblExTipi.setLabel("Ex Tipi:");
+        lblExTipi.setText("Ex TIPI:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1047,7 +1045,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelDados.add(textControl32, gridBagConstraints);
 
-        lblCodLst.setText("Código Lst:");
+        lblCodLst.setText("Código LST:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -1072,7 +1070,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanelDados.add(lblFotoProduto, gridBagConstraints);
 
-        lblIat.setLabel("Iat:");
+        lblIat.setText("IAT:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1091,7 +1089,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelDados.add(comboBoxControl35, gridBagConstraints);
 
-        lblIppt.setLabel("Ippt:");
+        lblIppt.setText("IPPT:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
@@ -1153,6 +1151,7 @@ public class ProdutoDetalhe extends InternalFrame {
         jPanelDados.add(numericControl45, gridBagConstraints);
 
         imageCtrFotoProduto.setAttributeName("imagem");
+        imageCtrFotoProduto.setCanCopy(false);
         imageCtrFotoProduto.setLinkLabel(lblFotoProduto);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -1236,7 +1235,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelDados.add(numericControl41, gridBagConstraints);
 
-        lblAliqIcmsPaf.setLabel("Aliquota Icms Paf:");
+        lblAliqIcmsPaf.setText("Alíquota ICMS PAF:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -1255,7 +1254,7 @@ public class ProdutoDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelDados.add(numericControl42, gridBagConstraints);
 
-        lblAliquotaIssqnPaf.setLabel("Aliquota Issqn Paf:");
+        lblAliquotaIssqnPaf.setText("Alíquota ISSQN PAF:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 6;

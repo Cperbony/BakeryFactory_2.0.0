@@ -124,7 +124,6 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         ApplicationFunction n117 = new ApplicationFunction(factory.getResources(langId).getResource("Ingrediente"), "ingrediente", null, "getIngrediente");
         ApplicationFunction n118 = new ApplicationFunction(factory.getResources(langId).getResource("Receita"), "receita", null, "getReceita");
 
-
         //Pessoal
         n1.add(nPessoal);
         n1.add(n17);
@@ -202,7 +201,7 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         ApplicationFunction n34 = new ApplicationFunction(factory.getResources(langId).getResource("Unidade"), "unidadeProduto", null, "getUnidadeProduto");
         ApplicationFunction n35 = new ApplicationFunction(factory.getResources(langId).getResource("Instrução"), "pcpInstrucao", null, "getPcpInstrucao");
         ApplicationFunction n36 = new ApplicationFunction(factory.getResources(langId).getResource("Ordem de Produção"), "pcpOrdemProducao", null, "getPcpOrdemProducao");
-        
+
         n3.add(n31);
         n3.add(n32);
         n3.add(n33);
@@ -210,10 +209,23 @@ public class BakeryFactoryFunctionAuthorizationsAction implements Action {
         n3.add(n35);
         n3.add(n36);
 
+        //CALENDÁRIO DE PRODUÇÃO
+        ApplicationFunction n4 = new ApplicationFunction(factory.getResources(langId).getResource("Calendário Produção"), null);
+        ApplicationFunction n41 = new ApplicationFunction(factory.getResources(langId).getResource("Sala Produção"), "reuniaoSala", null, "getReuniaoSala");
+        ApplicationFunction n42 = new ApplicationFunction(factory.getResources(langId).getResource("Categoria Compromisso"), "agendaCategoriaCompromisso", null, "getAgendaCategoriaCompromisso");
+        ApplicationFunction n43 = new ApplicationFunction(factory.getResources(langId).getResource("Compromisso"), "agendaCompromisso", null, "getAgendaCompromisso");
+
+        n4.add(n41);
+        n4.add(n42);
+        n4.add(n43);
+        
+        
         // Adiciona à Árvore de Menus
         root.add(n1);
         root.add(n2);
         root.add(n3);
+        root.add(n4);
+        
 
         UsuarioVO usuario = (UsuarioVO) inputPar;
 

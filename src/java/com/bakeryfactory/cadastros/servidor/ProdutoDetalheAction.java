@@ -90,10 +90,10 @@ public class ProdutoDetalheAction implements Action {
 
             ProdutoVO produto = (ProdutoVO) criteria.uniqueResult();
 
-            if (produto.getFotoProduto() != null) {
-                File imagem = new File(produto.getFotoProduto());
+            if (produto.getCaminhoFotoProduto() != null) {
+                File imagem = new File(produto.getCaminhoFotoProduto());
                 if (imagem.exists()) {
-                    produto.setImagemProduto(Biblioteca.getBytesFromFile(imagem));
+                    produto.setImagem(Biblioteca.getBytesFromFile(imagem));
                 }
             }
 
@@ -112,10 +112,10 @@ public class ProdutoDetalheAction implements Action {
     }
 
     public void checaFotoProduto(ProdutoVO produto) throws Exception {
-        if (produto.getFotoProduto() != null) {
-            File imagem = new File(produto.getFotoProduto());
+        if (produto.getCaminhoFotoProduto() != null) {
+            File imagem = new File(produto.getCaminhoFotoProduto());
             if (imagem.exists()) {
-                produto.setImagemProduto(Biblioteca.getBytesFromFile(imagem));
+                produto.setImagem(Biblioteca.getBytesFromFile(imagem));
             }
         }
     }
@@ -142,14 +142,14 @@ public class ProdutoDetalheAction implements Action {
             checaIcms(produto);
             checaGrupoTributario(produto);
 
-            if (produto.getImagemProduto() != null) {
+            if (produto.getCaminhoFotoProduto()!= null) {
                 String caminhoArquivo = context.getRealPath("/imagens")
                         + System.getProperty("file.separator")
                         + "produtos"
                         + System.getProperty("file.separator")
                         + produto.getGtin() + ".jpg";
-                produto.setFotoProduto(caminhoArquivo);
-                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
+                produto.setCaminhoFotoProduto(caminhoArquivo);
+                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagem());
             }
 
             produto.setDataCadastro(new Date());
@@ -204,14 +204,14 @@ public class ProdutoDetalheAction implements Action {
             checaIcms(produto);
             checaGrupoTributario(produto);
 
-            if (produto.getImagemProduto() != null) {
+            if (produto.getCaminhoFotoProduto()!= null) {
                 String caminhoArquivo = context.getRealPath("/imagens")
                         + System.getProperty("file.separator")
                         + "produtos"
                         + System.getProperty("file.separator")
                         + produto.getGtin() + ".jpg";
-                produto.setFotoProduto(caminhoArquivo);
-                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
+                produto.setCaminhoFotoProduto(caminhoArquivo);
+                Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagem());
             }
 
             produto.setDataAlteracao(new Date());
@@ -272,14 +272,14 @@ public class ProdutoDetalheAction implements Action {
     }
 
     public void salvarFotoProduto(ProdutoVO produto, ServletContext context) throws Exception {
-        if (produto.getImagemProduto() != null) {
+        if (produto.getCaminhoFotoProduto()!= null) {
             String caminhoArquivo = context.getRealPath("/imagens")
                     + System.getProperty("file.separator")
                     + "produtos"
                     + System.getProperty("file.separator")
                     + produto.getGtin() + ".jpg";
-            produto.setFotoProduto(caminhoArquivo);
-            Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagemProduto());
+            produto.setCaminhoFotoProduto(caminhoArquivo);
+            Biblioteca.salvaArquivo(caminhoArquivo, produto.getImagem());
         }
     }
 }

@@ -100,7 +100,7 @@ public class SetorGrid extends InternalFrame {
         gridControl1.getColumnContainer().add(textColumn3);
 
         textColumn4.setColumnName("descricao");
-        textColumn4.setHeaderColumnName("Descricao");
+        textColumn4.setHeaderColumnName("Descrição");
         textColumn4.setHeaderFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
         textColumn4.setPreferredWidth(300);
         gridControl1.getColumnContainer().add(textColumn4);

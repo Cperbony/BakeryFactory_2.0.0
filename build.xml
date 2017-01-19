@@ -180,6 +180,23 @@
             </fileset>
         </copy>
         
+        <!-- CLASSES CALENDARIO PRODUÇÃO -->
+        <copy todir="${tmp}/com/bakeryfactory/calendarioproducao/cliente">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/calendarioproducao/cliente">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+
+        <copy todir="${tmp}/com/bakeryfactory/calendarioproducao/java">
+            <fileset dir="${build.classes.dir}/com/bakeryfactory/calendarioproducao/java">
+                <include name="*.*" />
+            </fileset>
+        </copy>
+        
+        
+        
+           <!-- AGUARDANDO PARA DECISÃO COM O CLIENTE -->
+        
         <!-- COMPRAS 
         <copy todir="${tmp}/com/bakeryfactory/compras/cliente">
             <fileset dir="${build.classes.dir}/com/bakeryfactory/compras/cliente">

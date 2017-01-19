@@ -74,10 +74,10 @@ public class ProdutoGridController extends GridController implements GridDataLoc
      * @return an ErrorResponse value object in case of errors, VOListResponse if the operation is successfully completed
      * @throws java.lang.Exception
      */
-    @Override
-    public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
-        return new VOListResponse(newValueObjects, false, newValueObjects.size());
-    }
+    //@Override
+    //public Response insertRecords(int[] rowNumbers, ArrayList newValueObjects) throws Exception {
+      //  return new VOListResponse(newValueObjects, false, newValueObjects.size());
+    //}
 
     /**
      * Callback method invoked when the user has double clicked on the selected row of the grid.

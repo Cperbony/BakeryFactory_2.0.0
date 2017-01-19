@@ -617,7 +617,7 @@
                 </Component>
                 <Component class="org.openswing.swing.client.LabelControl" name="lblSaiNaRais">
                   <Properties>
-                    <Property name="label" type="java.lang.String" value="Sai Na Rais:"/>
+                    <Property name="text" type="java.lang.String" value="Sai Na RAIS:"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -781,7 +781,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Sefip"/>
+                        <TitledBorder title="SEFIP"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -795,7 +795,7 @@
                   <SubComponents>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblOcorrenciaSefip">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Ocorrencia Sefip:"/>
+                        <Property name="text" type="java.lang.String" value="Ocorr&#xea;ncia SEFIP:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -818,7 +818,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCategSefip">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Categoria Sefip:"/>
+                        <Property name="text" type="java.lang.String" value="Categoria SEFIP:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -842,7 +842,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCodDemissaoSefip">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Demiss&#xe3;o Sefip:"/>
+                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Demiss&#xe3;o SEFIP:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -869,7 +869,7 @@
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Caged"/>
+                        <TitledBorder title="CAGED"/>
                       </Border>
                     </Property>
                   </Properties>
@@ -883,7 +883,7 @@
                   <SubComponents>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCodAdCaged">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Admiss&#xe3;o Caged:"/>
+                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Admiss&#xe3;o CAGED:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -906,7 +906,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCodDemCaged">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Demiss&#xe3;o Caged:"/>
+                        <Property name="text" type="java.lang.String" value="C&#xf3;digo Demiss&#xe3;o CAGED:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -947,7 +947,7 @@
                   <SubComponents>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblFgtsOptante">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Fgts Optante:"/>
+                        <Property name="text" type="java.lang.String" value="FGTS Optante:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -984,7 +984,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblFgtsDataOpcao">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Fgts Data Op&#xe7;&#xe3;o:"/>
+                        <Property name="text" type="java.lang.String" value="FGTS Data Op&#xe7;&#xe3;o:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1007,7 +1007,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblFgtsConta">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Fgts Conta:"/>
+                        <Property name="text" type="java.lang.String" value="FGTS Conta:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1035,7 +1035,7 @@
                   <SubComponents>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCtpsNumero">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ctps N&#xfa;mero:"/>
+                        <Property name="text" type="java.lang.String" value="CTPS N&#xfa;mero:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1059,7 +1059,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCtpsSerie">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Ctps S&#xe9;rie:"/>
+                        <Property name="text" type="java.lang.String" value="CTPS S&#xe9;rie:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1083,7 +1083,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCtpsDatExp">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Ctps Data Expedicao:"/>
+                        <Property name="text" type="java.lang.String" value="CTPS Data Expedi&#xe7;&#xe3;o:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1106,7 +1106,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblCtpsUf">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Ctps Uf:"/>
+                        <Property name="text" type="java.lang.String" value="CTPS UF:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1310,7 +1310,7 @@
                   <SubComponents>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblPisDataCadastro">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Pis Data Cadastro:"/>
+                        <Property name="text" type="java.lang.String" value="PIS Data Cadastro:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1333,7 +1333,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblPisNumero">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Pis N&#xfa;mero:"/>
+                        <Property name="text" type="java.lang.String" value="PIS N&#xfa;mero:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1371,7 +1371,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblPisBanco">
                       <Properties>
-                        <Property name="label" type="java.lang.String" value="Pis Banco:"/>
+                        <Property name="text" type="java.lang.String" value="PIS Banco:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1381,7 +1381,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblPisAgencia">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Pis Ag&#xea;ncia:"/>
+                        <Property name="text" type="java.lang.String" value="PIS Ag&#xea;ncia:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">
@@ -1405,7 +1405,7 @@
                     </Component>
                     <Component class="org.openswing.swing.client.LabelControl" name="lblPisAgenciaDigito">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Pis Ag&#xea;ncia D&#xed;gito:"/>
+                        <Property name="text" type="java.lang.String" value="PIS Ag&#xea;ncia D&#xed;gito:"/>
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout" value="org.netbeans.modules.form.compat2.layouts.DesignGridBagLayout$GridBagConstraintsDescription">

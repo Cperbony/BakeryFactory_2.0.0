@@ -52,6 +52,10 @@ import com.bakeryfactory.cadastros.cliente.TipoRelacionamentoGridController;
 import com.bakeryfactory.cadastros.cliente.TransportadoraGridController;
 import com.bakeryfactory.cadastros.cliente.UfGridController;
 import com.bakeryfactory.cadastros.cliente.UnidadeProdutoGridController;
+import com.bakeryfactory.calendarioproducao.cliente.AgendaCategoriaCompromissoGridController;
+import com.bakeryfactory.calendarioproducao.cliente.AgendaCompromissoGridController;
+import com.bakeryfactory.calendarioproducao.cliente.AniversarianteGridController;
+import com.bakeryfactory.calendarioproducao.cliente.ProducaoSalaGridController;
 import com.bakeryfactory.pcp.cliente.PcpInstrucaoGridController;
 import com.bakeryfactory.pcp.cliente.PcpOpCabecalhoGridController;
 import com.bakeryfactory.vendas.cliente.NotaFiscalTipoGridController;
@@ -197,7 +201,7 @@ public class Fachada implements ClientFacade {
     }
 
     public void getModoPreparo() {
-       // new ModoPreparoGridController();
+       //new ModoPreparoGridController();
     }
 
     public void getPcpInstrucao() {
@@ -231,6 +235,24 @@ public class Fachada implements ClientFacade {
 
     public void getVendaRomaneioEntrega() {
         new VendaRomaneioEntregaGridController();
+    }
+    
+    //CALENDÁRIO PRODUÇÃO
+    
+    public void getReuniaoSala() {
+        new ProducaoSalaGridController();
+    }
+    
+    public void getAgendaCategoriaCompromisso() {
+        new AgendaCategoriaCompromissoGridController();
+    }
+
+    public void getAgendaCompromisso() {
+        new AgendaCompromissoGridController();
+    }
+
+    public void getAniversariantes() {
+        new AniversarianteGridController();
     }
 
     //FUNÇÕES E TABELAS

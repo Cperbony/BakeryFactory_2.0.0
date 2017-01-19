@@ -55,7 +55,7 @@ public class PessoaFisicaDetalheController extends FormController {
         return new VOResponse(persistentObject);
     }
 
-    void setPessoa(PessoaVO pessoa) {
+    public void setPessoa(PessoaVO pessoa) {
         this.pessoa = pessoa;
     }
 }

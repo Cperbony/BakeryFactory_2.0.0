@@ -61,7 +61,7 @@ public class AtividadeForCliDetalhe extends InternalFrame {
         form1 = new org.openswing.swing.form.client.Form();
         lblNome = new org.openswing.swing.client.LabelControl();
         textControl2 = new org.openswing.swing.client.TextControl();
-        lblDescricao = new org.openswing.swing.client.LabelControl();
+        lblDescrição = new org.openswing.swing.client.LabelControl();
         textAreaControl1 = new org.openswing.swing.client.TextAreaControl();
         jSeparator1 = new javax.swing.JSeparator();
 
@@ -109,13 +109,13 @@ public class AtividadeForCliDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         form1.add(textControl2, gridBagConstraints);
 
-        lblDescricao.setLabel("Descricao:");
+        lblDescrição.setLabel("Descricao:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
-        form1.add(lblDescricao, gridBagConstraints);
+        form1.add(lblDescrição, gridBagConstraints);
 
         textAreaControl1.setAttributeName("descricao");
         textAreaControl1.setEnabled(false);
@@ -153,7 +153,7 @@ public class AtividadeForCliDetalhe extends InternalFrame {
     private org.openswing.swing.form.client.Form form1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator1;
-    private org.openswing.swing.client.LabelControl lblDescricao;
+    private org.openswing.swing.client.LabelControl lblDescrição;
     private org.openswing.swing.client.LabelControl lblNome;
     private org.openswing.swing.client.ReloadButton reloadButton1;
     private org.openswing.swing.client.SaveButton saveButton1;

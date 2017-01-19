@@ -24,6 +24,7 @@
 package com.bakeryfactory.pcp.java;
 
 import com.bakeryfactory.cadastros.java.ProdutoVO;
+import com.bakeryfactory.calendarioproducao.java.AgendaCompromissoVO;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.List;
@@ -79,6 +80,10 @@ public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpOpDetalhe")
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<PcpServicoVO> listaPcpServico;
+    
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "pcpOpDetalhe")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private List<AgendaCompromissoVO> listaAgendaCompromisso;
 
     public PcpOpDetalheVO() {
     }
@@ -158,6 +163,16 @@ public class PcpOpDetalheVO extends ValueObjectImpl implements Serializable {
     public void setListaPcpServico(List<PcpServicoVO> listaPcpServico) {
         this.listaPcpServico = listaPcpServico;
     }
+
+    public List<AgendaCompromissoVO> getListaAgendaCompromisso() {
+        return listaAgendaCompromisso;
+    }
+
+    public void setListaAgendaCompromisso(List<AgendaCompromissoVO> listaAgendaCompromisso) {
+        this.listaAgendaCompromisso = listaAgendaCompromisso;
+    }
+    
+    
 
     @Override
     public int hashCode() {

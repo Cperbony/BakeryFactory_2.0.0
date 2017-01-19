@@ -770,7 +770,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelDadosPrincipais.add(comboBoxControl37, gridBagConstraints);
 
-        lblSaiNaRais.setLabel("Sai Na Rais:");
+        lblSaiNaRais.setText("Sai Na RAIS:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 5;
         gridBagConstraints.gridy = 10;
@@ -884,10 +884,10 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelOutrasInf.add(jPanelExameMedico, gridBagConstraints);
 
-        jPanelSefip.setBorder(javax.swing.BorderFactory.createTitledBorder("Sefip"));
+        jPanelSefip.setBorder(javax.swing.BorderFactory.createTitledBorder("SEFIP"));
         jPanelSefip.setLayout(new java.awt.GridBagLayout());
 
-        lblOcorrenciaSefip.setLabel("Ocorrencia Sefip:");
+        lblOcorrenciaSefip.setText("Ocorrência SEFIP:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -905,7 +905,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelSefip.add(numericControl41, gridBagConstraints);
 
-        lblCategSefip.setLabel("Categoria Sefip:");
+        lblCategSefip.setText("Categoria SEFIP:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -924,7 +924,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelSefip.add(textControl39, gridBagConstraints);
 
-        lblCodDemissaoSefip.setText("Código Demissão Sefip:");
+        lblCodDemissaoSefip.setText("Código Demissão SEFIP:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -949,10 +949,10 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         jPanelOutrasInf.add(jPanelSefip, gridBagConstraints);
 
-        jPanelCaged.setBorder(javax.swing.BorderFactory.createTitledBorder("Caged"));
+        jPanelCaged.setBorder(javax.swing.BorderFactory.createTitledBorder("CAGED"));
         jPanelCaged.setLayout(new java.awt.GridBagLayout());
 
-        lblCodAdCaged.setText("Código Admissão Caged:");
+        lblCodAdCaged.setText("Código Admissão CAGED:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -969,7 +969,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelCaged.add(numericControl42, gridBagConstraints);
 
-        lblCodDemCaged.setText("Código Demissão Caged:");
+        lblCodDemCaged.setText("Código Demissão CAGED:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -996,7 +996,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         jPanelFgts.setBorder(javax.swing.BorderFactory.createTitledBorder("FGTS"));
         jPanelFgts.setLayout(new java.awt.GridBagLayout());
 
-        lblFgtsOptante.setLabel("Fgts Optante:");
+        lblFgtsOptante.setText("FGTS Optante:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1023,7 +1023,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelFgts.add(dateControl18, gridBagConstraints);
 
-        lblFgtsDataOpcao.setText("Fgts Data Opção:");
+        lblFgtsDataOpcao.setText("FGTS Data Opção:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1041,7 +1041,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelFgts.add(numericControl19, gridBagConstraints);
 
-        lblFgtsConta.setLabel("Fgts Conta:");
+        lblFgtsConta.setText("FGTS Conta:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1059,7 +1059,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         jPanelCarteiraProf.setBorder(javax.swing.BorderFactory.createTitledBorder("Carteira Profissional"));
         jPanelCarteiraProf.setLayout(new java.awt.GridBagLayout());
 
-        lblCtpsNumero.setText("Ctps Número:");
+        lblCtpsNumero.setText("CTPS Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1078,7 +1078,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelCarteiraProf.add(textControl33, gridBagConstraints);
 
-        lblCtpsSerie.setText("Ctps Série:");
+        lblCtpsSerie.setText("CTPS Série:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -1097,7 +1097,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelCarteiraProf.add(textControl34, gridBagConstraints);
 
-        lblCtpsDatExp.setLabel("Ctps Data Expedicao:");
+        lblCtpsDatExp.setText("CTPS Data Expedição:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1114,7 +1114,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelCarteiraProf.add(dateControl35, gridBagConstraints);
 
-        lblCtpsUf.setLabel("Ctps Uf:");
+        lblCtpsUf.setText("CTPS UF:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1263,7 +1263,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         jPanelPis.setBorder(javax.swing.BorderFactory.createTitledBorder("PIS"));
         jPanelPis.setLayout(new java.awt.GridBagLayout());
 
-        lblPisDataCadastro.setLabel("Pis Data Cadastro:");
+        lblPisDataCadastro.setText("PIS Data Cadastro:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -1280,7 +1280,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelPis.add(dateControl28, gridBagConstraints);
 
-        lblPisNumero.setText("Pis Número:");
+        lblPisNumero.setText("PIS Número:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 0;
@@ -1310,7 +1310,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelPis.add(textControl30, gridBagConstraints);
 
-        lblPisBanco.setLabel("Pis Banco:");
+        lblPisBanco.setText("PIS Banco:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
@@ -1318,7 +1318,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 0, 5);
         jPanelPis.add(lblPisBanco, gridBagConstraints);
 
-        lblPisAgencia.setText("Pis Agência:");
+        lblPisAgencia.setText("PIS Agência:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
         gridBagConstraints.gridy = 0;
@@ -1337,7 +1337,7 @@ public class ColaboradorDetalhe extends InternalFrame {
         gridBagConstraints.insets = new java.awt.Insets(0, 5, 5, 5);
         jPanelPis.add(textControl31, gridBagConstraints);
 
-        lblPisAgenciaDigito.setText("Pis Agência Dígito:");
+        lblPisAgenciaDigito.setText("PIS Agência Dígito:");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 4;
         gridBagConstraints.gridy = 0;
